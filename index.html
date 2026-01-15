@@ -3,8 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amada Realty | The Global Estate</title>
-  <meta name="description" content="Amada Realty presents the world's most exclusive gated community. The Chosen 69. Application required. Visa entry only." />
+
+  <!-- Primary SEO (Bilaad-style) -->
+  <title>AMADA REALTY - Global Estate</title>
+  <meta name="title" content="AMADA REALTY - Global Estate" />
+  <meta name="description" content="Welcome to The Amada Advantage. Our homes are designed for more than just today — blending timeless architecture with private-city amenities. Explore The City, select an Asset, and request your PR Card dossier." />
+  <meta name="robots" content="index,follow" />
+  <meta name="keywords" content="Amada Realty, luxury estate, gated community, private city, premium real estate, Nigeria luxury homes, sustainable communities, masterplan, estate assets" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="canonical" href="https://amadarealty.com/" />
+
+  <!-- Social (Open Graph / Twitter) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Amada Realty" />
+  <meta property="og:title" content="AMADA REALTY - Global Estate" />
+  <meta property="og:description" content="A private-city estate with curated territories and elite amenities. Select an Asset on the master layout and request your PR Card dossier." />
+  <meta property="og:url" content="https://amadarealty.com/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1600&auto=format&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AMADA REALTY - Global Estate" />
+  <meta name="twitter:description" content="Select an Asset on the master layout and request your PR Card dossier." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1600&auto=format&fit=crop" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" type="image/svg+xml"
+        href='data:image/svg+xml;utf8,
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="%230f172a"/>
+              <stop offset="1" stop-color="%23334155"/>
+            </linearGradient>
+          </defs>
+          <rect width="128" height="128" rx="28" fill="url(%23g)"/>
+          <path d="M64 18l30 26-12 48H46L34 44 64 18z" fill="%23ffffff" opacity="0.95"/>
+          <path d="M64 18l30 26H34L64 18z" fill="%23ffffff" opacity="0.65"/>
+          <path d="M46 92h36l-18 18-18-18z" fill="%23ffffff" opacity="0.85"/>
+        </svg>'/>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,13 +47,13 @@
 
   <style>
     :root{
-      --glass-border: rgba(255,255,255,.4);
-      --glass-shadow: 0 8px 32px 0 rgba(31,38,135,.07);
+      --glass-border: rgba(255,255,255,.42);
+      --glass-shadow: 0 10px 30px rgba(15,23,42,.06);
     }
     body{
       font-family:'Plus Jakarta Sans',sans-serif;
-      background-color:#f8fafc;
-      color:#1e293b;
+      background:#f8fafc;
+      color:#0f172a;
       overflow-x:hidden;
     }
     h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',serif;}
@@ -30,41 +65,44 @@
     /* Ambient background */
     .ambient-bg{
       position:fixed; inset:0;
-      width:100vw; height:100vh;
       z-index:-1;
-      background:radial-gradient(circle at 50% 50%,#ffffff,#f1f5f9);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(224,242,254,0.9), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(240,253,244,0.85), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(253,244,255,0.85), transparent 55%),
+        linear-gradient(#ffffff, #f1f5f9);
       overflow:hidden;
     }
     .orb{
       position:absolute; border-radius:50%;
-      filter:blur(80px);
-      opacity:.6;
-      animation:float 20s infinite ease-in-out;
+      filter:blur(90px);
+      opacity:.55;
+      animation:float 18s infinite ease-in-out;
     }
-    .orb-1{width:600px;height:600px;background:#e0f2fe;top:-10%;left:-10%;animation-delay:0s;}
-    .orb-2{width:500px;height:500px;background:#f0fdf4;bottom:-10%;right:-10%;animation-delay:-5s;}
-    .orb-3{width:400px;height:400px;background:#fdf4ff;top:40%;left:40%;animation-delay:-10s;}
-    @keyframes float{0%,100%{transform:translate(0,0);}50%{transform:translate(30px,-50px);}}
+    .orb-1{width:520px;height:520px;background:#e0f2fe;top:-12%;left:-10%;animation-delay:0s;}
+    .orb-2{width:460px;height:460px;background:#f0fdf4;bottom:-10%;right:-10%;animation-delay:-4s;}
+    .orb-3{width:360px;height:360px;background:#fdf4ff;top:42%;left:44%;animation-delay:-8s;}
+    @keyframes float{0%,100%{transform:translate(0,0);}50%{transform:translate(26px,-40px);}}
 
     /* Glass */
     .glass-panel{
-      background:rgba(255,255,255,.65);
+      background:rgba(255,255,255,.68);
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
       border:1px solid var(--glass-border);
       box-shadow:var(--glass-shadow);
     }
     .glass-card{
-      background:rgba(255,255,255,.4);
+      background:rgba(255,255,255,.45);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
-      border:1px solid rgba(255,255,255,.5);
-      transition:all .35s cubic-bezier(.4,0,.2,1);
+      border:1px solid rgba(255,255,255,.55);
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
     }
     .glass-card:hover{
-      background:rgba(255,255,255,.85);
-      transform:translateY(-4px) scale(1.01);
-      box-shadow:0 18px 36px -10px rgba(0,0,0,.08);
+      background:rgba(255,255,255,.9);
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(15,23,42,.08);
       border-color:rgba(255,255,255,.9);
     }
 
@@ -76,77 +114,166 @@
 
     /* Marquee */
     .marquee-container{overflow:hidden;white-space:nowrap;}
-    .marquee-content{display:inline-block;animation:scroll 30s linear infinite;}
+    .marquee-content{display:inline-block;animation:scroll 28s linear infinite;}
     @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-    /* Scrollbar */
-    ::-webkit-scrollbar{width:8px;}
-    ::-webkit-scrollbar-track{background:transparent;}
-    ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px;}
-    ::-webkit-scrollbar-thumb:hover{background:#94a3b8;}
-
     /* Reveal */
-    .reveal{opacity:0;transform:translateY(18px);transition:all .85s ease-out;}
+    .reveal{opacity:0;transform:translateY(18px);transition:all .8s ease-out;}
     .reveal.active{opacity:1;transform:translateY(0);}
 
-    /* Shimmer */
-    .shimmer{position:relative;overflow:hidden;}
-    .shimmer::after{
-      content:'';
-      position:absolute; inset:0;
-      transform:translateX(-100%);
-      background-image:linear-gradient(
-        90deg,
-        rgba(255,255,255,0) 0,
-        rgba(255,255,255,.2) 20%,
-        rgba(255,255,255,.55) 60%,
-        rgba(255,255,255,0)
-      );
-      animation:shimmer 3s infinite;
-    }
-    @keyframes shimmer{100%{transform:translateX(100%);} }
-
-    .text-gold{
-      background:linear-gradient(135deg,#b45309 0%,#d97706 50%,#f59e0b 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    /* Tooltip style (city + mini-map) */
+    /* Tooltip */
     .tip{
       position:absolute;
-      z-index:20;
+      z-index:30;
       padding:8px 12px;
       border-radius:16px;
       background:rgba(15,23,42,.94);
       color:#fff;
       font-size:11px;
-      letter-spacing:.18em;
+      letter-spacing:.16em;
       text-transform:uppercase;
       pointer-events:none;
-      box-shadow:0 30px 60px rgba(2,6,23,.25);
+      box-shadow:0 26px 60px rgba(2,6,23,.25);
       white-space:nowrap;
     }
 
-    /* Small unit squares (mini map) */
-    .unit-square{
-      width:28px; height:28px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.7);
-      transition:transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-      box-shadow:0 6px 12px rgba(2,6,23,.05);
+    /* Estate mini layout (3D-ish) */
+    .estate-canvas{
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.35);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(34,197,94,.18), transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(34,197,94,.12), transparent 60%),
+        linear-gradient(180deg, rgba(6,95,70,.14), rgba(34,197,94,.06));
     }
-    .unit-square:hover{transform:translateY(-1px);opacity:.96;}
-    .unit-square:focus{outline:none; box-shadow:0 0 0 3px rgba(15,23,42,.25), 0 6px 14px rgba(2,6,23,.08);}
+    .estate-inner{
+      position:absolute; inset:0;
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 8px, rgba(0,0,0,.02) 8px 16px);
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
 
-    /* Better anchor offsets */
-    a,button,input,select,textarea{scroll-margin-top:120px;}
+    /* Road */
+    .estate-road{
+      border-radius:14px;
+      background:
+        linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.78));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.08),
+        0 10px 18px rgba(2,6,23,.08);
+      position:relative;
+    }
+    .estate-road:before{
+      content:"";
+      position:absolute; inset:10px 45%;
+      border-left:2px dashed rgba(255,255,255,.22);
+      border-right:2px dashed rgba(255,255,255,.10);
+      border-radius:999px;
+      opacity:.9;
+    }
+
+    /* Territory band */
+    .band{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.35);
+      background:
+        linear-gradient(180deg, rgba(15,118,110,.10), rgba(2,132,199,.06));
+      box-shadow:0 10px 18px rgba(2,6,23,.04);
+    }
+    .band-title{
+      background:rgba(15,23,42,.72);
+      color:white;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      padding:10px 12px;
+      font-weight:700;
+      text-align:center;
+    }
+    .lots{
+      padding:10px;
+      background:
+        linear-gradient(180deg, rgba(2,132,199,.14), rgba(2,132,199,.08));
+    }
+
+    /* Unit square (tiny, fast) */
+    .unit{
+      width:24px; height:24px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.7);
+      box-shadow:
+        0 6px 10px rgba(2,6,23,.06),
+        inset 0 1px 0 rgba(255,255,255,.35);
+      position:relative;
+      transform:translateZ(0);
+      transition:transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+    }
+    .unit:hover{transform:translateY(-1px);opacity:.98;box-shadow:0 10px 18px rgba(2,6,23,.12), inset 0 1px 0 rgba(255,255,255,.38);}
+    .unit:focus{outline:none; box-shadow:0 0 0 3px rgba(15,23,42,.18), 0 10px 18px rgba(2,6,23,.10), inset 0 1px 0 rgba(255,255,255,.38);}
+    .unit:after{
+      /* tiny roof highlight for “3D house feel” */
+      content:"";
+      position:absolute; left:5px; top:5px;
+      width:14px; height:14px;
+      background:rgba(255,255,255,.22);
+      clip-path:polygon(50% 0, 100% 38%, 100% 100%, 0 100%, 0 38%);
+      border-radius:3px;
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    /* Amenity stack */
+    .amenity{
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,.35);
+      background:rgba(255,255,255,.55);
+      box-shadow:0 10px 18px rgba(2,6,23,.05);
+      overflow:hidden;
+    }
+    .amenity-pill{
+      border-radius:999px;
+      background:rgba(15,23,42,.90);
+      color:white;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      padding:14px 12px;
+      text-align:center;
+      box-shadow:0 10px 20px rgba(2,6,23,.18);
+    }
+    .amenity-block{
+      border-radius:14px;
+      background:rgba(15,23,42,.76);
+      color:white;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:800;
+      padding:12px 12px;
+      text-align:center;
+      box-shadow:0 10px 18px rgba(2,6,23,.14);
+    }
+    .amenity-card{
+      border-radius:14px;
+      background:rgba(255,255,255,.75);
+      border:1px solid rgba(148,163,184,.35);
+      padding:10px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:8px;}
+    ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px;}
+    ::-webkit-scrollbar-track{background:transparent;}
   </style>
 </head>
 
 <body class="antialiased selection:bg-slate-200 selection:text-slate-900">
 
-  <!-- Ambient Background -->
   <div class="ambient-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -157,30 +284,33 @@
   <div class="fixed top-0 left-0 w-full z-50 bg-slate-900 text-white text-xs py-2 glass-panel border-none !bg-slate-900/90 backdrop-blur-md">
     <div class="marquee-container flex items-center">
       <div class="marquee-content px-4 font-medium tracking-widest uppercase">
-        Warning: Phase 1 Fully Subscribed // The Chosen 69: Only 8 Spots Remaining // Visa Applications Closing in 48 Hours // International Waitlist: 4,102 Applicants //
-        Warning: Phase 1 Fully Subscribed // The Chosen 69: Only 8 Spots Remaining // Visa Applications Closing in 48 Hours // International Waitlist: 4,102 Applicants //
+        PR Card Applications Closing in 48 Hours // The Chosen 69: Only 8 Assets Available // International Waitlist: 4,102 Applicants //
+        PR Card Applications Closing in 48 Hours // The Chosen 69: Only 8 Assets Available // International Waitlist: 4,102 Applicants //
       </div>
     </div>
   </div>
 
   <!-- Navigation -->
-  <nav class="fixed top-12 left-0 w-full z-40 transition-all duration-300 px-4 md:px-12 py-4">
+  <nav class="fixed top-12 left-0 w-full z-40 px-4 md:px-12 py-4">
     <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
       <div class="flex items-center gap-2 cursor-pointer" onclick="location.hash = '#/home'">
         <i data-lucide="gem" class="w-6 h-6 text-slate-800"></i>
-        <span class="serif text-2xl font-semibold tracking-tight text-slate-900">AMADA<span class="font-light opacity-60">REALTY</span></span>
+        <span class="serif text-2xl font-semibold tracking-tight text-slate-900">
+          AMADA<span class="font-light opacity-60">REALTY</span>
+        </span>
       </div>
 
       <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide text-slate-600">
         <a href="#/home" class="hover:text-slate-900 transition-colors">Home</a>
         <a href="#/city" class="hover:text-slate-900 transition-colors">The City</a>
-        <a href="#/properties" class="hover:text-slate-900 transition-colors">Properties</a>
-        <a href="#/visa" class="hover:text-slate-900 transition-colors">Visa Process</a>
+        <a href="#/assets" class="hover:text-slate-900 transition-colors">Assets</a>
+        <a href="#/pr-card" class="hover:text-slate-900 transition-colors">PR Card</a>
         <button onclick="openLegal('terms')" class="hover:text-slate-900 transition-colors">T&amp;C</button>
       </div>
 
-      <button onclick="location.hash = '#/visa'" class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 shimmer">
-        Apply for Entry
+      <button onclick="location.hash = '#/pr-card'"
+              class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+        Request PR Card
         <i data-lucide="arrow-right" class="w-3 h-3"></i>
       </button>
 
@@ -202,11 +332,12 @@
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
+
       <div class="p-6 space-y-3 text-slate-700">
         <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/home" onclick="closeMobileMenu()">Home</a>
         <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/city" onclick="closeMobileMenu()">The City</a>
-        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/properties" onclick="closeMobileMenu()">Properties</a>
-        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/visa" onclick="closeMobileMenu()">Visa Process</a>
+        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/assets" onclick="closeMobileMenu()">Assets</a>
+        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/pr-card" onclick="closeMobileMenu()">PR Card</a>
 
         <div class="grid grid-cols-1 gap-2 pt-2">
           <button class="w-full text-left px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" onclick="openLegal('privacy'); closeMobileMenu()">Privacy Policy</button>
@@ -214,8 +345,9 @@
           <button class="w-full text-left px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" onclick="openLegal('bylaws'); closeMobileMenu()">Estate Bylaws</button>
         </div>
 
-        <button class="w-full flex items-center justify-center gap-2 mt-3 bg-slate-900 text-white px-6 py-3 rounded-2xl text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg" onclick="location.hash='#/visa'; closeMobileMenu()">
-          Apply for Entry
+        <button class="w-full flex items-center justify-center gap-2 mt-3 bg-slate-900 text-white px-6 py-3 rounded-2xl text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg"
+                onclick="location.hash='#/pr-card'; closeMobileMenu()">
+          Request PR Card
           <i data-lucide="arrow-right" class="w-3 h-3"></i>
         </button>
       </div>
@@ -225,12 +357,10 @@
   <!-- App -->
   <main id="app" class="pt-28">
 
-    <!-- HOME PAGE -->
+    <!-- HOME -->
     <section class="page active" data-page="home" id="page-home">
-
-      <!-- Hero -->
-      <header class="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 pt-8">
-        <div class="absolute inset-0 z-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+      <header class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-4 pt-8">
+        <div class="absolute inset-0 z-0 opacity-28 bg-[url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2200&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
 
         <div class="z-10 max-w-5xl mx-auto space-y-8 reveal active">
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-slate-200">
@@ -243,38 +373,36 @@
           </h1>
 
           <p class="text-lg md:text-2xl font-light text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            An enclave so exclusive, you don't buy a home. <br/>
-            <span class="font-medium text-slate-900">You apply for a new citizenship.</span>
+            An enclave so exclusive, you don’t buy an asset. <br/>
+            <span class="font-medium text-slate-900">You request a PR Card dossier.</span>
           </p>
 
           <div class="pt-8 flex flex-col md:flex-row gap-6 justify-center items-center">
             <div class="text-center px-8 py-4 glass-card rounded-2xl">
               <p class="text-xs text-slate-500 uppercase tracking-widest mb-1">Entry Requirement</p>
-              <p class="text-2xl font-serif font-semibold text-slate-900">$1,000,000 USD <span class="text-xs font-sans font-normal text-slate-400">min liquid assets</span></p>
+              <p class="text-2xl font-serif font-semibold text-slate-900">
+                $1,000,000 USD <span class="text-xs font-sans font-normal text-slate-400">min liquid assets</span>
+              </p>
             </div>
 
-            <button onclick="location.hash='#/visa'" class="group relative px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-slate-500/30 transition-all">
+            <button onclick="location.hash='#/pr-card'"
+                    class="group relative px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-slate-500/30 transition-all">
               <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               <span class="relative flex items-center gap-3 font-semibold tracking-widest text-sm uppercase">
-                Request Application Dossier
-                <i data-lucide="lock" class="w-4 h-4"></i>
+                Request PR Card Dossier
+                <i data-lucide="id-card" class="w-4 h-4"></i>
               </span>
             </button>
           </div>
 
           <div class="pt-6 flex flex-wrap justify-center gap-2 text-xs">
             <a href="#/city" class="px-4 py-2 rounded-full glass-panel border border-slate-200 hover:bg-white/80 transition">Explore The City</a>
-            <a href="#/properties" class="px-4 py-2 rounded-full glass-panel border border-slate-200 hover:bg-white/80 transition">Select a Property</a>
+            <a href="#/assets" class="px-4 py-2 rounded-full glass-panel border border-slate-200 hover:bg-white/80 transition">Select an Asset</a>
             <button onclick="openLegal('bylaws')" class="px-4 py-2 rounded-full glass-panel border border-slate-200 hover:bg-white/80 transition">Estate Bylaws</button>
           </div>
         </div>
-
-        <div class="absolute bottom-10 animate-bounce">
-          <i data-lucide="chevron-down" class="w-6 h-6 text-slate-400"></i>
-        </div>
       </header>
 
-      <!-- Social Proof -->
       <section class="py-12 border-y border-slate-200/50 glass-panel">
         <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
           <span class="text-xl serif font-semibold">Architectural Digest</span>
@@ -285,187 +413,72 @@
         </div>
       </section>
 
-      <!-- Concept -->
-      <section class="py-28 relative">
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 reveal">
+      <section class="py-24 px-4">
+        <div class="max-w-5xl mx-auto text-center space-y-8 reveal">
           <h2 class="text-4xl md:text-6xl font-serif text-slate-900">Five Nations. One Address.</h2>
-          <p class="text-xl text-slate-600 leading-relaxed font-light">
-            Why travel when the world can come to you? Amada Realty has terraformed 9 hectares into a sovereign collection of international territories.
-            Every street is a portal—every neighbor is curated.
+          <p class="text-lg md:text-xl text-slate-600 leading-relaxed font-light">
+            A private-city estate where territories are districts, and amenities are curated like a luxury terminal.
+            Select an Asset on the layout, preview its floor plan, then request your PR Card dossier.
           </p>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
             <div class="glass-card p-6 rounded-3xl text-center">
               <h3 class="text-4xl font-bold text-slate-900 mb-2">69</h3>
-              <p class="text-xs uppercase tracking-widest text-slate-500">The Chosen</p>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Assets</p>
             </div>
             <div class="glass-card p-6 rounded-3xl text-center">
               <h3 class="text-4xl font-bold text-slate-900 mb-2">5</h3>
-              <p class="text-xs uppercase tracking-widest text-slate-500">Global Styles</p>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Territories</p>
             </div>
             <div class="glass-card p-6 rounded-3xl text-center">
-              <h3 class="text-4xl font-bold text-slate-900 mb-2">100%</h3>
-              <p class="text-xs uppercase tracking-widest text-slate-500">Secure Grid</p>
+              <h3 class="text-4xl font-bold text-slate-900 mb-2">1</h3>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Private City</p>
             </div>
             <div class="glass-card p-6 rounded-3xl text-center">
               <h3 class="text-4xl font-bold text-slate-900 mb-2">Top 1%</h3>
               <p class="text-xs uppercase tracking-widest text-slate-500">Neighbors</p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- Territories -->
-      <section class="py-20 px-4">
-        <div class="max-w-7xl mx-auto space-y-12">
-          <div class="flex justify-between items-end px-4">
-            <div>
-              <span class="text-xs font-bold tracking-widest uppercase text-slate-400">The Collection</span>
-              <h2 class="text-4xl md:text-5xl font-serif mt-2">Select Your Territory</h2>
-            </div>
-            <div class="hidden md:block text-right">
-              <p class="text-sm text-slate-500">Only 69 residences across the estate.</p>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- NY -->
-            <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal">
-              <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop" alt="New York" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Only 2 Units Left</div>
-              </div>
-              <div class="p-6 space-y-4">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-2xl font-serif">New York St.</h3>
-                  <i data-lucide="building-2" class="w-6 h-6 text-slate-400"></i>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Industrial luxury meets brownstone heritage. High ceilings, exposed brick textures, and rooftop terraces designed for the urban elite.</p>
-                <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                  <span class="text-lg font-semibold text-slate-900">$1.2M+</span>
-                  <button onclick="openFloorplan('ny')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Dubai -->
-            <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 80ms">
-              <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop" alt="Dubai" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute bottom-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Waitlist Only</div>
-              </div>
-              <div class="p-6 space-y-4">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-2xl font-serif">Dubai St.</h3>
-                  <i data-lucide="sun" class="w-6 h-6 text-slate-400"></i>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Opulent minimalism. White stone, floor-to-ceiling glass, and infinity pools. Designed for those who demand the future, today.</p>
-                <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                  <span class="text-lg font-semibold text-slate-900">$1.8M+</span>
-                  <button onclick="openFloorplan('dubai')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">Join Waitlist</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- London -->
-            <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 160ms">
-              <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop" alt="London" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-              </div>
-              <div class="p-6 space-y-4">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-2xl font-serif">London St.</h3>
-                  <i data-lucide="umbrella" class="w-6 h-6 text-slate-400"></i>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Timeless aristocracy. Regency architecture, manicured hedges, and wrought iron detailing. A sanctuary of silence and class.</p>
-                <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                  <span class="text-lg font-semibold text-slate-900">$1.5M+</span>
-                  <button onclick="openFloorplan('london')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Canada -->
-            <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 240ms">
-              <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop" alt="Canada" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-              </div>
-              <div class="p-6 space-y-4">
-                <div class="flex justify-between items-start">
-                  <h3 class="text-2xl font-serif">Canada St.</h3>
-                  <i data-lucide="mountain" class="w-6 h-6 text-slate-400"></i>
-                </div>
-                <p class="text-slate-600 text-sm leading-relaxed">Alpine serenity. Warm timber accents, steep gabled roofs, and expansive porches. The ultimate retreat from the city chaos.</p>
-                <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                  <span class="text-lg font-semibold text-slate-900">$1.1M+</span>
-                  <button onclick="openFloorplan('canada')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Naija -->
-            <div class="group glass-card rounded-[2.5rem] p-3 bg-gradient-to-br from-white to-green-50 border border-green-100 hover:shadow-green-100/50 transition-all duration-500 md:col-span-2 lg:col-span-2 reveal" style="transition-delay: 320ms">
-              <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop" alt="Naija" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                <div class="absolute top-4 right-4 bg-green-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                  <i data-lucide="crown" class="w-3 h-3"></i> Flagship Collection
-                </div>
-              </div>
-              <div class="p-6 space-y-4">
-                <h3 class="text-2xl font-serif text-green-900">Naija St. (The Royal Mile)</h3>
-                <p class="text-slate-600 text-sm leading-relaxed max-w-xl">The pinnacle of modern Afro-centric luxury. Massive pent-villas designed for entertainment, featuring deep balconies and interiors that celebrate heritage with world-class finesse.</p>
-                <div class="pt-4 border-t border-green-100 flex justify-between items-center">
-                  <span class="text-lg font-semibold text-green-900">$2.5M+</span>
-                  <button onclick="openFloorplan('naija')" class="text-xs text-green-700 font-semibold underline decoration-green-300 underline-offset-4 group-hover:text-green-900 cursor-pointer hover:font-bold transition-all">Apply for Residency</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="px-4">
-            <div class="glass-panel rounded-3xl p-6 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 reveal">
-              <div>
-                <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Next</span>
-                <h3 class="text-2xl md:text-3xl font-serif mt-2">Pick an exact unit by layout?</h3>
-                <p class="text-sm text-slate-600 mt-2">Open the compact property selector — tiny boxes, fast load, true estate structure.</p>
-              </div>
-              <button onclick="location.hash='#/properties'" class="bg-slate-900 text-white px-8 py-4 rounded-full font-semibold tracking-widest text-sm uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 shimmer">
-                Open Property Selector
-              </button>
-            </div>
+          <div class="pt-6">
+            <button onclick="location.hash='#/assets'"
+                    class="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
+              Enter the Assets Page
+              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </button>
           </div>
         </div>
       </section>
 
       <footer class="bg-white border-t border-slate-200 py-14 px-4">
         <div class="max-w-7xl mx-auto text-center">
-          <p class="text-[10px] text-slate-300 uppercase tracking-widest">© 2024 Amada Realty. All Rights Reserved. Luxury is a discipline.</p>
+          <p class="text-[10px] text-slate-300 uppercase tracking-widest">© 2024 Amada Realty. All Rights Reserved.</p>
         </div>
       </footer>
     </section>
 
-    <!-- CITY PAGE -->
+    <!-- CITY -->
     <section class="page" data-page="city" id="page-city">
       <div class="max-w-7xl mx-auto px-6 py-14">
         <div class="text-center mb-10 reveal">
           <span class="text-xs font-bold tracking-widest uppercase text-slate-400">The City</span>
-          <h2 class="text-4xl md:text-6xl font-serif mt-2">Masterplan Layout</h2>
+          <h2 class="text-4xl md:text-6xl font-serif mt-2">Masterplan View</h2>
           <p class="text-lg text-slate-600 font-light max-w-3xl mx-auto mt-4">
-            Replace the map image URL in JS (<span class="font-semibold">CITY_MAP_IMAGE_URL</span>). SVG hotspots are already aligned for the left territories + right amenities corridor.
+            Click any zone to reveal access rules and policies.
           </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-          <!-- MAP -->
+          <!-- Map -->
           <div class="lg:col-span-3 glass-panel rounded-3xl p-6 reveal">
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div class="flex items-start justify-between gap-4">
               <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 border border-slate-200">
                   <i data-lucide="map" class="w-4 h-4 text-slate-700"></i>
-                  <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Abstract City Map</span>
+                  <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Interactive Map</span>
                 </div>
-                <h3 class="text-2xl md:text-3xl font-serif mt-3">Image + SVG Overlay</h3>
-                <p class="text-sm text-slate-500 mt-2">Hover for tooltip. Click to populate the details panel.</p>
+                <h3 class="text-2xl md:text-3xl font-serif mt-3">City Zones</h3>
+                <p class="text-sm text-slate-500 mt-2">Hover for tooltip. Click for details.</p>
               </div>
 
               <div class="flex gap-2 flex-wrap">
@@ -476,6 +489,7 @@
             </div>
 
             <div class="mt-6 relative rounded-3xl overflow-hidden border border-slate-200 bg-white/40 aspect-[5/7]">
+              <!-- Optional: set CITY_MAP_IMAGE_URL in JS -->
               <img id="cityMapImg" src="" class="absolute inset-0 w-full h-full object-cover" alt="Amada City Masterplan" onerror="this.style.display='none';" />
               <svg id="cityMapSvg" class="absolute inset-0 w-full h-full" viewBox="0 0 1000 1400" preserveAspectRatio="none"></svg>
               <div id="cityTip" class="tip hidden">ZONE</div>
@@ -484,11 +498,11 @@
                 <div class="max-w-md">
                   <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-slate-200 mb-4">
                     <i data-lucide="image" class="w-4 h-4"></i>
-                    <span class="text-xs font-semibold tracking-widest uppercase">Map Image Not Set</span>
+                    <span class="text-xs font-semibold tracking-widest uppercase">Map Image Optional</span>
                   </div>
                   <p class="text-sm leading-relaxed">
-                    Paste your masterplan image URL into <span class="font-semibold">CITY_MAP_IMAGE_URL</span> in the script.
-                    Hotspots will still work even without the image.
+                    You can paste a masterplan image URL into <span class="font-semibold">CITY_MAP_IMAGE_URL</span> in the script.
+                    Hotspots already work without the image.
                   </p>
                 </div>
               </div>
@@ -497,19 +511,17 @@
             <div class="mt-5 flex flex-wrap gap-2 text-xs text-slate-600">
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Hover</span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Click</span>
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Territories Left</span>
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Road Center</span>
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Amenities Right</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Policy-Driven</span>
             </div>
           </div>
 
-          <!-- DETAILS -->
+          <!-- Details -->
           <div class="lg:col-span-2 space-y-6 reveal">
             <div class="glass-panel rounded-3xl p-6">
               <div class="flex items-start justify-between gap-4">
                 <div>
                   <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Selected Zone</span>
-                  <h3 class="text-2xl font-serif mt-2" id="cityDetailTitle">New York Street</h3>
+                  <h3 class="text-2xl font-serif mt-2" id="cityDetailTitle">New York Territory</h3>
                   <p class="text-sm text-slate-600 mt-2 leading-relaxed" id="cityDetailDesc">
                     Click a zone on the map to show its rules and access tiers.
                   </p>
@@ -520,27 +532,27 @@
               </div>
 
               <div class="mt-6 grid grid-cols-2 gap-3">
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
                   <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Access</p>
                   <p class="text-sm text-slate-800 mt-1" id="cityDetailAccess">Residents + escorted guests</p>
                 </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
                   <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Hours</p>
                   <p class="text-sm text-slate-800 mt-1" id="cityDetailHours">Always</p>
                 </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
                   <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Noise</p>
                   <p class="text-sm text-slate-800 mt-1" id="cityDetailNoise">Low</p>
                 </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
                   <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Policy</p>
                   <button class="text-sm text-slate-800 mt-1 underline underline-offset-4 hover:text-slate-900" onclick="openLegal('bylaws')">View Estate Bylaws</button>
                 </div>
               </div>
 
               <div class="mt-6 flex gap-3">
-                <button id="cityCTA" onclick="location.hash='#/properties'" class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
-                  Browse Units
+                <button id="cityCTA" onclick="location.hash='#/assets'" class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
+                  Browse Assets
                 </button>
                 <button onclick="openLegal('privacy')" class="px-5 py-3 border border-slate-200 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/70 transition-colors text-xs text-slate-700">
                   Privacy
@@ -549,235 +561,10 @@
             </div>
 
             <div class="glass-card rounded-3xl p-6">
-              <div class="flex items-center justify-between">
-                <h4 class="text-xl font-serif">Amenities</h4>
-                <span class="text-xs uppercase tracking-widest text-slate-400 font-bold">Right Wing</span>
-              </div>
-              <div class="mt-5 grid grid-cols-2 gap-3 text-sm text-slate-700">
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('mall')">
-                  <div class="flex items-center gap-2"><i data-lucide="shopping-bag" class="w-4 h-4"></i><span class="font-semibold">Mall & Offices</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('heli')">
-                  <div class="flex items-center gap-2"><i data-lucide="plane" class="w-4 h-4"></i><span class="font-semibold">Helipad</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('school')">
-                  <div class="flex items-center gap-2"><i data-lucide="graduation-cap" class="w-4 h-4"></i><span class="font-semibold">School</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('park')">
-                  <div class="flex items-center gap-2"><i data-lucide="trees" class="w-4 h-4"></i><span class="font-semibold">Park</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('leisure')">
-                  <div class="flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4"></i><span class="font-semibold">Leisure</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition" onclick="setCityDetails('golf')">
-                  <div class="flex items-center gap-2"><i data-lucide="flag" class="w-4 h-4"></i><span class="font-semibold">Golf</span></div>
-                </button>
-                <button class="rounded-2xl border border-slate-200 bg-white/55 p-4 text-left hover:bg-white transition col-span-2" onclick="setCityDetails('resort')">
-                  <div class="flex items-center gap-2"><i data-lucide="waves" class="w-4 h-4"></i><span class="font-semibold">Resort & Spa</span></div>
-                </button>
-              </div>
-            </div>
-
-            <div class="text-center text-xs text-slate-500">
-              <button class="underline underline-offset-4 hover:text-slate-900" onclick="openLegal('terms')">Visa Terms</button>
-              <span class="opacity-40 mx-2">•</span>
-              <button class="underline underline-offset-4 hover:text-slate-900" onclick="openLegal('bylaws')">Estate Rules</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROPERTIES PAGE -->
-    <section class="page" data-page="properties" id="page-properties">
-      <div class="max-w-7xl mx-auto px-6 py-14">
-        <div class="text-center mb-10 reveal">
-          <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Property Page</span>
-          <h2 class="text-4xl md:text-6xl font-serif mt-2">Search. Filter. Sort. Select.</h2>
-          <p class="text-lg text-slate-600 font-light max-w-3xl mx-auto mt-4 leading-relaxed">
-            The selector is now a compact rectangle like your design: territories on the left, road in the middle, amenities on the right.
-            Lightweight and fast.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-          <!-- Filters + Results -->
-          <div class="lg:col-span-3 space-y-6">
-            <div class="glass-panel rounded-3xl p-6 reveal">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Filters</span>
-                  <h3 class="text-2xl font-serif mt-2">Find your unit</h3>
-                  <p class="text-sm text-slate-500 mt-2">Search “AM-” or filter by territory.</p>
-                </div>
-                <button onclick="resetFilters()" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">
-                  Reset
-                </button>
-              </div>
-
-              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Search</label>
-                  <input id="fSearch" type="text" class="w-full bg-white/60 border border-slate-200 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900 placeholder-slate-400" placeholder="e.g. AM-019, Naija..." oninput="renderInventory()">
-                </div>
-
-                <div class="space-y-2">
-                  <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Territory</label>
-                  <select id="fTerritory" class="w-full bg-white/60 border border-slate-200 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900" onchange="renderInventory()">
-                    <option value="all">All Territories</option>
-                    <option value="ny">New York</option>
-                    <option value="canada">Canada</option>
-                    <option value="london">London</option>
-                    <option value="dubai">Dubai</option>
-                    <option value="naija">Naija</option>
-                  </select>
-                </div>
-
-                <div class="space-y-2">
-                  <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Status</label>
-                  <select id="fStatus" class="w-full bg-white/60 border border-slate-200 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900" onchange="renderInventory()">
-                    <option value="all">All</option>
-                    <option value="available">Available</option>
-                    <option value="reserved">Reserved</option>
-                    <option value="waitlist">Waitlist</option>
-                  </select>
-                </div>
-
-                <div class="space-y-2">
-                  <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Sort</label>
-                  <select id="fSort" class="w-full bg-white/60 border border-slate-200 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900" onchange="renderInventory()">
-                    <option value="scarcity">Scarcity Priority</option>
-                    <option value="priceAsc">Price: Low → High</option>
-                    <option value="priceDesc">Price: High → Low</option>
-                    <option value="sizeDesc">Size: Large → Small</option>
-                    <option value="bedsDesc">Bedrooms: Many → Few</option>
-                  </select>
-                </div>
-
-                <div class="space-y-2 md:col-span-2">
-                  <div class="flex items-center justify-between">
-                    <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Max Price (USD)</label>
-                    <span class="text-xs font-bold tracking-widest text-slate-500" id="fPriceLabel">$3,000,000</span>
-                  </div>
-                  <input id="fMaxPrice" type="range" min="800000" max="3000000" step="50000" value="3000000" class="w-full" oninput="updatePriceLabel(); renderInventory()">
-                  <p class="text-[10px] text-slate-500 mt-1">Drag to restrict by price ceiling.</p>
-                </div>
-
-                <div class="space-y-2 md:col-span-2">
-                  <div class="flex items-center justify-between">
-                    <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Minimum Bedrooms</label>
-                    <span class="text-xs font-bold tracking-widest text-slate-500" id="fBedsLabel">2+</span>
-                  </div>
-                  <input id="fMinBeds" type="range" min="1" max="7" step="1" value="2" class="w-full" oninput="updateBedsLabel(); renderInventory()">
-                  <p class="text-[10px] text-slate-500 mt-1">Quickly tighten inventory.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="glass-panel rounded-3xl p-6 reveal">
-              <div class="flex items-center justify-between gap-4">
-                <div>
-                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Inventory</span>
-                  <h3 class="text-2xl font-serif mt-2">Units</h3>
-                </div>
-                <div class="text-right">
-                  <p class="text-xs uppercase tracking-widest text-slate-400 font-bold">Showing</p>
-                  <p class="text-lg font-semibold text-slate-900" id="resultsCount">—</p>
-                </div>
-              </div>
-
-              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" id="propertyCards"></div>
-
-              <div class="mt-6 text-[11px] text-slate-500">
-                Tip: click a tiny box in the layout → it selects the unit here too.
-              </div>
-            </div>
-          </div>
-
-          <!-- Compact Layout + Selected -->
-          <div class="lg:col-span-2 space-y-6">
-            <div class="glass-panel rounded-3xl p-6 reveal">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Visual Selector</span>
-                  <h3 class="text-2xl font-serif mt-2">Estate Layout (Compact)</h3>
-                  <p class="text-sm text-slate-500 mt-2">Rectangle box. Tiny unit squares. Fast load.</p>
-                </div>
-                <button onclick="openLegal('terms')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">
-                  Visa Terms
-                </button>
-              </div>
-
-              <div class="mt-6 rounded-3xl border border-slate-200 bg-white/40 overflow-hidden">
-                <div class="p-4">
-                  <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-3">
-                    Territories • Road • Amenities
-                  </div>
-
-                  <div id="estateMiniMap"
-                       class="relative rounded-2xl border border-slate-200 bg-white/50 overflow-hidden w-full"
-                       style="height: 420px;">
-                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-sm">Loading layout…</div>
-                    <div id="unitTip" class="tip hidden">UNIT</div>
-                  </div>
-
-                  <div class="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-600">
-                    <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                      <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Available
-                    </span>
-                    <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                      <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Reserved
-                    </span>
-                    <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                      <span class="inline-block w-2 h-2 rounded-full bg-slate-400 mr-2"></span>Waitlist
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="glass-panel rounded-3xl p-6 reveal">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Selected Unit</span>
-                  <h3 class="text-2xl font-serif mt-2" id="selectedTitle">None selected</h3>
-                  <p class="text-sm text-slate-600 mt-2 leading-relaxed" id="selectedDesc">Click any unit square or inventory card.</p>
-                </div>
-                <div class="w-12 h-12 rounded-2xl bg-white/60 border border-slate-200 flex items-center justify-center">
-                  <i data-lucide="home" class="w-6 h-6 text-slate-700"></i>
-                </div>
-              </div>
-
-              <div class="mt-6 grid grid-cols-2 gap-3" id="selectedStats">
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Status</p>
-                  <p class="text-sm text-slate-800 mt-1">—</p>
-                </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Price</p>
-                  <p class="text-sm text-slate-800 mt-1">—</p>
-                </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Beds / Baths</p>
-                  <p class="text-sm text-slate-800 mt-1">—</p>
-                </div>
-                <div class="rounded-2xl bg-white/55 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Size</p>
-                  <p class="text-sm text-slate-800 mt-1">—</p>
-                </div>
-              </div>
-
-              <div class="mt-6 flex gap-3">
-                <button onclick="applyWithSelected()" class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
-                  Request Dossier
-                </button>
-                <button onclick="downloadSelectedPDF()" class="px-5 py-3 border border-slate-200 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/70 transition-colors text-xs text-slate-700">
-                  Download PDF
-                </button>
-              </div>
-
-              <p class="text-center text-[10px] text-slate-500 mt-4">
-                By selecting a unit, you agree to the <button class="underline underline-offset-4 hover:text-slate-900" onclick="openLegal('terms')">Terms &amp; Conditions</button>.
+              <h4 class="text-xl font-serif">City Statement</h4>
+              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                The city is curated for controlled elegance—privacy-first, access-tiered, and built to preserve quiet luxury.
+                Every policy exists to protect the value of the address.
               </p>
             </div>
           </div>
@@ -785,50 +572,214 @@
       </div>
     </section>
 
-    <!-- VISA PAGE -->
-    <section class="page" data-page="visa" id="page-visa">
+    <!-- ASSETS -->
+    <section class="page" data-page="assets" id="page-assets">
+      <div class="max-w-7xl mx-auto px-6 py-14">
+        <div class="text-center mb-10 reveal">
+          <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Assets</span>
+          <h2 class="text-4xl md:text-6xl font-serif mt-2">Select an Asset on the Layout</h2>
+          <p class="text-lg text-slate-600 font-light max-w-3xl mx-auto mt-4 leading-relaxed">
+            No inventory lists. No search. Just the estate map — click an Asset, see its details and floor plan instantly.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+          <!-- Estate Layout -->
+          <div class="lg:col-span-3 glass-panel rounded-3xl p-6 reveal">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 border border-slate-200">
+                  <i data-lucide="layout-dashboard" class="w-4 h-4 text-slate-700"></i>
+                  <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Estate Layout</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-serif mt-3">Territories • Road • Amenities</h3>
+                <p class="text-sm text-slate-500 mt-2">Click a unit square to select it.</p>
+              </div>
+
+              <button onclick="openLegal('bylaws')"
+                      class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">
+                Estate Bylaws
+              </button>
+            </div>
+
+            <div class="mt-6 estate-canvas" style="height: 520px;">
+              <div class="estate-inner"></div>
+
+              <div class="absolute inset-0 p-4">
+                <div class="w-full h-full grid gap-3" style="grid-template-columns: 1fr 18px .72fr;">
+                  <!-- LEFT: Territories -->
+                  <div class="space-y-3 overflow-auto pr-1" id="territoryBands"></div>
+
+                  <!-- ROAD -->
+                  <div class="estate-road"></div>
+
+                  <!-- RIGHT: Amenities -->
+                  <div class="overflow-auto">
+                    <div class="amenity p-4 space-y-3">
+                      <div class="amenity-pill">Shopping Mall & Offices</div>
+                      <div class="amenity-block">Parking Lot & Helipad</div>
+
+                      <div class="amenity-card">
+                        <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">School</div>
+                        <div class="h-16 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-xs">
+                          School Block
+                        </div>
+                      </div>
+
+                      <div class="grid grid-cols-2 gap-3">
+                        <div class="amenity-card text-center text-xs font-semibold text-slate-700">Park</div>
+                        <div class="amenity-card text-center text-xs font-semibold text-slate-700">Dog Park</div>
+                      </div>
+
+                      <div class="amenity-card text-center">
+                        <div class="text-xs font-semibold text-slate-800">Leisure Center</div>
+                        <div class="mt-2 h-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 text-xs">
+                          Activity Hub
+                        </div>
+                      </div>
+
+                      <div class="amenity-card text-center">
+                        <div class="text-xs font-semibold text-slate-800">Golf</div>
+                        <div class="mt-2 h-12 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 text-xs font-semibold">
+                          Putting Green
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tooltip -->
+              <div id="unitTip" class="tip hidden">UNIT</div>
+            </div>
+
+            <div class="mt-5 flex flex-wrap gap-2 text-[11px] text-slate-600">
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
+                <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Available
+              </span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
+                <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Reserved
+              </span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
+                <span class="inline-block w-2 h-2 rounded-full bg-slate-400 mr-2"></span>Waitlist
+              </span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
+                Click = Select
+              </span>
+            </div>
+          </div>
+
+          <!-- Selected Unit -->
+          <div class="lg:col-span-2 space-y-6 reveal">
+            <div class="glass-panel rounded-3xl p-6">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Selected Asset</span>
+                  <h3 class="text-2xl font-serif mt-2" id="selectedTitle">None selected</h3>
+                  <p class="text-sm text-slate-600 mt-2 leading-relaxed" id="selectedDesc">
+                    Click any unit square on the layout to preview details and floor plan.
+                  </p>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-white/60 border border-slate-200 flex items-center justify-center">
+                  <i data-lucide="home" class="w-6 h-6 text-slate-700"></i>
+                </div>
+              </div>
+
+              <div class="mt-6 grid grid-cols-2 gap-3" id="selectedStats">
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
+                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Status</p>
+                  <p class="text-sm text-slate-800 mt-1" id="statStatus">—</p>
+                </div>
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
+                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Price</p>
+                  <p class="text-sm text-slate-800 mt-1" id="statPrice">—</p>
+                </div>
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
+                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Beds / Baths</p>
+                  <p class="text-sm text-slate-800 mt-1" id="statBeds">—</p>
+                </div>
+                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
+                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Size</p>
+                  <p class="text-sm text-slate-800 mt-1" id="statSize">—</p>
+                </div>
+              </div>
+
+              <div class="mt-6 rounded-3xl border border-slate-200 bg-white/55 overflow-hidden">
+                <div class="px-5 py-4 border-b border-slate-200/60 flex items-center justify-between gap-4">
+                  <div>
+                    <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Floor Plan Preview</div>
+                    <div class="text-sm text-slate-700 mt-1" id="planLabel">Select an asset to generate a preview.</div>
+                  </div>
+                  <button onclick="openFloorplanModal()"
+                          class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/70 hover:bg-white transition">
+                    View
+                  </button>
+                </div>
+                <div class="p-4 bg-white/50" id="floorplanPreview">
+                  <div class="h-44 rounded-2xl border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-400 text-sm">
+                    No asset selected
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 flex gap-3">
+                <button onclick="goPRCardWithSelection()"
+                        class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
+                  Request PR Card
+                </button>
+                <button onclick="downloadSelectedDossierPDF()"
+                        class="px-5 py-3 border border-slate-200 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/70 transition-colors text-xs text-slate-700">
+                  Download PDF
+                </button>
+              </div>
+
+              <p class="text-center text-[10px] text-slate-500 mt-4">
+                By selecting an asset, you agree to the <button class="underline underline-offset-4 hover:text-slate-900" onclick="openLegal('terms')">Terms &amp; Conditions</button>.
+              </p>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6">
+              <h4 class="text-xl font-serif">How this works</h4>
+              <ol class="mt-3 space-y-2 text-sm text-slate-600">
+                <li><span class="font-semibold text-slate-900">1)</span> Click any unit square on the estate layout.</li>
+                <li><span class="font-semibold text-slate-900">2)</span> Review details + floor plan preview instantly.</li>
+                <li><span class="font-semibold text-slate-900">3)</span> Request your PR Card dossier for viewing rights.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PR CARD -->
+    <section class="page" data-page="pr-card" id="page-pr-card">
       <section class="py-28 px-4 relative overflow-hidden">
         <div class="absolute inset-0 bg-slate-900 z-0"></div>
         <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-8 reveal">
           <div class="inline-block border border-white/20 px-4 py-1 rounded-full backdrop-blur-md">
-            <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold">Exclusive Access</span>
+            <span class="text-xs font-bold tracking-[0.2em] uppercase">PR Card Access</span>
           </div>
 
           <h2 class="text-5xl md:text-7xl font-serif leading-none">Not For Everyone.<br/>Perhaps, For You.</h2>
 
           <p class="text-lg text-slate-300 font-light max-w-2xl mx-auto">
-            Ownership at Amada Realty is by invitation or approved application only. We curate our community as strictly as we curate our architecture.
+            Ownership at Amada Realty is by invitation or approved application only. Your PR Card dossier request triggers private review.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-14 border-t border-white/10 pt-12">
-            <div class="space-y-4">
-              <div class="text-4xl font-bold text-white/20">01</div>
-              <h4 class="text-xl font-serif">Financial Vetting</h4>
-              <p class="text-sm text-slate-400">Proof of funds ($1M+ liquidity) required before floorplan viewing.</p>
-            </div>
-            <div class="space-y-4">
-              <div class="text-4xl font-bold text-white/20">02</div>
-              <h4 class="text-xl font-serif">Social Reference</h4>
-              <p class="text-sm text-slate-400">Two referrals from existing members or recognized industry leaders.</p>
-            </div>
-            <div class="space-y-4">
-              <div class="text-4xl font-bold text-white/20">03</div>
-              <h4 class="text-xl font-serif">The Visa Grant</h4>
-              <p class="text-sm text-slate-400">Successful applicants receive the "Amada Golden Key" and purchase rights.</p>
-            </div>
-          </div>
-
           <div class="pt-10">
-            <form id="visaForm" onsubmit="handleVisaSubmit(event)" class="glass-panel p-8 rounded-3xl max-w-lg mx-auto space-y-4 text-left relative overflow-hidden">
+            <form id="prForm" onsubmit="handlePRSubmit(event)" class="glass-panel p-8 rounded-3xl max-w-lg mx-auto space-y-4 text-left relative overflow-hidden">
               <div id="formSuccess" class="absolute inset-0 bg-white z-20 hidden flex-col justify-center items-center text-center p-8">
                 <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i data-lucide="check" class="w-8 h-8"></i>
                 </div>
-                <h4 class="text-2xl font-serif text-slate-900 mb-2">Application Received</h4>
-                <p class="text-slate-500 text-sm">Your dossier ID is <span class="font-semibold" id="dossierId">#AM-9281</span>. Our private board will review your credentials within 48 hours.</p>
-                <button type="button" onclick="closeVisaSuccess()" class="mt-6 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
+                <h4 class="text-2xl font-serif text-slate-900 mb-2">Request Received</h4>
+                <p class="text-slate-500 text-sm">
+                  Your dossier ID is <span class="font-semibold" id="dossierId">#AM-9281</span>.
+                  Our private board will review your credentials within 48 hours.
+                </p>
+                <button type="button" onclick="closePRSuccess()" class="mt-6 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
               </div>
 
               <div class="space-y-2">
@@ -846,19 +797,19 @@
               </div>
 
               <div class="space-y-2">
-                <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Preferred Territory</label>
-                <select id="formSelect" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
-                  <option value="Naija">Naija St. (Flagship)</option>
-                  <option value="Dubai">Dubai St.</option>
-                  <option value="London">London St.</option>
-                  <option value="NY">New York St.</option>
-                  <option value="Canada">Canada St.</option>
-                </select>
+                <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Selected Asset</label>
+                <input id="prUnit" type="text" readonly class="w-full bg-white/40 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400" placeholder="Select an asset on the Assets page">
               </div>
 
               <div class="space-y-2">
-                <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Selected Unit (Optional)</label>
-                <input id="formUnit" type="text" readonly class="w-full bg-white/40 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400" placeholder="Pick a unit from Properties to auto-fill">
+                <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Preferred Territory</label>
+                <select id="prTerritory" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
+                  <option value="Naija">Naija</option>
+                  <option value="Dubai">Dubai</option>
+                  <option value="London">London</option>
+                  <option value="NY">New York</option>
+                  <option value="Canada">Canada</option>
+                </select>
               </div>
 
               <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg mt-4 flex justify-center items-center gap-2">
@@ -880,57 +831,30 @@
 
   </main>
 
-  <!-- Floor Plan Modal -->
-  <div id="floorplan-modal" class="modal-overlay fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Floorplan">
-    <div class="modal-content w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
-      <button onclick="closeFloorplan()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/60 rounded-full flex items-center justify-center hover:bg-white transition-colors" aria-label="Close">
+  <!-- Floorplan Modal (for selected unit) -->
+  <div id="fp-modal" class="modal-overlay fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Floorplan">
+    <div class="modal-content w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl relative">
+      <button onclick="closeFloorplanModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/60 rounded-full flex items-center justify-center hover:bg-white transition-colors" aria-label="Close">
         <i data-lucide="x" class="w-5 h-5 text-slate-900"></i>
       </button>
 
-      <div class="w-full md:w-1/2 h-64 md:h-auto bg-slate-100 relative">
-        <img id="modal-img" src="" class="w-full h-full object-cover" alt="Territory image">
-        <div class="absolute bottom-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest" id="modal-tag">Only 2 Left</div>
-      </div>
-
-      <div class="w-full md:w-1/2 p-8 md:p-12 space-y-6 flex flex-col justify-center">
-        <div>
-          <span class="text-xs font-bold tracking-widest uppercase text-slate-400" id="modal-subtitle">The Collection</span>
-          <h3 class="text-3xl md:text-4xl font-serif mt-1" id="modal-title">New York St.</h3>
-        </div>
-
-        <p class="text-slate-600 text-sm leading-relaxed" id="modal-desc">Description goes here.</p>
-
-        <div class="grid grid-cols-2 gap-4 border-y border-slate-100 py-6">
+      <div class="p-6 md:p-10 border-b border-slate-200 bg-white/70 backdrop-blur">
+        <div class="flex items-start justify-between gap-6">
           <div>
-            <span class="block text-2xl font-bold text-slate-900" id="modal-bed">4</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400">Bedrooms</span>
+            <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Floor Plan</span>
+            <h3 class="text-3xl md:text-4xl font-serif mt-2" id="fpTitle">Asset Floor Plan</h3>
+            <p class="text-sm text-slate-600 mt-2" id="fpSubtitle">Preview generated from unit configuration.</p>
           </div>
-          <div>
-            <span class="block text-2xl font-bold text-slate-900" id="modal-bath">5.5</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400">Bathrooms</span>
-          </div>
-          <div>
-            <span class="block text-2xl font-bold text-slate-900" id="modal-size">4,200</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400">Sq. Ft.</span>
-          </div>
-          <div>
-            <span class="block text-2xl font-bold text-slate-900" id="modal-price">$1.2M</span>
-            <span class="text-xs uppercase tracking-widest text-slate-400">Starting</span>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <button onclick="closeFloorplan(); location.hash='#/visa'; prefillTerritoryFromModal();" class="flex-1 bg-slate-900 text-white py-3 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
-            Start Application
-          </button>
-          <button onclick="downloadTerritoryPDF()" class="px-6 py-3 border border-slate-200 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-50 transition-colors text-xs text-slate-600">
+          <button onclick="downloadSelectedDossierPDF()" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white hover:bg-slate-50 transition">
             Download PDF
           </button>
         </div>
+      </div>
 
-        <p class="text-[10px] text-slate-400">
-          Access to full dossiers is governed by <button class="underline underline-offset-4 hover:text-slate-700" onclick="openLegal('terms')">Terms &amp; Conditions</button>.
-        </p>
+      <div class="p-6 md:p-10">
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-4" id="fpBody">
+          <!-- injected -->
+        </div>
       </div>
     </div>
   </div>
@@ -966,26 +890,23 @@
 
   <script>
     // ---------------------------
-    // Lucide
+    // Icons + Reveal
     // ---------------------------
     lucide.createIcons();
 
-    // ---------------------------
-    // Reveal observer
-    // ---------------------------
-    const observerOptions = { threshold: 0.1, rootMargin: "0px" };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, observerOptions);
+    }, { threshold: 0.1 });
+
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ---------------------------
     // SPA Router
     // ---------------------------
     function showPage(page, { scrollTop = true } = {}) {
-      closeFloorplan(true);
-      closeLegal(true);
       closeMobileMenu(true);
+      closeLegal(true);
+      closeFloorplanModal(true);
 
       document.querySelectorAll('.page[data-page]').forEach(p => p.classList.remove('active'));
       (document.querySelector(`.page[data-page="${page}"]`) || document.querySelector('.page[data-page="home"]'))?.classList.add('active');
@@ -995,18 +916,26 @@
       lucide.createIcons();
       syncCityMapFallback();
 
-      if (page === 'properties') {
-        renderInventory();
-        if (!miniMapRendered) renderEstateMiniMap(); // render once
+      if (page === 'assets') {
+        if (!estateRendered) renderEstateLayout();
+        // pull selection into PR page inputs if already set
+        hydratePRFormFromSelection();
       }
-      if (page === 'city') renderCityHotspots();
+
+      if (page === 'pr-card') {
+        hydratePRFormFromSelection();
+      }
+
+      if (page === 'city') {
+        renderCityHotspots();
+      }
     }
 
     function getRoutePage() {
       const h = location.hash || '#/home';
       if (!h.startsWith('#/')) return 'home';
       const page = h.replace('#/', '').trim();
-      const allowed = new Set(['home','city','properties','visa']);
+      const allowed = new Set(['home','city','assets','pr-card']);
       return allowed.has(page) ? page : 'home';
     }
 
@@ -1017,7 +946,7 @@
     });
 
     // ---------------------------
-    // Mobile menu (scroll lock)
+    // Mobile Menu (scroll lock)
     // ---------------------------
     const mobileMenu = document.getElementById('mobileMenu');
     document.getElementById('mobileMenuBtn').addEventListener('click', () => {
@@ -1033,82 +962,347 @@
     mobileMenu.addEventListener('click', (e) => { if(e.target === mobileMenu) closeMobileMenu(); });
 
     // ---------------------------
-    // Floorplan modal (scroll lock)
+    // Data: 69 Assets (lightweight)
     // ---------------------------
-    const territoryData = {
-      ny: {
-        title:'New York St.',
-        subtitle:'The Industrialist',
-        desc:'A masterclass in vertical living. Exposed brick interiors, private elevators, rooftop terraces, and a basement speakeasy lounge for private gatherings.',
-        img:'https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1400&auto=format&fit=crop',
-        bed:'4', bath:'5', size:'4,200', price:'$1.2M', tag:'2 Units Left'
-      },
-      dubai: {
-        title:'Dubai St.',
-        subtitle:'The Futurist',
-        desc:'Seamless indoor-outdoor living. Automated glass walls, central atriums with palms, and an infinity-edge plunge pool built for modern royalty.',
-        img:'https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1400&auto=format&fit=crop',
-        bed:'5', bath:'6.5', size:'5,500', price:'$1.8M', tag:'Waitlist Only'
-      },
-      london: {
-        title:'London St.',
-        subtitle:'The Aristocrat',
-        desc:'Georgian-inspired facades and quiet gardens. Formal drawing rooms, a library, and refined interiors designed for discreet living.',
-        img:'https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1400&auto=format&fit=crop',
-        bed:'4', bath:'4.5', size:'3,800', price:'$1.5M', tag:'Available'
-      },
-      canada: {
-        title:'Canada St.',
-        subtitle:'The Naturalist',
-        desc:'Alpine luxury in a controlled micro-climate street. Timber beams, stone fireplaces, and gabled windows built for warm gatherings.',
-        img:'https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1400&auto=format&fit=crop',
-        bed:'5', bath:'4', size:'4,600', price:'$1.1M', tag:'Available'
-      },
-      naija: {
-        title:'Naija St.',
-        subtitle:'The Sovereign',
-        desc:'The flagship collection. Double-volume living areas, cinema room, reinforced security suites, and a private courtyard for ceremonial hosting.',
-        img:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1400&auto=format&fit=crop',
-        bed:'7', bath:'8', size:'8,000', price:'$2.5M', tag:'Flagship'
-      }
+    const territoryMeta = {
+      ny:     { label:'New York Street', short:'NY',     basePrice:1200000, baseBeds:4, baseSize:4200 },
+      canada: { label:'Canada Street',   short:'CA',     basePrice:1100000, baseBeds:4, baseSize:4600 },
+      london: { label:'London Street',   short:'LDN',    basePrice:1500000, baseBeds:4, baseSize:3900 },
+      dubai:  { label:'Dubai Street',    short:'DXB',    basePrice:1800000, baseBeds:5, baseSize:5200 },
+      naija:  { label:'Naija Street',    short:'NG',     basePrice:2500000, baseBeds:6, baseSize:7200 }
     };
 
-    let currentSelectionTerritory = 'naija';
+    const counts = { ny:13, canada:13, london:14, dubai:14, naija:15 }; // total 69
+    let inventory = [];
+    (function generateInventory(){
+      const order = ['ny','canada','london','dubai','naija'];
+      let idx = 1;
+      for(const terr of order){
+        for(let i=0;i<counts[terr];i++){
+          const meta = territoryMeta[terr];
+          const price = meta.basePrice + (Math.random()*350000) - 90000 + (terr==='naija' ? (Math.random()*250000) : 0);
+          const beds = Math.max(1, Math.round(meta.baseBeds + (Math.random()*2 - 1)));
+          const baths = (beds + (Math.random()>0.5?1:0)) + (Math.random()>0.75?0.5:0);
+          const size = Math.round(meta.baseSize + (Math.random()*900 - 250));
+          inventory.push({
+            id: 'AM-' + String(idx).padStart(3,'0'),
+            territory: terr,
+            beds, baths,
+            size,
+            price: Math.round(price),
+            status: 'waitlist'
+          });
+          idx++;
+        }
+      }
 
-    function openFloorplan(id){
-      const d = territoryData[id];
-      if(!d) return;
-      currentSelectionTerritory = id;
+      const shuffled = [...inventory].sort(()=>Math.random()-0.5);
+      const availableIds = new Set(shuffled.slice(0,8).map(x=>x.id));
+      const reservedIds  = new Set(shuffled.slice(8,29).map(x=>x.id));
+      inventory = inventory.map(p => ({
+        ...p,
+        status: availableIds.has(p.id) ? 'available' : reservedIds.has(p.id) ? 'reserved' : 'waitlist'
+      }));
+    })();
 
-      document.getElementById('modal-title').innerText = d.title;
-      document.getElementById('modal-subtitle').innerText = d.subtitle;
-      document.getElementById('modal-desc').innerText = d.desc;
-      document.getElementById('modal-img').src = d.img;
-      document.getElementById('modal-bed').innerText = d.bed;
-      document.getElementById('modal-bath').innerText = d.bath;
-      document.getElementById('modal-size').innerText = d.size;
-      document.getElementById('modal-price').innerText = d.price;
-      document.getElementById('modal-tag').innerText = d.tag;
+    function formatUSD(n){
+      return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    function statusLabel(s){
+      return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Waitlist';
+    }
+    function statusColor(s){
+      if(s === 'available') return 'rgba(34,197,94,.85)';
+      if(s === 'reserved') return 'rgba(245,158,11,.85)';
+      return 'rgba(148,163,184,.85)';
+    }
 
-      document.body.style.overflow = 'hidden';
-      document.getElementById('floorplan-modal').classList.add('open');
+    // ---------------------------
+    // Assets Page: Estate Layout
+    // ---------------------------
+    const MINI_COLS = 6;
+    let estateRendered = false;
+    let selectedUnit = null;
+    let prevSelectedId = null;
+
+    function groupUnitsByTerritory(){
+      const groups = { ny:[], canada:[], london:[], dubai:[], naija:[] };
+      inventory.forEach(u => groups[u.territory].push(u));
+      return groups;
+    }
+
+    function renderEstateLayout(){
+      const bandsEl = document.getElementById('territoryBands');
+      if(!bandsEl) return;
+
+      const groups = groupUnitsByTerritory();
+      const order = ['ny','canada','london','dubai','naija'];
+
+      bandsEl.innerHTML = order.map(key => {
+        const list = groups[key];
+        const label = territoryMeta[key].label;
+
+        const units = list.map(u => `
+          <button class="unit"
+                  id="unit-${u.id}"
+                  data-unit="${u.id}"
+                  style="background:${statusColor(u.status)}"
+                  aria-label="${u.id}"
+                  title="${u.id}">
+          </button>
+        `).join('');
+
+        return `
+          <div class="band">
+            <div class="band-title">${label}</div>
+            <div class="lots">
+              <div class="grid grid-cols-6 gap-2" style="grid-auto-rows:24px;">
+                ${units}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      wireEstateUnitEvents();
+      estateRendered = true;
+
+      // restore selection (if exists)
+      const saved = sessionStorage.getItem('amada_selected_unit');
+      if (saved) selectUnit(saved, { silentScroll: true });
+    }
+
+    function wireEstateUnitEvents(){
+      const tip = document.getElementById('unitTip');
+      const canvas = document.querySelector('.estate-canvas');
+      if(!canvas) return;
+
+      document.querySelectorAll('[data-unit]').forEach(btn => {
+        const unitId = btn.getAttribute('data-unit');
+
+        btn.addEventListener('mouseenter', () => {
+          const unit = inventory.find(x => x.id === unitId);
+          if(!unit || !tip) return;
+          tip.classList.remove('hidden');
+          tip.textContent = `${unit.id} • ${territoryMeta[unit.territory].short} • ${statusLabel(unit.status)}`;
+        });
+
+        btn.addEventListener('mousemove', (e) => {
+          if(!tip) return;
+          const rect = canvas.getBoundingClientRect();
+          tip.style.left = (e.clientX - rect.left + 12) + 'px';
+          tip.style.top  = (e.clientY - rect.top  + 12) + 'px';
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          tip?.classList.add('hidden');
+        });
+
+        btn.addEventListener('click', () => selectUnit(unitId));
+      });
+    }
+
+    function selectUnit(unitId, { silentScroll = false } = {}){
+      const unit = inventory.find(x => x.id === unitId);
+      if(!unit) return;
+      selectedUnit = unit;
+      sessionStorage.setItem('amada_selected_unit', unit.id);
+
+      // highlight
+      if (prevSelectedId) {
+        document.getElementById('unit-' + prevSelectedId)?.classList.remove('ring-2','ring-slate-900');
+      }
+      document.getElementById('unit-' + unit.id)?.classList.add('ring-2','ring-slate-900');
+      prevSelectedId = unit.id;
+
+      // update UI
+      const terrLabel = territoryMeta[unit.territory].label;
+      document.getElementById('selectedTitle').innerText = `${unit.id} • ${terrLabel}`;
+      document.getElementById('selectedDesc').innerText =
+        `A ${unit.beds}-bed residence in ${terrLabel}. Status: ${statusLabel(unit.status)}.`;
+
+      document.getElementById('statStatus').innerText = statusLabel(unit.status);
+      document.getElementById('statPrice').innerText = formatUSD(unit.price);
+      document.getElementById('statBeds').innerText  = `${unit.beds} / ${unit.baths}`;
+      document.getElementById('statSize').innerText  = `${unit.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²`;
+
+      document.getElementById('planLabel').innerText = `Generated preview for ${unit.id} (${unit.beds} bedrooms).`;
+
+      // floorplan preview
+      const preview = document.getElementById('floorplanPreview');
+      preview.innerHTML = buildFloorplanSVG(unit, { compact: true });
+
+      // hydrate PR form fields if on PR page later
+      hydratePRFormFromSelection();
+
+      if(!silentScroll){
+        // keep UX crisp on mobile: scroll the details into view
+        if (window.innerWidth < 1024) {
+          document.getElementById('selectedTitle').scrollIntoView({ behavior:'smooth', block:'start' });
+        }
+      }
+
       lucide.createIcons();
     }
 
-    function closeFloorplan(force=false){
-      const m = document.getElementById('floorplan-modal');
+    // ---------------------------
+    // Floorplan generation (lightweight SVG)
+    // ---------------------------
+    function buildFloorplanSVG(unit, { compact = false } = {}){
+      const beds = unit.beds;
+      const w = compact ? 520 : 760;
+      const h = compact ? 240 : 360;
+
+      const roomCount = Math.min(6, Math.max(3, beds)); // 3..6 rooms
+      const cols = 2;
+      const rows = Math.ceil((roomCount + 2) / cols); // + living/kitchen
+      const pad = 14;
+      const gap = 10;
+
+      const usableW = w - pad*2;
+      const usableH = h - pad*2;
+      const cellW = (usableW - gap*(cols-1)) / cols;
+      const cellH = (usableH - gap*(rows-1)) / rows;
+
+      const labels = ["Living", "Kitchen", ...Array.from({length: roomCount}, (_,i)=>`Bed ${i+1}`)];
+      const rects = [];
+
+      for(let i=0;i<labels.length;i++){
+        const r = Math.floor(i/cols);
+        const c = i%cols;
+        const x = pad + c*(cellW+gap);
+        const y = pad + r*(cellH+gap);
+
+        // slightly different fills for “depth”
+        const isCore = i < 2;
+        const fill = isCore ? "rgba(2,132,199,.10)" : "rgba(15,23,42,.05)";
+        const stroke = "rgba(100,116,139,.45)";
+        rects.push(`
+          <g>
+            <rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" rx="14"
+                  fill="${fill}" stroke="${stroke}" stroke-width="1.2"/>
+            <text x="${x+14}" y="${y+22}" font-size="12" fill="rgba(15,23,42,.78)" font-weight="700" letter-spacing=".08em">
+              ${labels[i].toUpperCase()}
+            </text>
+            <line x1="${x+14}" y1="${y+30}" x2="${x+cellW-14}" y2="${y+30}" stroke="rgba(15,23,42,.08)" />
+          </g>
+        `);
+      }
+
+      return `
+        <svg viewBox="0 0 ${w} ${h}" width="100%" height="${compact ? 180 : 280}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floorplan">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.9)"/>
+              <stop offset="1" stop-color="rgba(241,245,249,.9)"/>
+            </linearGradient>
+            <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,.7)"/>
+              <stop offset="1" stop-color="rgba(2,6,23,.04)"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="6" y="6" width="${w-12}" height="${h-12}" rx="22" fill="url(#bg)" stroke="rgba(148,163,184,.55)" />
+          <rect x="12" y="12" width="${w-24}" height="${h-24}" rx="18" fill="none" stroke="url(#edge)" />
+
+          <text x="18" y="26" font-size="12" fill="rgba(100,116,139,.8)" font-weight="800" letter-spacing=".22em">
+            ${unit.id} • ${territoryMeta[unit.territory].short} • ${beds} BED
+          </text>
+
+          ${rects.join("")}
+
+          <text x="${w-18}" y="${h-16}" text-anchor="end" font-size="10" fill="rgba(100,116,139,.75)" font-weight="700" letter-spacing=".18em">
+            PREVIEW • NOT TO SCALE
+          </text>
+        </svg>
+      `;
+    }
+
+    // ---------------------------
+    // Floorplan Modal controls
+    // ---------------------------
+    function openFloorplanModal(){
+      if(!selectedUnit){
+        // gentle feedback without extra UI
+        return;
+      }
+      document.body.style.overflow = 'hidden';
+      document.getElementById('fpTitle').innerText = `${selectedUnit.id} • Floor Plan`;
+      document.getElementById('fpSubtitle').innerText = `${territoryMeta[selectedUnit.territory].label} • ${selectedUnit.beds} beds • ${selectedUnit.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²`;
+      document.getElementById('fpBody').innerHTML = buildFloorplanSVG(selectedUnit, { compact:false });
+      document.getElementById('fp-modal').classList.add('open');
+      lucide.createIcons();
+    }
+
+    function closeFloorplanModal(force=false){
+      const m = document.getElementById('fp-modal');
       if(!m.classList.contains('open') && !force) return;
       m.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    document.getElementById('floorplan-modal').addEventListener('click', function(e){
-      if(e.target === this) closeFloorplan();
+    document.getElementById('fp-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'fp-modal') closeFloorplanModal();
     });
 
-    function prefillTerritoryFromModal(){
-      const map = { ny:'NY', dubai:'Dubai', london:'London', canada:'Canada', naija:'Naija' };
-      document.getElementById('formSelect').value = map[currentSelectionTerritory] || 'Naija';
+    // ---------------------------
+    // PR Card: prefill from selection
+    // ---------------------------
+    function hydratePRFormFromSelection(){
+      const prUnit = document.getElementById('prUnit');
+      const prTerr = document.getElementById('prTerritory');
+      if(!prUnit || !prTerr) return;
+
+      const saved = sessionStorage.getItem('amada_selected_unit');
+      const unit = saved ? inventory.find(x => x.id === saved) : null;
+
+      if(unit){
+        prUnit.value = unit.id;
+        const map = { ny:'NY', dubai:'Dubai', london:'London', canada:'Canada', naija:'Naija' };
+        prTerr.value = map[unit.territory] || 'Naija';
+      } else {
+        prUnit.value = '';
+      }
+    }
+
+    function goPRCardWithSelection(){
+      location.hash = '#/pr-card';
+      setTimeout(hydratePRFormFromSelection, 80);
+    }
+
+    // ---------------------------
+    // PR Card submit
+    // ---------------------------
+    function makeDossierId(){
+      const n = Math.floor(1000 + Math.random()*8999);
+      return '#AM-' + n;
+    }
+
+    function closePRSuccess(){
+      const fs = document.getElementById('formSuccess');
+      fs.classList.add('hidden');
+      fs.classList.remove('flex');
+      document.getElementById('prForm').reset();
+      hydratePRFormFromSelection();
+    }
+
+    function handlePRSubmit(e){
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+
+      btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Encrypting...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('dossierId').innerText = makeDossierId();
+        const fs = document.getElementById('formSuccess');
+        fs.classList.remove('hidden');
+        fs.classList.add('flex');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        lucide.createIcons();
+      }, 1200);
     }
 
     // ---------------------------
@@ -1120,49 +1314,45 @@
         title: 'Privacy Policy',
         subtitle: 'How Amada Realty collects, uses, stores, and protects information submitted through the estate website.',
         body: `
-          <h4 style="font-weight:700; margin-top:0;">1. Scope</h4>
-          <p>This Privacy Policy applies to data submitted through Amada Realty’s website, application forms, and private concierge channels.</p>
-          <h4 style="font-weight:700;">2. What We Collect</h4>
+          <h4 style="font-weight:800; margin-top:0;">1. Scope</h4>
+          <p>This policy covers data submitted through Amada Realty pages, PR Card requests, and concierge communications.</p>
+
+          <h4 style="font-weight:800;">2. What We Collect</h4>
           <ul style="margin-left:18px; list-style:disc;">
-            <li><strong>Identity & contact</strong>: name, email, phone, and optional assistant/representative contact details.</li>
-            <li><strong>Applicant credentials</strong>: financial bracket selection, territory preference, and optional unit selection.</li>
-            <li><strong>Usage data</strong>: basic analytics like device type, pages visited, and general interaction patterns (non-sensitive).</li>
+            <li><strong>Identity & contact</strong>: name and contact details submitted by you.</li>
+            <li><strong>Application context</strong>: net worth bracket, selected asset, territory preference.</li>
+            <li><strong>Usage</strong>: basic site analytics to improve experience.</li>
           </ul>
-          <h4 style="font-weight:700;">3. How We Use Information</h4>
-          <ul style="margin-left:18px; list-style:disc;">
-            <li>To process and review visa dossier requests.</li>
-            <li>To provide concierge follow-up and appointment scheduling.</li>
-            <li>To maintain the estate’s eligibility and vetting standards (anti-fraud and integrity screening).</li>
-            <li>To improve the estate’s digital experience and reduce errors in submissions.</li>
-          </ul>
-          <h4 style="font-weight:700;">4. Sharing</h4>
-          <p>We do not sell applicant data. We may share limited information with trusted service partners strictly for operational requirements, under confidentiality obligations.</p>
-          <h4 style="font-weight:700;">5. Security</h4>
-          <p>We use access controls and monitoring to protect confidentiality. No system is perfectly secure, but we operate with privacy-first intent.</p>
-          <h4 style="font-weight:700;">6. Contact</h4>
+
+          <h4 style="font-weight:800;">3. Confidentiality</h4>
+          <p>Amada Realty is invitation-grade. Submitted information is reviewed under need-to-know access and used only for eligibility and concierge follow-up.</p>
+
+          <h4 style="font-weight:800;">4. Sharing</h4>
+          <p>We do not sell your data. Limited sharing may occur with vetted service partners strictly for operational needs, under confidentiality obligations.</p>
+
+          <h4 style="font-weight:800;">5. Contact</h4>
           <p>Concierge: <strong>concierge@amadarealty.com</strong></p>
         `
       },
       terms: {
         kicker: 'Legal',
         title: 'Terms & Conditions',
-        subtitle: 'Website use, application rules, eligibility standards, and purchase-access conditions for Amada Realty.',
+        subtitle: 'Website use, PR Card eligibility, confidentiality rules, and purchase-access conditions.',
         body: `
-          <h4 style="font-weight:700; margin-top:0;">1. Private Estate Notice</h4>
-          <p>Amada Realty is invitation-grade. Access to inventory, tours, floorplans, and purchase rights may be restricted at any time.</p>
-          <h4 style="font-weight:700;">2. Eligibility & Vetting</h4>
+          <h4 style="font-weight:800; margin-top:0;">1. Private Estate Notice</h4>
+          <p>Amada Realty is invitation-grade. Access to floorplans, tours, and purchase rights may be restricted at any time.</p>
+
+          <h4 style="font-weight:800;">2. PR Card Requests</h4>
           <ul style="margin-left:18px; list-style:disc;">
-            <li>Applicants may be required to provide proof of funds and/or references before private disclosure.</li>
-            <li>Submission does not guarantee acceptance, viewing rights, or purchase approval.</li>
+            <li>Submitting a PR Card request does not guarantee approval or viewing rights.</li>
+            <li>We may require proof of funds and/or references before private disclosures.</li>
           </ul>
-          <h4 style="font-weight:700;">3. Confidentiality</h4>
-          <p>Floorplans, pricing detail, layouts, and internal policies are confidential. You agree not to distribute proprietary materials.</p>
-          <h4 style="font-weight:700;">4. Inventory & Pricing</h4>
-          <p>Availability and price ranges are indicative and may change without notice. Final terms are governed by executed documents.</p>
-          <h4 style="font-weight:700;">5. Anti-Fraud & Integrity</h4>
-          <p>We may decline applications where we detect misrepresentation, suspicious activity, or conduct that risks estate integrity.</p>
-          <h4 style="font-weight:700;">6. Contact</h4>
-          <p>Concierge: <strong>concierge@amadarealty.com</strong></p>
+
+          <h4 style="font-weight:800;">3. Confidentiality</h4>
+          <p>Layouts, floorplans, internal policies, and pricing details are confidential. You agree not to distribute proprietary materials.</p>
+
+          <h4 style="font-weight:800;">4. Availability</h4>
+          <p>All status labels are indicative and may change without notice.</p>
         `
       },
       bylaws: {
@@ -1170,22 +1360,23 @@
         title: 'Estate Bylaws',
         subtitle: 'Rules that protect silence, safety, aesthetics, and resident privacy.',
         body: `
-          <h4 style="font-weight:700; margin-top:0;">1. Quiet Luxury Standard</h4>
+          <h4 style="font-weight:800; margin-top:0;">1. Quiet Luxury Standard</h4>
           <ul style="margin-left:18px; list-style:disc;">
             <li>Quiet Hours: <strong>22:00 – 07:00</strong></li>
-            <li>No public-facing noise events without approval.</li>
+            <li>Restricted outdoor noise events without approval.</li>
           </ul>
-          <h4 style="font-weight:700;">2. Visitor Policy</h4>
+
+          <h4 style="font-weight:800;">2. Visitor Policy</h4>
           <ul style="margin-left:18px; list-style:disc;">
             <li>Guests must be registered by residents.</li>
             <li>Large gatherings require prior approval.</li>
           </ul>
-          <h4 style="font-weight:700;">3. Aesthetics</h4>
-          <p>Exterior changes require architectural review to preserve the territory identity.</p>
-          <h4 style="font-weight:700;">4. Security</h4>
+
+          <h4 style="font-weight:800;">3. Aesthetics</h4>
+          <p>Exterior changes require architectural review to preserve territory identity.</p>
+
+          <h4 style="font-weight:800;">4. Security</h4>
           <p>Controlled entry, authorized access, and protected routes are enforced to preserve resident privacy.</p>
-          <h4 style="font-weight:700;">5. Resort & Spa</h4>
-          <p>Tiered access, dress code, and noise control apply.</p>
         `
       }
     };
@@ -1193,10 +1384,12 @@
     function openLegal(kind){
       document.body.style.overflow = 'hidden';
       const doc = legalDocs[kind] || legalDocs.privacy;
+
       document.getElementById('legalKicker').innerText = doc.kicker;
       document.getElementById('legalTitle').innerText = doc.title;
       document.getElementById('legalSubtitle').innerText = doc.subtitle;
       document.getElementById('legalBody').innerHTML = doc.body;
+
       document.getElementById('legal-modal').classList.add('open');
       lucide.createIcons();
     }
@@ -1213,85 +1406,24 @@
     });
 
     // ---------------------------
-    // Print helpers (no injected <script> tag)
+    // City Map (optional background + hotspots)
     // ---------------------------
-    function openPrintWindow(htmlTitle, htmlBody){
-      const w = window.open('', '_blank', 'width=900,height=1100');
-      if(!w) return;
-
-      const html = `<!doctype html><html><head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>${htmlTitle}</title>
-        <style>
-          body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:40px; color:#0f172a;}
-          h1{font-family: Georgia, serif; margin:0 0 8px 0; font-size:34px;}
-          h2{margin:0 0 18px 0; font-weight:600; color:#334155;}
-          .pill{display:inline-block; padding:6px 12px; border:1px solid #cbd5e1; border-radius:999px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#475569; margin:8px 8px 0 0;}
-          .box{border:1px solid #e2e8f0; border-radius:18px; padding:18px; margin-top:18px;}
-          .grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px;}
-          .k{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#64748b; font-weight:700;}
-          .v{font-size:14px; margin-top:4px;}
-          .foot{margin-top:28px; font-size:12px; color:#64748b;}
-          .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
-        </style>
-      </head><body>
-        ${htmlBody}
-        <div class="foot">Tip: Use your browser Print dialog → “Save as PDF”.</div>
-        <div class="brand">AMADA REALTY • Confidential Dossier</div>
-      </body></html>`;
-
-      w.document.open();
-      w.document.write(html);
-      w.document.close();
-
-      w.onload = () => setTimeout(() => { try { w.focus(); w.print(); } catch(e){} }, 350);
-      setTimeout(() => { try { w.focus(); w.print(); } catch(e){} }, 900);
-    }
-
-    function downloadTerritoryPDF(){
-      const t = territoryData[currentSelectionTerritory] || territoryData.naija;
-      const body = `
-        <div class="pill">Territory Dossier</div>
-        <h1>${t.title}</h1>
-        <h2>${t.subtitle}</h2>
-        <div class="box">
-          <div class="grid">
-            <div><div class="k">Bedrooms</div><div class="v">${t.bed}</div></div>
-            <div><div class="k">Bathrooms</div><div class="v">${t.bath}</div></div>
-            <div><div class="k">Size</div><div class="v">${t.size} sq.ft.</div></div>
-            <div><div class="k">Starting</div><div class="v">${t.price}</div></div>
-          </div>
-        </div>
-        <div class="box">
-          <div class="k">Overview</div>
-          <div class="v" style="line-height:1.7;">${t.desc}</div>
-        </div>
-      `;
-      openPrintWindow(`${t.title} Dossier`, body);
-    }
-
-    // ---------------------------
-    // City Map (Image + SVG hotspots)
-    // ---------------------------
-    // Paste your masterplan image URL here:
-    const CITY_MAP_IMAGE_URL = ""; // e.g. "https://yourdomain.com/amada-masterplan.png"
+    const CITY_MAP_IMAGE_URL = ""; // optional: paste URL to your masterplan image
     let currentCityLayer = "all";
 
     const cityZones = {
-      ny:     { type:"territory", title:"New York Street", icon:"building-2", access:"Residents + escorted guests", hours:"Always", noise:"Medium", desc:"Industrial luxury band — townhouse rhythm, controlled terraces." },
-      canada: { type:"territory", title:"Canada Street",   icon:"mountain",   access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Timber calm band — retreat homes, silence-first living." },
-      london: { type:"territory", title:"London Street",   icon:"umbrella",   access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Regency band — garden etiquette, discreet arrivals." },
-      dubai:  { type:"territory", title:"Dubai Street",    icon:"sun",        access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Modernist band — glass, bright villas, controlled privacy." },
-      naija:  { type:"territory", title:"Naija Street",    icon:"crown",      access:"Residents + escorted guests", hours:"Always", noise:"Medium", desc:"Flagship band — sovereign scale homes and private hosting." },
+      ny:     { type:"territory", title:"New York Territory", icon:"building-2", access:"Residents + escorted guests", hours:"Always", noise:"Medium", desc:"Industrial luxury district with controlled terraces and quiet prestige." },
+      canada: { type:"territory", title:"Canada Territory",   icon:"mountain",   access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Timber calm district designed for retreat and family privacy." },
+      london: { type:"territory", title:"London Territory",   icon:"umbrella",   access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Regency calm district with garden etiquette and discreet arrivals." },
+      dubai:  { type:"territory", title:"Dubai Territory",    icon:"sun",        access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Modernist villas and controlled pool privacy zoning." },
+      naija:  { type:"territory", title:"Naija Territory",    icon:"crown",      access:"Residents + escorted guests", hours:"Always", noise:"Medium", desc:"Flagship district with sovereign-scale residences and hosting zones." },
 
       mall:   { type:"amenity", title:"Shopping Mall & Offices", icon:"shopping-bag", access:"Residents + invited guests", hours:"08:00–22:00", noise:"Low", desc:"Curated retail + private offices, controlled access." },
       heli:   { type:"amenity", title:"Parking Lot & Helipad",   icon:"plane",        access:"Authorized entry",         hours:"06:00–22:00", noise:"Controlled", desc:"Valet pockets, service routing, executive arrivals." },
       school: { type:"amenity", title:"School",                  icon:"graduation-cap",access:"Residents only",         hours:"07:30–16:00", noise:"Low", desc:"International academy corridor, controlled parent access." },
       park:   { type:"amenity", title:"Park & Dog Park",         icon:"trees",        access:"Residents + guests",      hours:"06:00–21:00", noise:"Low", desc:"Green breathing space + dog zone, strict cleanliness policy." },
       leisure:{ type:"amenity", title:"Leisure Center",          icon:"sparkles",     access:"Residents + guests",      hours:"08:00–23:00", noise:"Low", desc:"Gym + lounge — curated social behavior." },
-      golf:   { type:"amenity", title:"Golf",                    icon:"flag",         access:"Residents + guests",      hours:"06:00–19:00", noise:"Low", desc:"Putting/practice — quiet sport, quiet prestige." },
-      resort: { type:"amenity", title:"Resort & Spa",            icon:"waves",        access:"Resident tiers + escorted guests", hours:"07:00–23:00", noise:"Low", desc:"Suites, spa circuit, calm lounge. Strict noise policy." }
+      golf:   { type:"amenity", title:"Golf",                    icon:"flag",         access:"Residents + guests",      hours:"06:00–19:00", noise:"Low", desc:"Putting/practice — quiet sport, quiet prestige." }
     };
 
     const cityHotspots = [
@@ -1307,7 +1439,6 @@
       { key:"park",   layer:"amenities",  x: 705, y: 610, w: 250, h: 140 },
       { key:"leisure",layer:"amenities",  x: 705, y: 780, w: 250, h: 150 },
       { key:"golf",   layer:"amenities",  x: 705, y: 960, w: 250, h: 140 }
-      // Add resort hotspot if your image contains it
     ];
 
     function syncCityMapFallback(){
@@ -1342,16 +1473,7 @@
       iconEl.setAttribute('data-lucide', z.icon);
 
       const cta = document.getElementById('cityCTA');
-      if(z.type === 'territory'){
-        cta.innerText = 'Browse Units';
-        cta.onclick = () => {
-          location.hash = '#/properties';
-          setTimeout(() => setTerritoryFilterFromCity(key), 120);
-        };
-      } else {
-        cta.innerText = 'Browse Units';
-        cta.onclick = () => location.hash = '#/properties';
-      }
+      cta.onclick = () => location.hash = '#/assets';
 
       lucide.createIcons();
     }
@@ -1362,7 +1484,6 @@
       if(!svg) return;
 
       syncCityMapFallback();
-
       const visible = cityHotspots.filter(h => currentCityLayer === 'all' ? true : h.layer === currentCityLayer);
 
       svg.innerHTML = visible.map(h => `
@@ -1403,464 +1524,100 @@
         r.addEventListener('click', () => setCityDetails(key));
       });
 
-      // default
       setCityDetails('ny');
       lucide.createIcons();
     }
 
     // ---------------------------
-    // Inventory (lightweight)
+    // PDF (print-to-pdf window) for selected unit
     // ---------------------------
-    const territoryMeta = {
-      ny:     { label:'NY',     title:'New York St.', basePrice:1200000, baseBeds:4, baseSize:4200 },
-      canada: { label:'Canada', title:'Canada St.',   basePrice:1100000, baseBeds:4, baseSize:4600 },
-      london: { label:'London', title:'London St.',   basePrice:1500000, baseBeds:4, baseSize:3900 },
-      dubai:  { label:'Dubai',  title:'Dubai St.',    basePrice:1800000, baseBeds:5, baseSize:5200 },
-      naija:  { label:'Naija',  title:'Naija St.',    basePrice:2500000, baseBeds:6, baseSize:7200 }
-    };
+    function openPrintWindow(htmlTitle, htmlBody){
+      const w = window.open('', '_blank', 'width=900,height=1100');
+      if(!w) return;
 
-    function formatUSD(n){
-      return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const html = `<!doctype html><html><head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>${htmlTitle}</title>
+        <style>
+          body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:40px; color:#0f172a;}
+          h1{font-family: Georgia, serif; margin:0 0 8px 0; font-size:34px;}
+          h2{margin:0 0 18px 0; font-weight:600; color:#334155;}
+          .pill{display:inline-block; padding:6px 12px; border:1px solid #cbd5e1; border-radius:999px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#475569; margin:8px 8px 0 0;}
+          .box{border:1px solid #e2e8f0; border-radius:18px; padding:18px; margin-top:18px;}
+          .grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px;}
+          .k{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#64748b; font-weight:800;}
+          .v{font-size:14px; margin-top:4px;}
+          .foot{margin-top:28px; font-size:12px; color:#64748b;}
+          .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
+          svg{max-width:100%; height:auto;}
+        </style>
+      </head><body>
+        ${htmlBody}
+        <div class="foot">Tip: Use Print → “Save as PDF”.</div>
+        <div class="brand">AMADA REALTY • Confidential Dossier</div>
+      </body></html>`;
+
+      w.document.open();
+      w.document.write(html);
+      w.document.close();
+
+      w.onload = () => setTimeout(() => { try { w.focus(); w.print(); } catch(e){} }, 350);
+      setTimeout(() => { try { w.focus(); w.print(); } catch(e){} }, 900);
     }
 
-    const counts = { ny:13, canada:13, london:14, dubai:14, naija:15 }; // total 69
-    let inventory = [];
+    function downloadSelectedDossierPDF(){
+      if(!selectedUnit) return;
 
-    (function generateInventory(){
-      const order = ['ny','canada','london','dubai','naija']; // matches your screenshot order
-      let idx = 1;
-      for(const terr of order){
-        for(let i=0;i<counts[terr];i++){
-          const meta = territoryMeta[terr];
-          const price = meta.basePrice + (Math.random()*350000) - 90000 + (terr==='naija' ? (Math.random()*250000) : 0);
-          const beds = Math.max(1, Math.round(meta.baseBeds + (Math.random()*2 - 1)));
-          const baths = (beds + (Math.random()>0.5?1:0)) + (Math.random()>0.75?0.5:0);
-          const size = Math.round(meta.baseSize + (Math.random()*900 - 250));
-
-          inventory.push({
-            id: 'AM-' + String(idx).padStart(3,'0'),
-            territory: terr,
-            territoryTitle: meta.title,
-            beds, baths,
-            size,
-            price: Math.round(price),
-            status: 'waitlist'
-          });
-          idx++;
-        }
-      }
-
-      // statuses: 8 available, 21 reserved, rest waitlist
-      const shuffled = [...inventory].sort(()=>Math.random()-0.5);
-      const availableIds = new Set(shuffled.slice(0,8).map(x=>x.id));
-      const reservedIds  = new Set(shuffled.slice(8,29).map(x=>x.id));
-
-      inventory = inventory.map(p => ({
-        ...p,
-        status: availableIds.has(p.id) ? 'available' : reservedIds.has(p.id) ? 'reserved' : 'waitlist'
-      }));
-    })();
-
-    let selectedUnit = null;
-
-    function statusLabel(s){
-      return s === 'available' ? 'Available' : s === 'reserved' ? 'Reserved' : 'Waitlist';
-    }
-    function statusDotClass(s){
-      return s === 'available' ? 'bg-green-500' : s === 'reserved' ? 'bg-amber-500' : 'bg-slate-400';
-    }
-    function scarcityRank(s){ return s === 'available' ? 0 : s === 'reserved' ? 1 : 2; }
-
-    function updatePriceLabel(){
-      const v = Number(document.getElementById('fMaxPrice')?.value || 3000000);
-      const el = document.getElementById('fPriceLabel');
-      if(el) el.innerText = formatUSD(v);
-    }
-    function updateBedsLabel(){
-      const v = Number(document.getElementById('fMinBeds')?.value || 2);
-      const el = document.getElementById('fBedsLabel');
-      if(el) el.innerText = `${v}+`;
-    }
-
-    function resetFilters(){
-      document.getElementById('fSearch').value = '';
-      document.getElementById('fTerritory').value = 'all';
-      document.getElementById('fStatus').value = 'all';
-      document.getElementById('fSort').value = 'scarcity';
-      document.getElementById('fMaxPrice').value = '3000000';
-      document.getElementById('fMinBeds').value = '2';
-      updatePriceLabel(); updateBedsLabel();
-      renderInventory();
-    }
-
-    function setTerritoryFilterFromCity(key){
-      const select = document.getElementById('fTerritory');
-      if(!select) return;
-      select.value = key;
-      renderInventory();
-    }
-
-    function getFilteredInventory(){
-      const q = (document.getElementById('fSearch')?.value || '').trim().toLowerCase();
-      const terr = document.getElementById('fTerritory')?.value || 'all';
-      const status = document.getElementById('fStatus')?.value || 'all';
-      const sort = document.getElementById('fSort')?.value || 'scarcity';
-      const maxPrice = Number(document.getElementById('fMaxPrice')?.value || 3000000);
-      const minBeds = Number(document.getElementById('fMinBeds')?.value || 2);
-
-      let items = inventory.filter(p => {
-        const matchesSearch = !q || (
-          p.id.toLowerCase().includes(q) ||
-          p.territoryTitle.toLowerCase().includes(q) ||
-          p.territory.toLowerCase().includes(q)
-        );
-        const matchesTerr = terr === 'all' || p.territory === terr;
-        const matchesStatus = status === 'all' || p.status === status;
-        const matchesPrice = p.price <= maxPrice;
-        const matchesBeds = p.beds >= minBeds;
-        return matchesSearch && matchesTerr && matchesStatus && matchesPrice && matchesBeds;
-      });
-
-      if(sort === 'scarcity'){
-        items.sort((a,b) => {
-          const r = scarcityRank(a.status) - scarcityRank(b.status);
-          if(r !== 0) return r;
-          return b.price - a.price;
-        });
-      } else if(sort === 'priceAsc') items.sort((a,b)=>a.price-b.price);
-      else if(sort === 'priceDesc') items.sort((a,b)=>b.price-a.price);
-      else if(sort === 'sizeDesc') items.sort((a,b)=>b.size-a.size);
-      else if(sort === 'bedsDesc') items.sort((a,b)=>b.beds-a.beds);
-
-      return items;
-    }
-
-    function renderInventory(){
-      const cards = document.getElementById('propertyCards');
-      const countEl = document.getElementById('resultsCount');
-      if(!cards || !countEl) return;
-
-      const items = getFilteredInventory();
-      countEl.innerText = `${items.length} / 69`;
-
-      // Keep light: show 12 cards only (faster)
-      cards.innerHTML = items.slice(0,12).map(p => `
-        <button class="glass-card rounded-3xl p-5 text-left hover:bg-white transition-all border border-white/60"
-          onclick="selectUnit('${p.id}')">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">${p.territoryTitle}</div>
-              <div class="mt-1 flex items-center gap-2">
-                <span class="font-serif text-xl text-slate-900">${p.id}</span>
-                <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-slate-200 bg-white/60 text-[10px] uppercase tracking-widest text-slate-600">
-                  <span class="w-2 h-2 rounded-full ${statusDotClass(p.status)}"></span>${statusLabel(p.status)}
-                </span>
-              </div>
-            </div>
-            <span class="px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold bg-slate-900 text-white">${territoryMeta[p.territory].label}</span>
-          </div>
-
-          <div class="mt-4 grid grid-cols-3 gap-2">
-            <div class="rounded-2xl bg-white/55 border border-slate-200 p-3">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Beds</div>
-              <div class="text-sm text-slate-900 mt-1">${p.beds}</div>
-            </div>
-            <div class="rounded-2xl bg-white/55 border border-slate-200 p-3">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Size</div>
-              <div class="text-sm text-slate-900 mt-1">${p.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²</div>
-            </div>
-            <div class="rounded-2xl bg-white/55 border border-slate-200 p-3">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Price</div>
-              <div class="text-sm text-slate-900 mt-1">${formatUSD(p.price)}</div>
-            </div>
-          </div>
-
-          <div class="mt-4 text-xs text-slate-500">Tap to select (also highlights the tiny box on the layout).</div>
-        </button>
-      `).join('');
-    }
-
-    function selectUnit(unitId){
-      const p = inventory.find(x => x.id === unitId);
-      if(!p) return;
-      selectedUnit = p;
-
-      document.getElementById('selectedTitle').innerText = `${p.id} • ${p.territoryTitle}`;
-      document.getElementById('selectedDesc').innerText = `A ${p.beds}-bed residence in ${p.territoryTitle}. Status: ${statusLabel(p.status)}.`;
-
-      const stats = document.getElementById('selectedStats').querySelectorAll('p.text-sm');
-      stats[0].innerText = statusLabel(p.status);
-      stats[1].innerText = formatUSD(p.price);
-      stats[2].innerText = `${p.beds} / ${p.baths}`;
-      stats[3].innerText = `${p.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²`;
-
-      // prefill visa
-      const map = { ny:'NY', dubai:'Dubai', london:'London', canada:'Canada', naija:'Naija' };
-      document.getElementById('formSelect').value = map[p.territory] || 'Naija';
-      document.getElementById('formUnit').value = p.id;
-
-      // highlight in mini-map
-      highlightMiniMapUnit(p.id);
-    }
-
-    // ---------------------------
-    // Compact mini-map selector (fast)
-    // ---------------------------
-    const MINI_COLS = 6;
-    let miniMapRendered = false;
-    let prevSelectedMiniId = null;
-
-    function statusBg(status){
-      if(status === 'available') return 'background: rgba(34,197,94,.85);';   // green
-      if(status === 'reserved')  return 'background: rgba(245,158,11,.85);';  // amber
-      return 'background: rgba(148,163,184,.85);';                            // slate
-    }
-
-    function groupUnitsByTerritory(){
-      const groups = { ny:[], canada:[], london:[], dubai:[], naija:[] };
-      inventory.forEach(u => groups[u.territory].push(u));
-      return groups;
-    }
-
-    function getAmenityBlocksHTML(){
-      return `
-        <div class="p-4 space-y-3">
-          <div class="rounded-2xl bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase text-center py-4">
-            Shopping Mall & Offices
-          </div>
-
-          <div class="rounded-2xl bg-slate-800 text-white text-[11px] font-bold tracking-widest uppercase text-center py-3">
-            Parking Lot & Helipad
-          </div>
-
-          <div class="rounded-2xl bg-white/70 border border-slate-200 p-3">
-            <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">School</div>
-            <div class="h-16 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-xs">
-              School Block
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div class="rounded-2xl bg-white/70 border border-slate-200 p-3 text-center text-xs font-semibold text-slate-700">Park</div>
-            <div class="rounded-2xl bg-white/70 border border-slate-200 p-3 text-center text-xs font-semibold text-slate-700">Dog Park</div>
-          </div>
-
-          <div class="rounded-2xl bg-white/70 border border-slate-200 p-4 text-center">
-            <div class="text-xs font-semibold text-slate-800">Leisure Center</div>
-          </div>
-
-          <div class="rounded-2xl bg-white/70 border border-slate-200 p-4 text-center">
-            <div class="text-xs font-semibold text-slate-800">Golf</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderEstateMiniMap(){
-      const wrap = document.getElementById('estateMiniMap');
-      if(!wrap) return;
-
-      const groups = groupUnitsByTerritory();
-      const order = [
-        { key:'ny',     label:'New York Street' },
-        { key:'canada', label:'Canada Street' },
-        { key:'london', label:'London Street' },
-        { key:'dubai',  label:'Dubai Street' },
-        { key:'naija',  label:'Naija Street' }
-      ];
-
-      const leftHTML = order.map(t => {
-        const list = groups[t.key];
-
-        const unitsHTML = list.map(u => `
-          <button
-            id="unit-${u.id}"
-            data-unit="${u.id}"
-            class="unit-square"
-            style="${statusBg(u.status)}"
-            aria-label="${u.id}"
-            title="${u.id}">
-          </button>
-        `).join('');
-
-        return `
-          <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white/35">
-            <div class="bg-slate-700/70 text-white text-[11px] font-semibold tracking-widest uppercase py-2 px-3 text-center">
-              ${t.label}
-            </div>
-            <div class="p-3">
-              <div class="grid grid-cols-6 gap-2" style="grid-auto-rows: 28px;">
-                ${unitsHTML}
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      // Responsive layout: on small screens, stack amenities under (still rectangle + scroll)
-      wrap.innerHTML = `
-        <div class="w-full h-full p-3">
-          <div class="grid gap-3 h-full"
-               style="grid-template-columns: 1fr 16px .78fr;">
-            <div class="space-y-3 overflow-auto pr-1" style="max-height: 100%;">${leftHTML}</div>
-            <div class="rounded-xl bg-slate-900/70 border border-white/10"></div>
-            <div class="overflow-auto" style="max-height: 100%;">
-              <div class="rounded-2xl border border-slate-200 bg-emerald-900/10">
-                ${getAmenityBlocksHTML()}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      wireMiniMapUnitEvents();
-      miniMapRendered = true;
-      lucide.createIcons();
-    }
-
-    function wireMiniMapUnitEvents(){
-      const tip = document.getElementById('unitTip');
-      const wrap = document.getElementById('estateMiniMap');
-      if(!wrap) return;
-
-      wrap.querySelectorAll('[data-unit]').forEach(btn => {
-        const unitId = btn.getAttribute('data-unit');
-
-        btn.addEventListener('mouseenter', () => {
-          const unit = inventory.find(x => x.id === unitId);
-          if(!unit || !tip) return;
-          tip.classList.remove('hidden');
-          tip.textContent = `${unit.id} • ${statusLabel(unit.status)}`;
-        });
-
-        btn.addEventListener('mousemove', (e) => {
-          if(!tip) return;
-          const rect = wrap.getBoundingClientRect();
-          tip.style.left = (e.clientX - rect.left + 12) + 'px';
-          tip.style.top  = (e.clientY - rect.top  + 12) + 'px';
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          tip?.classList.add('hidden');
-        });
-
-        btn.addEventListener('click', () => selectUnit(unitId));
-      });
-    }
-
-    function highlightMiniMapUnit(unitId){
-      if(!miniMapRendered) return;
-
-      if (prevSelectedMiniId) {
-        const prev = document.getElementById('unit-' + prevSelectedMiniId);
-        prev?.classList.remove('ring-2','ring-slate-900');
-      }
-      const el = document.getElementById('unit-' + unitId);
-      el?.classList.add('ring-2','ring-slate-900');
-      prevSelectedMiniId = unitId;
-    }
-
-    // ---------------------------
-    // Visa form
-    // ---------------------------
-    function makeDossierId(){
-      const n = Math.floor(1000 + Math.random()*8999);
-      return '#AM-' + n;
-    }
-
-    function closeVisaSuccess(){
-      const fs = document.getElementById('formSuccess');
-      fs.classList.add('hidden');
-      fs.classList.remove('flex');
-      document.getElementById('visaForm').reset();
-
-      if(selectedUnit){
-        document.getElementById('formUnit').value = selectedUnit.id;
-        const map = { ny:'NY', dubai:'Dubai', london:'London', canada:'Canada', naija:'Naija' };
-        document.getElementById('formSelect').value = map[selectedUnit.territory] || 'Naija';
-      }
-    }
-
-    function handleVisaSubmit(e){
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      const originalText = btn.innerHTML;
-
-      btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing Encryption...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        document.getElementById('dossierId').innerText = makeDossierId();
-        const fs = document.getElementById('formSuccess');
-        fs.classList.remove('hidden');
-        fs.classList.add('flex');
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        lucide.createIcons();
-      }, 1200);
-    }
-
-    function applyWithSelected(){
-      location.hash = '#/visa';
-    }
-
-    function downloadSelectedPDF(){
-      const p = selectedUnit;
-      if(!p){
-        openPrintWindow('Amada Realty Dossier', `
-          <div class="pill">Selection Required</div>
-          <h1>No unit selected</h1>
-          <h2>Please select a unit first</h2>
-          <div class="box"><div class="v" style="line-height:1.7;">Go to Properties and click a unit square, then try again.</div></div>
-        `);
-        return;
-      }
+      const terrLabel = territoryMeta[selectedUnit.territory].label;
 
       const body = `
-        <div class="pill">Unit Dossier</div>
-        <h1>${p.id} • ${p.territoryTitle}</h1>
-        <h2>${statusLabel(p.status)} • ${formatUSD(p.price)}</h2>
+        <div class="pill">Asset Dossier</div>
+        <h1>${selectedUnit.id} • ${terrLabel}</h1>
+        <h2>${statusLabel(selectedUnit.status)} • ${formatUSD(selectedUnit.price)}</h2>
 
         <div class="box">
           <div class="grid">
-            <div><div class="k">Territory</div><div class="v">${p.territoryTitle}</div></div>
-            <div><div class="k">Status</div><div class="v">${statusLabel(p.status)}</div></div>
-            <div><div class="k">Beds / Baths</div><div class="v">${p.beds} / ${p.baths}</div></div>
-            <div><div class="k">Size</div><div class="v">${p.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²</div></div>
+            <div><div class="k">Territory</div><div class="v">${terrLabel}</div></div>
+            <div><div class="k">Status</div><div class="v">${statusLabel(selectedUnit.status)}</div></div>
+            <div><div class="k">Beds / Baths</div><div class="v">${selectedUnit.beds} / ${selectedUnit.baths}</div></div>
+            <div><div class="k">Size</div><div class="v">${selectedUnit.size.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",")} ft²</div></div>
           </div>
         </div>
 
         <div class="box">
-          <div class="k">Confidential Notes</div>
+          <div class="k">Floor Plan Preview</div>
+          <div class="v" style="margin-top:12px;">${buildFloorplanSVG(selectedUnit, { compact:false })}</div>
+        </div>
+
+        <div class="box">
+          <div class="k">Confidentiality</div>
           <div class="v" style="line-height:1.7;">
-            This dossier is invitation-grade. Distribution is prohibited. Floorplan viewing and purchase access are subject to vetting and acceptance.
+            This dossier is invitation-grade. Distribution is prohibited. Viewing rights and purchase access are subject to PR Card approval.
           </div>
         </div>
       `;
 
-      openPrintWindow(`${p.id} Dossier`, body);
+      openPrintWindow(`${selectedUnit.id} Dossier`, body);
     }
-
-    // ---------------------------
-    // Global key handling
-    // ---------------------------
-    window.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape'){
-        closeFloorplan(true);
-        closeLegal(true);
-        closeMobileMenu(true);
-      }
-    });
 
     // ---------------------------
     // Init
     // ---------------------------
     document.addEventListener('DOMContentLoaded', () => {
-      updatePriceLabel();
-      updateBedsLabel();
-      renderInventory();
-      renderCityHotspots();
       syncCityMapFallback();
+      renderCityHotspots();
+      // defer heavy DOM until Assets page is opened
+      lucide.createIcons();
+    });
+
+    // ESC close
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        closeMobileMenu(true);
+        closeLegal(true);
+        closeFloorplanModal(true);
+      }
     });
   </script>
 </body>
