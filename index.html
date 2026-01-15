@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amada Realty | The Global Estate</title>
+    <meta name="description" content="Amada Realty presents the world's most exclusive gated community. The Chosen 69. Application required. Visa entry only.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Animations & Base Styles */
+        :root {
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Ambient Animated Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #ffffff, #f1f5f9);
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 { width: 600px; height: 600px; background: #e0f2fe; top: -10%; left: -10%; animation-delay: 0s; }
+        .orb-2 { width: 500px; height: 500px; background: #f0fdf4; bottom: -10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 400px; height: 400px; background: #fdf4ff; top: 40%; left: 40%; animation-delay: -10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -50px); }
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-content {
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gold {
+            background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.5) 60%,
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-slate-200 selection:text-slate-900">
+
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Scarcity Banner -->
+    <div class="fixed top-0 left-0 w-full z-50 bg-slate-900 text-white text-xs py-2 glass-panel border-none !bg-slate-900/90 backdrop-blur-md">
+        <div class="marquee-container flex items-center">
+            <div class="marquee-content px-4 font-medium tracking-widest uppercase">
+                Warning: Phase 1 Fully Subscribed // The Chosen 69: Only 8 Spots Remaining // Visa Applications Closing in 48 Hours // International Waitlist: 4,102 Applicants // 
+                Warning: Phase 1 Fully Subscribed // The Chosen 69: Only 8 Spots Remaining // Visa Applications Closing in 48 Hours // International Waitlist: 4,102 Applicants // 
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-12 left-0 w-full z-40 transition-all duration-300 px-4 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <i data-lucide="gem" class="w-6 h-6 text-slate-800"></i>
+                <span class="serif text-2xl font-semibold tracking-tight text-slate-900">AMADA<span class="font-light opacity-60">REALTY</span></span>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide text-slate-600">
+                <a href="#concept" class="hover:text-slate-900 transition-colors">The Concept</a>
+                <a href="#streets" class="hover:text-slate-900 transition-colors">The Territories</a>
+                <a href="#amenities" class="hover:text-slate-900 transition-colors">Privileges</a>
+                <a href="#visa" class="hover:text-slate-900 transition-colors">Visa Process</a>
+            </div>
+
+            <button onclick="scrollToVisa()" class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 shimmer">
+                Apply for Entry
+                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </button>
+            
+            <button class="md:hidden p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
+        <div class="absolute inset-0 z-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+        
+        <div class="z-10 max-w-5xl mx-auto space-y-8 reveal active">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-slate-200">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">The 9 Hectare Masterpiece</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-light leading-none tracking-tighter text-slate-900">
+                The World <br/> Within <span class="serif italic text-slate-500">Walls</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl font-light text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                An enclave so exclusive, you don't buy a home. <br/>
+                <span class="font-medium text-slate-900">You apply for a new citizenship.</span>
+            </p>
+
+            <div class="pt-8 flex flex-col md:flex-row gap-6 justify-center items-center">
+                <div class="text-center px-8 py-4 glass-card rounded-2xl">
+                    <p class="text-xs text-slate-500 uppercase tracking-widest mb-1">Entry Requirement</p>
+                    <p class="text-2xl font-serif font-semibold text-slate-900">$1,000,000 USD <span class="text-xs font-sans font-normal text-slate-400">min liquid assets</span></p>
+                </div>
+                <button onclick="scrollToVisa()" class="group relative px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-slate-500/30 transition-all">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                    <span class="relative flex items-center gap-3 font-semibold tracking-widest text-sm uppercase">
+                        Request Application Dossier
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-12 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-slate-400"></i>
+        </div>
+    </header>
+
+    <!-- Social Proof / Logos -->
+    <section class="py-12 border-y border-slate-200/50 glass-panel">
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <span class="text-xl serif font-semibold">Architectural Digest</span>
+            <span class="text-xl serif font-semibold">Forbes Real Estate</span>
+            <span class="text-xl serif font-semibold">The Lagos Journal</span>
+            <span class="text-xl serif font-semibold">Haute Living</span>
+            <span class="text-xl serif font-semibold">Elite Traveler</span>
+        </div>
+    </section>
+
+    <!-- The Concept -->
+    <section id="concept" class="py-32 relative">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 reveal">
+            <h2 class="text-4xl md:text-6xl font-serif text-slate-900">Five Nations. One Address.</h2>
+            <p class="text-xl text-slate-600 leading-relaxed font-light">
+                Why travel when the world can come to you? Amada Realty has terraformed 9 hectares of prime earth into a sovereign collection of international territories. From the brownstones of New York to the desert modernism of Dubai, every street is a portal.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12">
+                <div class="glass-card p-6 rounded-3xl text-center">
+                    <h3 class="text-4xl font-bold text-slate-900 mb-2">69</h3>
+                    <p class="text-xs uppercase tracking-widest text-slate-500">The Chosen</p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center">
+                    <h3 class="text-4xl font-bold text-slate-900 mb-2">5</h3>
+                    <p class="text-xs uppercase tracking-widest text-slate-500">Global Styles</p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center">
+                    <h3 class="text-4xl font-bold text-slate-900 mb-2">100%</h3>
+                    <p class="text-xs uppercase tracking-widest text-slate-500">Secure Grid</p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center">
+                    <h3 class="text-4xl font-bold text-slate-900 mb-2">Top 1%</h3>
+                    <p class="text-xs uppercase tracking-widest text-slate-500">Neighbors</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Streets (Cards) -->
+    <section id="streets" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="flex justify-between items-end px-4">
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-slate-400">The Collection</span>
+                    <h2 class="text-4xl md:text-5xl font-serif mt-2">Select Your Territory</h2>
+                </div>
+                <div class="hidden md:block text-right">
+                    <p class="text-sm text-slate-500">Only 14 units per territory.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- NY -->
+                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal">
+                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop" alt="New York" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Only 2 Units Left</div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-serif">New York St.</h3>
+                            <i data-lucide="building-2" class="w-6 h-6 text-slate-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Industrial luxury meets brownstone heritage. High ceilings, exposed brick textures, and rooftop terraces designed for the urban elite.</p>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-slate-900">$1.2M+</span>
+                            <button onclick="openModal('ny')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dubai -->
+                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 100ms">
+                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop" alt="Dubai" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Waitlist Only</div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-serif">Dubai St.</h3>
+                            <i data-lucide="sun" class="w-6 h-6 text-slate-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Opulent minimalism. White stone, floor-to-ceiling glass, and infinity pools. Designed for those who demand the future, today.</p>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-slate-900">$1.8M+</span>
+                            <button onclick="openModal('dubai')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">Join Waitlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- London -->
+                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 200ms">
+                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop" alt="London" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-serif">London St.</h3>
+                            <i data-lucide="umbrella" class="w-6 h-6 text-slate-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Timeless aristocracy. Regency architecture, manicured hedges, and wrought iron detailing. A sanctuary of silence and class.</p>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-slate-900">$1.5M+</span>
+                            <button onclick="openModal('london')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canada -->
+                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 300ms">
+                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop" alt="Canada" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-serif">Canada St.</h3>
+                            <i data-lucide="mountain" class="w-6 h-6 text-slate-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Alpine serenity. Warm timber accents, steep gabled roofs, and expansive porches. The ultimate retreat from the city chaos.</p>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-slate-900">$1.1M+</span>
+                            <button onclick="openModal('canada')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Naija -->
+                <div class="group glass-card rounded-[2.5rem] p-3 bg-gradient-to-br from-white to-green-50 border border-green-100 hover:shadow-green-100/50 transition-all duration-500 md:col-span-2 lg:col-span-2 reveal" style="transition-delay: 400ms">
+                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop" alt="Naija" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                         <div class="absolute top-4 right-4 bg-green-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                             <i data-lucide="crown" class="w-3 h-3"></i> Flagship Collection
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-serif text-green-900">Naija St. (The Royal Mile)</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed max-w-xl">The pinnacle of modern Afro-centric luxury. Massive pent-villas designed for entertainment, featuring deep balconies for the tropical breeze and interiors that celebrate heritage with world-class finesse.</p>
+                        <div class="pt-4 border-t border-green-100 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-green-900">$2.5M+</span>
+                            <button onclick="openModal('naija')" class="text-xs text-green-700 font-semibold underline decoration-green-300 underline-offset-4 group-hover:text-green-900 cursor-pointer hover:font-bold transition-all">Apply for Residency</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities -->
+    <section id="amenities" class="py-20 bg-white/40 backdrop-blur-sm border-y border-white">
+        <div class="max-w-7xl mx-auto px-6">
+             <div class="text-center mb-16 reveal">
+                <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Life Within The Walls</span>
+                <h2 class="text-4xl md:text-5xl font-serif mt-2">Unparalleled Privileges</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Golf -->
+                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal">
+                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                        <i data-lucide="club" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-serif text-lg font-semibold">Private Golf Putting</h4>
+                    <p class="text-xs text-slate-500 mt-2">For the leisurely afternoon.</p>
+                </div>
+
+                <!-- Helipad -->
+                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 100ms">
+                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                        <i data-lucide="plane" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-serif text-lg font-semibold">Executive Helipad</h4>
+                    <p class="text-xs text-slate-500 mt-2">Lagos to Amada in 12 mins.</p>
+                </div>
+
+                <!-- Mall -->
+                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 200ms">
+                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                        <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-serif text-lg font-semibold">The Terminal Mall</h4>
+                    <p class="text-xs text-slate-500 mt-2">Curated luxury retail.</p>
+                </div>
+
+                <!-- Education -->
+                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 300ms">
+                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-serif text-lg font-semibold">International Academy</h4>
+                    <p class="text-xs text-slate-500 mt-2">British Curriculum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Visa Application (FOMO Section) -->
+    <section id="visa" class="py-32 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-slate-900 z-0"></div>
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-8 reveal">
+            <div class="inline-block border border-white/20 px-4 py-1 rounded-full backdrop-blur-md">
+                <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold">Exclusive Access</span>
+            </div>
+            
+            <h2 class="text-5xl md:text-7xl font-serif leading-none">Not For Everyone.<br/>Perhaps, For You.</h2>
+            
+            <p class="text-lg text-slate-300 font-light max-w-2xl mx-auto">
+                Ownership at Amada Realty is by invitation or approved application only. We curate our community as strictly as we curate our architecture.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-16 border-t border-white/10 pt-12">
+                <div class="space-y-4">
+                    <div class="text-4xl font-bold text-white/20">01</div>
+                    <h4 class="text-xl font-serif">Financial Vetting</h4>
+                    <p class="text-sm text-slate-400">Proof of funds ($1M+ liquidity) required before floorplan viewing.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-4xl font-bold text-white/20">02</div>
+                    <h4 class="text-xl font-serif">Social Reference</h4>
+                    <p class="text-sm text-slate-400">Two referrals from existing members or recognized industry leaders.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-4xl font-bold text-white/20">03</div>
+                    <h4 class="text-xl font-serif">The Visa Grant</h4>
+                    <p class="text-sm text-slate-400">Successful applicants receive the "Amada Golden Key" and purchase rights.</p>
+                </div>
+            </div>
+
+            <div class="pt-12">
+                <form id="visaForm" onsubmit="handleVisaSubmit(event)" class="glass-panel p-8 rounded-3xl max-w-lg mx-auto space-y-4 text-left relative overflow-hidden">
+                    <!-- Success Overlay -->
+                    <div id="formSuccess" class="absolute inset-0 bg-white z-20 flex-col justify-center items-center text-center p-8 hidden animate-fade-in">
+                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="check" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-2xl font-serif text-slate-900 mb-2">Application Received</h4>
+                        <p class="text-slate-500 text-sm">Your dossier ID is #AM-9281. Our private board will review your credentials within 48 hours.</p>
+                        <button type="button" onclick="document.getElementById('formSuccess').classList.add('hidden'); document.getElementById('visaForm').reset();" class="mt-6 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Full Name</label>
+                        <input required type="text" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900 placeholder-slate-400" placeholder="e.g. Dr. Aliko...">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Net Worth Bracket</label>
+                        <select class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
+                            <option>$1M - $5M</option>
+                            <option>$5M - $20M</option>
+                            <option>$20M+</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Preferred Territory</label>
+                        <select id="formSelect" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
+                            <option value="Naija">Naija St. (Flagship)</option>
+                            <option value="Dubai">Dubai St.</option>
+                            <option value="London">London St.</option>
+                            <option value="NY">New York St.</option>
+                            <option value="Canada">Canada St.</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg mt-4 flex justify-center items-center gap-2">
+                        <span>Submit for Review</span>
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                    <p class="text-center text-[10px] text-slate-500 mt-2">Confidentiality Agreement: Your data is encrypted and reviewed by our private board only.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-20 px-4 pb-32">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="space-y-6 max-w-xs">
+                <span class="serif text-3xl font-semibold tracking-tight text-slate-900">AMADA<span class="font-light opacity-60">REALTY</span></span>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    The world's first multi-national residential sanctuary. A project by Amada Group.
+                </p>
+                <div class="flex gap-4">
+                    <i data-lucide="instagram" class="w-5 h-5 text-slate-400 hover:text-slate-900 cursor-pointer"></i>
+                    <i data-lucide="twitter" class="w-5 h-5 text-slate-400 hover:text-slate-900 cursor-pointer"></i>
+                    <i data-lucide="linkedin" class="w-5 h-5 text-slate-400 hover:text-slate-900 cursor-pointer"></i>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-12 text-sm text-slate-600">
+                <div class="space-y-4">
+                    <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Territories</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="openModal('ny'); return false;" class="hover:text-slate-900">New York</a></li>
+                        <li><a href="#" onclick="openModal('london'); return false;" class="hover:text-slate-900">London</a></li>
+                        <li><a href="#" onclick="openModal('dubai'); return false;" class="hover:text-slate-900">Dubai</a></li>
+                        <li><a href="#" onclick="openModal('canada'); return false;" class="hover:text-slate-900">Canada</a></li>
+                        <li><a href="#" onclick="openModal('naija'); return false;" class="hover:text-slate-900">Naija</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-slate-900">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-slate-900">Visa Terms</a></li>
+                        <li><a href="#" class="hover:text-slate-900">Estate Bylaws</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Contact</h5>
+                    <ul class="space-y-2">
+                        <li>concierge@amadarealty.com</li>
+                        <li>+1 (555) 000-VISA</li>
+                        <li>Private Line Available<br>Upon Approval</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 text-center">
+            <p class="text-[10px] text-slate-300 uppercase tracking-widest">© 2024 Amada Realty. All Rights Reserved. Luxury is a discipline.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Floor Plan Modal -->
+    <div id="floorplan-modal" class="modal-overlay fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="modal-content w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-8 h-8 bg-white/50 rounded-full flex items-center justify-center hover:bg-white transition-colors">
+                <i data-lucide="x" class="w-4 h-4 text-slate-900"></i>
+            </button>
+            
+            <!-- Modal Image -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto bg-slate-100 relative">
+                <img id="modal-img" src="" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest" id="modal-tag">Only 2 Left</div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 space-y-6 flex flex-col justify-center">
+                <div>
+                    <span class="text-xs font-bold tracking-widest uppercase text-slate-400" id="modal-subtitle">The Collection</span>
+                    <h3 class="text-3xl md:text-4xl font-serif mt-1" id="modal-title">New York St.</h3>
+                </div>
+                
+                <p class="text-slate-600 text-sm leading-relaxed" id="modal-desc">
+                    Description goes here.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 border-y border-slate-100 py-6">
+                    <div>
+                        <span class="block text-2xl font-bold text-slate-900" id="modal-bed">4</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Bedrooms</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-slate-900" id="modal-bath">5.5</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Bathrooms</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-slate-900" id="modal-size">4,200</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Sq. Ft.</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-slate-900" id="modal-price">$1.2M</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400">Starting</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="closeModal(); scrollToVisaWithSelection()" class="flex-1 bg-slate-900 text-white py-3 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
+                        Start Application
+                    </button>
+                    <button class="px-6 py-3 border border-slate-200 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-50 transition-colors text-xs text-slate-600">
+                        Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navigation Helper
+        function scrollToVisa() {
+            document.getElementById('visa').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Data Object for Properties ---
+        const propertyData = {
+            'ny': {
+                title: 'New York St.',
+                subtitle: 'The Industrialist',
+                desc: 'A masterclass in vertical living. The Brownstones feature exposed brick interiors, private elevators, and rooftop terraces that overlook the central park. Includes a basement speakeasy lounge.',
+                img: 'https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop',
+                bed: '4',
+                bath: '5',
+                size: '4,200',
+                price: '$1.2M',
+                tag: '2 Units Left'
+            },
+            'dubai': {
+                title: 'Dubai St.',
+                subtitle: 'The Futurist',
+                desc: 'Seamless indoor-outdoor living. These white-stone villas feature automated glass walls, central atriums with date palms, and a private infinity edge plunge pool.',
+                img: 'https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop',
+                bed: '5',
+                bath: '6.5',
+                size: '5,500',
+                price: '$1.8M',
+                tag: 'Waitlist Only'
+            },
+            'london': {
+                title: 'London St.',
+                subtitle: 'The Aristocrat',
+                desc: 'Stately and serene. Georgian-inspired facades with white stucco detailing. Features a formal drawing room, a library, and a rear garden designed for high tea.',
+                img: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop',
+                bed: '4',
+                bath: '4.5',
+                size: '3,800',
+                price: '$1.5M',
+                tag: 'Available'
+            },
+            'canada': {
+                title: 'Canada St.',
+                subtitle: 'The Naturalist',
+                desc: 'Alpine luxury in the tropics. Heavy timber beams, stone fireplaces, and massive gabled windows. Designed for cozy gatherings and connection with nature.',
+                img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop',
+                bed: '5',
+                bath: '4',
+                size: '4,600',
+                price: '$1.1M',
+                tag: 'Available'
+            },
+            'naija': {
+                title: 'Naija St.',
+                subtitle: 'The Sovereign',
+                desc: 'The jewel of the estate. Massive pent-villas built for royalty. Features double-volume living areas, a cinema room, and reinforced security suites.',
+                img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop',
+                bed: '7',
+                bath: '8',
+                size: '8,000',
+                price: '$2.5M',
+                tag: 'Flagship'
+            }
+        };
+
+        let currentSelection = '';
+
+        // --- Modal Functions ---
+        function openModal(id) {
+            const data = propertyData[id];
+            if(!data) return;
+
+            currentSelection = id; // Store for form pre-selection
+
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-subtitle').innerText = data.subtitle;
+            document.getElementById('modal-desc').innerText = data.desc;
+            document.getElementById('modal-img').src = data.img;
+            document.getElementById('modal-bed').innerText = data.bed;
+            document.getElementById('modal-bath').innerText = data.bath;
+            document.getElementById('modal-size').innerText = data.size;
+            document.getElementById('modal-price').innerText = data.price;
+            document.getElementById('modal-tag').innerText = data.tag;
+
+            document.getElementById('floorplan-modal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('floorplan-modal').classList.remove('open');
+        }
+
+        function scrollToVisaWithSelection() {
+            scrollToVisa();
+            // Map ID to select value
+            const map = {
+                'ny': 'NY',
+                'dubai': 'Dubai',
+                'london': 'London',
+                'canada': 'Canada',
+                'naija': 'Naija'
+            };
+            const select = document.getElementById('formSelect');
+            if(select && currentSelection) {
+                select.value = map[currentSelection];
+            }
+        }
+
+        // Close modal on click outside
+        document.getElementById('floorplan-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // --- Form Handling ---
+        function handleVisaSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            // Loading state
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing Encryption...';
+            btn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('formSuccess').classList.remove('hidden');
+                document.getElementById('formSuccess').classList.add('flex');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+
+    </script>
+</body>
+</html>
