@@ -1137,35 +1137,40 @@
 
     // PDF download (simple print-to-PDF window)
     function openPrintWindow(htmlTitle, htmlBody){
-      const w = window.open('', '_blank', 'width=900,height=1100');
-      if(!w) return;
-      w.document.write(`
-        <!doctype html><html><head>
-          <meta charset="utf-8"/>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <title>${htmlTitle}</title>
-          <style>
-            body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:40px; color:#0f172a;}
-            h1{font-family: "Georgia", serif; margin:0 0 8px 0; font-size:34px;}
-            h2{margin:0 0 18px 0; font-weight:600; color:#334155;}
-            .pill{display:inline-block; padding:6px 12px; border:1px solid #cbd5e1; border-radius:999px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#475569; margin:8px 8px 0 0;}
-            .box{border:1px solid #e2e8f0; border-radius:18px; padding:18px; margin-top:18px;}
-            .grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px;}
-            .k{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#64748b; font-weight:700;}
-            .v{font-size:14px; margin-top:4px;}
-            .foot{margin-top:28px; font-size:12px; color:#64748b;}
-            .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
-            @media print { .no-print{display:none;} }
-          </style>
-        </head><body>
-          ${htmlBody}
-          <div class="foot">Tip: Use your browser Print dialog → “Save as PDF”.</div>
-          <div class="brand">AMADA REALTY • Confidential Dossier</div>
-          <script>setTimeout(()=>window.print(), 400);</script>
-        </body></html>
-      `);
-      w.document.close();
-    }
+  const w = window.open('', '_blank', 'width=900,height=1100');
+  if(!w) return;
+
+  const html = `<!doctype html><html><head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>${htmlTitle}</title>
+    <style>
+      body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:40px; color:#0f172a;}
+      h1{font-family: "Georgia", serif; margin:0 0 8px 0; font-size:34px;}
+      h2{margin:0 0 18px 0; font-weight:600; color:#334155;}
+      .pill{display:inline-block; padding:6px 12px; border:1px solid #cbd5e1; border-radius:999px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#475569; margin:8px 8px 0 0;}
+      .box{border:1px solid #e2e8f0; border-radius:18px; padding:18px; margin-top:18px;}
+      .grid{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:14px;}
+      .k{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#64748b; font-weight:700;}
+      .v{font-size:14px; margin-top:4px;}
+      .foot{margin-top:28px; font-size:12px; color:#64748b;}
+      .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
+      @media print { .no-print{display:none;} }
+    </style>
+  </head><body>
+    ${htmlBody}
+    <div class="foot">Tip: Use your browser Print dialog → “Save as PDF”.</div>
+    <div class="brand">AMADA REALTY • Confidential Dossier</div>
+  </body></html>`;
+
+  w.document.open();
+  w.document.write(html);
+  w.document.close();
+
+  // Print after load
+  w.onload = () => setTimeout(() => w.print(), 400);
+}
+
 
     function downloadTerritoryPDF(){
       const t = territoryData[currentSelectionTerritory] || territoryData.naija;
