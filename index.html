@@ -7,7 +7,7 @@
     <meta name="description" content="Amada Realty presents the world's most exclusive gated community. The Chosen 69. Application required. Visa entry only.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom Animations & Base Styles */
         :root {
@@ -98,13 +98,48 @@
             transform: translateY(0);
         }
 
-        /* Text Gradients */
-        .text-gradient {
-            background: linear-gradient(135deg, #1e293b 0%, #64748b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* View Switching */
+        .view-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .view-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Map Styles */
+        .map-grid {
+            display: grid;
+            grid-template-columns: 2fr 0.5fr 1.5fr; /* Residential | Road | Amenities */
+            gap: 1rem;
+            height: 800px;
         }
         
+        .map-zone {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .map-zone:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+            z-index: 10;
+        }
+        
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .map-zone:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Text Gradients */
         .text-gold {
             background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
             -webkit-background-clip: text;
@@ -135,9 +170,6 @@
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
         }
 
         /* Reveal Animation Classes */
@@ -199,19 +231,19 @@
     <!-- Navigation -->
     <nav class="fixed top-12 left-0 w-full z-40 transition-all duration-300 px-4 md:px-12 py-4">
         <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
                 <i data-lucide="gem" class="w-6 h-6 text-slate-800"></i>
                 <span class="serif text-2xl font-semibold tracking-tight text-slate-900">AMADA<span class="font-light opacity-60">REALTY</span></span>
             </div>
             
             <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide text-slate-600">
-                <a href="#concept" class="hover:text-slate-900 transition-colors">The Concept</a>
-                <a href="#streets" class="hover:text-slate-900 transition-colors">The Territories</a>
-                <a href="#amenities" class="hover:text-slate-900 transition-colors">Privileges</a>
-                <a href="#visa" class="hover:text-slate-900 transition-colors">Visa Process</a>
+                <button onclick="navigateTo('home')" class="hover:text-slate-900 transition-colors uppercase tracking-widest text-xs">Concept</button>
+                <button onclick="navigateTo('city')" class="hover:text-slate-900 transition-colors uppercase tracking-widest text-xs">The City</button>
+                <button onclick="navigateTo('properties')" class="hover:text-slate-900 transition-colors uppercase tracking-widest text-xs">Properties</button>
+                <button onclick="navigateTo('visa')" class="hover:text-slate-900 transition-colors uppercase tracking-widest text-xs">Visa</button>
             </div>
 
-            <button onclick="scrollToVisa()" class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 shimmer">
+            <button onclick="navigateTo('visa')" class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 shimmer">
                 Apply for Entry
                 <i data-lucide="arrow-right" class="w-3 h-3"></i>
             </button>
@@ -222,320 +254,322 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
-        <div class="absolute inset-0 z-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
-        
-        <div class="z-10 max-w-5xl mx-auto space-y-8 reveal active">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-slate-200">
-                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">The 9 Hectare Masterpiece</span>
-            </div>
-            
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-light leading-none tracking-tighter text-slate-900">
-                The World <br/> Within <span class="serif italic text-slate-500">Walls</span>
-            </h1>
-            
-            <p class="text-lg md:text-2xl font-light text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                An enclave so exclusive, you don't buy a home. <br/>
-                <span class="font-medium text-slate-900">You apply for a new citizenship.</span>
-            </p>
+    <!-- VIEWS CONTAINER -->
+    <main class="pt-24 min-h-screen">
 
-            <div class="pt-8 flex flex-col md:flex-row gap-6 justify-center items-center">
-                <div class="text-center px-8 py-4 glass-card rounded-2xl">
-                    <p class="text-xs text-slate-500 uppercase tracking-widest mb-1">Entry Requirement</p>
-                    <p class="text-2xl font-serif font-semibold text-slate-900">$1,000,000 USD <span class="text-xs font-sans font-normal text-slate-400">min liquid assets</span></p>
+        <!-- ======================= HOME VIEW ======================= -->
+        <div id="view-home" class="view-section active">
+            <!-- Hero Section -->
+            <header class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-4">
+                <div class="absolute inset-0 z-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+                
+                <div class="z-10 max-w-5xl mx-auto space-y-8 reveal active">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-slate-200">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">The 9 Hectare Masterpiece</span>
+                    </div>
+                    
+                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-light leading-none tracking-tighter text-slate-900">
+                        The World <br/> Within <span class="serif italic text-slate-500">Walls</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-2xl font-light text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                        An enclave so exclusive, you don't buy a home. <br/>
+                        <span class="font-medium text-slate-900">You apply for a new citizenship.</span>
+                    </p>
+
+                    <div class="pt-8 flex flex-col md:flex-row gap-6 justify-center items-center">
+                        <div class="text-center px-8 py-4 glass-card rounded-2xl">
+                            <p class="text-xs text-slate-500 uppercase tracking-widest mb-1">Entry Requirement</p>
+                            <p class="text-2xl font-serif font-semibold text-slate-900">$1,000,000 USD <span class="text-xs font-sans font-normal text-slate-400">min liquid assets</span></p>
+                        </div>
+                        <button onclick="navigateTo('properties')" class="group relative px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-slate-500/30 transition-all">
+                            <span class="relative flex items-center gap-3 font-semibold tracking-widest text-sm uppercase">
+                                Explore The City
+                                <i data-lucide="map" class="w-4 h-4"></i>
+                            </span>
+                        </button>
+                    </div>
                 </div>
-                <button onclick="scrollToVisa()" class="group relative px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-slate-500/30 transition-all">
-                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                    <span class="relative flex items-center gap-3 font-semibold tracking-widest text-sm uppercase">
-                        Request Application Dossier
-                        <i data-lucide="lock" class="w-4 h-4"></i>
-                    </span>
-                </button>
+            </header>
+
+            <!-- Social Proof -->
+            <section class="py-12 border-y border-slate-200/50 glass-panel">
+                <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <span class="text-xl serif font-semibold">Architectural Digest</span>
+                    <span class="text-xl serif font-semibold">Forbes Real Estate</span>
+                    <span class="text-xl serif font-semibold">The Lagos Journal</span>
+                    <span class="text-xl serif font-semibold">Haute Living</span>
+                    <span class="text-xl serif font-semibold">Elite Traveler</span>
+                </div>
+            </section>
+
+            <!-- Concept Section -->
+             <section id="concept" class="py-32 relative">
+                <div class="max-w-4xl mx-auto px-6 text-center space-y-8 reveal active">
+                    <h2 class="text-4xl md:text-6xl font-serif text-slate-900">Five Nations. One Address.</h2>
+                    <p class="text-xl text-slate-600 leading-relaxed font-light">
+                        Why travel when the world can come to you? Amada Realty has terraformed 9 hectares of prime earth into a sovereign collection of international territories. From the brownstones of New York to the desert modernism of Dubai, every street is a portal.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12">
+                        <div class="glass-card p-6 rounded-3xl text-center">
+                            <h3 class="text-4xl font-bold text-slate-900 mb-2">69</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-500">The Chosen</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl text-center">
+                            <h3 class="text-4xl font-bold text-slate-900 mb-2">5</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-500">Global Styles</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl text-center">
+                            <h3 class="text-4xl font-bold text-slate-900 mb-2">100%</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-500">Secure Grid</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl text-center">
+                            <h3 class="text-4xl font-bold text-slate-900 mb-2">Top 1%</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-500">Neighbors</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= CITY MAP VIEW ======================= -->
+        <div id="view-city" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="text-center mb-12">
+                    <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Master Plan</span>
+                    <h2 class="text-4xl md:text-6xl font-serif mt-2">The Estate Map</h2>
+                    <p class="text-slate-600 mt-4 max-w-2xl mx-auto">Explore the 9-hectare layout. Hover over zones to discover the amenities and residential sectors that make up our world.</p>
+                </div>
+
+                <!-- Abstract Map Container -->
+                <div class="bg-slate-100 rounded-[3rem] p-4 shadow-2xl relative overflow-hidden border border-slate-200">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')] opacity-10"></div>
+                    
+                    <!-- The Grid Layout -->
+                    <div class="map-grid relative z-10">
+                        
+                        <!-- LEFT COLUMN: RESIDENTIAL -->
+                        <div class="flex flex-col gap-4">
+                            <!-- New York -->
+                            <div class="map-zone flex-1 bg-slate-800 rounded-3xl relative overflow-hidden group" onclick="openModal('ny')">
+                                <img src="https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity">
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="font-serif text-2xl">New York St.</h3>
+                                    <p class="text-xs uppercase tracking-widest opacity-80">14 Units</p>
+                                </div>
+                            </div>
+                            <!-- Canada -->
+                            <div class="map-zone flex-1 bg-amber-900/80 rounded-3xl relative overflow-hidden group" onclick="openModal('canada')">
+                                <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity">
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="font-serif text-2xl">Canada St.</h3>
+                                    <p class="text-xs uppercase tracking-widest opacity-80">14 Units</p>
+                                </div>
+                            </div>
+                            <!-- London -->
+                            <div class="map-zone flex-1 bg-slate-600 rounded-3xl relative overflow-hidden group" onclick="openModal('london')">
+                                <img src="https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity">
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="font-serif text-2xl">London St.</h3>
+                                    <p class="text-xs uppercase tracking-widest opacity-80">14 Units</p>
+                                </div>
+                            </div>
+                            <!-- Dubai -->
+                            <div class="map-zone flex-1 bg-amber-100 rounded-3xl relative overflow-hidden group" onclick="openModal('dubai')">
+                                <img src="https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity">
+                                <div class="absolute bottom-4 left-4 text-slate-900">
+                                    <h3 class="font-serif text-2xl">Dubai St.</h3>
+                                    <p class="text-xs uppercase tracking-widest opacity-80">14 Units</p>
+                                </div>
+                            </div>
+                            <!-- Naija -->
+                            <div class="map-zone flex-1 bg-green-900 rounded-3xl relative overflow-hidden group border-2 border-green-400" onclick="openModal('naija')">
+                                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity">
+                                <div class="absolute bottom-4 left-4 text-white">
+                                    <h3 class="font-serif text-2xl">Naija St.</h3>
+                                    <p class="text-xs uppercase tracking-widest text-green-300">Flagship • 14 Units</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CENTER COLUMN: ROAD -->
+                        <div class="relative flex justify-center h-full">
+                            <div class="w-24 h-full bg-slate-800 rounded-full flex flex-col items-center justify-between py-8">
+                                <div class="h-full w-1 border-l-2 border-dashed border-white/30"></div>
+                            </div>
+                            <div class="absolute bottom-0 w-32 h-16 bg-red-800 rounded-t-xl flex items-center justify-center text-white text-[10px] uppercase font-bold tracking-widest shadow-xl z-20">
+                                Main Gate
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: AMENITIES -->
+                        <div class="flex flex-col gap-4">
+                            <!-- Mall -->
+                            <div class="map-zone h-1/4 bg-white rounded-3xl p-6 border border-slate-200 hover:shadow-xl relative group">
+                                <div class="absolute top-4 right-4 bg-slate-100 p-2 rounded-full"><i data-lucide="shopping-bag" class="w-5 h-5"></i></div>
+                                <h3 class="font-serif text-2xl mt-8">The Terminal Mall</h3>
+                                <p class="text-xs text-slate-500 mt-2">Luxury retail & fine dining.</p>
+                                <div class="tooltip absolute inset-0 bg-slate-900/90 text-white p-6 flex items-center justify-center text-center rounded-3xl backdrop-blur-sm">
+                                    <div>
+                                        <h4 class="font-serif text-xl mb-2">Retail Therapy</h4>
+                                        <p class="text-xs font-light">Featuring global brands, a cinema, and rooftop lounge.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- School -->
+                            <div class="map-zone h-1/6 bg-blue-50 rounded-3xl p-6 border border-blue-100 hover:shadow-xl relative group">
+                                <div class="absolute top-4 right-4 bg-white p-2 rounded-full"><i data-lucide="graduation-cap" class="w-5 h-5 text-blue-900"></i></div>
+                                <h3 class="font-serif text-xl mt-4 text-blue-900">Intl. Academy</h3>
+                                <div class="tooltip absolute inset-0 bg-blue-900/90 text-white p-6 flex items-center justify-center text-center rounded-3xl backdrop-blur-sm">
+                                    <p class="text-xs font-light">K-12 British Curriculum with world-class facilities.</p>
+                                </div>
+                            </div>
+
+                            <!-- Park & Leisure -->
+                            <div class="map-zone h-1/4 bg-emerald-50 rounded-3xl p-6 border border-emerald-100 hover:shadow-xl relative group overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80')] bg-cover opacity-20"></div>
+                                <div class="relative z-10">
+                                    <div class="flex justify-between items-start">
+                                        <h3 class="font-serif text-2xl text-emerald-900">Central Park</h3>
+                                        <i data-lucide="trees" class="w-5 h-5 text-emerald-700"></i>
+                                    </div>
+                                    <p class="text-xs text-emerald-700 mt-2">Lagoon & Leisure Center</p>
+                                </div>
+                            </div>
+
+                            <!-- Golf & Helipad -->
+                            <div class="map-zone flex-1 bg-green-100 rounded-3xl p-6 border border-green-200 hover:shadow-xl relative group overflow-hidden">
+                                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80')] bg-cover opacity-30"></div>
+                                <div class="relative z-10 h-full flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="font-serif text-2xl text-green-900">The Links</h3>
+                                        <p class="text-xs text-green-700">Putting Green & Sand Traps</p>
+                                    </div>
+                                    <div class="self-end bg-slate-900 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold border-2 border-white shadow-lg">
+                                        H
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="absolute bottom-12 animate-bounce">
-            <i data-lucide="chevron-down" class="w-6 h-6 text-slate-400"></i>
-        </div>
-    </header>
-
-    <!-- Social Proof / Logos -->
-    <section class="py-12 border-y border-slate-200/50 glass-panel">
-        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            <span class="text-xl serif font-semibold">Architectural Digest</span>
-            <span class="text-xl serif font-semibold">Forbes Real Estate</span>
-            <span class="text-xl serif font-semibold">The Lagos Journal</span>
-            <span class="text-xl serif font-semibold">Haute Living</span>
-            <span class="text-xl serif font-semibold">Elite Traveler</span>
-        </div>
-    </section>
-
-    <!-- The Concept -->
-    <section id="concept" class="py-32 relative">
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 reveal">
-            <h2 class="text-4xl md:text-6xl font-serif text-slate-900">Five Nations. One Address.</h2>
-            <p class="text-xl text-slate-600 leading-relaxed font-light">
-                Why travel when the world can come to you? Amada Realty has terraformed 9 hectares of prime earth into a sovereign collection of international territories. From the brownstones of New York to the desert modernism of Dubai, every street is a portal.
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12">
-                <div class="glass-card p-6 rounded-3xl text-center">
-                    <h3 class="text-4xl font-bold text-slate-900 mb-2">69</h3>
-                    <p class="text-xs uppercase tracking-widest text-slate-500">The Chosen</p>
-                </div>
-                <div class="glass-card p-6 rounded-3xl text-center">
-                    <h3 class="text-4xl font-bold text-slate-900 mb-2">5</h3>
-                    <p class="text-xs uppercase tracking-widest text-slate-500">Global Styles</p>
-                </div>
-                <div class="glass-card p-6 rounded-3xl text-center">
-                    <h3 class="text-4xl font-bold text-slate-900 mb-2">100%</h3>
-                    <p class="text-xs uppercase tracking-widest text-slate-500">Secure Grid</p>
-                </div>
-                <div class="glass-card p-6 rounded-3xl text-center">
-                    <h3 class="text-4xl font-bold text-slate-900 mb-2">Top 1%</h3>
-                    <p class="text-xs uppercase tracking-widest text-slate-500">Neighbors</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Streets (Cards) -->
-    <section id="streets" class="py-20 px-4">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="flex justify-between items-end px-4">
-                <div>
-                    <span class="text-xs font-bold tracking-widest uppercase text-slate-400">The Collection</span>
-                    <h2 class="text-4xl md:text-5xl font-serif mt-2">Select Your Territory</h2>
-                </div>
-                <div class="hidden md:block text-right">
-                    <p class="text-sm text-slate-500">Only 14 units per territory.</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- NY -->
-                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal">
-                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop" alt="New York" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Only 2 Units Left</div>
+        <!-- ======================= PROPERTIES VIEW ======================= -->
+        <div id="view-properties" class="view-section">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Inventory</span>
+                        <h2 class="text-4xl md:text-6xl font-serif mt-2">Find Your Unit</h2>
                     </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-serif">New York St.</h3>
-                            <i data-lucide="building-2" class="w-6 h-6 text-slate-400"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">Industrial luxury meets brownstone heritage. High ceilings, exposed brick textures, and rooftop terraces designed for the urban elite.</p>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                            <span class="text-lg font-semibold text-slate-900">$1.2M+</span>
-                            <button onclick="openModal('ny')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dubai -->
-                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 100ms">
-                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop" alt="Dubai" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-4 bg-slate-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Waitlist Only</div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-serif">Dubai St.</h3>
-                            <i data-lucide="sun" class="w-6 h-6 text-slate-400"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">Opulent minimalism. White stone, floor-to-ceiling glass, and infinity pools. Designed for those who demand the future, today.</p>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                            <span class="text-lg font-semibold text-slate-900">$1.8M+</span>
-                            <button onclick="openModal('dubai')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">Join Waitlist</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- London -->
-                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 200ms">
-                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop" alt="London" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-serif">London St.</h3>
-                            <i data-lucide="umbrella" class="w-6 h-6 text-slate-400"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">Timeless aristocracy. Regency architecture, manicured hedges, and wrought iron detailing. A sanctuary of silence and class.</p>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                            <span class="text-lg font-semibold text-slate-900">$1.5M+</span>
-                            <button onclick="openModal('london')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Canada -->
-                <div class="group glass-card rounded-[2.5rem] p-3 hover:bg-white transition-all duration-500 reveal" style="transition-delay: 300ms">
-                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop" alt="Canada" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-serif">Canada St.</h3>
-                            <i data-lucide="mountain" class="w-6 h-6 text-slate-400"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">Alpine serenity. Warm timber accents, steep gabled roofs, and expansive porches. The ultimate retreat from the city chaos.</p>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                            <span class="text-lg font-semibold text-slate-900">$1.1M+</span>
-                            <button onclick="openModal('canada')" class="text-xs text-slate-400 underline decoration-slate-300 underline-offset-4 group-hover:text-slate-900 cursor-pointer hover:font-bold transition-all">View Floorplans</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Naija -->
-                <div class="group glass-card rounded-[2.5rem] p-3 bg-gradient-to-br from-white to-green-50 border border-green-100 hover:shadow-green-100/50 transition-all duration-500 md:col-span-2 lg:col-span-2 reveal" style="transition-delay: 400ms">
-                    <div class="relative h-64 rounded-[2rem] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop" alt="Naija" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
-                         <div class="absolute top-4 right-4 bg-green-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                             <i data-lucide="crown" class="w-3 h-3"></i> Flagship Collection
-                        </div>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-2xl font-serif text-green-900">Naija St. (The Royal Mile)</h3>
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed max-w-xl">The pinnacle of modern Afro-centric luxury. Massive pent-villas designed for entertainment, featuring deep balconies for the tropical breeze and interiors that celebrate heritage with world-class finesse.</p>
-                        <div class="pt-4 border-t border-green-100 flex justify-between items-center">
-                            <span class="text-lg font-semibold text-green-900">$2.5M+</span>
-                            <button onclick="openModal('naija')" class="text-xs text-green-700 font-semibold underline decoration-green-300 underline-offset-4 group-hover:text-green-900 cursor-pointer hover:font-bold transition-all">Apply for Residency</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Amenities -->
-    <section id="amenities" class="py-20 bg-white/40 backdrop-blur-sm border-y border-white">
-        <div class="max-w-7xl mx-auto px-6">
-             <div class="text-center mb-16 reveal">
-                <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Life Within The Walls</span>
-                <h2 class="text-4xl md:text-5xl font-serif mt-2">Unparalleled Privileges</h2>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- Golf -->
-                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal">
-                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                        <i data-lucide="club" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="font-serif text-lg font-semibold">Private Golf Putting</h4>
-                    <p class="text-xs text-slate-500 mt-2">For the leisurely afternoon.</p>
-                </div>
-
-                <!-- Helipad -->
-                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 100ms">
-                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                        <i data-lucide="plane" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="font-serif text-lg font-semibold">Executive Helipad</h4>
-                    <p class="text-xs text-slate-500 mt-2">Lagos to Amada in 12 mins.</p>
-                </div>
-
-                <!-- Mall -->
-                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 200ms">
-                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                        <i data-lucide="shopping-bag" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="font-serif text-lg font-semibold">The Terminal Mall</h4>
-                    <p class="text-xs text-slate-500 mt-2">Curated luxury retail.</p>
-                </div>
-
-                <!-- Education -->
-                <div class="p-8 rounded-3xl bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-center group reveal" style="transition-delay: 300ms">
-                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                        <i data-lucide="graduation-cap" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="font-serif text-lg font-semibold">International Academy</h4>
-                    <p class="text-xs text-slate-500 mt-2">British Curriculum.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Visa Application (FOMO Section) -->
-    <section id="visa" class="py-32 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-slate-900 z-0"></div>
-        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        
-        <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-8 reveal">
-            <div class="inline-block border border-white/20 px-4 py-1 rounded-full backdrop-blur-md">
-                <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold">Exclusive Access</span>
-            </div>
-            
-            <h2 class="text-5xl md:text-7xl font-serif leading-none">Not For Everyone.<br/>Perhaps, For You.</h2>
-            
-            <p class="text-lg text-slate-300 font-light max-w-2xl mx-auto">
-                Ownership at Amada Realty is by invitation or approved application only. We curate our community as strictly as we curate our architecture.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-16 border-t border-white/10 pt-12">
-                <div class="space-y-4">
-                    <div class="text-4xl font-bold text-white/20">01</div>
-                    <h4 class="text-xl font-serif">Financial Vetting</h4>
-                    <p class="text-sm text-slate-400">Proof of funds ($1M+ liquidity) required before floorplan viewing.</p>
-                </div>
-                <div class="space-y-4">
-                    <div class="text-4xl font-bold text-white/20">02</div>
-                    <h4 class="text-xl font-serif">Social Reference</h4>
-                    <p class="text-sm text-slate-400">Two referrals from existing members or recognized industry leaders.</p>
-                </div>
-                <div class="space-y-4">
-                    <div class="text-4xl font-bold text-white/20">03</div>
-                    <h4 class="text-xl font-serif">The Visa Grant</h4>
-                    <p class="text-sm text-slate-400">Successful applicants receive the "Amada Golden Key" and purchase rights.</p>
-                </div>
-            </div>
-
-            <div class="pt-12">
-                <form id="visaForm" onsubmit="handleVisaSubmit(event)" class="glass-panel p-8 rounded-3xl max-w-lg mx-auto space-y-4 text-left relative overflow-hidden">
-                    <!-- Success Overlay -->
-                    <div id="formSuccess" class="absolute inset-0 bg-white z-20 flex-col justify-center items-center text-center p-8 hidden animate-fade-in">
-                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="check" class="w-8 h-8"></i>
-                        </div>
-                        <h4 class="text-2xl font-serif text-slate-900 mb-2">Application Received</h4>
-                        <p class="text-slate-500 text-sm">Your dossier ID is #AM-9281. Our private board will review your credentials within 48 hours.</p>
-                        <button type="button" onclick="document.getElementById('formSuccess').classList.add('hidden'); document.getElementById('visaForm').reset();" class="mt-6 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Full Name</label>
-                        <input required type="text" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900 placeholder-slate-400" placeholder="e.g. Dr. Aliko...">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Net Worth Bracket</label>
-                        <select class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
-                            <option>$1M - $5M</option>
-                            <option>$5M - $20M</option>
-                            <option>$20M+</option>
-                        </select>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs uppercase tracking-widest text-slate-900 font-bold">Preferred Territory</label>
-                        <select id="formSelect" class="w-full bg-white/50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-900 text-slate-900">
-                            <option value="Naija">Naija St. (Flagship)</option>
+                    
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100 w-full md:w-auto">
+                        <select id="filter-street" onchange="renderProperties()" class="bg-slate-50 border-none rounded-xl px-4 py-2 text-sm font-medium text-slate-700 focus:ring-2 focus:ring-slate-200 outline-none">
+                            <option value="all">All Territories</option>
+                            <option value="Naija">Naija St.</option>
                             <option value="Dubai">Dubai St.</option>
                             <option value="London">London St.</option>
-                            <option value="NY">New York St.</option>
+                            <option value="New York">New York St.</option>
                             <option value="Canada">Canada St.</option>
                         </select>
+
+                        <select id="filter-price" onchange="renderProperties()" class="bg-slate-50 border-none rounded-xl px-4 py-2 text-sm font-medium text-slate-700 focus:ring-2 focus:ring-slate-200 outline-none">
+                            <option value="all">Any Price</option>
+                            <option value="1">Under $1.5M</option>
+                            <option value="2">$1.5M - $2M</option>
+                            <option value="3">$2M+</option>
+                        </select>
+                        
+                         <button onclick="renderProperties()" class="bg-slate-900 text-white px-6 py-2 rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-slate-800">
+                            Search
+                        </button>
                     </div>
-                    <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg mt-4 flex justify-center items-center gap-2">
-                        <span>Submit for Review</span>
-                        <i data-lucide="send" class="w-4 h-4"></i>
-                    </button>
-                    <p class="text-center text-[10px] text-slate-500 mt-2">Confidentiality Agreement: Your data is encrypted and reviewed by our private board only.</p>
-                </form>
+                </div>
+
+                <!-- Properties Grid -->
+                <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Javascript will populate this -->
+                </div>
             </div>
         </div>
-    </section>
+
+        <!-- ======================= VISA / FORM VIEW ======================= -->
+        <div id="view-visa" class="view-section">
+            <section class="py-20 px-4 relative overflow-hidden min-h-screen flex items-center">
+                <div class="absolute inset-0 bg-slate-900 z-0"></div>
+                <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                
+                <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-8">
+                    <div class="inline-block border border-white/20 px-4 py-1 rounded-full backdrop-blur-md">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase text-gold">Exclusive Access</span>
+                    </div>
+                    
+                    <h2 class="text-5xl md:text-7xl font-serif leading-none">The Visa Grant.</h2>
+                    
+                    <div class="pt-12">
+                        <form id="visaForm" onsubmit="handleVisaSubmit(event)" class="glass-panel p-8 rounded-3xl max-w-lg mx-auto space-y-4 text-left relative overflow-hidden bg-white/10 backdrop-blur-xl border-white/20">
+                            <!-- Success Overlay -->
+                            <div id="formSuccess" class="absolute inset-0 bg-white z-20 flex flex-col justify-center items-center text-center p-8 hidden animate-fade-in text-slate-900">
+                                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i data-lucide="check" class="w-8 h-8"></i>
+                                </div>
+                                <h4 class="text-2xl font-serif mb-2">Application Received</h4>
+                                <p class="text-slate-500 text-sm">Your dossier ID is #AM-9281. Our private board will review your credentials within 48 hours.</p>
+                                <button type="button" onclick="document.getElementById('formSuccess').classList.add('hidden'); document.getElementById('visaForm').reset(); navigateTo('home')" class="mt-6 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase tracking-widest text-white/70 font-bold">Full Name</label>
+                                <input required type="text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white text-white placeholder-white/30" placeholder="e.g. Dr. Aliko...">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase tracking-widest text-white/70 font-bold">Net Worth Bracket</label>
+                                <select class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white text-white">
+                                    <option class="text-slate-900">$1M - $5M</option>
+                                    <option class="text-slate-900">$5M - $20M</option>
+                                    <option class="text-slate-900">$20M+</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs uppercase tracking-widest text-white/70 font-bold">Preferred Territory</label>
+                                <select id="formSelect" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white text-white">
+                                    <option class="text-slate-900" value="Naija">Naija St. (Flagship)</option>
+                                    <option class="text-slate-900" value="Dubai">Dubai St.</option>
+                                    <option class="text-slate-900" value="London">London St.</option>
+                                    <option class="text-slate-900" value="NY">New York St.</option>
+                                    <option class="text-slate-900" value="Canada">Canada St.</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-white text-slate-900 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors shadow-lg mt-4 flex justify-center items-center gap-2">
+                                <span>Submit for Review</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                            <p class="text-center text-[10px] text-white/40 mt-2">Confidentiality Agreement: Your data is encrypted and reviewed by our private board only.</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= LEGAL VIEW ======================= -->
+        <div id="view-legal" class="view-section">
+            <div class="max-w-4xl mx-auto px-6 py-20">
+                <button onclick="navigateTo('home')" class="mb-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Estate
+                </button>
+                
+                <div id="legal-content" class="glass-panel p-12 rounded-3xl space-y-8">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-20 px-4 pb-32">
@@ -556,19 +590,19 @@
                 <div class="space-y-4">
                     <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Territories</h5>
                     <ul class="space-y-2">
-                        <li><a href="#" onclick="openModal('ny'); return false;" class="hover:text-slate-900">New York</a></li>
-                        <li><a href="#" onclick="openModal('london'); return false;" class="hover:text-slate-900">London</a></li>
-                        <li><a href="#" onclick="openModal('dubai'); return false;" class="hover:text-slate-900">Dubai</a></li>
-                        <li><a href="#" onclick="openModal('canada'); return false;" class="hover:text-slate-900">Canada</a></li>
-                        <li><a href="#" onclick="openModal('naija'); return false;" class="hover:text-slate-900">Naija</a></li>
+                        <li><button onclick="openModal('ny')" class="hover:text-slate-900 text-left">New York</button></li>
+                        <li><button onclick="openModal('london')" class="hover:text-slate-900 text-left">London</button></li>
+                        <li><button onclick="openModal('dubai')" class="hover:text-slate-900 text-left">Dubai</button></li>
+                        <li><button onclick="openModal('canada')" class="hover:text-slate-900 text-left">Canada</button></li>
+                        <li><button onclick="openModal('naija')" class="hover:text-slate-900 text-left">Naija</button></li>
                     </ul>
                 </div>
                 <div class="space-y-4">
                     <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Legal</h5>
                     <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-slate-900">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-slate-900">Visa Terms</a></li>
-                        <li><a href="#" class="hover:text-slate-900">Estate Bylaws</a></li>
+                        <li><button onclick="openLegal('privacy')" class="hover:text-slate-900 text-left">Privacy Policy</button></li>
+                        <li><button onclick="openLegal('terms')" class="hover:text-slate-900 text-left">Visa Terms</button></li>
+                        <li><button onclick="openLegal('bylaws')" class="hover:text-slate-900 text-left">Estate Bylaws</button></li>
                     </ul>
                 </div>
                 <div class="space-y-4">
@@ -645,96 +679,191 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Intersection Observer for Scroll Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px"
-        };
-
+        // Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Navigation Helper
+        // --- Navigation System ---
+        function navigateTo(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => {
+                    if(!el.classList.contains('active')) el.style.display = 'none';
+                }, 500); // fade out
+            });
+
+            // Show selected view
+            const target = document.getElementById('view-' + viewId);
+            target.style.display = 'block';
+            setTimeout(() => target.classList.add('active'), 10);
+            
+            window.scrollTo(0, 0);
+        }
+
         function scrollToVisa() {
-            document.getElementById('visa').scrollIntoView({ behavior: 'smooth' });
+            navigateTo('visa');
         }
 
         // --- Data Object for Properties ---
         const propertyData = {
             'ny': {
+                id: 'ny',
                 title: 'New York St.',
                 subtitle: 'The Industrialist',
-                desc: 'A masterclass in vertical living. The Brownstones feature exposed brick interiors, private elevators, and rooftop terraces that overlook the central park. Includes a basement speakeasy lounge.',
+                desc: 'A masterclass in vertical living. The Brownstones feature exposed brick interiors, private elevators, and rooftop terraces that overlook the central park.',
                 img: 'https://images.unsplash.com/photo-1524813686514-a5756c97759e?q=80&w=1000&auto=format&fit=crop',
-                bed: '4',
-                bath: '5',
-                size: '4,200',
-                price: '$1.2M',
+                bed: 4, bath: 5, size: 4200, price: 1.2,
                 tag: '2 Units Left'
             },
             'dubai': {
+                id: 'dubai',
                 title: 'Dubai St.',
                 subtitle: 'The Futurist',
                 desc: 'Seamless indoor-outdoor living. These white-stone villas feature automated glass walls, central atriums with date palms, and a private infinity edge plunge pool.',
                 img: 'https://images.unsplash.com/photo-1512453979798-5ea904a848bd?q=80&w=1000&auto=format&fit=crop',
-                bed: '5',
-                bath: '6.5',
-                size: '5,500',
-                price: '$1.8M',
+                bed: 5, bath: 6.5, size: 5500, price: 1.8,
                 tag: 'Waitlist Only'
             },
             'london': {
+                id: 'london',
                 title: 'London St.',
                 subtitle: 'The Aristocrat',
                 desc: 'Stately and serene. Georgian-inspired facades with white stucco detailing. Features a formal drawing room, a library, and a rear garden designed for high tea.',
                 img: 'https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=1000&auto=format&fit=crop',
-                bed: '4',
-                bath: '4.5',
-                size: '3,800',
-                price: '$1.5M',
+                bed: 4, bath: 4.5, size: 3800, price: 1.5,
                 tag: 'Available'
             },
             'canada': {
+                id: 'canada',
                 title: 'Canada St.',
                 subtitle: 'The Naturalist',
                 desc: 'Alpine luxury in the tropics. Heavy timber beams, stone fireplaces, and massive gabled windows. Designed for cozy gatherings and connection with nature.',
                 img: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1000&auto=format&fit=crop',
-                bed: '5',
-                bath: '4',
-                size: '4,600',
-                price: '$1.1M',
+                bed: 5, bath: 4, size: 4600, price: 1.1,
                 tag: 'Available'
             },
             'naija': {
+                id: 'naija',
                 title: 'Naija St.',
                 subtitle: 'The Sovereign',
                 desc: 'The jewel of the estate. Massive pent-villas built for royalty. Features double-volume living areas, a cinema room, and reinforced security suites.',
                 img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop',
-                bed: '7',
-                bath: '8',
-                size: '8,000',
-                price: '$2.5M',
+                bed: 7, bath: 8, size: 8000, price: 2.5,
                 tag: 'Flagship'
             }
         };
 
+        // --- Generate Inventory for Property Finder ---
+        // Simulating the 69 units
+        let inventory = [];
+        const streets = ['ny', 'dubai', 'london', 'canada', 'naija'];
+        let unitCounter = 1;
+        
+        streets.forEach(street => {
+            const base = propertyData[street];
+            // Generate 14 units per street
+            for(let i=1; i<=14; i++) {
+                inventory.push({
+                    ...base,
+                    unitId: `${base.title.split(' ')[0].toUpperCase()}-${i.toString().padStart(2, '0')}`,
+                    price: base.price + (Math.random() * 0.5), // varies slightly
+                    isSold: Math.random() > 0.8 // Random sold status
+                });
+            }
+        });
+
+        // --- Render Properties ---
+        function renderProperties() {
+            const grid = document.getElementById('property-grid');
+            const streetFilter = document.getElementById('filter-street').value;
+            const priceFilter = document.getElementById('filter-price').value;
+
+            grid.innerHTML = '';
+
+            const filtered = inventory.filter(item => {
+                if (streetFilter !== 'all' && item.title !== streetFilter + ' St.') return false;
+                if (priceFilter === '1' && item.price >= 1.5) return false;
+                if (priceFilter === '2' && (item.price < 1.5 || item.price > 2)) return false;
+                if (priceFilter === '3' && item.price <= 2) return false;
+                return true;
+            });
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-[2rem] p-3 hover:bg-white transition-all duration-300';
+                card.innerHTML = `
+                    <div class="relative h-48 rounded-[1.5rem] overflow-hidden cursor-pointer" onclick="openModal('${item.id}')">
+                        <img src="${item.img}" class="object-cover w-full h-full hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-900">
+                            Unit ${item.unitId}
+                        </div>
+                         ${item.isSold ? '<div class="absolute inset-0 bg-slate-900/60 flex items-center justify-center text-white font-bold uppercase tracking-widest text-xl backdrop-blur-sm">Sold</div>' : ''}
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-serif font-semibold">${item.title}</h3>
+                            <span class="text-sm font-bold text-slate-900">$${item.price.toFixed(2)}M</span>
+                        </div>
+                        <div class="flex gap-4 text-xs text-slate-500 uppercase tracking-wide border-t border-slate-100 pt-2 mt-2">
+                            <span>${item.bed} Beds</span>
+                            <span>${item.bath} Baths</span>
+                            <span>${item.size} Sq.Ft</span>
+                        </div>
+                        <button onclick="openModal('${item.id}')" class="w-full mt-3 py-2 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-900 text-xs font-bold uppercase tracking-widest rounded-lg transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- Legal Content System ---
+        const legalDocs = {
+            'privacy': `
+                <h2 class="text-3xl font-serif mb-6">Privacy Policy</h2>
+                <p class="mb-4 text-slate-600 leading-relaxed">At Amada Realty, the privacy of our residents is paramount. We do not disclose the identity of our residents to any public registry.</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">1. Data Collection</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">Financial data submitted during the visa application is encrypted using banking-grade standards and destroyed 48 hours after board review.</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">2. Surveillance</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">While public areas are monitored for security, strict blackouts are enforced on private residences to ensure total discretion.</p>
+            `,
+            'terms': `
+                <h2 class="text-3xl font-serif mb-6">Visa & Application Terms</h2>
+                <p class="mb-4 text-slate-600 leading-relaxed">Purchase of property in Amada Estate is contingent upon the successful granting of the "Amada Golden Key".</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">1. The Vetting Process</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">The Board reserves the right to reject any application without providing specific reasons. Liquidity proof does not guarantee entry.</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">2. Resale Restrictions</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">Properties may only be resold to pre-approved candidates on the waiting list. Open market listings are strictly prohibited.</p>
+            `,
+            'bylaws': `
+                <h2 class="text-3xl font-serif mb-6">Estate Bylaws</h2>
+                <p class="mb-4 text-slate-600 leading-relaxed">To maintain the "World Within Walls" atmosphere, strict aesthetic guidelines are enforced.</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">1. Architectural Integrity</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">Modifications to the exterior facade must adhere strictly to the street's designated country style (e.g., no modern glass extensions on London St.).</p>
+                <h3 class="text-xl font-serif mt-6 mb-2">2. Noise & Conduct</h3>
+                <p class="mb-4 text-slate-600 leading-relaxed">Amada is a sanctuary. Heavy construction and loud gatherings are restricted to specific windows.</p>
+            `
+        };
+
+        function openLegal(type) {
+            document.getElementById('legal-content').innerHTML = legalDocs[type];
+            navigateTo('legal');
+        }
+
+        // --- Modal & Form Functions ---
         let currentSelection = '';
 
-        // --- Modal Functions ---
         function openModal(id) {
             const data = propertyData[id];
             if(!data) return;
-
-            currentSelection = id; // Store for form pre-selection
+            currentSelection = id;
 
             document.getElementById('modal-title').innerText = data.title;
             document.getElementById('modal-subtitle').innerText = data.subtitle;
@@ -742,8 +871,8 @@
             document.getElementById('modal-img').src = data.img;
             document.getElementById('modal-bed').innerText = data.bed;
             document.getElementById('modal-bath').innerText = data.bath;
-            document.getElementById('modal-size').innerText = data.size;
-            document.getElementById('modal-price').innerText = data.price;
+            document.getElementById('modal-size').innerText = data.size.toLocaleString();
+            document.getElementById('modal-price').innerText = '$' + data.price + 'M';
             document.getElementById('modal-tag').innerText = data.tag;
 
             document.getElementById('floorplan-modal').classList.add('open');
@@ -754,39 +883,26 @@
         }
 
         function scrollToVisaWithSelection() {
-            scrollToVisa();
-            // Map ID to select value
-            const map = {
-                'ny': 'NY',
-                'dubai': 'Dubai',
-                'london': 'London',
-                'canada': 'Canada',
-                'naija': 'Naija'
-            };
+            closeModal();
+            navigateTo('visa');
+            
+            const map = { 'ny': 'NY', 'dubai': 'Dubai', 'london': 'London', 'canada': 'Canada', 'naija': 'Naija' };
             const select = document.getElementById('formSelect');
             if(select && currentSelection) {
                 select.value = map[currentSelection];
             }
         }
 
-        // Close modal on click outside
         document.getElementById('floorplan-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+            if (e.target === this) closeModal();
         });
 
-        // --- Form Handling ---
         function handleVisaSubmit(e) {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
-            
-            // Loading state
-            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing Encryption...';
+            btn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...';
             btn.disabled = true;
-
-            // Simulate API call
             setTimeout(() => {
                 document.getElementById('formSuccess').classList.remove('hidden');
                 document.getElementById('formSuccess').classList.add('flex');
@@ -794,6 +910,9 @@
                 btn.disabled = false;
             }, 2000);
         }
+
+        // Init
+        renderProperties(); // Pre-load inventory
 
     </script>
 </body>
