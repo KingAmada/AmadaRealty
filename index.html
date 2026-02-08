@@ -107,6 +107,155 @@
       border-color:rgba(255,255,255,.9);
     }
 
+    /* 3D Flip Box (Elementor-style: slow + eased + floating content) */
+    :root{
+      --flip-dur: 1.5s;
+      --flip-ease: cubic-bezier(0.19, 1, 0.22, 1);
+      --flip-radius: 24px;
+      --flip-gold: #d4af37;
+    }
+    .flip-box{
+      position:relative;
+      height:clamp(280px, 26vw, 360px);
+      min-height:280px;
+      perspective:1200px;
+      perspective-origin:50% 50%;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color:transparent;
+      outline:none;
+    }
+    .flip-box-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:inherit;
+      transform-style:preserve-3d;
+      -webkit-transform-style:preserve-3d;
+      transition:transform var(--flip-dur) var(--flip-ease);
+      will-change:transform;
+    }
+    .flip-face{
+      position:absolute;
+      inset:0;
+      transform-style:preserve-3d;
+      -webkit-transform-style:preserve-3d;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+    .flip-front{ transform:rotateY(0deg); z-index:2; }
+    .flip-back{ transform:rotateY(180deg); z-index:1; }
+
+    /* The background plane: handles rounded corners + clipping */
+    .flip-bg{
+      position:absolute;
+      inset:0;
+      border-radius:var(--flip-radius);
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.32);
+      box-shadow:0 22px 50px rgba(2,6,23,.14);
+      transform:translateZ(-1px);
+      background:linear-gradient(180deg, rgba(15,23,42,.88), rgba(15,23,42,.70));
+    }
+    .flip-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:var(--flip-bg-image, none);
+      background-size:cover;
+      background-position:center;
+      transform:scale(1.03);
+      filter:saturate(1.06) contrast(1.03);
+    }
+    .flip-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(2,6,23,.15), rgba(2,6,23,.55));
+      transition:opacity .45s ease;
+      opacity:.7;
+    }
+    .flip-back .flip-bg{
+      background:linear-gradient(180deg, rgba(2,6,23,.92), rgba(2,6,23,.78));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .flip-back .flip-bg::before{ background-image:none; filter:none; transform:none; }
+
+    /* Card images (front faces) */
+    .flip-bg.bg-1{ --flip-bg-image: url('amada-masterplan-estate-aerial.png'); }
+    .flip-bg.bg-2{ --flip-bg-image: url('amada-modern-villas-street.png'); }
+    .flip-bg.bg-3{ --flip-bg-image: url('amada-resort-lagoon-pool.png'); }
+
+    /* The content plane: floats above the background */
+    .flip-content{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:12px;
+      padding:26px;
+      text-align:center;
+      transform-style:preserve-3d;
+      -webkit-transform-style:preserve-3d;
+      transform:translateZ(36px);
+    }
+    .flip-kicker{
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:900;
+      color:rgba(226,232,240,.80);
+      transform:translateZ(44px);
+      text-shadow:0 12px 26px rgba(0,0,0,.55);
+    }
+    .flip-title{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:30px;
+      line-height:1.05;
+      font-weight:900;
+      text-transform:uppercase;
+      color:var(--flip-gold);
+      transform:translateZ(74px);
+      text-shadow:0 18px 46px rgba(0,0,0,.75);
+    }
+    .flip-desc{
+      margin:0;
+      font-size:15px;
+      line-height:1.7;
+      font-weight:500;
+      color:rgba(241,245,249,.92);
+      transform:translateZ(44px);
+      text-shadow:0 10px 24px rgba(0,0,0,.55);
+    }
+    .flip-back .flip-title{
+      color:#fff;
+      transform:translateZ(62px);
+    }
+    .flip-back .flip-desc{
+      color:rgba(203,213,225,.90);
+      font-size:14px;
+    }
+
+    /* Flip triggers */
+    @media (hover:hover) and (pointer:fine){
+      .flip-box:hover .flip-box-inner{ transform:rotateY(-180deg); }
+      .flip-box:hover .flip-front .flip-bg::after{ opacity:.9; }
+    }
+    .flip-box:focus-visible .flip-box-inner{ transform:rotateY(-180deg); }
+    @media (hover:none), (pointer:coarse){
+      .flip-box.is-flipped .flip-box-inner{ transform:rotateY(-180deg); }
+    }
+
+    .flip-box:focus-visible{ box-shadow:0 0 0 4px rgba(15,23,42,.18); border-radius:var(--flip-radius); }
+    @media (prefers-reduced-motion: reduce){
+      .flip-box-inner{ transition:none; transform:none !important; }
+      .flip-back{ display:none; }
+    }
+
     /* Modals */
     .modal-overlay{opacity:0;pointer-events:none;transition:opacity .22s ease;}
     .modal-overlay.open{opacity:1;pointer-events:all;}
@@ -1103,23 +1252,79 @@
           </p>
 
           <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-left reveal">
-            <div class="glass-card rounded-3xl p-6">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Nigeria, Upgraded</div>
-              <p class="text-slate-700 mt-2 leading-relaxed font-light">
-                You’re not buying a property. You’re purchasing positioning. Smart people don’t chase comfort; they secure advantage. This is not real estate — it’s future-control dressed as architecture.
-              </p>
+            <div class="flip-box rounded-3xl" tabindex="0" role="button" aria-label="Nigeria, Upgraded. Flip card">
+              <div class="flip-box-inner">
+                <div class="flip-face flip-front">
+                  <div class="flip-bg bg-1"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">Nigeria, Upgraded</div>
+                    <h3 class="flip-title">Positioning</h3>
+                    <p class="flip-desc">
+                      You’re not buying a property. You’re purchasing positioning. Smart people don’t chase comfort; they secure advantage.
+                    </p>
+                  </div>
+                </div>
+                <div class="flip-face flip-back">
+                  <div class="flip-bg"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">Nigeria, Upgraded</div>
+                    <h3 class="flip-title">Future Control</h3>
+                    <p class="flip-desc">
+                      This is not real estate — it’s future-control dressed as architecture.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="glass-card rounded-3xl p-6">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">No Relocation</div>
-              <p class="text-slate-700 mt-2 leading-relaxed font-light">
-               Money can’t buy happiness — but poverty can buy regret. The point isn’t riches. The point is removing chaos from your family’s future, so peace and progress become your default setting.
-              </p>
+
+            <div class="flip-box rounded-3xl" tabindex="0" role="button" aria-label="No Relocation. Flip card">
+              <div class="flip-box-inner">
+                <div class="flip-face flip-front">
+                  <div class="flip-bg bg-2"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">No Relocation</div>
+                    <h3 class="flip-title">Stability</h3>
+                    <p class="flip-desc">
+                      Money can’t buy happiness — but poverty can buy regret. The point isn’t riches.
+                    </p>
+                  </div>
+                </div>
+                <div class="flip-face flip-back">
+                  <div class="flip-bg"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">No Relocation</div>
+                    <h3 class="flip-title">Peace & Progress</h3>
+                    <p class="flip-desc">
+                      The point is removing chaos from your family’s future, so peace and progress become your default setting.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="glass-card rounded-3xl p-6">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Abroad Living</div>
-              <p class="text-slate-700 mt-2 leading-relaxed font-light">
-                This is “abroad living”… without the loneliness of abroad. No cultural dislocation. No distance from family. No identity trade-off. Just premium living — in familiar soil.
-              </p>
+
+            <div class="flip-box rounded-3xl" tabindex="0" role="button" aria-label="Abroad Living. Flip card">
+              <div class="flip-box-inner">
+                <div class="flip-face flip-front">
+                  <div class="flip-bg bg-3"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">Abroad Living</div>
+                    <h3 class="flip-title">Familiar Luxury</h3>
+                    <p class="flip-desc">
+                      This is “abroad living”… without the loneliness of abroad. No cultural dislocation. No distance from family.
+                    </p>
+                  </div>
+                </div>
+                <div class="flip-face flip-back">
+                  <div class="flip-bg"></div>
+                  <div class="flip-content">
+                    <div class="flip-kicker">Abroad Living</div>
+                    <h3 class="flip-title">Premium Living</h3>
+                    <p class="flip-desc">
+                      No identity trade-off. Just premium living — in familiar soil.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1163,18 +1368,18 @@
 	            </p>
 	          </div>
 
-			          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-			            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal">
-			              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
-			                <img src="amada-masterplan-estate-aerial-angle.png" alt="Private golf putting" loading="lazy"
-			                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-			                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
-			              </div>
-			              <div class="p-6 text-center">
-			                <h4 class="font-serif text-lg font-semibold">Private Golf Putting</h4>
-			                <p class="text-xs text-slate-500 mt-2">For the leisurely afternoon.</p>
-			              </div>
-			            </div>
+				          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+				            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal">
+				              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+				                <img src="amada-masterplan-estate-aerial-angle.png" alt="Private golf putting" loading="lazy"
+				                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+				                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+				              </div>
+				              <div class="p-6 text-center">
+				                <h4 class="font-serif text-lg font-semibold">Private Golf Putting</h4>
+				                <p class="text-xs text-slate-500 mt-2">For the leisurely afternoon.</p>
+				              </div>
+				            </div>
 
 			            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 80ms">
 			              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
@@ -1200,44 +1405,68 @@
 			              </div>
 			            </div>
 
-			            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 240ms">
-			              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
-			                <img src="amada-estate-layout-map-labeled-streets.png" alt="International academy" loading="lazy"
-			                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-			                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
-			              </div>
-			              <div class="p-6 text-center">
-			                <h4 class="font-serif text-lg font-semibold">International Academy</h4>
-			                <p class="text-xs text-slate-500 mt-2">British Curriculum.</p>
-			              </div>
-			            </div>
+					            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 240ms">
+					              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+					                <img src="amada-estate-layout-map-labeled-streets.png" alt="International academy" loading="lazy"
+					                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+					                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+					              </div>
+					              <div class="p-6 text-center">
+					                <h4 class="font-serif text-lg font-semibold">International Academy</h4>
+					                <p class="text-xs text-slate-500 mt-2">British Curriculum.</p>
+					              </div>
+					            </div>
 
-			            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 320ms">
-			              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
-			                <img src="amada-resort-lagoon-pool.png" alt="Resort and spa" loading="lazy"
-			                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-			                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
-			              </div>
-			              <div class="p-6 text-center">
-			                <h4 class="font-serif text-lg font-semibold">Resort &amp; Spa</h4>
-			                <p class="text-xs text-slate-500 mt-2">Private suites. Quiet luxury.</p>
-			              </div>
-			            </div>
+					            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 320ms">
+					              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+					                <img src="amada-resort-lagoon-pool.png" alt="Resort and spa" loading="lazy"
+					                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+					                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+					              </div>
+					              <div class="p-6 text-center">
+					                <h4 class="font-serif text-lg font-semibold">Resort &amp; Spa</h4>
+					                <p class="text-xs text-slate-500 mt-2">Private suites. Quiet luxury.</p>
+					              </div>
+					            </div>
 
-			            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 400ms">
-			              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
-			                <img src="amada-luxury-villas-palm-lined-street.png" alt="Private clinic" loading="lazy"
-			                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
-			                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
-			              </div>
-			              <div class="p-6 text-center">
-			                <h4 class="font-serif text-lg font-semibold">Private Clinic</h4>
-			                <p class="text-xs text-slate-500 mt-2">Discreet medical access.</p>
-			              </div>
-			            </div>
-			          </div>
-		        </div>
-		      </section>
+						            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 400ms">
+						              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+						                <img src="amada-luxury-villas-palm-lined-street.png" alt="Private clinic" loading="lazy"
+						                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+						                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+						              </div>
+						              <div class="p-6 text-center">
+						                <h4 class="font-serif text-lg font-semibold">Private Clinic</h4>
+						                <p class="text-xs text-slate-500 mt-2">Discreet medical access.</p>
+						              </div>
+						            </div>
+
+						            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 480ms">
+						              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+						                <img src="Gemini_Generated_Image_gu927ggu927ggu92.png" alt="Natural food reserve" loading="lazy"
+						                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+						                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+						              </div>
+						              <div class="p-6 text-center">
+						                <h4 class="font-serif text-lg font-semibold">Natural Food Reserve</h4>
+						                <p class="text-xs text-slate-500 mt-2">Onsite premium produce + dedicated offsite farm supply for residents.</p>
+						              </div>
+						            </div>
+
+						            <div class="rounded-3xl overflow-hidden bg-white shadow-sm border border-slate-100 hover:shadow-xl transition-all text-left group reveal" style="transition-delay: 560ms">
+						              <div class="relative w-full h-28 bg-slate-100 overflow-hidden">
+						                <img src="Gemini_Generated_Image_do2n5fdo2n5fdo2n.png" alt="24/7 estate lighting" loading="lazy"
+						                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+						                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/15 to-transparent"></div>
+						              </div>
+						              <div class="p-6 text-center">
+						                <h4 class="font-serif text-lg font-semibold">24/7 Light</h4>
+						                <p class="text-xs text-slate-500 mt-2">Partially powered by green energy.</p>
+						              </div>
+						            </div>
+					          </div>
+			        </div>
+			      </section>
 
 				      <!-- Nigeria, Upgraded (Homepage copy) -->
 				      <section class="py-20 px-4" id="home-positioning">
@@ -2109,18 +2338,11 @@
               </p>
             </div>
 
-            <div class="glass-card rounded-3xl p-6">
-              <h4 class="text-xl font-serif">How this works</h4>
-              <ol class="mt-3 space-y-2 text-sm text-slate-600">
-                <li><span class="font-semibold text-slate-900">1)</span> Click any unit square on the estate layout.</li>
-                <li><span class="font-semibold text-slate-900">2)</span> Review details + floor plan preview instantly.</li>
-                <li><span class="font-semibold text-slate-900">3)</span> Request your PR Card dossier for viewing rights.</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+	            
+	          </div>
+	        </div>
+	      </div>
+	    </section>
 
     <!-- PR CARD -->
     <section class="page" data-page="pr-card" id="page-pr-card">
@@ -2264,16 +2486,26 @@
                     <div class="mt-4 grid grid-cols-1 gap-3" id="prxVisaDynamic"></div>
                   </div>
 
-                  <button class="prx-btn" type="button" onclick="prxSubmitForm()">Apply For Waitlist</button>
+	                  <div class="w-full rounded-2xl border border-white/10 bg-white/5 p-4">
+	                    <label class="flex items-start gap-3 text-[11px] tracking-widest uppercase font-extrabold text-white/85 select-none">
+	                      <input id="prxTermsCheck" type="checkbox" class="mt-0.5 h-4 w-4 accent-white"/>
+	                      <span>
+	                        I have read and agree to the
+	                        <button type="button" class="underline underline-offset-4 hover:text-white" onclick="openLegal('terms')">Terms</button>
+	                        and
+	                        <button type="button" class="underline underline-offset-4 hover:text-white" onclick="openLegal('privacy')">Privacy Policy</button>.
+	                      </span>
+	                    </label>
+	                    <div class="prx-errtext" id="prxTermsError">Please accept Terms &amp; Privacy to continue.</div>
+	                  </div>
 
-                  <p class="text-center text-[10px] text-slate-400 mt-2">
-                    By submitting, you agree to our
-                    <button type="button" class="underline underline-offset-4 hover:text-white" onclick="openLegal('terms')">Terms</button>
-                    and
-                    <button type="button" class="underline underline-offset-4 hover:text-white" onclick="openLegal('privacy')">Privacy Policy</button>.
-                  </p>
-                </div>
-              </div>
+	                  <button class="prx-btn" id="prxApplyBtn" type="button" onclick="prxSubmitForm()">Apply For Waitlist</button>
+
+	                  <p class="text-center text-[10px] text-slate-400 mt-2">
+	                    Applications are invitation-grade and subject to eligibility review.
+	                  </p>
+	                </div>
+	              </div>
 
               <div id="prxSuccessView" class="hidden prx-success w-full">
                 <div class="text-center">
@@ -2287,13 +2519,16 @@
                   </p>
                 </div>
 
-                <div class="w-full flex flex-col items-center">
-                  <div id="prxCardResult" class="transform origin-top scale-95 mb-2"></div>
-                  <button class="prx-btn prx-btn-ghost flex items-center justify-center gap-2" type="button" onclick="prxDownloadCard()">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>Download Card</span>
-                  </button>
-                </div>
+	                <div class="w-full flex flex-col items-center gap-3">
+	                  <div id="prxCardResult" class="transform origin-top scale-95 mb-2"></div>
+	                  <button class="prx-btn flex items-center justify-center gap-2" type="button" onclick="prxDownloadPack()">
+	                    <i data-lucide="download" class="w-4 h-4"></i>
+	                    <span>Download Application Pack</span>
+	                  </button>
+	                  <p class="text-center text-[10px] text-slate-400">
+	                    Includes Card, Brochure, Newsletter, Terms &amp; Conditions, and Acknowledgement Letter.
+	                  </p>
+	                </div>
 
                 <div id="prxDepositWrap">
                   <div class="text-center">
@@ -2359,7 +2594,7 @@
             <h3 class="text-4xl md:text-5xl font-serif mt-4 text-white">Not For Everyone.<br/>Perhaps, For You.</h3>
             <p class="text-white/70 mt-4 font-light leading-relaxed max-w-2xl">
               Interiors are built to your taste across three floors — starting at <span class="font-semibold text-white">$2,500,000</span>.
-              Choose rooms, cinema, lounges, play areas, and more, while exteriors remain cohesive per street.
+              Choose rooms, cinema, lounges, play areas, and more.
             </p>
           </div>
 
@@ -2418,15 +2653,31 @@
           </ul>
         </div>
 
-	        <div class="space-y-4">
-	          <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Contact</h5>
-	          <ul class="space-y-2"> 
-	            <li><span class="text-slate-500">Private Line Available<br/>Upon Approval</span></li>
-	            <li><span class="text-slate-500">Fill the PR form to connect</span></li>
-	          </ul>
-	        </div>
-      </div>
-    </div>
+		        <div class="space-y-4">
+		          <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Contact</h5>
+		          <div class="space-y-3">
+		            <div> 
+		              <div class="text-slate-500 text-xs leading-relaxed mt-1">Access is limited to serious buyers and committed applicants.</div>
+		            </div>
+
+		            <button onclick="location.hash='#/pr-card'"
+		                    class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-[10px] font-extrabold tracking-widest uppercase hover:bg-slate-800 transition shadow">
+		              Submit Buyer Qualification Form
+		              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+		            </button>
+
+		            <div class="pt-2">
+		              <div class="font-semibold text-slate-900">Press &amp; Partnerships</div>
+		              <div class="mt-2 space-y-1 text-slate-600">
+		                <a class="block hover:text-slate-900" href="mailto:press@amadarealty.com">press@amadarealty.com</a>
+		                <a class="block hover:text-slate-900" href="mailto:partnerships@amadarealty.com">partnerships@amadarealty.com</a>
+		              </div>
+		            </div>
+ 
+		          </div>
+		        </div>
+	      </div>
+	    </div>
 
     <div class="max-w-7xl mx-auto pt-14">
       <p class="text-center text-[10px] text-slate-300 uppercase tracking-widest">
@@ -2691,7 +2942,7 @@
     // ---------------------------
     // Provides: window.amadaQrToCanvas(canvas, text, { ecc:'M', scale:4, margin:1 })
     // Minimal embed based on classic qrcode-generator patterns (no network required).
-    (function(){
+	    (function(){
       function QRMath(){ }
       QRMath.EXP_TABLE = new Array(256);
       QRMath.LOG_TABLE = new Array(256);
@@ -2741,35 +2992,94 @@
         }
         return list;
       };
-      QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel){
-        // Only need type 1-10 for short payloads; M level included.
-        // Table format: [count, totalCount, dataCount, ...]
-        const L=1, M=0, Q=3, H=2;
-        const t = QRRSBlock.RS_BLOCK_TABLE;
-        return t[(typeNumber-1)*4 + errorCorrectLevel] || null;
-      };
-      QRRSBlock.RS_BLOCK_TABLE = [
-        // 1
-        [1,26,19],[1,26,16],[1,26,13],[1,26,9],
-        // 2
-        [1,44,34],[1,44,28],[1,44,22],[1,44,16],
-        // 3
-        [1,70,55],[1,70,44],[2,35,17],[2,35,13],
-        // 4
-        [1,100,80],[2,50,32],[2,50,24],[4,25,9],
-        // 5
-        [1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],
-        // 6
-        [2,86,68],[4,43,27],[4,43,19],[4,43,15],
-        // 7
-        [2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],
-        // 8
-        [2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],
-        // 9
-        [2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],
-        // 10
-        [2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16]
-      ];
+	      QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel){
+	        // Table format: [count, totalCount, dataCount, ...]
+	        // Index is the qrcode-generator "errorCorrectLevel" (M=0, L=1, H=2, Q=3).
+	        const t = QRRSBlock.RS_BLOCK_TABLE;
+	        return t[(typeNumber-1)*4 + errorCorrectLevel] || null;
+	      };
+	      QRRSBlock.RS_BLOCK_TABLE = [
+	        // 1 (M, L, H, Q)
+	        [1,26,16],[1,26,19],[1,26,9],[1,26,13],
+	        // 2
+	        [1,44,28],[1,44,34],[1,44,16],[1,44,22],
+	        // 3
+	        [1,70,44],[1,70,55],[2,35,13],[2,35,17],
+	        // 4
+	        [2,50,32],[1,100,80],[4,25,9],[2,50,24],
+	        // 5
+	        [2,67,43],[1,134,108],[2,33,11,2,34,12],[2,33,15,2,34,16],
+	        // 6
+	        [4,43,27],[2,86,68],[4,43,15],[4,43,19],
+	        // 7
+	        [4,49,31],[2,98,78],[4,39,13,1,40,14],[2,32,14,4,33,15],
+	        // 8
+	        [2,60,38,2,61,39],[2,121,97],[4,40,14,2,41,15],[4,40,18,2,41,19],
+	        // 9
+	        [3,58,36,2,59,37],[2,146,116],[4,36,12,4,37,13],[4,36,16,4,37,17],
+	        // 10
+	        [4,69,43,1,70,44],[2,86,68,2,87,69],[6,43,15,2,44,16],[6,43,19,2,44,20],
+	        // 11
+	        [1,80,50,4,81,51],[4,101,81],[3,36,12,8,37,13],[4,50,22,4,51,23],
+	        // 12
+	        [6,58,36,2,59,37],[2,116,92,2,117,93],[7,42,14,4,43,15],[4,46,20,6,47,21],
+	        // 13
+	        [8,59,37,1,60,38],[4,133,107],[12,33,11,4,34,12],[8,44,20,4,45,21],
+	        // 14
+	        [4,64,40,5,65,41],[3,145,115,1,146,116],[11,36,12,5,37,13],[11,36,16,5,37,17],
+	        // 15
+	        [5,65,41,5,66,42],[5,109,87,1,110,88],[11,36,12,7,37,13],[5,54,24,7,55,25],
+	        // 16
+	        [7,73,45,3,74,46],[5,122,98,1,123,99],[3,45,15,13,46,16],[15,43,19,2,44,20],
+	        // 17
+	        [10,74,46,1,75,47],[1,135,107,5,136,108],[2,42,14,17,43,15],[1,50,22,15,51,23],
+	        // 18
+	        [9,69,43,4,70,44],[5,150,120,1,151,121],[2,42,14,19,43,15],[17,50,22,1,51,23],
+	        // 19
+	        [3,70,44,11,71,45],[3,141,113,4,142,114],[9,39,13,16,40,14],[17,47,21,4,48,22],
+	        // 20
+	        [3,67,41,13,68,42],[3,135,107,5,136,108],[15,43,15,10,44,16],[15,54,24,5,55,25],
+	        // 21
+	        [17,68,42],[4,144,116,4,145,117],[19,46,16,6,47,17],[19,50,22,6,51,23],
+	        // 22
+	        [17,74,46],[2,139,111,7,140,112],[34,37,13],[7,54,24,16,55,25],
+	        // 23
+	        [4,75,47,14,76,48],[4,151,121,5,152,122],[16,45,15,14,46,16],[11,54,24,14,55,25],
+	        // 24
+	        [6,73,45,14,74,46],[6,147,117,4,148,118],[30,46,16,2,47,17],[11,54,24,16,55,25],
+	        // 25
+	        [8,75,47,13,76,48],[8,132,106,4,133,107],[22,45,15,13,46,16],[7,54,24,22,55,25],
+	        // 26
+	        [19,74,46,4,75,47],[10,142,114,2,143,115],[33,46,16,4,47,17],[28,50,22,6,51,23],
+	        // 27
+	        [22,73,45,3,74,46],[8,152,122,4,153,123],[12,45,15,28,46,16],[8,53,23,26,54,24],
+	        // 28
+	        [3,73,45,23,74,46],[3,147,117,10,148,118],[11,45,15,31,46,16],[4,54,24,31,55,25],
+	        // 29
+	        [21,73,45,7,74,46],[7,146,116,7,147,117],[19,45,15,26,46,16],[1,53,23,37,54,24],
+	        // 30
+	        [19,75,47,10,76,48],[5,145,115,10,146,116],[23,45,15,25,46,16],[15,54,24,25,55,25],
+	        // 31
+	        [2,74,46,29,75,47],[13,145,115,3,146,116],[23,45,15,28,46,16],[42,54,24,1,55,25],
+	        // 32
+	        [10,74,46,23,75,47],[17,145,115],[19,45,15,35,46,16],[10,54,24,35,55,25],
+	        // 33
+	        [14,74,46,21,75,47],[17,145,115,1,146,116],[11,45,15,46,46,16],[29,54,24,19,55,25],
+	        // 34
+	        [14,74,46,23,75,47],[13,145,115,6,146,116],[59,46,16,1,47,17],[44,54,24,7,55,25],
+	        // 35
+	        [12,75,47,26,76,48],[12,151,121,7,152,122],[22,45,15,41,46,16],[39,54,24,14,55,25],
+	        // 36
+	        [6,75,47,34,76,48],[6,151,121,14,152,122],[2,45,15,64,46,16],[46,54,24,10,55,25],
+	        // 37
+	        [29,74,46,14,75,47],[17,152,122,4,153,123],[24,45,15,46,46,16],[49,54,24,10,55,25],
+	        // 38
+	        [13,74,46,32,75,47],[4,152,122,18,153,123],[42,45,15,32,46,16],[48,54,24,14,55,25],
+	        // 39
+	        [40,75,47,7,76,48],[20,147,117,4,148,118],[10,45,15,67,46,16],[43,54,24,22,55,25],
+	        // 40
+	        [18,75,47,31,76,48],[19,148,118,6,149,119],[20,45,15,61,46,16],[34,54,24,34,55,25]
+	      ];
 
       function QRBitBuffer(){ this.buffer=[]; this.length=0; }
       QRBitBuffer.prototype.get = function(index){
@@ -3098,29 +3408,29 @@
         return data;
       };
 
-      function chooseTypeNumber(text, errorCorrectLevel){
-        // Try types 1..10; enough for our VISA payload.
-        for (let type = 1; type <= 10; type++){
-          try {
-            const qr = new QRCodeModel(type, errorCorrectLevel);
-            qr.addData(text);
-            qr.make();
-            return qr;
-          } catch (e) {}
-        }
-        // Fallback to type 10 even if overflow; will throw earlier, so just return smallest.
-        const qr = new QRCodeModel(10, errorCorrectLevel);
-        qr.addData(text.slice(0, 200));
-        qr.make();
-        return qr;
-      }
+	      function chooseTypeNumber(text, errorCorrectLevel){
+	        // Try types 1..10 (keeps generator tiny and reliable for offline use).
+	        for (let type = 1; type <= 10; type++){
+	          try {
+	            const qr = new QRCodeModel(type, errorCorrectLevel);
+	            qr.addData(text);
+	            qr.make();
+	            return qr;
+	          } catch (e) {}
+	        }
+	        // Hard fallback: make a small code from a truncated payload.
+	        const qr = new QRCodeModel(10, errorCorrectLevel);
+	        qr.addData(text.slice(0, 120));
+	        qr.make();
+	        return qr;
+	      }
 
-      window.amadaQrToCanvas = function(canvas, text, opts){
-        const ecc = (opts?.ecc || 'M').toUpperCase();
-        const eccMap = { M:0, L:1, H:2, Q:3 };
-        const level = eccMap[ecc] ?? 0;
-        const scale = Math.max(2, Math.min(10, Number(opts?.scale || 4)));
-        const margin = Math.max(0, Math.min(6, Number(opts?.margin ?? 1)));
+	      window.amadaQrToCanvas = function(canvas, text, opts){
+	        const ecc = (opts?.ecc || 'M').toUpperCase();
+	        const eccMap = { L:1, M:0, Q:3, H:2 };
+	        const level = eccMap[ecc] ?? 0;
+	        const scale = Math.max(2, Math.min(10, Number(opts?.scale || 4)));
+	        const margin = Math.max(0, Math.min(6, Number(opts?.margin ?? 1)));
 
         const qr = chooseTypeNumber(String(text || ''), level);
         const count = qr.getModuleCount();
@@ -3817,9 +4127,9 @@
       visa: { bg: '#1e1b4b', accent: 'linear-gradient(135deg, #ffffff, #e0e7ff, #a5b4fc)', solid: '#ffffff', number: 'VISA', tier: 'Visit Approved', icon: 'credit-card', label: 'Visit Applicant', prefix: 'VS' }
     };
 
-    function prxInit(){
-      if (prxInitialized) return;
-      prxInitialized = true;
+	    function prxInit(){
+	      if (prxInitialized) return;
+	      prxInitialized = true;
 
       const nameInput = document.getElementById('prxNameInput');
       const phoneInput = document.getElementById('prxPhoneInput');
@@ -3827,10 +4137,12 @@
       const dashboard = document.getElementById('prxDashboard');
       const card = document.getElementById('prxCard');
       const shine = document.getElementById('prxShine');
-      const modePR = document.getElementById('prxModePR');
-      const modeVISA = document.getElementById('prxModeVISA');
+	      const modePR = document.getElementById('prxModePR');
+	      const modeVISA = document.getElementById('prxModeVISA');
+	      const terms = document.getElementById('prxTermsCheck');
+	      const termsError = document.getElementById('prxTermsError');
 
-      if (!nameInput || !phoneInput || !tierSelect || !dashboard || !card || !shine) return;
+	      if (!nameInput || !phoneInput || !tierSelect || !dashboard || !card || !shine) return;
 
       nameInput.addEventListener('keyup', (e) => {
         const val = String(e.target.value || '');
@@ -3851,11 +4163,15 @@
         }
       });
 
-      tierSelect.addEventListener('change', () => prxSwitchCard(tierSelect.value));
-      modePR?.addEventListener('click', () => {
-        tierSelect.value = 'ny';
-        prxSwitchCard('ny');
-      });
+	      tierSelect.addEventListener('change', () => prxSwitchCard(tierSelect.value));
+	      terms?.addEventListener('change', () => {
+	        if (termsError) termsError.style.display = terms.checked ? 'none' : 'block';
+	        prxSyncApplyGate();
+	      });
+	      modePR?.addEventListener('click', () => {
+	        tierSelect.value = 'ny';
+	        prxSwitchCard('ny');
+	      });
       modeVISA?.addEventListener('click', () => {
         tierSelect.value = 'visa';
         prxSwitchCard('visa');
@@ -3909,21 +4225,32 @@
       prxSwitchCard(tierSelect.value);
     }
 
-    function prxSetModeButtons(type){
-      const modePR = document.getElementById('prxModePR');
-      const modeVISA = document.getElementById('prxModeVISA');
-      if (modePR) modePR.className = `rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 transition ${type === 'visa' ? 'bg-white/5 text-white/85 hover:bg-white/10' : 'bg-white/10 text-white hover:bg-white/15'}`;
-      if (modeVISA) modeVISA.className = `rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 transition ${type === 'visa' ? 'bg-white/10 text-white hover:bg-white/15' : 'bg-white/5 text-white/85 hover:bg-white/10'}`;
-    }
+	    function prxSetModeButtons(type){
+	      const modePR = document.getElementById('prxModePR');
+	      const modeVISA = document.getElementById('prxModeVISA');
+	      if (modePR) modePR.className = `rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 transition ${type === 'visa' ? 'bg-white/5 text-white/85 hover:bg-white/10' : 'bg-white/10 text-white hover:bg-white/15'}`;
+	      if (modeVISA) modeVISA.className = `rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 transition ${type === 'visa' ? 'bg-white/10 text-white hover:bg-white/15' : 'bg-white/5 text-white/85 hover:bg-white/10'}`;
+	    }
 
-    function prxUpdateVisaFields(type){
-      const wrap = document.getElementById('prxVisaFields');
-      const qrWrap = document.getElementById('prxQrWrap');
-      const btn = document.querySelector('#prxFormView .prx-btn');
-      if (wrap) wrap.classList.toggle('hidden', type !== 'visa');
-      if (qrWrap) qrWrap.style.display = (type === 'visa') ? 'flex' : 'none';
-      if (btn) btn.textContent = (type === 'visa') ? 'Apply For VISA' : 'Apply For Waitlist';
-    }
+	    function prxSyncApplyGate(){
+	      const btn = document.getElementById('prxApplyBtn');
+	      const terms = document.getElementById('prxTermsCheck');
+	      if (!btn) return;
+	      const ok = !!terms?.checked;
+	      btn.disabled = !ok;
+	      btn.style.opacity = ok ? '1' : '0.55';
+	      btn.style.cursor = ok ? 'pointer' : 'not-allowed';
+	    }
+
+	    function prxUpdateVisaFields(type){
+	      const wrap = document.getElementById('prxVisaFields');
+	      const qrWrap = document.getElementById('prxQrWrap');
+	      const btn = document.getElementById('prxApplyBtn');
+	      if (wrap) wrap.classList.toggle('hidden', type !== 'visa');
+	      if (qrWrap) qrWrap.style.display = (type === 'visa') ? 'flex' : 'none';
+	      if (btn) btn.textContent = (type === 'visa') ? 'Apply For VISA' : 'Apply For Waitlist';
+	      prxSyncApplyGate();
+	    }
 
     function prxQrText({ dossierId, name, phone, visitType, details }){
       const safe = (s) => String(s || '').trim().replace(/\s+/g,' ').slice(0, 64);
@@ -4118,16 +4445,23 @@
       return ok;
     }
 
-    function prxDrawQr(canvas, text){
-      if (!canvas) return;
-      const value = String(text || '');
-      if (typeof window.amadaQrToCanvas === 'function') {
-        window.amadaQrToCanvas(canvas, value, { ecc:'M', scale:4, margin:1 });
-        return;
-      }
-      const ctx = canvas.getContext('2d');
-      canvas.width = 120;
-      canvas.height = 120;
+	    function prxDrawQr(canvas, text){
+	      if (!canvas) return;
+	      const value = String(text || '');
+	      if (typeof window.amadaQrToCanvas === 'function') {
+	        try {
+	          window.amadaQrToCanvas(canvas, value, { ecc:'M', scale:4, margin:1 });
+	          return;
+	        } catch (e) {
+	          try {
+	            window.amadaQrToCanvas(canvas, value.slice(0, 120), { ecc:'M', scale:4, margin:1 });
+	            return;
+	          } catch (e2) {}
+	        }
+	      }
+	      const ctx = canvas.getContext('2d');
+	      canvas.width = 120;
+	      canvas.height = 120;
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0,0,120,120);
       ctx.fillStyle = '#0f172a';
@@ -4199,20 +4533,30 @@
       prxSwitchCard(tierSelect.value);
     }
 
-    function prxSubmitForm(){
-      const nameInput = document.getElementById('prxNameInput');
-      const phoneInput = document.getElementById('prxPhoneInput');
-      const tierSelect = document.getElementById('prxTierSelect');
-      const nameError = document.getElementById('prxNameError');
-      const phoneError = document.getElementById('prxPhoneError');
-      const visitType = document.getElementById('prxVisitType');
-      const visitError = document.getElementById('prxVisitError');
+	    function prxSubmitForm(){
+	      const nameInput = document.getElementById('prxNameInput');
+	      const phoneInput = document.getElementById('prxPhoneInput');
+	      const tierSelect = document.getElementById('prxTierSelect');
+	      const nameError = document.getElementById('prxNameError');
+	      const phoneError = document.getElementById('prxPhoneError');
+	      const visitType = document.getElementById('prxVisitType');
+	      const visitError = document.getElementById('prxVisitError');
+	      const terms = document.getElementById('prxTermsCheck');
+	      const termsError = document.getElementById('prxTermsError');
 
-      if (!nameInput || !phoneInput || !tierSelect) return;
+	      if (!nameInput || !phoneInput || !tierSelect) return;
 
-      let valid = true;
-      const nameVal = nameInput.value.trim();
-      const phoneVal = phoneInput.value.trim();
+	      if (!terms?.checked) {
+	        if (termsError) termsError.style.display = 'block';
+	        prxSyncApplyGate();
+	        return;
+	      } else {
+	        if (termsError) termsError.style.display = 'none';
+	      }
+
+	      let valid = true;
+	      const nameVal = nameInput.value.trim();
+	      const phoneVal = phoneInput.value.trim();
 
       if (nameVal.length < 3) {
         nameInput.classList.add('prx-error');
@@ -4234,9 +4578,18 @@
 
       if (!valid) return;
 
-      const tierKey = tierSelect.value;
-      const data = prxCardData[tierKey] || prxCardData.ny;
-      const dossierId = `#${data.prefix}-${data.number}`;
+	      const tierKey = tierSelect.value;
+	      const data = prxCardData[tierKey] || prxCardData.ny;
+	      const dossierId = `#${data.prefix}-${data.number}`;
+
+	      window.prxLastSubmission = {
+	        tierKey,
+	        dossierId,
+	        name: nameVal,
+	        phone: phoneVal,
+	        visitType: visitType?.value || '',
+	        details: (tierKey === 'visa') ? visaGetDetails(visitType?.value || '') : null
+	      };
 
       if (tierKey === 'visa') {
         const v = String(visitType?.value || '').trim();
@@ -4332,21 +4685,327 @@
       lucide.createIcons();
     }
 
-    function prxDownloadCard(){
-      const el = document.querySelector('#prxCardResult > div');
-      if (!el) return;
-      if (typeof html2canvas !== 'function') {
-        alert('Download unavailable: html2canvas failed to load.');
-        return;
-      }
+	    function prxEscapeHtml(s){
+	      return String(s ?? '')
+	        .replace(/&/g, '&amp;')
+	        .replace(/</g, '&lt;')
+	        .replace(/>/g, '&gt;')
+	        .replace(/"/g, '&quot;')
+	        .replace(/'/g, '&#39;');
+	    }
 
-      html2canvas(el, { backgroundColor: null, scale: 3, useCORS: true }).then(canvas => {
-        const a = document.createElement('a');
-        a.download = 'Amada_PR_Card.png';
-        a.href = canvas.toDataURL('image/png');
-        a.click();
-      });
-    }
+	    function prxDownloadHtml(filename, html){
+	      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+	      const url = URL.createObjectURL(blob);
+	      const a = document.createElement('a');
+	      a.href = url;
+	      a.download = filename;
+	      document.body.appendChild(a);
+	      a.click();
+	      a.remove();
+	      setTimeout(() => URL.revokeObjectURL(url), 3000);
+	    }
+
+	    function prxDocShell(title, bodyHtml){
+	      return `<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${title}</title>
+	        <style>
+	          body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; padding:38px; color:#0f172a; background:#fff;}
+	          h1{font-family: Georgia, serif; font-weight:600; margin:0 0 10px;}
+	          h2{font-family: Georgia, serif; font-weight:600; margin:24px 0 10px;}
+	          .k{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#64748b; font-weight:900;}
+	          .box{border:1px solid #e2e8f0; border-radius:18px; padding:18px; margin-top:14px;}
+	          .pill{display:inline-block; padding:6px 12px; border:1px solid #cbd5e1; border-radius:999px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#475569;}
+	          .muted{color:#475569;}
+	          img{max-width:100%; height:auto;}
+	          .grid{display:grid; grid-template-columns: 1fr; gap:14px;}
+	          @media (min-width: 900px){ .grid{grid-template-columns: 420px 1fr;} }
+	          .card-img{border:1px solid #e2e8f0;border-radius:18px;overflow:hidden;}
+	          .hr{height:1px;background:#e2e8f0;margin:22px 0;}
+	          a{color:#0f172a;}
+	        </style></head><body>
+	        <div class="pill">AMADA REALTY</div>
+	        <h1>${title}</h1>
+	        ${bodyHtml}
+	        <div class="box muted">Tip: Use Print → “Save as PDF” if you need a PDF copy.</div>
+	      </body></html>`;
+	    }
+
+	    function prxDownloadBrochure(){
+	      const meta = window.prxLastSubmission || {};
+	      const body = `
+	        <div class="box">
+	          <div class="k">Brochure</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Welcome to Amada Realty — a private-city estate engineered for quiet luxury, protected systems, and curated territories.
+	            Select an asset, design your three-floor interior, and request access through the PR Card protocol.
+	          </p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Territories</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">New York • London • Toronto • Paris • Dubai</p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Amenities</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Terminal Mall • Resort &amp; Spa • International Academy • Private Clinic • Parks &amp; Golf • Natural Food Reserve • 24/7 Light
+	          </p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Your Reference</div>
+	          <p class="muted" style="margin-top:10px;">Dossier ID: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong></p>
+	        </div>
+	      `;
+	      prxDownloadHtml(`Amada_Brochure_${(meta.dossierId || 'AMADA').replace('#','')}.html`, prxDocShell('Amada Realty — Estate Brochure', body));
+	    }
+
+	    function prxDownloadNewsletter(){
+	      const meta = window.prxLastSubmission || {};
+	      const body = `
+	        <div class="box">
+	          <div class="k">Newsletter</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            AMADA Dispatch — Invitation Grade. This newsletter includes development milestones, territory releases, and protocol updates.
+	          </p>
+	          <ul class="muted" style="line-height:1.7;margin-top:10px;">
+	            <li>Territory releases rotate by scarcity windows.</li>
+	            <li>PR Card dossiers are reviewed on a need-to-know basis.</li>
+	            <li>Presidential Villas (1,400 sqm) are one per street.</li>
+	          </ul>
+	        </div>
+	        <div class="box">
+	          <div class="k">Subscriber</div>
+	          <p class="muted" style="margin-top:10px;"><strong>${prxEscapeHtml(meta.name || '—')}</strong> • ${prxEscapeHtml(meta.phone || '')}</p>
+	        </div>
+	      `;
+	      prxDownloadHtml(`Amada_Newsletter_${(meta.dossierId || 'AMADA').replace('#','')}.html`, prxDocShell('AMADA Dispatch — Newsletter', body));
+	    }
+
+	    function prxDownloadTerms(){
+	      const t = (typeof legalDocs === 'object' && legalDocs?.terms) ? legalDocs.terms : null;
+	      const body = `
+	        <div class="box">
+	          <div class="k">${t ? prxEscapeHtml(t.kicker) : 'Legal'}</div>
+	          <div style="margin-top:12px; line-height:1.7;">${t ? t.body : '<p class="muted">Terms unavailable.</p>'}</div>
+	        </div>
+	      `;
+	      prxDownloadHtml('Amada_Terms_and_Conditions.html', prxDocShell('Terms & Conditions', body));
+	    }
+
+	    function prxDownloadAcknowledgement(){
+	      const meta = window.prxLastSubmission || {};
+	      const isVisa = meta.tierKey === 'visa';
+	      const title = isVisa ? 'VISA (Visit) Application — Acknowledgement' : 'PR Application — Acknowledgement';
+	      const payment = isVisa ? `
+	        <div class="box">
+	          <div class="k">Status</div>
+	          <p class="muted" style="margin-top:10px;">Received. Awaiting verification and clearance.</p>
+	        </div>
+	      ` : `
+	        <div class="box">
+	          <div class="k">Status</div>
+	          <p class="muted" style="margin-top:10px;">Received. Awaiting payment to engage review.</p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Payment</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Deposit to engage: <strong>₦100,000,000</strong><br/>
+	            Bank: <strong>Stanbic IBTC</strong><br/>
+	            Account Name: <strong>Amada Residence</strong><br/>
+	            Account Number: <strong>5770707070</strong><br/>
+	            Reference: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong>
+	          </p>
+	        </div>
+	      `;
+	      const body = `
+	        <div class="box">
+	          <div class="k">Applicant</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Name: <strong>${prxEscapeHtml(meta.name || '—')}</strong><br/>
+	            Phone: <strong>${prxEscapeHtml(meta.phone || '—')}</strong><br/>
+	            Dossier ID: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong>
+	          </p>
+	        </div>
+	        ${payment}
+	        <div class="box">
+	          <div class="k">Confidentiality</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            This acknowledgement is invitation-grade. Distribution is prohibited.
+	          </p>
+	        </div>
+	      `;
+	      prxDownloadHtml(`Amada_Acknowledgement_${(meta.dossierId || 'AMADA').replace('#','')}.html`, prxDocShell(title, body));
+	    }
+
+	    function prxDownloadCard(){
+	      const el = document.querySelector('#prxCardResult > div');
+	      if (!el) return;
+	      if (typeof html2canvas !== 'function') {
+	        alert('Download unavailable: html2canvas failed to load.');
+	        return;
+	      }
+	      html2canvas(el, { backgroundColor: null, scale: 3, useCORS: true }).then(canvas => {
+	        const a = document.createElement('a');
+	        a.download = 'Amada_PR_Card.png';
+	        a.href = canvas.toDataURL('image/png');
+	        a.click();
+	      });
+	    }
+
+	    function prxDownloadPack(){
+	      const meta = window.prxLastSubmission || {};
+	      const dossier = (meta.dossierId || 'AMADA').toString();
+	      const safeDossier = dossier.replace('#', '').replace(/[^a-zA-Z0-9_-]/g, '');
+	      const t = (typeof legalDocs === 'object' && legalDocs?.terms) ? legalDocs.terms : null;
+
+	      const brochure = `
+	        <h2>Brochure</h2>
+	        <div class="box">
+	          <div class="k">Overview</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Welcome to Amada Realty — a private-city estate engineered for quiet luxury, protected systems, and curated territories.
+	            Select an asset, design your three-floor interior, and request access through the PR Card protocol.
+	          </p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Territories</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">New York • London • Toronto • Paris • Dubai</p>
+	        </div>
+	        <div class="box">
+	          <div class="k">Amenities</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Terminal Mall • Resort &amp; Spa • International Academy • Private Clinic • Parks &amp; Golf • Natural Food Reserve • 24/7 Light
+	          </p>
+	        </div>
+	      `;
+
+	      const newsletter = `
+	        <h2>Newsletter</h2>
+	        <div class="box">
+	          <div class="k">AMADA Dispatch</div>
+	          <p class="muted" style="line-height:1.7;margin-top:10px;">
+	            Invitation Grade. Development milestones, territory releases, and protocol updates.
+	          </p>
+	          <ul class="muted" style="line-height:1.7;margin-top:10px;">
+	            <li>Territory releases rotate by scarcity windows.</li>
+	            <li>PR Card dossiers are reviewed on a need-to-know basis.</li>
+	            <li>Presidential Villas (1,400 sqm) are one per street.</li>
+	          </ul>
+	        </div>
+	      `;
+
+	      const acknowledgement = (() => {
+	        const isVisa = meta.tierKey === 'visa';
+	        const title = isVisa ? 'VISA (Visit) Application — Acknowledgement' : 'PR Application — Acknowledgement';
+	        const payment = isVisa ? `
+	          <div class="box">
+	            <div class="k">Status</div>
+	            <p class="muted" style="margin-top:10px;">Received. Awaiting verification and clearance.</p>
+	          </div>
+	        ` : `
+	          <div class="box">
+	            <div class="k">Status</div>
+	            <p class="muted" style="margin-top:10px;">Received. Awaiting payment to engage review.</p>
+	          </div>
+	          <div class="box">
+	            <div class="k">Payment</div>
+	            <p class="muted" style="line-height:1.7;margin-top:10px;">
+	              Deposit to engage: <strong>₦100,000,000</strong><br/>
+	              Bank: <strong>Stanbic IBTC</strong><br/>
+	              Account Name: <strong>Amada Residence</strong><br/>
+	              Account Number: <strong>5770707070</strong><br/>
+	              Reference: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong>
+	            </p>
+	          </div>
+	        `;
+	        return `
+	          <h2>Acknowledgement Letter</h2>
+	          <div class="box">
+	            <div class="k">${prxEscapeHtml(title)}</div>
+	            <p class="muted" style="line-height:1.7;margin-top:10px;">
+	              Name: <strong>${prxEscapeHtml(meta.name || '—')}</strong><br/>
+	              Phone: <strong>${prxEscapeHtml(meta.phone || '—')}</strong><br/>
+	              Dossier ID: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong>
+	            </p>
+	          </div>
+	          ${payment}
+	          <div class="box">
+	            <div class="k">Confidentiality</div>
+	            <p class="muted" style="line-height:1.7;margin-top:10px;">
+	              This acknowledgement is invitation-grade. Distribution is prohibited.
+	            </p>
+	          </div>
+	        `;
+	      })();
+
+	      const terms = `
+	        <h2>Terms &amp; Conditions</h2>
+	        <div class="box">
+	          <div class="k">${t ? prxEscapeHtml(t.kicker) : 'Legal'}</div>
+	          <div style="margin-top:12px; line-height:1.7;">${t ? t.body : '<p class="muted">Terms unavailable.</p>'}</div>
+	        </div>
+	      `;
+
+	      const el = document.querySelector('#prxCardResult > div');
+	      const buildPack = (cardDataUrl) => {
+	        const cardSection = cardDataUrl ? `
+	          <h2>PR Card</h2>
+	          <div class="grid">
+	            <div class="card-img"><img alt="Amada PR Card" src="${cardDataUrl}"/></div>
+	            <div>
+	              <div class="box">
+	                <div class="k">Dossier</div>
+	                <p class="muted" style="margin-top:10px;">ID: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong></p>
+	              </div>
+	              <div class="box">
+	                <div class="k">Download</div>
+	                <p class="muted" style="margin-top:10px;">
+	                  Save the card image: <a download="Amada_PR_Card_${prxEscapeHtml(safeDossier || 'AMADA')}.png" href="${cardDataUrl}">Download PNG</a>
+	                </p>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="hr"></div>
+	        ` : `
+	          <h2>PR Card</h2>
+	          <div class="box">
+	            <div class="k">Note</div>
+	            <p class="muted" style="margin-top:10px;">
+	              Card preview is unavailable for export on this device. You can still download the other documents in this pack.
+	            </p>
+	          </div>
+	          <div class="hr"></div>
+	        `;
+
+	        const body = `
+	          <div class="box">
+	            <div class="k">Applicant</div>
+	            <p class="muted" style="line-height:1.7;margin-top:10px;">
+	              Name: <strong>${prxEscapeHtml(meta.name || '—')}</strong><br/>
+	              Phone: <strong>${prxEscapeHtml(meta.phone || '—')}</strong><br/>
+	              Dossier ID: <strong>${prxEscapeHtml(meta.dossierId || '—')}</strong>
+	            </p>
+	          </div>
+	          ${cardSection}
+	          ${brochure}
+	          <div class="hr"></div>
+	          ${newsletter}
+	          <div class="hr"></div>
+	          ${terms}
+	          <div class="hr"></div>
+	          ${acknowledgement}
+	        `;
+
+	        prxDownloadHtml(`Amada_Application_Pack_${safeDossier || 'AMADA'}.html`, prxDocShell('AMADA — Application Pack', body));
+	      };
+
+	      if (el && typeof html2canvas === 'function') {
+	        html2canvas(el, { backgroundColor: null, scale: 3, useCORS: true }).then(canvas => {
+	          buildPack(canvas.toDataURL('image/png'));
+	        }).catch(() => buildPack(null));
+	      } else {
+	        buildPack(null);
+	      }
+	    }
 
     function prxCopyDetails(){
       const dossierId = document.getElementById('prxRefId')?.innerText || '';
@@ -5075,6 +5734,43 @@
       openPrintWindow(`${selectedUnit.id} Dossier`, body);
     }
 
+    function wireFlipBoxes(){
+      const isCoarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+      document.querySelectorAll('.flip-box').forEach(box => {
+        if (!isCoarsePointer) {
+          box.classList.remove('is-flipped');
+          box.removeAttribute('aria-pressed');
+          return;
+        }
+
+        const syncPressed = () => box.setAttribute('aria-pressed', box.classList.contains('is-flipped') ? 'true' : 'false');
+        syncPressed();
+
+        box.addEventListener('click', () => {
+          box.classList.toggle('is-flipped');
+          syncPressed();
+        });
+        box.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            box.classList.toggle('is-flipped');
+            syncPressed();
+          }
+          if (e.key === 'Escape') {
+            box.classList.remove('is-flipped');
+            syncPressed();
+            box.blur?.();
+          }
+        });
+        box.addEventListener('focusout', (e) => {
+          if (!box.contains(e.relatedTarget)) {
+            box.classList.remove('is-flipped');
+            syncPressed();
+          }
+        });
+      });
+    }
+
     // ---------------------------
     // Init
     // ---------------------------
@@ -5082,6 +5778,7 @@
       syncCityMapFallback();
       renderCityHotspots();
       startHeroRotation();
+      wireFlipBoxes();
       lucide.createIcons();
     });
 
