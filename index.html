@@ -1094,7 +1094,15 @@
     ::-webkit-scrollbar{width:8px;}
     ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px;}
     ::-webkit-scrollbar-track{background:transparent;}
-  </style>
+  
+    .measured-map-wrap{background:#f4f7f2;border:1px solid #ccd8cf;border-radius:1.25rem;overflow:hidden}
+    .measured-map{display:block;width:100%;height:auto;max-width:680px;margin:auto;font-family:inherit}
+    .measured-map .map-action{cursor:pointer;outline:none;touch-action:manipulation}
+    .measured-map .map-action:hover polygon,.measured-map .map-action:focus-visible polygon,.measured-map .map-action[aria-pressed="true"] polygon{stroke:#0f172a;stroke-width:4}
+    .measured-map .map-action:focus-visible .map-zone-shape,.measured-map .map-action:hover .map-zone-shape{stroke:#0f172a;stroke-width:4}
+    .measured-map text{pointer-events:none}
+    #selectedTitle{scroll-margin-top:9rem}
+</style>
 </head>
 
 <body class="antialiased selection:bg-slate-200 selection:text-slate-900">
@@ -1810,7 +1818,7 @@
                   <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Interactive Map</span>
                 </div>
                 <h3 class="text-2xl md:text-3xl font-serif mt-3">City Zones</h3>
-                <p class="text-sm text-slate-500 mt-2">Hover for tooltip. Click for details.</p>
+                <p class="text-sm text-slate-500 mt-2">Select a street or amenity to see its details.</p>
               </div>
 
               <div class="flex gap-2 flex-wrap">
@@ -1820,26 +1828,13 @@
               </div>
             </div>
 
-            <div class="mt-6 relative rounded-3xl overflow-hidden border border-slate-200 bg-white/40 aspect-[5/7]">
-              <img id="cityMapImg" src="" class="absolute inset-0 w-full h-full object-cover" alt="Amada City Masterplan" onerror="this.style.display='none';" />
-              <svg id="cityMapSvg" class="absolute inset-0 w-full h-full" viewBox="0 0 1000 1400" preserveAspectRatio="none"></svg>
-              <div id="cityTip" class="tip hidden">ZONE</div>
-
-              <div id="cityMapFallback" class="absolute inset-0 flex items-center justify-center text-center p-10 text-slate-600">
-                <div class="max-w-md">
-                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-slate-200 mb-4">
-                    <i data-lucide="image" class="w-4 h-4"></i>
-                    <span class="text-xs font-semibold tracking-widest uppercase">Map Image Optional</span>
-                  </div>
-                  <p class="text-sm leading-relaxed">
-                    Set <span class="font-semibold">CITY_MAP_IMAGE_URL</span> to a masterplan image. Hotspots work with or without the image.
-                  </p>
-                </div>
-              </div>
+            <div class="mt-6 measured-map-wrap">
+              <svg id="cityMapSvg" class="measured-map" viewBox="200 235 795 1050" aria-label="City zones on the estate masterplan"></svg>
             </div>
+            <p class="mt-3 text-xs text-slate-500">Estate design study. Select a labeled zone to explore it.</p>
 
             <div class="mt-5 flex flex-wrap gap-2 text-xs text-slate-600">
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Hover</span>
+              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Select a zone</span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Click</span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Policy-Driven</span>
             </div>
@@ -2152,7 +2147,7 @@
           <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Assets</span>
           <h2 class="text-4xl md:text-6xl font-serif mt-2">Select an Asset on the Layout</h2>
           <p class="text-lg text-slate-600 font-light max-w-3xl mx-auto mt-4 leading-relaxed">
-            No inventory lists. No search. Just the estate map — click an Asset, see its details and floor plan instantly.
+            Explore the estate masterplan, then select a plot on the map or by street and number to see its details and floor plan.
           </p>
         </div>
 
@@ -2175,56 +2170,12 @@
               </button>
             </div>
 
-            <div class="mt-6 estate-canvas" style="height: 520px;">
-              <div class="estate-inner"></div>
-
-              <div class="absolute inset-0 p-4">
-                <div class="w-full h-full grid gap-3" style="grid-template-columns: 1fr 18px .72fr;">
-                  <!-- LEFT: Territories -->
-                  <div class="space-y-3 overflow-auto pr-1" id="territoryBands"></div>
-
-                  <!-- ROAD -->
-                  <div class="estate-road"></div>
-
-                  <!-- RIGHT: Amenities -->
-                  <div class="overflow-auto">
-                    <div class="amenity p-4 space-y-3">
-                      <div class="amenity-pill">Shopping Mall & Offices</div>
-                      <div class="amenity-block">Parking Lot & Helipad</div>
-
-                      <div class="amenity-card">
-                        <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">School</div>
-                        <div class="h-16 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-xs">
-                          School Block
-                        </div>
-                      </div>
-
-                      <div class="grid grid-cols-2 gap-3">
-                        <div class="amenity-card text-center text-xs font-semibold text-slate-700">Park</div>
-                        <div class="amenity-card text-center text-xs font-semibold text-slate-700">Dog Park</div>
-                      </div>
-
-                      <div class="amenity-card text-center">
-                        <div class="text-xs font-semibold text-slate-800">Leisure Center</div>
-                        <div class="mt-2 h-14 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 text-xs">
-                          Activity Hub
-                        </div>
-                      </div>
-
-                      <div class="amenity-card text-center">
-                        <div class="text-xs font-semibold text-slate-800">Golf</div>
-                        <div class="mt-2 h-12 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center text-green-700 text-xs font-semibold">
-                          Putting Green
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tooltip -->
-              <div id="unitTip" class="tip hidden">UNIT</div>
+            <div class="mt-6 measured-map-wrap">
+              <svg id="estatePlanSvg" class="measured-map" viewBox="200 235 795 1050" aria-label="Estate masterplan with selectable plots"></svg>
             </div>
+            <p class="mt-3 text-xs text-slate-500">70 residential plots and five presidential villa plots. Based on the supplied design study; not a survey or construction drawing.</p>
+            <label for="estatePlotPicker" class="mt-4 block text-xs font-semibold uppercase tracking-wide text-slate-600">Find a plot by street and number</label>
+            <select id="estatePlotPicker" class="mt-1 w-full rounded-xl border border-slate-200 bg-white p-2 text-sm"><option value="">Select a plot</option></select>
 
             <div class="mt-5 flex flex-wrap gap-2 text-[11px] text-slate-600">
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
@@ -3259,10 +3210,10 @@
       if (scrollTop) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 
       lucide.createIcons();
-      syncCityMapFallback();
 
       if (page === 'assets') {
         if (!estateRendered) renderEstateLayout();
+        else focusEstateTerritory();
       }
 
       if (page === 'city') {
@@ -3283,11 +3234,7 @@
     function goToAssetsAndFocus(territoryKey){
       sessionStorage.setItem('amada_focus_territory', territoryKey);
       if (getRoutePage() === 'assets') {
-        setTimeout(() => {
-          const block = document.querySelector(`[data-territory="${territoryKey}"]`);
-          block?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          sessionStorage.removeItem('amada_focus_territory');
-        }, 120);
+        focusEstateTerritory();
         return;
       }
       location.hash = '#/assets';
@@ -3416,137 +3363,124 @@
     // ---------------------------
     // Assets Page: Estate Layout
     // ---------------------------
-    const MINI_COLS = 6;
+
+    // Masterplan geometry traced from the supplied measured design overview.
+    // Asset IDs remain stable; numbered plots follow their physical plan positions.
+    const measuredBands = [
+      {key:'ny', y:0, t:[[530,351],[787,309],[806,416],[548,455]], b:[[553,464],[809,425],[822,502],[562,536]], villa:[[791,315],[839,307],[866,488],[814,496]], vc:[831,401]},
+      {key:'london', y:1, t:[[562,540],[819,501],[837,587],[578,628]], b:[[581,644],[840,601],[851,678],[594,712]], villa:[[819,501],[864,494],[896,665],[848,674]], vc:[860,579]},
+      {key:'naija', y:2, t:[[594,714],[852,676],[867,762],[608,808]], b:[[611,823],[868,777],[881,847],[622,882]], villa:[[850,675],[897,668],[924,841],[878,848]], vc:[890,751]},
+      {key:'dubai', y:3, t:[[622,881],[879,843],[895,935],[637,977]], b:[[640,993],[897,948],[910,1023],[652,1053]], villa:[[879,846],[926,840],[951,1017],[906,1024]], vc:[917,920]},
+      {key:'canada', y:4, t:[[644,1058],[910,1017],[924,1109],[659,1151]], b:[[663,1166],[926,1122],[938,1192],[672,1228]], villa:[[908,1023],[953,1017],[972,1167],[931,1176]], vc:[943,1092]}
+    ];
+    const mapOutline = '322,276 838,300 978,1194 932,1250 315,1263';
+    const mapZones = [
+      {key:'school',points:'334,293 385,295 389,338 369,344 371,401 401,396 407,432 333,446',x:371,y:366,label:'Academy',fill:'#b39a72'},
+      {key:'golf',points:'325,450 412,445 425,515 397,591 381,642 369,707 324,707',x:375,y:580,label:'9-hole golf',fill:'#afc99c'},
+      {key:'leisure',points:'465,687 491,718 467,747 454,776 459,808 472,841 487,868 505,895 523,913 505,949 459,925 430,895 414,864 407,829 407,790 413,761 429,725',x:450,y:824,label:'Resort',fill:'#c3aa80'},
+      {key:'pool',points:'494,736 505,749 490,793 490,824 505,868 509,888 494,880 478,847 470,817 471,774',x:527,y:860,label:'Beach / Pool',fill:'#a3d3d2'},
+      {key:'mall',points:'332,944 388,926 420,976 451,1013 482,1038 511,1146 420,1166 374,1194 331,1194',x:411,y:1070,label:'Mall / A Tower',fill:'#b4a993'},
+      {key:'sports',points:'354,1205 433,1208 433,1253 354,1252 354,1205 553,1205 553,1245 444,1245 444,1205',x:462,y:1263,label:'Sports courts',fill:'#8cba9e'},
+      {key:'kitchen',points:'487,286 556,281 631,299 799,314 528,351 543,419 504,437 495,382',x:658,y:309,label:'Kitchen garden',fill:'#b7cda4'},
+      {key:'orchard',points:'627,1193 659,1164 673,1229 932,1190 969,1183 974,1195 931,1249 632,1255',x:797,y:1238,label:'Orchard garden',fill:'#b7cda4'}
+    ];
+    const mapRoads = 'M472 291L487 387Q488 433 500 471L526 653Q536 716 549 777L580 970L605 1107L612 1240 M332 833L370 828Q383 825 382 793Q383 748 404 714Q434 653 425 585Q439 506 412 442 M380 828Q383 901 419 970Q455 1017 500 1057Q532 1101 541 1155L596 1169 M500 471L553 445 M528 653L581 621 M557 823L612 799 M583 995L641 966 M611 1176L661 1147';
+    const pStr = a => a.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ');
+    const pMix = (a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+    function planLabel(x,y,label,{size=16,color='#243b34',bg=false}={}){
+      const w = label.length*size*.58+12;
+      return (bg ? `<rect x="${x-w/2}" y="${y-size*.83-3}" width="${w}" height="${size+7}" rx="4" fill="#fff" opacity=".92"/>` : '') +
+        `<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" font-weight="750" fill="${color}">${label}</text>`;
+    }
+    function measuredPlotRef(u){
+      const band = measuredBands.find(b=>b.key===u.territory);
+      const list = inventory.filter(v=>v.territory===u.territory);
+      const i = list.findIndex(v=>v.id===u.id);
+      if(!band||i<0) return u.id;
+      return u.kind==='presidential-villa' ? 'PV-0'+(band.y+1) : 'Plot '+String(band.y*14+i+1).padStart(2,'0');
+    }
+    function renderMeasuredMap(mode){
+      return `
+        <defs><clipPath id="${mode}PlanBoundary"><polygon points="${mapOutline}"/></clipPath></defs>
+        <polygon points="${mapOutline}" fill="#e6ede0" stroke="#254942" stroke-width="4"/>
+        <g clip-path="url(#${mode}PlanBoundary)">
+          ${mapZones.map(z=>`<polygon points="${z.points}" fill="${z.fill}" stroke="#6b836e" stroke-width="1.5"/>`).join('')}
+          <path d="${mapRoads}" fill="none" stroke="#e9d9b5" stroke-width="47" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="${mapRoads}" fill="none" stroke="#aeb9b3" stroke-width="35" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M473 303L501 473L527 653L555 823L584 995L611 1242" fill="none" stroke="#f4f7f2" stroke-width="2" stroke-dasharray="10 9"/>
+        </g>
+        ${measuredBands.map(band=>{
+          const territory = territoryMeta[band.key];
+          const lots = inventory.filter(x=>x.territory===band.key);
+          const road=[band.t[3],band.t[2],band.b[1],band.b[0]];
+          const near=pMix(road[0],road[3],.5), far=pMix(road[1],road[2],.5), middle=pMix(near,far,.52);
+          const angle=Math.atan2(far[1]-near[1],far[0]-near[0])*180/Math.PI;
+          const cells=[band.t,band.b].map((row,side)=>Array.from({length:7},(_,j)=>{
+            const i=side*7+j,u=lots[i],a=j/7,b=(j+1)/7;
+            const quad=[pMix(row[0],row[1],a),pMix(row[0],row[1],b),pMix(row[3],row[2],b),pMix(row[3],row[2],a)];
+            const center=pMix(pMix(quad[0],quad[1],.5),pMix(quad[3],quad[2],.5),.5);
+            const ref=String(band.y*14+i+1).padStart(2,'0');
+            const chip=quad.map(p=>[center[0]+(p[0]-center[0])*(side?.83:.69),center[1]+(p[1]-center[1])*(side?.52:.61)]);
+            const fill=mode==='estate'?statusColor(u.status):(side?'#847b6e':'#706b5f');
+            const attr=mode==='estate'?`class="map-action" id="unit-${u.id}" data-unit="${u.id}" role="button" tabindex="0" aria-pressed="false" aria-label="Plot ${ref}, ${territory.label}, ${statusLabel(u.status)}"`:'';
+            return `<g ${attr}><title>Plot ${ref} · ${territory.label}</title><polygon points="${pStr(quad)}" fill="${side?'#eee4d3':'#e4d5c1'}" stroke="#af9f8a" stroke-width="1.2"/><polygon points="${pStr(chip)}" fill="${fill}" stroke="#fff" stroke-width=".7"/>${planLabel(center[0],center[1]+4,ref,{size:15,color:'#16261d',bg:true})}</g>`;
+          }).join('')).join('');
+          const villa=lots.at(-1),ref='PV-0'+(band.y+1);
+          const va=mode==='estate'?`class="map-action" id="unit-${villa.id}" data-unit="${villa.id}" role="button" tabindex="0" aria-pressed="false" aria-label="${ref}, presidential villa, ${territory.label}"`:'';
+          const villaShape=`<g ${va}><title>${ref} · Presidential villa</title><polygon points="${pStr(band.villa)}" fill="${mode==='estate'?statusColor(villa.status):'#c2a689'}" stroke="#9c8063" stroke-width="2"/>${planLabel(band.vc[0],band.vc[1],ref,{size:14,bg:true})}</g>`;
+          const heading=`<g transform="rotate(${angle} ${middle.join(' ')})">${planLabel(middle[0],middle[1]+5,territory.label,{size:17})}</g>`;
+          const target=mode==='city'&&currentCityLayer!=='amenities'?`<g class="map-action" data-zone="${band.key}" role="button" tabindex="0" aria-label="${territory.label}"><polygon points="${pStr([band.t[0],band.t[1],band.b[2],band.b[3]])}" fill="transparent" stroke="transparent"/><title>${territory.label}</title></g>`:'';
+          return `<g data-territory="${band.key}"><polygon points="${pStr(road)}" fill="#aeb9b3"/>${cells}${villaShape}${heading}${target}</g>`;
+        }).join('')}
+        ${mapZones.map(z=>{
+          const a=mode==='city'&&currentCityLayer!=='territories'?`class="map-action" data-zone="${z.key}" role="button" tabindex="0" aria-label="${z.label}"`:'';
+          return `<g ${a}><polygon class="map-zone-shape" points="${z.points}" fill="transparent" stroke="transparent"/>${planLabel(z.x,z.y,z.label,{bg:true,size:16})}<title>${z.label}</title></g>`;
+        }).join('')}
+        <g aria-label="Sports areas">
+          <rect x="355" y="1207" width="78" height="43" fill="#79aa8d" stroke="#557a66"/>
+          <rect x="445" y="1217" width="52" height="29" fill="#78a78d" stroke="#557a66"/>
+          <rect x="503" y="1217" width="50" height="29" fill="#78a78d" stroke="#557a66"/>
+          ${planLabel(394,1233,'Football',{size:13})}${planLabel(471,1234,'Basketball',{size:11})}${planLabel(528,1234,'Tennis',{size:12})}
+          ${planLabel(468,1211,'Table tennis',{size:12,bg:true})}
+        </g>
+        <path d="M459 271L469 300 M286 838L333 838" stroke="#50675e" stroke-width="2"/>
+        ${planLabel(470,260,'School gate',{size:16,bg:true})}
+        ${planLabel(258,844,'Resort gate',{size:16,bg:true})}
+        ${planLabel(525,527,'Main boulevard',{size:15,bg:true})}
+        <path d="M956 273l8-18 8 18h-6v17h-4v-17z" fill="#254942"/>
+        ${planLabel(964,309,'N',{size:16})}
+      `;
+    }
+
     let estateRendered = false;
     let selectedUnit = null;
     let prevSelectedId = null;
 
-    function groupUnitsByTerritory(){
-      const groups = { ny:[], canada:[], london:[], dubai:[], naija:[] };
-      inventory.forEach(u => groups[u.territory].push(u));
-      return groups;
-    }
-
     function renderEstateLayout(){
-      const bandsEl = document.getElementById('territoryBands');
-      if(!bandsEl) return;
-
-      const groups = groupUnitsByTerritory();
-      const order = ['ny','canada','london','dubai','naija'];
-
-      bandsEl.innerHTML = order.map(key => {
-        const list = groups[key];
-        const label = territoryMeta[key].label;
-
-        const sorted = [...list].sort((a,b) => a.id.localeCompare(b.id));
-        const villa = sorted[sorted.length - 1];
-        const remaining = sorted.slice(0, -1);
-
-        const standard = remaining.slice(0, 14);
-        const topRow = standard.slice(0, 7);
-        const bottomRow = standard.slice(7, 14);
-        const cols = 7;
-        const lotCell = 24;
-
-        const renderUnitBtn = (u, extraClass = "") => `
-          <button class="unit lot-unit ${extraClass}"
-                  id="unit-${u.id}"
-                  data-unit="${u.id}"
-                  style="background:${statusColor(u.status)}"
-                  aria-label="${u.id}"
-                  title="${u.id}">
-          </button>
-        `;
-
-        const renderEmpty = () => `<span class="w-[24px] h-[38px]"></span>`;
-
-        const topUnits = [...topRow.map(u => renderUnitBtn(u)), ...Array.from({length: cols - topRow.length}, renderEmpty)].join('');
-        const bottomUnits = [...bottomRow.map(u => renderUnitBtn(u)), ...Array.from({length: cols - bottomRow.length}, renderEmpty)].join('');
-
-        const villaBtn = villa ? `
-          <button class="unit villa-unit presidential ring-1 ring-white/70 relative"
-                  id="unit-${villa.id}"
-                  data-unit="${villa.id}"
-                  style="background:${statusColor(villa.status)}"
-                  aria-label="Presidential Villa ${villa.id}"
-                  title="Presidential Villa • ${villa.id}">
-            <span class="absolute inset-x-2 bottom-2 px-2 py-1 rounded-full bg-white/70 text-[10px] font-extrabold tracking-widest uppercase text-slate-900 text-center">Villa</span>
-            <span class="absolute top-2 left-2 w-8 h-8 rounded-full bg-white/70 flex items-center justify-center">
-              <i data-lucide="crown" class="w-4 h-4 text-amber-600"></i>
-            </span>
-          </button>
-        ` : '';
-
-        return `
-            <div class="street-block" data-territory="${key}">
-            <div class="street-body">
-              <div class="street-grid">
-                <div class="street-villa">
-                  ${villaBtn}
-                </div>
-                <div class="street-lots">
-                  <div class="street-row" style="grid-template-columns: repeat(${cols}, ${lotCell}px);">
-                    ${topUnits}
-                  </div>
-                  <div class="street-road-h" aria-hidden="true">
-                    <span class="street-road-ext" aria-hidden="true"></span>
-                    <span class="street-road-label" aria-hidden="true">${label}</span>
-                  </div>
-                  <div class="street-row" style="grid-template-columns: repeat(${cols}, ${lotCell}px);">
-                    ${bottomUnits}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      wireEstateUnitEvents();
+      const svg = document.getElementById('estatePlanSvg');
+      if(!svg) return;
+      svg.innerHTML = renderMeasuredMap('estate');
+      const picker=document.getElementById('estatePlotPicker');
+      picker.innerHTML = '<option value="">Select a plot</option>' + measuredBands.map(b=>`<optgroup label="${territoryMeta[b.key].label}">${inventory.filter(u=>u.territory===b.key).map(u=>`<option value="${u.id}">${measuredPlotRef(u)} · ${u.kind==='presidential-villa'?'Presidential villa':statusLabel(u.status)}</option>`).join('')}</optgroup>`).join('');
+      picker.addEventListener('change',()=>{if(picker.value)selectUnit(picker.value);});
+      svg.querySelectorAll('[data-unit]').forEach(el=>{
+        const act=()=>selectUnit(el.dataset.unit);
+        el.addEventListener('click',act);
+        el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+      });
       estateRendered = true;
-
       const saved = sessionStorage.getItem('amada_selected_unit');
-      if (saved) selectUnit(saved, { silentScroll: true });
-
-      const focusTerr = sessionStorage.getItem('amada_focus_territory');
-      if (focusTerr) {
-        setTimeout(() => {
-          const block = document.querySelector(`[data-territory="${focusTerr}"]`);
-          block?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 120);
-        sessionStorage.removeItem('amada_focus_territory');
-      }
+      if(!focusEstateTerritory() && saved) selectUnit(saved,{silentScroll:true});
     }
 
-    function wireEstateUnitEvents(){
-      const tip = document.getElementById('unitTip');
-      const canvas = document.querySelector('.estate-canvas');
-      if(!canvas) return;
-
-      document.querySelectorAll('[data-unit]').forEach(btn => {
-        const unitId = btn.getAttribute('data-unit');
-
-        btn.addEventListener('mouseenter', () => {
-          const unit = inventory.find(x => x.id === unitId);
-          if(!unit || !tip) return;
-          tip.classList.remove('hidden');
-          const kind = unit.kind === 'presidential-villa' ? 'PRESIDENTIAL VILLA • ' : '';
-          tip.textContent = `${kind}${unit.id} • ${territoryMeta[unit.territory].short} • ${statusLabel(unit.status)}`;
-        });
-
-        btn.addEventListener('mousemove', (e) => {
-          if(!tip) return;
-          const rect = canvas.getBoundingClientRect();
-          tip.style.left = (e.clientX - rect.left + 12) + 'px';
-          tip.style.top  = (e.clientY - rect.top  + 12) + 'px';
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          tip?.classList.add('hidden');
-        });
-
-        btn.addEventListener('click', () => selectUnit(unitId));
-      });
+    function focusEstateTerritory(){
+      const key=sessionStorage.getItem('amada_focus_territory');
+      if(!key) return false;
+      sessionStorage.removeItem('amada_focus_territory');
+      const unit=inventory.find(u=>u.territory===key);
+      if(!unit) return false;
+      selectUnit(unit.id,{silentScroll:true});
+      return true;
     }
 
     function selectUnit(unitId, { silentScroll = false } = {}){
@@ -3556,16 +3490,18 @@
       sessionStorage.setItem('amada_selected_unit', unit.id);
 
       if (prevSelectedId) {
-        document.getElementById('unit-' + prevSelectedId)?.classList.remove('ring-2','ring-slate-900');
+        document.getElementById('unit-' + prevSelectedId)?.setAttribute('aria-pressed','false');
       }
-      document.getElementById('unit-' + unit.id)?.classList.add('ring-2','ring-slate-900');
+      document.getElementById('unit-' + unit.id)?.setAttribute('aria-pressed','true');
+      const picker = document.getElementById('estatePlotPicker');
+      if(picker) picker.value = unit.id;
       prevSelectedId = unit.id;
 
       const terrLabel = territoryMeta[unit.territory].label;
       const interior = getInteriorConfigForUnit(unit);
       const totals = getInteriorTotals(interior);
 
-      document.getElementById('selectedTitle').innerText = `${unit.id} • ${terrLabel}`;
+      document.getElementById('selectedTitle').innerText = `${measuredPlotRef(unit)} • ${terrLabel}`;
       document.getElementById('selectedDesc').innerText =
         `Exterior is cohesive for ${terrLabel}. Interior is built to your taste across three floors: ${totals.bedrooms} bedrooms, ${totals.bathrooms} bathrooms. Status: ${statusLabel(unit.status)}.`;
 
@@ -3953,7 +3889,6 @@
     // ---------------------------
     // City Map (local masterplan + hotspots)
     // ---------------------------
-    const CITY_MAP_IMAGE_URL = "amada-estate-layout-collage-2x.jpeg";
     let currentCityLayer = "all";
 
     const cityZones = {
@@ -3963,42 +3898,15 @@
       dubai:  { type:"territory", title:"Dubai Territory",    icon:"sun",        access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Modernist villas and controlled pool privacy zoning." },
       naija:  { type:"territory", title:"Paris Territory",    icon:"landmark",   access:"Residents + escorted guests", hours:"Always", noise:"Low",    desc:"Boulevard elegance—timeless façades, discretion-first living, and quiet prestige." },
 
-      mall:   { type:"amenity", title:"Shopping Mall & Offices", icon:"shopping-bag", access:"Residents + invited guests", hours:"08:00–22:00", noise:"Low", desc:"Curated retail + private offices, controlled access." },
-      heli:   { type:"amenity", title:"Parking Lot & Helipad",   icon:"plane",        access:"Authorized entry",         hours:"06:00–22:00", noise:"Controlled", desc:"Valet pockets, service routing, executive arrivals." },
-      school: { type:"amenity", title:"School",                  icon:"graduation-cap",access:"Residents only",         hours:"07:30–16:00", noise:"Low", desc:"International academy corridor, controlled parent access." },
-      park:   { type:"amenity", title:"Park & Dog Park",         icon:"trees",        access:"Residents + guests",      hours:"06:00–21:00", noise:"Low", desc:"Green breathing space + dog zone, strict cleanliness policy." },
-      leisure:{ type:"amenity", title:"Leisure Center",          icon:"sparkles",     access:"Residents + guests",      hours:"08:00–23:00", noise:"Low", desc:"Gym + lounge — curated social behavior." },
-      golf:   { type:"amenity", title:"Golf",                    icon:"flag",         access:"Residents + guests",      hours:"06:00–19:00", noise:"Low", desc:"Putting/practice — quiet sport, quiet prestige." }
+      mall: {type:"amenity",title:"Mall / A Tower",icon:"building-2",access:"Planned",hours:"Not set",noise:"Not set",desc:"The tower and retail podium sit south of the resort, close to the sports courts."},
+      school: {type:"amenity",title:"International Academy",icon:"graduation-cap",access:"Planned",hours:"Not set",noise:"Not set",desc:"The academy is on the north-west side next to the school gate."},
+      leisure: {type:"amenity",title:"Resort",icon:"sparkles",access:"Planned",hours:"Not set",noise:"Not set",desc:"The curved resort anchors the west-side arrival, opposite the residential streets."},
+      pool: {type:"amenity",title:"Beach / Pool",icon:"waves",access:"Planned",hours:"Not set",noise:"Not set",desc:"The water feature curves along the boulevard side of the resort."},
+      golf: {type:"amenity",title:"9-Hole Golf",icon:"flag",access:"Planned",hours:"Not set",noise:"Not set",desc:"The golf area is west of the main boulevard between the academy and resort."},
+      sports: {type:"amenity",title:"Sports Courts",icon:"trophy",access:"Planned",hours:"Not set",noise:"Not set",desc:"Football, table tennis, basketball, and tennis sit south of the Mall / A Tower."},
+      kitchen: {type:"amenity",title:"Kitchen Garden",icon:"sprout",access:"Planned",hours:"Not set",noise:"Not set",desc:"The kitchen garden is north of New York Street."},
+      orchard: {type:"amenity",title:"Orchard Garden",icon:"trees",access:"Planned",hours:"Not set",noise:"Not set",desc:"The orchard is along the southern boundary beyond Santorini Street."}
     };
-
-    const cityHotspots = [
-      { key:"ny",     layer:"territories", x: 90,  y: 110, w: 520, h: 170 },
-      { key:"canada", layer:"territories", x: 90,  y: 315, w: 520, h: 170 },
-      { key:"london", layer:"territories", x: 90,  y: 520, w: 520, h: 170 },
-      { key:"dubai",  layer:"territories", x: 90,  y: 725, w: 520, h: 170 },
-      { key:"naija",  layer:"territories", x: 90,  y: 930, w: 520, h: 170 },
-
-      { key:"mall",   layer:"amenities",  x: 705, y: 120, w: 250, h: 140 },
-      { key:"heli",   layer:"amenities",  x: 705, y: 290, w: 250, h: 120 },
-      { key:"school", layer:"amenities",  x: 705, y: 440, w: 250, h: 140 },
-      { key:"park",   layer:"amenities",  x: 705, y: 610, w: 250, h: 140 },
-      { key:"leisure",layer:"amenities",  x: 705, y: 780, w: 250, h: 150 },
-      { key:"golf",   layer:"amenities",  x: 705, y: 960, w: 250, h: 140 }
-    ];
-
-    function syncCityMapFallback(){
-      const img = document.getElementById('cityMapImg');
-      const fallback = document.getElementById('cityMapFallback');
-      if(!img || !fallback) return;
-
-      if (CITY_MAP_IMAGE_URL && CITY_MAP_IMAGE_URL.trim().length > 0) {
-        img.style.display = '';
-        img.src = CITY_MAP_IMAGE_URL.trim();
-        fallback.style.display = 'none';
-      } else {
-        fallback.style.display = 'flex';
-      }
-    }
 
     function setCityLayer(layer){
       currentCityLayer = layer;
@@ -4025,53 +3933,15 @@
     }
 
     function renderCityHotspots(){
-      const svg = document.getElementById('cityMapSvg');
-      const tip = document.getElementById('cityTip');
+      const svg=document.getElementById('cityMapSvg');
       if(!svg) return;
-
-      syncCityMapFallback();
-      const visible = cityHotspots.filter(h => currentCityLayer === 'all' ? true : h.layer === currentCityLayer);
-
-      svg.innerHTML = visible.map(h => `
-        <rect data-zone="${h.key}"
-              x="${h.x}" y="${h.y}" width="${h.w}" height="${h.h}"
-              rx="22" ry="22"
-              fill="rgba(255,255,255,0.001)"
-              stroke="rgba(255,255,255,0.0)"
-              stroke-width="2"
-              style="cursor:pointer;"></rect>
-      `).join('');
-
-      svg.querySelectorAll('rect[data-zone]').forEach(r => {
-        const key = r.getAttribute('data-zone');
-
-        r.addEventListener('mouseenter', () => {
-          r.setAttribute('fill', 'rgba(255,255,255,0.08)');
-          r.setAttribute('stroke','rgba(255,255,255,0.35)');
-          if(tip){
-            tip.classList.remove('hidden');
-            tip.textContent = cityZones[key]?.title || key.toUpperCase();
-          }
-        });
-
-        r.addEventListener('mousemove', (e) => {
-          if(!tip) return;
-          const wrap = svg.getBoundingClientRect();
-          tip.style.left = (e.clientX - wrap.left + 14) + 'px';
-          tip.style.top  = (e.clientY - wrap.top + 14) + 'px';
-        });
-
-        r.addEventListener('mouseleave', () => {
-          r.setAttribute('fill', 'rgba(255,255,255,0.001)');
-          r.setAttribute('stroke','rgba(255,255,255,0.0)');
-          tip?.classList.add('hidden');
-        });
-
-        r.addEventListener('click', () => setCityDetails(key));
+      svg.innerHTML=renderMeasuredMap('city');
+      svg.querySelectorAll('[data-zone]').forEach(el=>{
+        const act=()=>setCityDetails(el.dataset.zone);
+        el.addEventListener('click',act);
+        el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
       });
-
-      setCityDetails('ny');
-      lucide.createIcons();
+      setCityDetails(currentCityLayer==='amenities'?'school':'ny');
     }
 
     // ---------------------------
@@ -4086,7 +3956,7 @@
       { id:"2rosn9", kind:"Streets", title:"Quiet Prestige", subtitle:"A calm residential corridor built for private living.", src:"amada-resort-lagoon-pool.jpeg", span:"col-span-12 md:col-span-5", h:"h-72 md:h-[320px]" },
       { id:"15u10z", kind:"Arrival", title:"The Wall Line", subtitle:"Aerial approach—designed to feel exclusive before you enter.", src:"amada-modern-villas-street.jpeg", span:"col-span-12 md:col-span-5", h:"h-72 md:h-[320px]" },
       { id:"dw7yda", kind:"Territory", title:"Modern Villa Rows", subtitle:"High-end architecture, clean lines, controlled landscaping.", src:"amada-luxury-villas-palm-lined-street.jpeg", span:"col-span-12 md:col-span-7", h:"h-72 md:h-[320px]" },
-      { id:"layout", kind:"Masterplan", title:"Estate Layout", subtitle:"Territories on the left, premium amenities on the right.", src:"amada-estate-layout-collage-2x.jpeg", span:"col-span-12", h:"h-72 md:h-[460px]" }
+      { id:"layout", kind:"Masterplan", title:"Estate Layout", subtitle:"Earlier concept illustration. See City Zones or Estate Layout for the current plan.", src:"amada-estate-layout-collage-2x.jpeg", span:"col-span-12", h:"h-72 md:h-[460px]" }
     ];
 
     let galleryRendered = false;
@@ -4498,7 +4368,7 @@
     // Init
     // ---------------------------
     document.addEventListener('DOMContentLoaded', () => {
-      syncCityMapFallback();
+
       renderCityHotspots();
       startHeroRotation();
       wireFlipBoxes();
