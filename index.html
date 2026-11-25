@@ -1095,12 +1095,24 @@
     ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px;}
     ::-webkit-scrollbar-track{background:transparent;}
   
-    .measured-map-wrap{background:#f4f7f2;border:1px solid #ccd8cf;border-radius:1.25rem;overflow:hidden}
-    .measured-map{display:block;width:100%;height:auto;max-width:680px;margin:auto;font-family:inherit}
+    .measured-map-wrap{border:1px solid #c9bd9f;border-radius:1rem;background:#f6f4e9;overflow:auto;--estate-ink:#143a31}
+    .measured-map-titlebar{display:flex;justify-content:space-between;gap:.85rem;align-items:center;padding:1rem 1.15rem;background:#15392f;color:#fff9e8}
+    .measured-map-titlebar span{display:block}
+    .measured-map-titlebar .eyebrow{font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:#e6bd99;font-weight:700}
+    .measured-map-titlebar strong{display:block;font:700 1.18rem Georgia,serif;margin-top:.25rem}
+    .measured-map-zoom{white-space:nowrap;color:#fff4e4;border:1px solid #bc8768;border-radius:.4rem;padding:.3rem .55rem;font-size:.69rem}
+    .measured-map-zoom:focus-visible{outline:2px solid #fff4e4;outline-offset:2px}
+    .measured-map{display:block;width:100%;height:auto;max-width:760px;margin:auto;font-family:system-ui,sans-serif}
+    .measured-map-wrap.is-zoomed .measured-map{width:850px;max-width:none}
     .measured-map .map-action{cursor:pointer;outline:none;touch-action:manipulation}
-    .measured-map .map-action:hover polygon,.measured-map .map-action:focus-visible polygon,.measured-map .map-action[aria-pressed="true"] polygon{stroke:#0f172a;stroke-width:4}
-    .measured-map .map-action:focus-visible .map-zone-shape,.measured-map .map-action:hover .map-zone-shape{stroke:#0f172a;stroke-width:4}
-    .measured-map text{pointer-events:none}
+    .measured-map .map-action:hover .map-lot,.measured-map .map-action:focus-visible .map-lot,.measured-map .map-action[aria-pressed="true"] .map-lot{stroke:#9b5733;stroke-width:5}
+    .measured-map .map-action:focus-visible .map-zone-shape,.measured-map .map-action:hover .map-zone-shape{stroke:#9b5733;stroke-width:4;fill:#bf845d20}
+    .measured-map text,.measured-map .map-ink{pointer-events:none}
+    .map-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:.8rem;border:1px solid #d8cfbb;background:#fbf8ef;border-radius:.75rem;color:#15392f}
+    .map-facts div{padding:.65rem .4rem;text-align:center;min-width:0}
+    .map-facts div+div{border-left:1px solid #ded5c2}
+    .map-facts strong{display:block;font:700 clamp(.9rem,2vw,1.2rem) Georgia,serif}
+    .map-facts small{display:block;font-size:.63rem;line-height:1.25;margin-top:.2rem}
     #selectedTitle{scroll-margin-top:9rem}
 </style>
 </head>
@@ -1829,7 +1841,8 @@
             </div>
 
             <div class="mt-6 measured-map-wrap">
-              <svg id="cityMapSvg" class="measured-map" viewBox="200 235 795 1050" aria-label="City zones on the estate masterplan"></svg>
+              <div class="measured-map-titlebar"><div><span class="eyebrow">Amada Residence / Masterplan</span><strong>City zones</strong></div><button type="button" aria-controls="cityMapSvg" aria-pressed="false" class="measured-map-zoom" onclick="toggleMeasuredMapZoom(this)">Zoom in</button></div>
+              <svg id="cityMapSvg" class="measured-map" viewBox="84 16 1120 1380" aria-label="City zones on the estate masterplan" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
             <p class="mt-3 text-xs text-slate-500">Estate design study. Select a labeled zone to explore it.</p>
 
@@ -2171,21 +2184,26 @@
             </div>
 
             <div class="mt-6 measured-map-wrap">
-              <svg id="estatePlanSvg" class="measured-map" viewBox="200 235 795 1050" aria-label="Estate masterplan with selectable plots"></svg>
+              <div class="measured-map-titlebar"><div><span class="eyebrow">Amada Residence / Masterplan</span><strong>Estate plot plan</strong></div><button type="button" aria-controls="estatePlanSvg" aria-pressed="false" class="measured-map-zoom" onclick="toggleMeasuredMapZoom(this)">Zoom in</button></div>
+              <svg id="estatePlanSvg" class="measured-map" viewBox="84 16 1120 1380" aria-label="Estate masterplan with selectable plots" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
-            <p class="mt-3 text-xs text-slate-500">70 residential plots and five presidential villa plots. Based on the supplied design study; not a survey or construction drawing.</p>
+            <div class="map-facts" aria-label="Masterplan figures"><div><strong>9.39 ha</strong><small>Estate boundary</small></div><div><strong>70</strong><small>35 detached + 35 townhouses</small></div><div><strong>5</strong><small>Presidential villa plots</small></div></div>
+            <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-700" aria-label="Map key">
+              <span><b style="color:#315347">■</b> Detached home</span><span><b style="color:#456254">▰</b> Townhouse row</span><span><b style="color:#a4613c">■</b> Presidential villa</span><span><b style="color:#6e8b67">■</b> Gardens and sports</span>
+            </div>
+            <p class="mt-3 text-xs text-slate-500">Based on the measured design study. Indicative only; not a survey or construction drawing. Status markers are illustrative, not live availability.</p>
             <label for="estatePlotPicker" class="mt-4 block text-xs font-semibold uppercase tracking-wide text-slate-600">Find a plot by street and number</label>
             <select id="estatePlotPicker" class="mt-1 w-full rounded-xl border border-slate-200 bg-white p-2 text-sm"><option value="">Select a plot</option></select>
 
             <div class="mt-5 flex flex-wrap gap-2 text-[11px] text-slate-600">
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Available
+                <span class="inline-block w-2 h-2 rounded-full mr-2" style="background:#2f7957"></span>Available
               </span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Reserved
+                <span class="inline-block w-2 h-2 rounded-full mr-2" style="background:#a86138"></span>Reserved
               </span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
-                <span class="inline-block w-2 h-2 rounded-full bg-slate-400 mr-2"></span>Waitlist
+                <span class="inline-block w-2 h-2 rounded-full mr-2" style="background:#737a82"></span>Waitlist
               </span>
               <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">
                 Click = Select
@@ -3364,91 +3382,129 @@
     // Assets Page: Estate Layout
     // ---------------------------
 
-    // Masterplan geometry traced from the supplied measured design overview.
-    // Asset IDs remain stable; numbered plots follow their physical plan positions.
+    // Artwork based on the supplied measured plan; coordinates are illustrative.
     const measuredBands = [
-      {key:'ny', y:0, t:[[530,351],[787,309],[806,416],[548,455]], b:[[553,464],[809,425],[822,502],[562,536]], villa:[[791,315],[839,307],[866,488],[814,496]], vc:[831,401]},
-      {key:'london', y:1, t:[[562,540],[819,501],[837,587],[578,628]], b:[[581,644],[840,601],[851,678],[594,712]], villa:[[819,501],[864,494],[896,665],[848,674]], vc:[860,579]},
-      {key:'naija', y:2, t:[[594,714],[852,676],[867,762],[608,808]], b:[[611,823],[868,777],[881,847],[622,882]], villa:[[850,675],[897,668],[924,841],[878,848]], vc:[890,751]},
-      {key:'dubai', y:3, t:[[622,881],[879,843],[895,935],[637,977]], b:[[640,993],[897,948],[910,1023],[652,1053]], villa:[[879,846],[926,840],[951,1017],[906,1024]], vc:[917,920]},
-      {key:'canada', y:4, t:[[644,1058],[910,1017],[924,1109],[659,1151]], b:[[663,1166],[926,1122],[938,1192],[672,1228]], villa:[[908,1023],[953,1017],[972,1167],[931,1176]], vc:[943,1092]}
+      {key:'ny', y:0, t:[[548,178],[887,128],[902,233],[572,286]], b:[[577,327],[908,273],[922,362],[593,418]], villa:'904,151 901,139 951,121 992,357 952,363 950,343 926,347', house:'920,190 956,184 973,292 937,298', vc:[951,236]},
+      {key:'london', y:1, t:[[592,430],[922,375],[937,470],[607,523]], b:[[615,563],[945,507],[962,593],[632,650]], villa:'934,396 957,391 951,373 993,366 1026,584 991,589 987,574 963,577', house:'957,427 994,422 1011,531 975,536', vc:[984,477]},
+      {key:'naija', y:2, t:[[629,663],[963,606],[976,698],[645,749]], b:[[650,788],[982,734],[998,820],[665,876]], villa:'971,626 994,623 990,603 1026,598 1063,805 1031,812 1025,799 1000,803',house:'995,657 1029,652 1046,756 1012,763',vc:[1020,704]},
+      {key:'dubai', y:3, t:[[667,889],[1001,835],[1015,925],[682,976]], b:[[689,1017],[1021,962],[1035,1047],[706,1102]], villa:'1008,851 1031,847 1026,827 1063,821 1097,1026 1058,1033 1054,1016 1033,1020',house:'1030,880 1065,874 1080,977 1046,983',vc:[1053,927]},
+      {key:'canada', y:4, t:[[701,1111],[1035,1055],[1048,1148],[717,1201]], b:[[722,1244],[1054,1188],[1066,1275],[736,1330]], villa:'1045,1073 1065,1069 1063,1048 1100,1042 1133,1258 1094,1266 1089,1249 1065,1251',house:'1064,1102 1099,1096 1114,1205 1080,1212',vc:[1090,1151]}
     ];
-    const mapOutline = '322,276 838,300 978,1194 932,1250 315,1263';
+    const mapOutline = '274,78 952,110 1137,1288 1078,1361 266,1377';
     const mapZones = [
-      {key:'school',points:'334,293 385,295 389,338 369,344 371,401 401,396 407,432 333,446',x:371,y:366,label:'Academy',fill:'#b39a72'},
-      {key:'golf',points:'325,450 412,445 425,515 397,591 381,642 369,707 324,707',x:375,y:580,label:'9-hole golf',fill:'#afc99c'},
-      {key:'leisure',points:'465,687 491,718 467,747 454,776 459,808 472,841 487,868 505,895 523,913 505,949 459,925 430,895 414,864 407,829 407,790 413,761 429,725',x:450,y:824,label:'Resort',fill:'#c3aa80'},
-      {key:'pool',points:'494,736 505,749 490,793 490,824 505,868 509,888 494,880 478,847 470,817 471,774',x:527,y:860,label:'Beach / Pool',fill:'#a3d3d2'},
-      {key:'mall',points:'332,944 388,926 420,976 451,1013 482,1038 511,1146 420,1166 374,1194 331,1194',x:411,y:1070,label:'Mall / A Tower',fill:'#b4a993'},
-      {key:'sports',points:'354,1205 433,1208 433,1253 354,1252 354,1205 553,1205 553,1245 444,1245 444,1205',x:462,y:1263,label:'Sports courts',fill:'#8cba9e'},
-      {key:'kitchen',points:'487,286 556,281 631,299 799,314 528,351 543,419 504,437 495,382',x:658,y:309,label:'Kitchen garden',fill:'#b7cda4'},
-      {key:'orchard',points:'627,1193 659,1164 673,1229 932,1190 969,1183 974,1195 931,1249 632,1255',x:797,y:1238,label:'Orchard garden',fill:'#b7cda4'}
+      {key:'school',points:'289,101 355,102 363,161 337,169 338,244 380,237 388,283 290,302',x:343,y:198,label:'Academy',fill:'#b78b6c'},
+      {key:'golf',points:'279,307 390,306 405,389 399,469 350,571 335,645 277,646',x:343,y:470,label:'9-hole golf',fill:'#a8bc8f'},
+      {key:'leisure',points:'463,619 499,664 470,699 449,745 473,775 483,810 464,853 492,889 539,917 520,967 474,947 435,917 413,883 394,835 386,787 388,739 415,674',x:449,y:795,label:'Resort',fill:'#c09373'},
+      {key:'pool',points:'500,668 509,675 513,694 503,732 495,771 504,813 508,848 524,888 514,894 492,874 480,847 486,814 482,784 468,744 476,717 486,692',x:561,y:814,label:'Beach / Pool',fill:'#8ebbb2'},
+      {key:'mall',points:'286,955 352,937 376,984 422,1040 470,1093 501,1143 525,1221 351,1252 349,1284 285,1285',x:392,y:1121,label:'Mall / A Tower',fill:'#a39f84'},
+      {key:'sports',points:'317,1298 421,1300 421,1363 316,1362 316,1298 582,1300 580,1351 442,1351 442,1298',x:0,y:0,label:'Sports courts',fill:'#9fb492'},
+      {key:'kitchen',points:'493,91 632,95 704,115 772,119 949,112 949,123 549,178 567,286 510,266 509,195',x:755,y:123,label:'Kitchen garden',fill:'#abc198'},
+      {key:'orchard',points:'675,1281 714,1234 735,1331 1067,1273 1116,1257 1135,1288 1076,1361 666,1370 685,1345',x:915,y:1336,label:'Orchard garden',fill:'#abc198'}
     ];
-    const mapRoads = 'M472 291L487 387Q488 433 500 471L526 653Q536 716 549 777L580 970L605 1107L612 1240 M332 833L370 828Q383 825 382 793Q383 748 404 714Q434 653 425 585Q439 506 412 442 M380 828Q383 901 419 970Q455 1017 500 1057Q532 1101 541 1155L596 1169 M500 471L553 445 M528 653L581 621 M557 823L612 799 M583 995L641 966 M611 1176L661 1147';
+    const mapRoads='M481 112L489 221Q493 244 503 283L511 421Q524 471 535 502L550 595Q575 663 574 690L589 766Q605 836 593 888L612 962L627 1087Q634 1137 649 1173L657 1335 M306 798L338 793Q347 790 346 775Q340 722 359 646Q376 585 401 528Q431 461 416 388L397 300 M309 842L345 835Q363 858 368 889Q385 943 414 981Q455 1033 506 1081Q536 1118 561 1183L575 1239L647 1230 M412 322L506 307L578 291 M543 521L571 545L617 530 M588 750L620 773L651 757 M615 970L646 996L687 982 M654 1182L675 1223L724 1211 M575 1239L354 1264 M354 1260L344 1279';
+    const mapMedians=[
+      'M474 214q13-8 16 9l4 33q-4 14-11 1l-11-24q-5-14 2-19z','M502 375q13-6 17 15l3 26q-2 16-10 4l-12-29q-5-10 2-16z','M514 450q13-3 16 15l2 25q-3 16-9 4l-12-29q-4-12 3-15z','M544 613q10-1 14 17l5 21q-1 11-11 4l-10-26q-6-12 2-16z','M551 685q9-7 15 10l3 29q-3 14-11 1l-9-25q-3-10 2-15z','M580 826q10 1 13 16l6 31q-3 14-11 7l-10-29q-5-19 2-25z','M588 909q11-8 16 10l4 28q-1 17-10 6l-10-29q-5-11 0-15z','M615 1061q8-3 14 13l5 25q0 13-10 7l-9-28q-5-9 0-17z','M624 1133q11-5 14 11l5 30q-3 17-11 2l-10-29q-3-8 2-14z','M652 1293q10-6 13 12l5 27q-3 16-12 7l-7-30q-4-10 1-16z'
+    ];
+    const mapJunctions=[[528,311],[566,548],[604,778],[640,1003],[674,1230]];
     const pStr = a => a.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' ');
     const pMix = (a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
-    function planLabel(x,y,label,{size=16,color='#243b34',bg=false}={}){
-      const w = label.length*size*.58+12;
-      return (bg ? `<rect x="${x-w/2}" y="${y-size*.83-3}" width="${w}" height="${size+7}" rx="4" fill="#fff" opacity=".92"/>` : '') +
-        `<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" font-weight="750" fill="${color}">${label}</text>`;
+    const planTheme={ink:'#183f34',street:'#a8b1a4',plot:'#eee3cd',lawn:'#e2ebd9',roof:'#315347',copper:'#a4613c',line:'#a78e6d'};
+    function planLabel(x,y,label,{size=17,color='#183f34',bg=false,street=false}={}){
+      const w=label.length*size*.59+16;
+      return (bg ? `<rect x="${x-w/2}" y="${y-size*.81-4}" width="${w}" height="${size+9}" rx="4" fill="#fffdf1" stroke="#b7b19c" stroke-width="1.3"/>`:'')+
+        `<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" font-weight="${street?850:750}" fill="${color}"${street?' letter-spacing=".6"':''}>${label}</text>`;
     }
     function measuredPlotRef(u){
-      const band = measuredBands.find(b=>b.key===u.territory);
-      const list = inventory.filter(v=>v.territory===u.territory);
-      const i = list.findIndex(v=>v.id===u.id);
-      if(!band||i<0) return u.id;
-      return u.kind==='presidential-villa' ? 'PV-0'+(band.y+1) : 'Plot '+String(band.y*14+i+1).padStart(2,'0');
+      const band=measuredBands.find(b=>b.key===u.territory);
+      const i=inventory.filter(v=>v.territory===u.territory).findIndex(v=>v.id===u.id);
+      if(!band||i<0)return u.id;
+      return u.kind==='presidential-villa'?'PV-0'+(band.y+1):'Plot '+String(band.y*14+i+1).padStart(2,'0');
+    }
+    function planBox(row,l,r,top,bottom){
+      const pos=(x,y)=>pMix(pMix(row[0],row[1],x),pMix(row[3],row[2],x),y);
+      return [pos(l,top),pos(r,top),pos(r,bottom),pos(l,bottom)];
+    }
+    function toggleMeasuredMapZoom(button){
+      const wrap=button.closest('.measured-map-wrap');
+      const zoom=wrap.classList.toggle('is-zoomed');
+      button.setAttribute('aria-pressed',String(zoom));button.textContent=zoom?'Fit map':'Zoom in';
     }
     function renderMeasuredMap(mode){
+      const t=planTheme,estate=mode==='estate';
+      const poly=(points,fill,stroke='none',w=1,cls='')=>`<polygon class="${cls}" points="${typeof points==='string'?points:pStr(points)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}"/>`;
+      const path=(d,c,w)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const plotDot=u=>u.status==='available'?'#2f7957':u.status==='reserved'?'#a86138':'#737a82';
+      const trees=(list)=>list.map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#5b795b" stroke="#b1c2a1" stroke-width="1.3"/><circle cx="${x-1.5}" cy="${y-1}" r="${r*.55}" fill="#78916e"/>`).join('');
+      const details=`
+        ${poly('291,104 352,104 358,156 331,166 333,250 377,243 382,277 295,294','#ab7a5a','#745e45',2)}
+        ${path('M303 111l42 1 5 38m-48 131 68-15m-48-94 1 79','#d0a98a',2)}
+        ${poly('292,1048 373,1023 388,1074 308,1098','#365047','#304338',2)}
+        ${poly('335,1191 414,1165 430,1216 351,1240','#365047','#304338',2)}
+        ${path('M299 1054l68-21 12 36m-34 125 63-21 13 40','#b8a78b',2)}
+        <circle cx="338" cy="1140" r="19" fill="none" stroke="#f8f1dc" stroke-width="2"/><circle cx="383" cy="1125" r="19" fill="none" stroke="#f8f1dc" stroke-width="2"/>
+        ${path('M405 1001L463 929','#724c33',8)}${path('M405 1001L463 929','#cb9c72',4)}
+        ${path('M410 827Q400 741 449 675 M410 829Q433 920 505 947','#d9b895',3)}
+        ${path('M497 678Q513 688 489 741Q478 776 496 818Q492 855 515 883','#d4e6de',2)}
+        ${[0,1,2,3].map(i=>path(`M${660-i*3} ${112+i*9}L${890-i*2} ${123+i*6}`,'#79956f',1.4)).join('')}
+        ${[0,1,2].map(i=>path(`M${780+i*10} ${1348-i*10}L${1023+i*13} ${1345-i*11}`,'#77976b',1.4)).join('')}
+        ${trees([[281,323,5],[288,347,6],[284,372,5],[285,399,5],[285,422,6],[284,456,5],[284,486,6],[282,517,5],[284,552,5],[286,582,6],[288,615,5],[526,115,5],[546,117,5],[566,118,5],[586,119,5],[608,119,5],[624,121,5],[685,1352,5],[714,1352,6],[742,1352,5],[768,1351,6],[1009,1345,6],[1042,1340,6],[1071,1331,6]])}
+        ${[[317,1300,103,62],[444,1316,56,34],[508,1316,70,34],[445,1294,61,15]].map(([x,y,w,h])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#769e83" stroke="#456d54" stroke-width="1.4"/><rect x="${x+3}" y="${y+3}" width="${w-6}" height="${h-6}" fill="none" stroke="#e8edd9" stroke-width="1.25"/><path d="M${x+w/2} ${y+3}v${h-6}" stroke="#e8edd9"/>`).join('')}
+        <circle cx="368.5" cy="1331" r="11" fill="none" stroke="#e8edd9" stroke-width="1.25"/>
+        ${planLabel(368,1337,'Football',{size:15,bg:true})}${planLabel(470,1339,'Basketball',{size:13,bg:true})}
+        ${planLabel(552,1339,'Tennis',{size:13,bg:true})}${planLabel(476,1292,'Table tennis',{size:13,bg:true})}
+      `;
       return `
-        <defs><clipPath id="${mode}PlanBoundary"><polygon points="${mapOutline}"/></clipPath></defs>
-        <polygon points="${mapOutline}" fill="#e6ede0" stroke="#254942" stroke-width="4"/>
-        <g clip-path="url(#${mode}PlanBoundary)">
-          ${mapZones.map(z=>`<polygon points="${z.points}" fill="${z.fill}" stroke="#6b836e" stroke-width="1.5"/>`).join('')}
-          <path d="${mapRoads}" fill="none" stroke="#e9d9b5" stroke-width="47" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="${mapRoads}" fill="none" stroke="#aeb9b3" stroke-width="35" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M473 303L501 473L527 653L555 823L584 995L611 1242" fill="none" stroke="#f4f7f2" stroke-width="2" stroke-dasharray="10 9"/>
+        <defs>
+          <clipPath id="${mode}PlanBoundary2"><polygon points="${mapOutline}"/></clipPath>
+          <pattern id="${mode}paperGrid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 0H28M0 0V28" fill="none" stroke="#a1967a" stroke-width=".65" opacity=".23"/></pattern>
+        </defs>
+        <rect width="1280" height="1398" fill="#f7f3e7"/>
+        <rect width="1280" height="1398" fill="url(#${mode}paperGrid)"/>
+        ${poly(mapOutline,'#e6ecdb',t.ink,4)}
+        <g clip-path="url(#${mode}PlanBoundary2)">
+          ${mapZones.map(z=>poly(z.points,z.fill,'#73896d',1.6)).join('')}
+          ${path(mapRoads,'#eee1be',65)}${path(mapRoads,t.street,53)}
+          ${path('M481 113L507 308L542 525L587 755L617 971L654 1183L658 1346','#efedda',2)}
+          ${mapMedians.map(d=>`<path d="${d}" fill="#b5c9a8" stroke="#f1e3c3" stroke-width="4"/>`).join('')}
+          ${details}
         </g>
-        ${measuredBands.map(band=>{
-          const territory = territoryMeta[band.key];
-          const lots = inventory.filter(x=>x.territory===band.key);
-          const road=[band.t[3],band.t[2],band.b[1],band.b[0]];
-          const near=pMix(road[0],road[3],.5), far=pMix(road[1],road[2],.5), middle=pMix(near,far,.52);
+        ${measuredBands.map(b=>{
+          const terr=territoryMeta[b.key],lots=inventory.filter(x=>x.territory===b.key);
+          const road=[b.t[3],b.t[2],b.b[1],b.b[0]];
+          const near=pMix(road[0],road[3],.5),far=pMix(road[1],road[2],.5),mid=pMix(near,far,.53);
           const angle=Math.atan2(far[1]-near[1],far[0]-near[0])*180/Math.PI;
-          const cells=[band.t,band.b].map((row,side)=>Array.from({length:7},(_,j)=>{
-            const i=side*7+j,u=lots[i],a=j/7,b=(j+1)/7;
-            const quad=[pMix(row[0],row[1],a),pMix(row[0],row[1],b),pMix(row[3],row[2],b),pMix(row[3],row[2],a)];
-            const center=pMix(pMix(quad[0],quad[1],.5),pMix(quad[3],quad[2],.5),.5);
-            const ref=String(band.y*14+i+1).padStart(2,'0');
-            const chip=quad.map(p=>[center[0]+(p[0]-center[0])*(side?.83:.69),center[1]+(p[1]-center[1])*(side?.52:.61)]);
-            const fill=mode==='estate'?statusColor(u.status):(side?'#847b6e':'#706b5f');
-            const attr=mode==='estate'?`class="map-action" id="unit-${u.id}" data-unit="${u.id}" role="button" tabindex="0" aria-pressed="false" aria-label="Plot ${ref}, ${territory.label}, ${statusLabel(u.status)}"`:'';
-            return `<g ${attr}><title>Plot ${ref} · ${territory.label}</title><polygon points="${pStr(quad)}" fill="${side?'#eee4d3':'#e4d5c1'}" stroke="#af9f8a" stroke-width="1.2"/><polygon points="${pStr(chip)}" fill="${fill}" stroke="#fff" stroke-width=".7"/>${planLabel(center[0],center[1]+4,ref,{size:15,color:'#16261d',bg:true})}</g>`;
+          const cells=[b.t,b.b].map((row,side)=>Array.from({length:7},(_,j)=>{
+            const i=side*7+j,u=lots[i],l=j/7,r=(j+1)/7,span=r-l;
+            const quad=planBox(row,l,r,0,1),roof=side?planBox(row,l,r,.31,.82):planBox(row,l+.12*span,r-.12*span,.27,.85);
+            const ref=String(b.y*14+i+1).padStart(2,'0');
+            const n=pMix(quad[0],quad[1],.51),o=pMix(quad[3],quad[2],.51), p=pMix(n,o,side?.91:.16);
+            const attr=estate?`class="map-action" id="unit-${u.id}" data-unit="${u.id}" role="button" tabindex="0" aria-pressed="false" aria-label="Plot ${ref}, ${terr.label}, ${statusLabel(u.status)}"`:'';
+            const garden=side?'':poly(planBox(row,l+.13*span,r-.13*span,.86,.96),'#b6c4a7','none',1,'map-ink');
+            return `<g ${attr}><title>Plot ${ref} · ${terr.label} · ${side?'Townhouse':'Detached home'}</title>${poly(quad,b.y===4?'#dce6d5':t.plot,t.line,1.35,'map-lot')}${garden}${poly(roof,side?'#456254':t.roof,'#243f34',1,'map-ink')}${path('M'+pStr([pMix(roof[0],roof[3],.13),pMix(roof[1],roof[2],.13)]),'#b0b9a4',.9)}${planLabel(p[0],p[1]+4,ref,{size:15})}${estate?`<circle class="map-ink" cx="${p[0]+13}" cy="${p[1]}" r="3.3" fill="${plotDot(u)}" stroke="#fffdf1" stroke-width="1"/>`:''}</g>`;
           }).join('')).join('');
-          const villa=lots.at(-1),ref='PV-0'+(band.y+1);
-          const va=mode==='estate'?`class="map-action" id="unit-${villa.id}" data-unit="${villa.id}" role="button" tabindex="0" aria-pressed="false" aria-label="${ref}, presidential villa, ${territory.label}"`:'';
-          const villaShape=`<g ${va}><title>${ref} · Presidential villa</title><polygon points="${pStr(band.villa)}" fill="${mode==='estate'?statusColor(villa.status):'#c2a689'}" stroke="#9c8063" stroke-width="2"/>${planLabel(band.vc[0],band.vc[1],ref,{size:14,bg:true})}</g>`;
-          const heading=`<g transform="rotate(${angle} ${middle.join(' ')})">${planLabel(middle[0],middle[1]+5,territory.label,{size:17})}</g>`;
-          const target=mode==='city'&&currentCityLayer!=='amenities'?`<g class="map-action" data-zone="${band.key}" role="button" tabindex="0" aria-label="${territory.label}"><polygon points="${pStr([band.t[0],band.t[1],band.b[2],band.b[3]])}" fill="transparent" stroke="transparent"/><title>${territory.label}</title></g>`:'';
-          return `<g data-territory="${band.key}"><polygon points="${pStr(road)}" fill="#aeb9b3"/>${cells}${villaShape}${heading}${target}</g>`;
+          const villa=lots.at(-1),ref='PV-0'+(b.y+1);
+          const va=estate?`class="map-action" id="unit-${villa.id}" data-unit="${villa.id}" role="button" tabindex="0" aria-pressed="false" aria-label="${ref}, presidential villa, ${terr.label}"`:'';
+          const target=mode==='city'&&currentCityLayer!=='amenities'?`<g class="map-action" data-zone="${b.key}" role="button" tabindex="0" aria-label="${terr.label}">${poly([b.t[0],b.t[1],b.b[2],b.b[3]],'transparent','transparent',1,'map-zone-shape')}<title>${terr.label}</title></g>`:'';
+          const walk=pMix(road[0],road[1],.045),walk2=pMix(road[3],road[2],.045);
+          const avenue=`<g transform="rotate(${angle} ${mid.join(' ')})">${planLabel(mid[0],mid[1]+5,terr.label.toUpperCase(),{size:19,street:true})}</g>`;
+          return `<g data-territory="${b.key}">${poly(road,t.street,'#e8ddbc',3)}${path('M'+pStr([walk,walk2]),'#fffdf1',7)}${cells}<g ${va}><title>${ref} · Presidential villa</title>${poly(b.villa,'#e6cbb0','#a47755',1.9,'map-lot')}${poly(b.house,'#9c6748','#775238',1.3,'map-ink')}${planLabel(b.vc[0],b.vc[1],ref,{size:16,bg:true})}${estate?`<circle class="map-ink" cx="${b.vc[0]+28}" cy="${b.vc[1]-5}" r="4" fill="${plotDot(villa)}" stroke="#fffdf1" stroke-width="1"/>`:''}</g>${avenue}${target}</g>`;
         }).join('')}
+        ${mapJunctions.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="14" fill="#f3e4c8" stroke="#ab7856" stroke-width="1.6"/><circle cx="${x}" cy="${y}" r="10" fill="#a66b46"/>${planLabel(x,y+4,String(i+1),{size:13,color:'#fff6e1'})}`).join('')}
         ${mapZones.map(z=>{
-          const a=mode==='city'&&currentCityLayer!=='territories'?`class="map-action" data-zone="${z.key}" role="button" tabindex="0" aria-label="${z.label}"`:'';
-          return `<g ${a}><polygon class="map-zone-shape" points="${z.points}" fill="transparent" stroke="transparent"/>${planLabel(z.x,z.y,z.label,{bg:true,size:16})}<title>${z.label}</title></g>`;
+          const a=!estate&&currentCityLayer!=='territories'?`class="map-action" data-zone="${z.key}" role="button" tabindex="0" aria-label="${z.label}"`:'';
+          return `<g ${a}>${poly(z.points,'transparent','transparent',1,'map-zone-shape')}${z.x?planLabel(z.x,z.y,z.label,{bg:true,size:18}):''}<title>${z.label}</title></g>`;
         }).join('')}
-        <g aria-label="Sports areas">
-          <rect x="355" y="1207" width="78" height="43" fill="#79aa8d" stroke="#557a66"/>
-          <rect x="445" y="1217" width="52" height="29" fill="#78a78d" stroke="#557a66"/>
-          <rect x="503" y="1217" width="50" height="29" fill="#78a78d" stroke="#557a66"/>
-          ${planLabel(394,1233,'Football',{size:13})}${planLabel(471,1234,'Basketball',{size:11})}${planLabel(528,1234,'Tennis',{size:12})}
-          ${planLabel(468,1211,'Table tennis',{size:12,bg:true})}
+        ${path('M464 86L474 58 M267 822L229 822','#506759',1.8)}
+        ${planLabel(472,59,'SCHOOL GATE',{size:16,bg:true})}
+        ${planLabel(174,829,'RESORT GATE',{size:16,bg:true})}
+        ${planLabel(565,413,'MAIN BOULEVARD',{size:15,bg:true})}
+        <path d="M1114 96l10-23 10 23h-7v17h-6V96z" fill="#234b3d"/>
+        ${planLabel(1124,132,'N',{size:17})}
+        <g transform="translate(97 1250)" aria-label="Indicative model scale">
+          <text x="0" y="0" fill="#264d40" font-size="13" font-weight="700">MODEL SCALE</text>
+          <path d="M0 10H160V16H0z" fill="#204738"/><path d="M32 10h32v6H32zM96 10h32v6H96z" fill="#fbf4df"/>
+          <text x="0" y="34" fill="#3c5b4d" font-size="12">0</text><text x="116" y="34" fill="#3c5b4d" font-size="12">50 m</text>
         </g>
-        <path d="M459 271L469 300 M286 838L333 838" stroke="#50675e" stroke-width="2"/>
-        ${planLabel(470,260,'School gate',{size:16,bg:true})}
-        ${planLabel(258,844,'Resort gate',{size:16,bg:true})}
-        ${planLabel(525,527,'Main boulevard',{size:15,bg:true})}
-        <path d="M956 273l8-18 8 18h-6v17h-4v-17z" fill="#254942"/>
-        ${planLabel(964,309,'N',{size:16})}
       `;
     }
 
@@ -3510,7 +3566,7 @@
       document.getElementById('statBeds').innerText  = `${totals.bedrooms} / ${totals.bathrooms}`;
       document.getElementById('statSize').innerText  = `${unit.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²`;
 
-      document.getElementById('planLabel').innerText = `3-floor interior preview for ${unit.id} — ${totals.bedrooms} bedrooms, ${totals.bathrooms} bathrooms.`;
+      document.getElementById('planLabel').innerText = `3-floor interior preview for ${measuredPlotRef(unit)} • ${totals.bedrooms} bedrooms, ${totals.bathrooms} bathrooms.`;
 
       const preview = document.getElementById('floorplanPreview');
       preview.innerHTML = buildInteriorPlan(unit, interior, { compact: true });
@@ -3771,7 +3827,7 @@
       document.body.style.overflow = 'hidden';
       const cfg = getInteriorConfigForUnit(selectedUnit);
       const totals = getInteriorTotals(cfg);
-      document.getElementById('fpTitle').innerText = `${selectedUnit.id} • Floor Plan`;
+      document.getElementById('fpTitle').innerText = `${measuredPlotRef(selectedUnit)} • ${territoryMeta[selectedUnit.territory].label}`;
       document.getElementById('fpSubtitle').innerText = `${territoryMeta[selectedUnit.territory].label} • ${totals.bedrooms} beds • ${totals.bathrooms} baths • ${selectedUnit.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ft²`;
       loadInteriorBuilderFromConfig(cfg);
       document.getElementById('fpBody').innerHTML = buildInteriorPlan(selectedUnit, cfg, { compact:false });
