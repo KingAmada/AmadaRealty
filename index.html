@@ -7,7 +7,7 @@
   <!-- Primary SEO (Bilaad-style) -->
   <title>AMADA RESIDENCE - Global Estate</title>
   <meta name="title" content="AMADA RESIDENCE - Global Estate" />
-  <meta name="description" content="Welcome to The Amada Advantage. Our homes are designed for more than just today — blending timeless architecture with private-city amenities. Explore The City, select an Asset, and request your PR Card dossier." />
+  <meta name="description" content="Welcome to The Amada Advantage. Our homes are designed for more than just today — blending timeless architecture with private-city amenities. Explore The City, select an Asset, and preview your PR Card." />
   <meta name="robots" content="index,follow" />
   <meta name="keywords" content="Amada Residence, luxury estate, gated community, private city, premium real estate, Nigeria luxury homes, sustainable communities, masterplan, estate assets" />
   <meta name="theme-color" content="#0f172a" />
@@ -1089,6 +1089,43 @@
     .prx-k{color:#94a3b8;}
     .prx-v{color:#fff;font-weight:700;text-align:right;}
     .prx-amt{color:#fbbf24;font-size:15px;}
+
+
+    /* Embassy credential preview */
+    #page-pr-card .prx-glass{max-height:none;overflow:visible}
+    #page-pr-card .prx-dashboard{background:radial-gradient(ellipse at 10% 10%,#1a2943 0%,#111b2d 48%,#0d1628 100%)}
+    #page-pr-card .prx-text h1{font-size:clamp(2.45rem,4.9vw,4.15rem)}
+    #page-pr-card .prx-card-container{cursor:default}
+    #page-pr-card .prx-card{background:linear-gradient(150deg,#ffffff20,transparent 42%,#0005),var(--prx-bg)}
+    #page-pr-card #prxCardName{max-width:calc(100% - 24px);overflow-wrap:anywhere;font-size:clamp(.8rem,3vw,1.12rem)}
+    #page-pr-card .prx-vert{right:13px;bottom:19px}
+    #page-pr-card .prx-sample-stamp{position:absolute;top:24px;right:52px;padding:3px 6px;border-radius:4px;border:1px solid #ffffff5c;color:#fff;font:700 8px system-ui;letter-spacing:.14em;z-index:11}
+    #page-pr-card .prx-preview-note{max-width:27rem;border:1px solid #ffffff24;border-radius:14px;background:#0b132480;color:#d8e0ef;padding:14px 16px;font-size:.85rem;line-height:1.55}
+    #page-pr-card .prx-preview-note strong{color:#fff}
+    #page-pr-card .prx-select{color-scheme:dark;padding-right:40px}
+    #page-pr-card .prx-select option{background:#101a2e;color:#fff}
+    #page-pr-card [aria-pressed="true"]{border-color:#d5bc7b;background:#b9a36a33;color:#fff}
+    #page-pr-card button:focus-visible,#page-pr-card select:focus-visible,#page-pr-card input:focus-visible,#page-pr-card #prxCard:focus-visible{outline:2px solid #f3d897;outline-offset:3px}
+    #page-pr-card .prx-policy{display:flex;gap:.65rem;justify-content:center;color:#dae2f0;font-size:.8rem;border:1px solid #ffffff18;background:#ffffff08;border-radius:12px;padding:11px 8px}
+    #page-pr-card .prx-policy button{text-decoration:underline;text-underline-offset:3px}
+    #page-pr-card .prx-form-note{color:#c1cce0;text-align:center;font-size:.78rem;line-height:1.4}
+    #page-pr-card .prx-demo-summary{color:#e9dfca;background:#152139;padding:.7rem .85rem;border-radius:.6rem;font-size:.8rem;line-height:1.4}
+    @media (max-width:600px){
+      #page-pr-card .prx-wrap{padding-inline:10px}
+      #page-pr-card .prx-dashboard{border-radius:24px}
+      #page-pr-card .prx-text{padding:26px 20px 0}
+      #page-pr-card .prx-text p{margin-bottom:16px}
+      #page-pr-card .prx-card-col{padding:16px 12px}
+      #page-pr-card .prx-glass{padding:16px;border-radius:20px}
+      #page-pr-card .prx-card{padding:16px}
+      #page-pr-card .prx-input{font-size:16px}
+      #page-pr-card .prx-sample-stamp{top:16px;right:45px}
+      #page-pr-card .prx-big{font-size:clamp(3rem,20vw,6rem)}
+    }
+    @media (prefers-reduced-motion:reduce){
+      #page-pr-card .prx-text-accent{animation:none}
+      #page-pr-card .prx-card-container,#page-pr-card .prx-btn{transition:none}
+    }
 
     /* Scrollbar */
     ::-webkit-scrollbar{width:8px;}
@@ -2291,28 +2328,121 @@
       <div class="prx-wrap">
         <div class="prx-dashboard" id="prxDashboard">
           <div class="prx-cube-bg"></div>
+
           <div class="prx-text">
             <div class="text-[10px] uppercase tracking-[0.25em] font-bold text-slate-400 mb-6">The Estate Embassy</div>
             <h1>Not For Everyone.<br/>Perhaps, For You.</h1>
-            <p>Private access to Amada Residence.</p>
-            <div class="rounded-2xl border border-white/15 bg-white/5 p-4 text-sm leading-relaxed text-slate-200">
-              <strong class="text-white">Applications are not yet open.</strong>
-              This site is a preview. Applications and deposits are not accepted here, and it does not issue access passes.
-            </div>
+            <p>Explore Permanent Residency and the Visitor Visa.</p>
+            <div class="prx-preview-note"><strong>The Chosen 75</strong><br>Preview your Amada Residence card. Applications are not open. Use sample details only; nothing is submitted or saved. These cards are for private estate access, not government residency or visas.</div>
           </div>
-          <div class="relative grid gap-4 text-white">
-            <article class="rounded-3xl border border-white/15 bg-slate-900/80 p-6 shadow-xl">
-              <div class="text-[10px] uppercase tracking-[0.22em] text-amber-400 font-bold">The Chosen 75</div>
-              <h2 class="text-2xl font-serif mt-2">PR Card</h2>
-              <p class="text-sm text-slate-300 leading-relaxed mt-2">The planned resident credential for this private estate. A PR Card is an estate membership credential, not government residency status.</p>
-              <a class="inline-block text-sm text-white underline underline-offset-4 mt-4" href="#/assets">Explore residences →</a>
-            </article>
-            <article class="rounded-3xl border border-white/15 bg-slate-900/80 p-6 shadow-xl">
-              <div class="text-[10px] uppercase tracking-[0.22em] text-amber-400 font-bold">By prior approval</div>
-              <h2 class="text-2xl font-serif mt-2">Visitor Visa</h2>
-              <p class="text-sm text-slate-300 leading-relaxed mt-2">The estate’s planned visitor approval process, managed by the Amada Residence Embassy. This is a private estate pass, not a government visa.</p>
-              <a class="inline-block text-sm text-white underline underline-offset-4 mt-4" href="#/city">Explore the estate →</a>
-            </article>
+
+          <div class="prx-card-col">
+            <div class="prx-glass" id="prxGlass">
+              <div id="prxFormView" class="w-full flex flex-col items-center">
+                <div class="w-full grid grid-cols-2 gap-2 px-2 mb-4">
+                  <button type="button" id="prxModePR" aria-pressed="true"
+                          class="rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 bg-white/10 text-white hover:bg-white/15 transition">
+                    PR Card
+                  </button>
+                  <button type="button" id="prxModeVISA" aria-pressed="false"
+                          class="rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 bg-white/5 text-white/85 hover:bg-white/10 transition">
+                    VISA (Visit)
+                  </button>
+                </div>
+
+                <div class="w-full flex justify-between items-center px-2 mb-4">
+                  <div class="flex items-center gap-2">
+                    <i data-lucide="gem" class="w-4 h-4 text-white"></i>
+                    <span class="text-xs font-bold tracking-widest text-white" id="prxHeaderBrand">AMADA PR</span>
+                  </div>
+                  <span class="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Card Status: Preview</span>
+                </div>
+
+                <div class="prx-card-container" id="prxCard" tabindex="-1" role="group" aria-label="Sample Amada Residence card">
+                  <div class="prx-card" id="prxCardInner">
+                    <div class="prx-noise"></div>
+                    <div class="prx-shine" id="prxShine"></div>
+                    <div class="prx-sample-stamp" aria-hidden="true">SAMPLE</div>
+                    <div class="prx-big" id="prxCardNumber">012</div>
+
+                    <div class="prx-content flex justify-between items-start">
+                      <div class="flex items-center gap-2">
+                        <i data-lucide="gem" class="w-4 h-4 text-slate-400"></i>
+                        <span class="serif text-sm tracking-widest text-slate-200 font-semibold">AMADA</span>
+                      </div>
+                      <svg class="w-6 h-6 text-slate-500 opacity-60 transform rotate-90" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.22-7.52-3.22V17.5zM17.5 12c0-1.85-.98-3.48-2.45-4.38l-1.15 1.77c.88.59 1.45 1.58 1.45 2.71s-.57 2.12-1.45 2.71l1.15 1.77c1.47-.9 2.45-2.53 2.45-4.38z"/>
+                      </svg>
+                    </div>
+
+                    <div class="prx-content flex items-end mt-auto h-full pb-0">
+                      <div>
+                        <div class="text-[8px] uppercase tracking-widest text-slate-400 mb-1 font-bold" id="prxCardHolderLabel">Permanent Resident • Sample</div>
+                        <div class="serif text-lg prx-text-accent tracking-wide uppercase leading-tight" id="prxCardName">
+                          Dr. Aliko Dangote
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="prx-vert">
+                      <div class="text-white text-[10px] font-bold tracking-widest uppercase flex items-center gap-2" id="prxCardTier">
+                        <span>New York Applicant</span>
+                        <i data-lucide="building-2" class="w-3 h-3 text-slate-400 -rotate-90"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="w-full space-y-4">
+                  <div class="w-full">
+                    <label class="prx-label" id="prxNameLabel" for="prxNameInput">Resident Full Name</label>
+                    <input type="text" class="prx-input" placeholder="e.g. Dr. Aliko Dangote" id="prxNameInput" maxlength="40" autocomplete="off">
+                  </div>
+
+                  <div class="w-full">
+                    <label class="prx-label" for="prxPhoneInput">Phone Number (sample only)</label>
+                    <input type="tel" class="prx-input" placeholder="08012345678" id="prxPhoneInput" maxlength="11" autocomplete="off" inputmode="numeric">
+                  </div>
+
+                  <div class="w-full">
+                    <label class="prx-label" for="prxTierSelect">Select Territory Tier</label>
+                    <select class="prx-input prx-select" id="prxTierSelect">
+                      <option value="ny">New York (012)</option>
+                      <option value="dubai">Dubai (014)</option>
+                      <option value="london">London (007)</option>
+                      <option value="canada">Santorini (004)</option>
+                      <option value="naija">Paris (009)</option>
+                      <option value="presidential">Presidential (001)</option>
+                      <option value="visa">Visa Applicant (VISA)</option>
+                    </select>
+                  </div>
+
+                  <div class="w-full hidden" id="prxVisaFields">
+                    <label class="prx-label" for="prxVisitType">Type of Visit (VISA)</label>
+                    <select class="prx-input prx-select" id="prxVisitType">
+                      <option value="" selected disabled>Select a visit type</option>
+                      <option value="Friend">Friends</option>
+                      <option value="Family">Family</option>
+                      <option value="Tourism">Tourism</option>
+                      <option value="Meeting">Meeting</option>
+                      <option value="Shopping">Shopping</option>
+                      <option value="School drop-off">School drop-off</option>
+                      <option value="Golfing">Golfing</option>
+                      <option value="Business">Business</option>
+                    </select>
+                    <div class="mt-4 grid grid-cols-1 gap-3" id="prxVisaDynamic"></div>
+                  </div>
+
+	                  <div class="prx-policy">
+                    <button type="button" onclick="openLegal('terms')">Terms</button>
+                    <span aria-hidden="true">·</span>
+                    <button type="button" onclick="openLegal('privacy')">Privacy Policy</button>
+                  </div>
+                  <button class="prx-btn" id="prxApplyBtn" type="button">Preview Waitlist Card</button>
+                  <p class="prx-form-note" id="prxPreviewStatus" role="status">Preview only. No application or payment is taken.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -3216,6 +3346,7 @@
     // SPA Router
     // ---------------------------
     function showPage(page, { scrollTop = true } = {}) {
+      if (page !== 'pr-card') prxPreview?.clearDetails();
       closeMobileMenu(true);
       closeLegal(true);
       closeFloorplanModal(true);
@@ -3228,6 +3359,8 @@
       if (scrollTop) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 
       lucide.createIcons();
+
+      if (page === 'pr-card') initPRPreview();
 
       if (page === 'assets') {
         if (!estateRendered) renderEstateLayout();
@@ -3849,8 +3982,203 @@
     });
 
     function goPRCardWithSelection(){
+      initPRPreview().fromPlot(selectedUnit);
       location.hash = '#/pr-card';
     }
+
+    const prxCardData = {
+      ny: { bg: '#0f172a', accent: 'linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)', solid: '#fcf6ba', number: '012', tier: 'New York', icon: 'building-2', label: 'Permanent Resident', prefix: 'NY' },
+      dubai: { bg: '#451a03', accent: 'linear-gradient(135deg, #fbbf24, #fffbeb, #d97706)', solid: '#fbbf24', number: '014', tier: 'Dubai', icon: 'sun', label: 'Permanent Resident', prefix: 'DB' },
+      london: { bg: '#172554', accent: 'linear-gradient(135deg, #93c5fd, #ffffff, #3b82f6)', solid: '#93c5fd', number: '007', tier: 'London', icon: 'umbrella', label: 'Permanent Resident', prefix: 'LD' },
+      canada: { bg: '#7f1d1d', accent: 'linear-gradient(135deg, #fca5a5, #ffffff, #f87171)', solid: '#fca5a5', number: '004', tier: 'Santorini', icon: 'building-2', label: 'Permanent Resident', prefix: 'SA' },
+      naija: { bg: '#064e3b', accent: 'linear-gradient(135deg, #34d399, #ecfdf5, #10b981)', solid: '#34d399', number: '009', tier: 'Paris', icon: 'landmark', label: 'Permanent Resident', prefix: 'PA' },
+      presidential: { bg: '#000000', accent: 'linear-gradient(135deg, #e2e8f0, #ffffff, #64748b, #ffffff)', solid: '#e2e8f0', number: '001', tier: 'Presidential', icon: 'crown', label: 'Permanent Resident', prefix: 'PV' },
+      visa: { bg: '#1e1b4b', accent: 'linear-gradient(135deg, #ffffff, #e0e7ff, #a5b4fc)', solid: '#ffffff', number: 'VISA', tier: 'Visitor Visa', icon: 'credit-card', label: 'Visit Applicant', prefix: 'VS' }
+    };
+    const visaSchemas = {
+      "Friend": [
+        { id:"unit", label:"House Number (Unit ID)", placeholder:"e.g. AM-064", required:true },
+        { id:"duration", label:"Duration", type:"select", required:true, options:["1 hour","2 hours","3 hours","4 hours","6 hours","1 day","3 days","1 week"] },
+        { id:"contact_name", label:"Friend's Full Name", placeholder:"e.g. John Doe", required:true },
+        { id:"contact_phone", label:"Friend's Phone", placeholder:"e.g. 08012345678", required:true, pattern:"digits11" },
+        { id:"date", label:"Visit Date", type:"date", required:true },
+        { id:"time", label:"Arrival Time", type:"time", required:true }
+      ],
+      "Family": [
+        { id:"unit", label:"House Number (Unit ID)", placeholder:"e.g. AM-064", required:true },
+        { id:"duration", label:"Duration", type:"select", required:true, options:["1 hour","2 hours","3 hours","4 hours","6 hours","1 day","3 days","1 week"] },
+        { id:"contact_name", label:"Family Contact Name", placeholder:"e.g. Jane Doe", required:true },
+        { id:"contact_phone", label:"Family Contact Phone", placeholder:"e.g. 08012345678", required:true, pattern:"digits11" },
+        { id:"date", label:"Visit Date", type:"date", required:true },
+        { id:"time", label:"Arrival Time", type:"time", required:true }
+      ],
+      "Meeting": [
+        { id:"location", label:"Meeting Location", type:"select", required:true, options:["Office","Resident"] },
+        { id:"with", label:"Meeting With (Name)", placeholder:"Name of person", required:true },
+        { id:"business", label:"Business / Purpose", placeholder:"e.g. Amada Group / Investment meeting", required:true },
+        { id:"duration", label:"Duration", type:"select", required:true, options:["30 mins","1 hour","2 hours","3 hours","Half-day","Full-day"] },
+        { id:"date", label:"Meeting Date", type:"date", required:true },
+        { id:"time", label:"Meeting Time", type:"time", required:true }
+      ],
+      "Tourism": [
+        { id:"duration_days", label:"Duration (Days)", type:"number", required:true, min:1, max:90, placeholder:"e.g. 5" },
+        { id:"hotel_booking", label:"Hotel Booking?", type:"select", required:true, options:["Yes","No"] },
+        { id:"hotel_name", label:"Hotel Name (if Yes)", placeholder:"Hotel name", required:false, dependsOn:{ id:"hotel_booking", value:"Yes" } },
+        { id:"date", label:"Arrival Date", type:"date", required:true },
+        { id:"time", label:"Arrival Time", type:"time", required:true }
+      ],
+      "Shopping": [
+        { id:"duration", label:"Duration", type:"select", required:true, options:["1 hour","2 hours","3 hours","Half-day","Full-day"] },
+        { id:"date", label:"Visit Date", type:"date", required:true },
+        { id:"time", label:"Arrival Time", type:"time", required:true }
+      ],
+      "School drop-off": [
+        { id:"level", label:"School Level", type:"select", required:true, options:["Primary","Secondary","University"] },
+        { id:"duration", label:"Duration", type:"select", required:true, options:["3 months (renewable)"] },
+        { id:"student_name", label:"Student Name", placeholder:"Student full name", required:true },
+        { id:"guardian_phone", label:"Parent/Guardian Phone", placeholder:"e.g. 08012345678", required:true, pattern:"digits11" },
+        { id:"guardian_email", label:"Parent/Guardian Email", type:"email", placeholder:"e.g. parent@email.com", required:true },
+        { id:"date", label:"Start Date", type:"date", required:true }
+      ],
+      "Golfing": [
+        { id:"duration", label:"Duration", type:"select", required:true, options:["1 hour","2 hours","3 hours","4 hours","Half-day"] },
+        { id:"date", label:"Golf Date", type:"date", required:true },
+        { id:"time", label:"Tee Time", type:"time", required:true }
+      ],
+      "Business": [
+        { id:"company", label:"Company / Organization", placeholder:"Company name", required:true },
+        { id:"purpose", label:"Purpose", placeholder:"Reason for visit", required:true },
+        { id:"duration", label:"Duration", type:"select", required:true, options:["1 hour","2 hours","3 hours","Half-day","Full-day","3 days","1 week"] },
+        { id:"contact_email", label:"Contact Email", type:"email", placeholder:"e.g. you@company.com", required:true },
+        { id:"date", label:"Visit Date", type:"date", required:true },
+        { id:"time", label:"Arrival Time", type:"time", required:true }
+      ]
+    };
+
+    let prxPreview = null;
+    function initPRPreview(){
+      if (prxPreview) return prxPreview;
+      const get = id => document.getElementById(id);
+      const page = get('page-pr-card'), card = get('prxCard'), shine = get('prxShine');
+      const tier = get('prxTierSelect'), name = get('prxNameInput'), phone = get('prxPhoneInput');
+      const visit = get('prxVisitType'), details = get('prxVisaDynamic'), status = get('prxPreviewStatus');
+      const resident = get('prxModePR'), visitor = get('prxModeVISA'), apply = get('prxApplyBtn');
+      const cardName = get('prxCardName'), cardNumber = get('prxCardNumber'), cardTier = get('prxCardTier').querySelector('span');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const baseStatus = 'Preview only. No application or payment is taken.';
+      let selected = null, lastResident = 'ny';
+      const drawName = () => { cardName.textContent = name.value.trim() || 'Dr. Aliko Dangote'; };
+      const resetStatus = () => { status.textContent = baseStatus; };
+      const drawVisit = () => {
+        details.replaceChildren();
+        const controls = {};
+        for (const field of visaSchemas[visit.value] || []) {
+          const wrap = document.createElement('div');
+          const label = document.createElement('label');
+          const id = 'prxDemoVisit-' + field.id;
+          label.textContent = field.label;
+          label.className = 'prx-label';
+          label.htmlFor = id;
+          const el = document.createElement(field.type === 'select' ? 'select' : 'input');
+          el.id = id;
+          el.className = field.type === 'select' ? 'prx-input prx-select' : 'prx-input';
+          el.autocomplete = 'off';
+          if (field.type === 'select') {
+            el.add(new Option('Select', ''));
+            for (const option of field.options) el.add(new Option(option, option));
+          } else {
+            el.type = field.type || 'text';
+            if (field.placeholder) el.placeholder = field.placeholder;
+            el.maxLength = field.pattern === 'digits11' ? 11 : 80;
+            if (field.pattern === 'digits11') {
+              el.inputMode = 'numeric';
+              el.addEventListener('input', () => { el.value = el.value.replace(/[^0-9]/g,'').slice(0,11); });
+            }
+            if (field.min != null) el.min = field.min;
+            if (field.max != null) el.max = field.max;
+          }
+          wrap.append(label,el);
+          if (field.dependsOn) {
+            const parent = controls[field.dependsOn.id];
+            if (parent) {
+              const sync = () => {
+                wrap.hidden = parent.value !== field.dependsOn.value;
+                if (wrap.hidden) el.value = '';
+              };
+              parent.addEventListener('change', sync);
+              sync();
+            }
+          }
+          controls[field.id] = el;
+          details.append(wrap);
+        }
+      };
+      const switchCard = key => {
+        const model = prxCardData[key] || prxCardData.ny;
+        const visa = key === 'visa';
+        if (!visa) lastResident = key;
+        const plot = selected && !visa && (selected.kind === 'presidential-villa' ? key === 'presidential' : selected.territory === key) ? measuredPlotRef(selected) : '';
+        tier.value = key;
+        page.style.setProperty('--prx-bg', model.bg);
+        page.style.setProperty('--prx-accent', model.accent);
+        cardNumber.textContent = plot ? plot.replace(/^(Plot |PV-)/, '') : model.number;
+        cardTier.textContent = visa ? 'Visitor Visa' : (model.tier + (plot ? ' • ' + plot : ' Applicant'));
+        get('prxHeaderBrand').textContent = visa ? 'AMADA VISA' : 'AMADA PR';
+        get('prxCardHolderLabel').textContent = (visa ? 'Visit Applicant' : 'Permanent Resident') + ' • Sample';
+        get('prxCardTier').querySelector('svg')?.remove();
+        get('prxCardTier').querySelector('i')?.remove();
+        get('prxNameLabel').textContent = visa ? 'Visitor Full Name' : 'Resident Full Name';
+        resident.setAttribute('aria-pressed', String(!visa));
+        visitor.setAttribute('aria-pressed', String(visa));
+        get('prxVisaFields').classList.toggle('hidden', !visa);
+        apply.textContent = visa ? 'Preview Visitor Visa' : 'Preview Waitlist Card';
+        resetStatus();
+        drawName();
+      };
+      const resetTilt = () => { card.style.transform = ''; shine.style.opacity = '0'; };
+      card.addEventListener('pointermove', event => {
+        if (reduceMotion.matches || event.pointerType === 'touch') return;
+        const r = card.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        const x = Math.max(-.5, Math.min(.5, (event.clientX - r.left) / r.width - .5));
+        const y = Math.max(-.5, Math.min(.5, (event.clientY - r.top) / r.height - .5));
+        card.style.transform = 'perspective(850px) rotateX(' + (-y*16) + 'deg) rotateY(' + (x*18) + 'deg)';
+        shine.style.background = 'radial-gradient(circle at ' + ((x+.5)*100) + '% ' + ((y+.5)*100) + '%, #ffffff3f, transparent 65%)';
+        shine.style.opacity = '1';
+      });
+      card.addEventListener('pointerleave', resetTilt);
+      card.addEventListener('pointercancel', resetTilt);
+      name.addEventListener('input', () => { drawName(); resetStatus(); });
+      phone.addEventListener('input', () => { phone.value = phone.value.replace(/[^0-9]/g,'').slice(0,11); resetStatus(); });
+      tier.addEventListener('change', () => switchCard(tier.value));
+      visit.addEventListener('change', () => { drawVisit(); resetStatus(); });
+      resident.addEventListener('click', () => switchCard(lastResident));
+      visitor.addEventListener('click', () => switchCard('visa'));
+      apply.addEventListener('click', () => {
+        const visa = tier.value === 'visa';
+        status.textContent = (visa ? 'Visitor Visa' : 'PR Card') + ' sample shown above. Nothing was submitted.';
+        card.focus({preventScroll:true});
+        card.scrollIntoView({block:'center', behavior:reduceMotion.matches ? 'auto' : 'smooth'});
+      });
+      prxPreview = {
+        fromPlot(unit) {
+          selected = unit;
+          switchCard(unit && unit.kind === 'presidential-villa' ? 'presidential' : (unit?.territory || 'ny'));
+        },
+        clearDetails() {
+          name.value = '';
+          phone.value = '';
+          visit.value = '';
+          drawVisit();
+          drawName();
+          resetStatus();
+          resetTilt();
+        }
+      };
+      switchCard('ny');
+      return prxPreview;
+    }
+
 
     // ---------------------------
     // Legal docs (scroll lock)
