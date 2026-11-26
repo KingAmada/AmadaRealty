@@ -2251,8 +2251,9 @@
                 <button type="button" onclick="focusEstateAtlas('all')" aria-label="Fit the estate on screen">Fit</button>
               </div>
             </div>
-            <nav class="atlas-streets" id="atlasStreets" aria-label="Focus the map on a street">
+            <nav class="atlas-streets" id="atlasStreets" aria-label="Focus the map on a place">
               <button type="button" aria-pressed="true" data-atlas="all">Full Estate</button>
+              <button type="button" aria-pressed="false" data-atlas="resort">Resort</button>
               <button type="button" aria-pressed="false" data-atlas="ny">New York</button>
               <button type="button" aria-pressed="false" data-atlas="london">London</button>
               <button type="button" aria-pressed="false" data-atlas="naija">Paris</button>
@@ -3679,18 +3680,66 @@
     function atlasLabel(at,name,{small=false,angle=0}={}){
       return '<text x="'+at[0]+'" y="'+at[1]+'" transform="rotate('+angle+' '+at.join(' ')+')" fill="'+(small?'#fae5bb':'#fff3d4')+'" text-anchor="middle" paint-order="stroke" stroke="#152b26" stroke-width=".72" stroke-linejoin="round" font-size="'+(small?'2.75':'3.85')+'" font-weight="800" letter-spacing="'+(small?'.17':'.34')+'">'+name+'</text>';
     }
+
+    // Resort detail is registered against the gate and roof corners in the owner's reference.
+    function renderAtlasResort(d){
+      const scale=1/9.46, origin=[-132.95-68*scale,29.97-653*scale];
+      const planCoordinates='translate('+origin.join(' ')+') scale('+scale+')';
+      const ground='M632 67C711 64 780 102 809 170C828 234 822 281 837 337C853 396 868 449 885 501C899 543 899 574 905 616C911 660 903 712 903 766C903 814 921 864 914 905C908 935 891 958 868 978C829 1021 804 1065 786 1084C660 1043 521 944 453 813C383 692 349 579 373 441C387 354 421 262 477 196C517 147 575 103 632 67Z';
+      const beach='M775 150C799 170 805 238 816 277C823 303 831 332 838 357C849 398 858 435 873 475C889 516 891 547 896 583C900 616 904 647 902 677C900 718 898 759 900 799C902 831 915 875 885 903C854 927 823 909 787 884C733 846 701 816 684 771C669 735 687 709 719 667C755 620 772 584 762 545C752 502 718 474 688 442C657 408 653 378 676 332C711 264 737 208 775 150Z';
+      const water='M782 194C796 210 798 240 807 270C813 293 822 323 830 352C842 397 849 428 863 467C876 504 883 536 888 575C891 607 898 647 895 676C892 715 889 755 891 791C894 825 909 865 878 882C848 900 817 875 787 851C752 823 729 796 724 766C719 734 736 704 759 668C791 619 797 577 783 534C771 495 741 464 710 436C681 411 675 387 694 353C719 306 739 252 765 215C772 205 777 199 782 194Z';
+      const walkway='M413 429C392 516 397 601 421 677C455 792 518 882 602 959M759 196C717 254 683 318 655 372C631 418 682 450 717 491C757 536 757 586 728 639C704 682 660 724 675 768C698 830 767 884 838 918';
+      const palms=[
+        [764,163,18],[782,218,16],[708,248,13],[694,281,15],[673,318,12],[630,390,15],
+        [650,426,19],[718,466,22],[706,537,16],[710,589,18],[758,597,20],[733,642,15],
+        [692,691,14],[663,736,16],[707,804,18],[755,850,20],[798,886,18],[849,929,17],[868,959,16],
+        [439,351,12],[415,405,11],[392,476,13],[390,543,14],[401,614,12],[433,710,15],[471,796,14],[518,864,11],[559,924,12]
+      ];
+      const boulders=[[786,164],[803,176],[799,191],[660,413],[673,425],[754,637],[741,647],[740,658],[714,815],[769,843],[860,920],[877,926]];
+      const seating=[[723,280,36],[707,303,33],[690,325,32],[714,497,-47],[738,526,-39],[750,555,-19],[701,727,11],[704,756,-9],[724,785,-25],[746,815,-33],[791,856,-41]];
+      const foliage=palms.map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+((i*59)%120)+') scale('+(r/16)+')"><use href="#atlasResortPalm"/></g>').join('');
+      const stones=boulders.map(([x,y],i)=>'<g transform="translate('+x+' '+y+') rotate('+i*29+')"><ellipse rx="8" ry="5.5" fill="#776a4e" opacity=".35" transform="translate(2 3)"/><ellipse rx="7.2" ry="5.4" fill="#b6a47c" stroke="#73694f" stroke-width="1.5"/></g>').join('');
+      const loungers=seating.map(([x,y,a],i)=>'<g transform="translate('+x+' '+y+') rotate('+a+')"><rect x="-3.5" y="-6.5" width="8" height="17" rx="1.4" fill="#695a42" opacity=".52" transform="translate(1.8 2.2)"/><rect x="-3.5" y="-7.5" width="7" height="15" rx="1.3" fill="#fff3d9" stroke="#a48864" stroke-width="1"/>'+(i%3===0?'<circle cx="9" cy="-4" r="8.1" fill="#fff5e1" stroke="#a8936c" stroke-width="1.2"/><path d="M4 -4h10M9 -9v10" stroke="#dcc6a1" stroke-width=".9"/>':'')+'</g>').join('');
+      const roadEdge=d.arrival.road;
+      const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"');
+      const defs='<defs>'+
+        '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#102e26"/><stop offset=".99" stop-color="#102e26" stop-opacity="0"/></radialGradient>'+ 
+        '<linearGradient id="atlasResortWater" x1="0" y1=".81" x2="1" y2=".25" gradientUnits="objectBoundingBox"><stop stop-color="#a7ddd0"/><stop offset=".27" stop-color="#45b1a6"/><stop offset=".64" stop-color="#12877f"/><stop offset="1" stop-color="#206668"/></linearGradient>'+
+        '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfca9a"/><stop offset=".56" stop-color="#f0d7a6"/><stop offset="1" stop-color="#cda573"/></linearGradient>'+
+        '<linearGradient id="atlasResortGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#618657"/><stop offset=".55" stop-color="#426e48"/><stop offset="1" stop-color="#284c37"/></linearGradient>'+
+        '<linearGradient id="atlasResortRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2dcb3"/><stop offset=".49" stop-color="#e5c89b"/><stop offset="1" stop-color="#bb925e"/></linearGradient>'+
+        '<pattern id="atlasResortRipple" width="31" height="19" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M-5 5q8 -5 15 0t15 0t15 0M-5 14q8 -5 15 0t15 0t15 0" fill="none" stroke="#e1eee0" stroke-width="1" opacity=".12"/></pattern>'+
+        '<mask id="atlasResortRoadClearance" maskUnits="userSpaceOnUse" x="-145" y="-45" width="150" height="160"><rect x="-145" y="-45" width="150" height="160" fill="white"/><path d="'+d.roads+'" fill="black" stroke="black" stroke-width=".4"/></mask>'+
+        '<symbol id="atlasResortPalm" overflow="visible"><ellipse cx="3.2" cy="5" rx="13" ry="8" fill="#163d2e" opacity=".45"/><circle r="9.2" fill="#244e36"/><path d="M0 1Q-4 -10 -15 -11Q-11 -3 0 1Q-13 -4 -16 4Q-7 7 0 1Q-6 10 -1 15Q4 9 0 1Q7 12 15 6Q9 1 0 1Q12 2 15 -7Q7 -9 0 1Q7 -9 3 -15Q-3 -10 0 1" fill="#749758" stroke="#426640" stroke-width="1.15"/><circle r="2.4" fill="#bfbb70"/></symbol>'+
+        '</defs>';
+      const leisure='<g id="atlasResortLagoon" aria-label="Resort gardens and beach lagoon" mask="url(#atlasResortRoadClearance)"><g transform="'+planCoordinates+'">'+
+        '<path d="'+ground+'" fill="url(#atlasResortGreen)" stroke="#9faf76" stroke-width="3"/>'+
+        '<path d="'+beach+'" fill="url(#atlasResortSand)" stroke="#ecd9ad" stroke-width="2.7"/>'+
+        '<path d="'+water+'" fill="url(#atlasResortWater)" stroke="#c2e2d3" stroke-width="3"/>'+
+        '<path d="'+water+'" fill="url(#atlasResortRipple)"/>'+
+        '<path d="'+walkway+'" fill="none" stroke="#b6ab78" stroke-width="3.8" opacity=".64"/>'+stones+loungers+foliage+'</g></g>';
+      // Let the green road continue beneath a separate raised span with both ends under the roofs.
+      const span=[[-97.7,91.8],[-76.25,61.15],[-70.95,64.77],[-92.6,95.43]];
+      const connector='<g id="atlasResortConnector" aria-label="Elevated resort connection to the Galleria">'+atlasPoly(span.map(([x,y])=>[x+.8,y+1.2]),'#0d2721','opacity=".8"')+atlasPoly(span,'url(#atlasResortRoof)','stroke="#755c3c" stroke-width=".56"')+atlasLine([span[0],span[1]],'#f3d9ad',.24)+'</g>';
+      const resort='<g id="atlasResortBuilding">'+atlasPoly(d.resort.map(([x,y])=>[x+.9,y+1.05]),'#182f27','opacity=".78"')+atlasPoly(d.resort,'url(#atlasResortRoof)','stroke="#735735" stroke-width=".64" stroke-linejoin="round"')+
+        atlasPoly(d.resort.map(([x,y])=>[x+(atlasCenter(d.resort)[0]-x)*.019,y+(atlasCenter(d.resort)[1]-y)*.012]),'none','stroke="#f6e0b7" stroke-width=".23" opacity=".8" pointer-events="none"')+
+        atlasLabel([-79,26.5],'RESORT')+'</g>';
+      return {defs,road,leisure,connector,resort};
+    }
+
     function renderEstateAtlas(){
       const d=estateAtlasPlan;
+      const resortDetail=renderAtlasResort(d);
       const defs='<defs><pattern id="atlasGrid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="#bfccb4" opacity=".18" stroke-width=".17"/></pattern><pattern id="atlasOrchard" width="4.5" height="4.5" patternUnits="userSpaceOnUse"><circle cx="2.25" cy="2.25" r="1.25" fill="#648465"/><circle cx="2" cy="1.9" r=".52" fill="#9bb18a"/></pattern><pattern id="atlasFairway" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)"><path d="M0 0H3V6H0Z" fill="#8aac7d" opacity=".26"/></pattern><linearGradient id="atlasWater" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#72aea3"/><stop offset="1" stop-color="#255b58"/></linearGradient><linearGradient id="atlasGround" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#50735a"/><stop offset="1" stop-color="#365747"/></linearGradient></defs>';
       const boundary=atlasPoly(d.boundary,'url(#atlasGround)','stroke="#d7af7d" stroke-width="1.2"');
       const farms=d.farms.map((p,i)=>atlasPoly(p,i?'#4c694e':'#4d6949','stroke="#a0b38b" stroke-width=".44"')+atlasPoly(p,'url(#atlasOrchard)')).join('');
       const golf=atlasPoly(d.schoolGolf,'#70936f','stroke="#abc093" stroke-width=".5"')+atlasPoly(d.schoolGolf,'url(#atlasFairway)');
       const roads='<path d="'+d.roads+'" fill="#34433d" stroke="#34433d" stroke-width=".10"/>'+d.corridors.map(p=>atlasPoly(p,'#37423b','stroke="#98a08a" stroke-width=".40"')).join('')+
-        d.frontWalks.map(p=>atlasPoly(p,'#c2b89b')).join('')+atlasLine(d.arrival.road,'#958771',5,'stroke-linejoin="round"');
+        d.frontWalks.map(p=>atlasPoly(p,'#c2b89b')).join('')+resortDetail.road;
       const islands=d.islands.map(([p,outline])=>atlasPoly(outline,'#6f9271','stroke="#bbb18b" stroke-width=".46"')+'<circle cx="'+p[0]+'" cy="'+p[1]+'" r=".66" fill="#e2c385"/>').join('');
-      const beach=atlasPoly(d.beach,'#c2aa78','stroke="#ddc99c" stroke-width=".55"')+atlasPoly(d.lagoon,'url(#atlasWater)','stroke="#a1cabc" stroke-width=".65"')+atlasLine([d.bridge.from,d.bridge.to],'#d5c3a1',d.bridge.width,'stroke-linecap="butt"');
+
       const block=(p)=>atlasPoly(p.map(([x,y])=>[x+.65,y+.85]),'#233c32')+atlasPoly(p,'#ccb793','stroke="#5f5240" stroke-width=".6"');
-      const resort=block(d.resort)+atlasLabel([-78,27],'RESORT');
+
       const school=block(d.school)+atlasLabel([-111,-183],'ACADEMY');
       const mall=block(d.mall)+atlasLabel([-104,93],'GALLERIA');
       const tower=d.padCenters.map(([x,y])=>'<rect x="'+(x-3.7)+'" y="'+(y-4.8)+'" rx=".85" width="7.4" height="9.6" fill="#ebc587" stroke="#695238" stroke-width=".6"/>').join('')+atlasLabel([-104,137],'THE A TOWER');
@@ -3724,7 +3773,7 @@
         const [x,y]=center, angle=Math.atan2(axis[1],axis[0])*180/Math.PI;
         return '<g transform="translate('+x+' '+y+') rotate('+angle+')" fill="#cabe9c" opacity=".79">'+Array.from({length:5},(_,i)=>'<rect x="'+(-1.8+i*.84)+'" y="'+(-width/2)+'" width=".38" height="'+width+'"/>').join('')+'</g>';
       }).join('');
-      return defs+'<path d="M-600 -650H600V650H-600Z" fill="#15332a"/><path d="M-600 -650H600V650H-600Z" fill="url(#atlasGrid)"/>'+boundary+farms+golf+roads+islands+crossings+beach+school+resort+mall+tower+sports+lots+villas+labels+gates;
+      return defs+resortDetail.defs+'<path d="M-600 -650H600V650H-600Z" fill="#15332a"/><path d="M-600 -650H600V650H-600Z" fill="url(#atlasGrid)"/>'+boundary+farms+golf+roads+islands+crossings+resortDetail.leisure+resortDetail.connector+school+resortDetail.resort+mall+tower+sports+lots+villas+labels+gates;
     }
     function atlasResidenceType(u){
       return u.kind==='presidential-villa'?'Presidential Villa':((Number(measuredPlotRef(u).slice(5))-1)%14>=7)?'Townhouse':'Detached Residence';
@@ -3735,6 +3784,7 @@
     }
     function focusEstateAtlas(key){
       document.querySelectorAll('[data-atlas]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.atlas===key)));
+      if(key==='resort'){setAtlasView([-140,-39,119,149]);return;}
       const i=atlasStreets.indexOf(key);
       if(i<0){setAtlasView(atlasFull.slice());return;}
       const d=estateAtlasPlan;
