@@ -1305,6 +1305,62 @@
     @media(max-width:800px){.experience-hero-index{display:none}.experience-hero::before{background:linear-gradient(90deg,#0b172cbe,#101c3138),linear-gradient(0deg,#0b1425fa,#101c3138 90%)}.experience-chapter,.experience-film{grid-template-columns:1fr}.experience-chapter-image{min-height:clamp(215px,55vw,415px)}.experience-section-head,.experience-visit{flex-direction:column;align-items:flex-start}.experience-film-copy br{display:none}}
     @media(max-width:560px){#page-experience .experience-shell{padding-top:1rem}.experience-hero{min-height:475px}.experience-hero-image{object-position:57% center}.experience-hero h1{font-size:clamp(3.35rem,12.1vw,4.7rem);margin:.8rem 0 1rem}.experience-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:.32rem}.experience-tabs button{min-height:43px;padding:.47rem .55rem;font-size:.71rem}.experience-tabs button:last-child{grid-column:1/-1}.experience-visit-actions{width:100%;justify-items:start}.experience-visit-types{justify-content:flex-start}}
     @media(prefers-reduced-motion:reduce){.experience-chapter-image img,.experience-btn{transition:none}}
+    /* Space and motion for the estate journey */
+    .sp-tour{margin-top:clamp(2.2rem,6vw,5.3rem)}
+    .sp-index{position:sticky;top:8.25rem;z-index:13;background:#f7faffed;backdrop-filter:blur(18px);border:1px solid #d4dfec;border-radius:1.05rem;box-shadow:0 7px 27px #13244012}
+    .sp-index-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.26rem .72rem .12rem;border-bottom:1px solid #dce5f1}
+    .sp-index-title{font:750 .65rem/1.3 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.15em;color:#3b546f;white-space:nowrap}
+    .sp-index-groups,.sp-index-stops{display:flex;gap:.18rem;min-width:0;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+    .sp-index-groups::-webkit-scrollbar,.sp-index-stops::-webkit-scrollbar{display:none}
+    .sp-index-stops{padding:.2rem .48rem .29rem}
+    .sp-index a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:43px;white-space:nowrap;padding:0 .65rem;border-radius:.65rem;color:#395471;font:650 .72rem/1.1 system-ui,sans-serif;transition:background .18s,color .18s}
+    .sp-index-groups a{min-height:34px;font-size:.65rem;letter-spacing:.025em}
+    .sp-index a:hover,.sp-index a[aria-current="location"]{background:#e4eefb;color:#112740}
+    .sp-index-stops a[aria-current="location"]{background:#142641;color:#f7fbff}
+    .sp-group{margin-top:clamp(2.85rem,8vw,6.25rem)}
+    .sp-group-head{display:grid;gap:.75rem;grid-template-columns:minmax(0,1fr) minmax(180px,22rem);align-items:end;margin:0 0 1.45rem}
+    .sp-group-head h2{font:550 clamp(2.6rem,6.25vw,5.65rem)/.95 'Cormorant Garamond',Georgia,serif;letter-spacing:-.045em;margin:.4rem 0 0;text-wrap:balance}
+    .sp-group-head>p{color:#445872;font:450 .93rem/1.6 system-ui,sans-serif;max-width:21rem;margin:0}
+    .sp-scene{--sp-ratio:52vw;position:relative;isolation:isolate;overflow:hidden;display:grid;align-items:end;min-height:clamp(340px,var(--sp-ratio),710px);margin:0 0 clamp(.85rem,3.1vw,2.7rem);border:1px solid #344c66;border-radius:clamp(1.05rem,2.8vw,2.35rem);background:#12213b;color:#f7fbff;scroll-margin-top:15rem;box-shadow:0 15px 40px #101e301a}
+    .sp-scene:focus-visible{outline:2px solid #9bb9e4;outline-offset:3px}
+    .sp-open-image{position:absolute;z-index:2;top:clamp(.85rem,2.7vw,1.9rem);left:clamp(.95rem,2.9vw,2.1rem);padding:.48rem .7rem;border-radius:999px;background:#0a182bc5;border:1px solid #e2eaf36c;color:#f4f9ff;font:650 .69rem/1.4 system-ui}
+    .sp-open-image:hover{background:#172b47}
+    .sp-scene.is-linework{--sp-ratio:46vw}
+    .sp-scene::after{content:"";inset:0;position:absolute;z-index:-1;pointer-events:none;background:linear-gradient(5deg,#071427ef 1%,#091627ad 24%,#09162718 74%),linear-gradient(90deg,#091627a4 0%,transparent 69%)}
+    .sp-scene.is-linework::after{background:linear-gradient(0deg,#081326ee,#08132682 23%,transparent 62%)}
+    .sp-scene.is-portrait{background:radial-gradient(ellipse at 74% 38%,#344d68,#11233b 58%,#102039)}
+    .sp-scene.is-portrait::after{background:linear-gradient(90deg,#0a1829bd 0%,transparent 60%),linear-gradient(0deg,#081326f0,transparent 49%)}
+    .sp-scene-media,.spatial-drawing{display:block;position:absolute;width:100%;height:100%;inset:0;z-index:-2}
+    .sp-scene-media{object-fit:cover;object-position:var(--sp-focus,center)}
+    .sp-scene.is-portrait .sp-scene-media{width:64%;left:36%;object-fit:contain;object-position:center}
+    .sp-scene-copy{position:relative;max-width:min(42rem,95%);padding:clamp(1.3rem,5.2vw,4rem);z-index:1}
+    .sp-scene-copy .experience-kicker{color:#bed2eb;letter-spacing:.16em}
+    .sp-scene-copy h3{font:550 clamp(2.15rem,5.2vw,5.3rem)/.93 'Cormorant Garamond',Georgia,serif;letter-spacing:-.035em;margin:.55rem 0 .8rem;text-wrap:balance}
+    .sp-scene-copy>p:last-of-type{color:#e2ebf8;font:450 clamp(.8rem,1.5vw,1.025rem)/1.6 system-ui,sans-serif;max-width:31rem;margin:0}
+    .sp-scene-no{position:absolute;top:clamp(.85rem,2.7vw,1.9rem);right:clamp(.95rem,2.9vw,2.1rem);font:680 .68rem/1.4 system-ui;letter-spacing:.14em;color:#d2e3f9;background:#0a182b81;border:1px solid #e2eaf343;border-radius:999px;padding:.45rem .61rem}
+    .sp-scene-link{display:inline-flex;align-items:center;min-height:43px;margin-top:.68rem;color:#fff;border-bottom:1px solid #d7e9fa83;font:690 .75rem/1.35 system-ui,sans-serif}
+    .sp-scene-link:hover{color:#cfdfff}
+    @media (prefers-reduced-motion:no-preference) and (min-width:801px){
+      .sp-scene.sp-will-reveal .sp-scene-copy{opacity:0;transform:translateY(30px);transition:opacity .65s ease-out,transform .8s cubic-bezier(.21,.69,.19,1)}
+      .sp-scene.sp-will-reveal.is-seen .sp-scene-copy,.sp-scene:focus-within .sp-scene-copy{opacity:1;transform:none}
+      @supports(animation-timeline:view()){
+        .sp-scene-media{animation:sp-push linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+        @keyframes sp-push{from{transform:scale(1.075) translateY(1.8%)}to{transform:scale(1.01) translateY(-.4%)}}
+      }
+    }
+    @media(max-width:800px){
+      .sp-index{top:8rem}.sp-group-head{grid-template-columns:1fr;gap:.6rem}
+      .sp-scene{scroll-margin-top:14.8rem;--sp-ratio:69vw}.sp-scene.is-linework{--sp-ratio:59vw}
+      .sp-scene.is-portrait .sp-scene-media{left:0;width:100%;height:100%}
+      .sp-scene.is-portrait::after{background:linear-gradient(0deg,#0a172af7 0%,#0a172a62 39%,transparent 75%)}
+    }
+    @media(max-width:520px){
+      .sp-index{top:7.8rem;border-radius:.82rem}
+      .sp-index-title{display:none}.sp-index-top{padding:.16rem .34rem 0}.sp-index-groups{width:100%;justify-content:space-between}
+      .sp-index-groups a{min-height:32px;padding:0 .45rem;font-size:.59rem}.sp-index-stops a{min-height:39px;font-size:.66rem}
+      .sp-scene{min-height:370px;scroll-margin-top:13.8rem}.sp-scene.is-linework{min-height:320px}
+      .sp-scene-copy{max-width:100%}.sp-scene-no{top:.72rem;right:.73rem}
+    }
 </style>
 </head>
 
@@ -1978,41 +2034,28 @@
     <section class="page" data-page="experience" id="page-experience">
       <div class="experience-shell">
         <header class="experience-hero">
-          <img class="experience-hero-image" src="amada-masterplan-estate-aerial.jpeg" alt="" decoding="async">
+          <img class="experience-hero-image" src="amada-estate-layout-map.jpeg" alt="" decoding="async" fetchpriority="high">
           <div class="experience-hero-content">
             <p class="experience-kicker">Amada Residence · Abuja, Nigeria</p>
             <h1>The Experience</h1>
-            <p>Come through the gates. Walk the streets. Spend a little time by the lagoon. Get to know Amada Residence as a guest.</p>
+            <p>Begin on the Boulevard. Then follow the streets, gardens and gathering places that give Amada Residence its character.</p>
             <div class="experience-actions">
               <button type="button" class="experience-btn experience-btn-light" id="experienceStart">Start the tour <span aria-hidden="true">↓</span></button>
               <button type="button" class="experience-btn experience-btn-outline" data-ex-visa="">Explore the Visitor Visa <span aria-hidden="true">&#8599;&#65038;</span></button>
             </div>
           </div>
-          <div class="experience-hero-index" aria-hidden="true">01–05<br>Estate Tour</div>
+          <div class="experience-hero-index" aria-hidden="true">01–18<br>Destinations</div>
         </header>
 
-        <section class="experience-tour" id="experienceTour" aria-labelledby="experienceTourTitle">
-          <div class="experience-section-head">
-            <div><p class="experience-kicker">Five stops · Your pace</p><h2 id="experienceTourTitle" tabindex="-1">Inside the gates</h2></div>
-            <p>Start where a guest would arrive, then explore the places that give the estate its character.</p>
-          </div>
-          <div class="experience-tabs" role="tablist" aria-label="Tour stops" id="experienceStops"></div>
-          <article class="experience-chapter" id="experienceChapter" role="tabpanel" tabindex="0">
-            <button type="button" class="experience-chapter-image" id="experienceImageButton" aria-label="Open the full image">
-              <img id="experienceImage" src="amada-townhome-street-brick.jpeg" alt="The estate entrance" decoding="async">
-              <span aria-hidden="true">View image &#8599;&#65038;</span>
-            </button>
-            <div class="experience-chapter-copy">
-              <p class="experience-kicker" id="experienceChapterLabel">01 / Arrival</p>
-              <h3 id="experienceChapterTitle">The Gated Arrival</h3>
-              <p id="experienceChapterDescription">Your first view of Amada is the entrance and the boulevard beyond it.</p>
-              <ul class="experience-tags" id="experienceChapterTags" aria-label="At this stop"></ul>
-              <div class="experience-chapter-nav">
-                <button type="button" class="experience-next" id="experienceNext">Next stop <span aria-hidden="true">→</span></button>
-                <span id="experienceChapterCount" aria-hidden="true">01 / 05</span>
-              </div>
+        <section class="sp-tour" id="experienceTour" aria-label="Explore the estate">
+          <nav class="sp-index" aria-label="Experience destinations">
+            <div class="sp-index-top">
+              <span class="sp-index-title">The Experience</span>
+              <div class="sp-index-groups" id="spGroups" aria-label="Chapters"></div>
             </div>
-          </article>
+            <div class="sp-index-stops" id="spStops" aria-label="All destinations"></div>
+          </nav>
+          <div id="spScenes"></div>
         </section>
 
         <section class="experience-film" aria-labelledby="experienceFilmTitle">
@@ -3420,82 +3463,202 @@
     // ---------------------------
     // SPA Router
     // ---------------------------
-    const EXPERIENCE_STOPS=[
-      {label:'Arrival',kind:'01 · Arrival',title:'The Gated Arrival',src:'amada-townhome-street-brick.jpeg',focus:'center 64%',
-        subtitle:'Look down the boulevard from the estate entrance. The gate marks the transition from Abuja outside to the quieter streets within.',
-        tags:['Estate Gate','Main boulevard','Estate Embassy']},
-      {label:'Resort & Lagoon',kind:'02 · Resort & Lagoon',title:'An afternoon by the lagoon',src:'amada-resort-lagoon-pool.jpeg',focus:'center 48%',
-        subtitle:'The curved resort wraps around the water. A planted walk leads to a sandy shore, with space to pause between the gardens and the lagoon.',
-        tags:['Lagoon beach','Resort','Garden walk']},
-      {label:'The Five Streets',kind:'03 · Architecture',title:'Five streets, five signatures',src:'amada-estate-layout-map.jpeg',focus:'center 53%',
-        subtitle:'Compare New York brownstones, London brickwork, Parisian façades, Dubai modernism and Santorini’s sculptural whites. Each street has a distinct architectural character.',
-        tags:['New York','London','Paris','Dubai','Santorini']},
-      {label:'The A Tower',alt:'Aerial plan of Amada Residence and its leisure district',kind:'04 · The A Tower',title:'From the Galleria to the sky',src:'amada-masterplan-estate-aerial.jpeg',focus:'73% 60%',
-        subtitle:'The A Tower and Galleria connect the resort side of the estate to its dining, retail and leisure destinations. Explore the vision for the Automobile Museum, Cave Restaurant and Sky Lounge.',
-        tags:['Galleria','Automobile Museum','Cave Restaurant','Sky Lounge']},
-      {label:'Golf & Gardens',alt:'Estate layout showing the gardens and open spaces',kind:'05 · Outdoors',title:'A quieter side of the estate',src:'amada-estate-layout-collage-2x.jpeg',focus:'73% 34%',
-        subtitle:'Follow the green spaces from the golf garden to the orchard and sports grounds. The landscape gives walking, playing and spending time outside their own place in the plan.',
-        tags:['Golf garden','Natural Fruits-Garden','Sports grounds']}
+    const SPATIAL_GROUPS=[
+      {id:'arrival',name:'Arrival',no:'01',title:'The approach',sub:'The Boulevard is your first view of life inside Amada.'},
+      {id:'streets',name:'Neighbourhoods',no:'02',title:'Five streets. Five points of view.',sub:'The architecture changes as you turn each corner.'},
+      {id:'day',name:'By day',no:'03',title:'A day inside the gates.',sub:'From the Academy and gardens to the lagoon, there’s more than one way to spend the day.'},
+      {id:'night',name:'After dark',no:'04',title:'The estate after sunset.',sub:'Explore the destinations for dining, entertainment and a view from above.'}
     ];
-    let pendingExperienceVisa=null, experienceReady=false;
+    const SPATIAL_DESTINATIONS=[
+      {id:'boulevard',group:'arrival',name:'Boulevard',title:'It starts on the Boulevard.',copy:'Follow the main avenue past tree-lined streets, gardens and the turn toward the resort. It’s the route that ties Amada together.',img:'amada-estate-layout-map.jpeg',focus:'50% 56%'},
+      {id:'paris',group:'streets',name:'Paris',title:'Paris, in stone and shadow.',copy:'Mansard roofs, tall windows and sculpted stone give Paris Street its formal rhythm.',img:'residence-gallery/paris-mansard.webp',fit:true},
+      {id:'new-york',group:'streets',name:'New York',title:'The brownstone rhythm.',copy:'Stoops, brick façades and closely spaced frontages lend New York Street its character.',img:'amada-resort-lagoon-aerial.jpeg',focus:'50% 62%'},
+      {id:'london',group:'streets',name:'London',title:'London behind the railings.',copy:'Georgian proportions, brickwork and garden setbacks create a quieter street edge.',img:'amada-townhome-street-brick-close.jpeg',focus:'50% 49%'},
+      {id:'santorini',group:'streets',name:'Santorini',title:'Sculpted in white.',copy:'Soft curves, arched entrances and layered terraces bring a Mediterranean silhouette to Santorini Street.',img:'residence-gallery/santorini-golden.webp',focus:'50% 43%'},
+      {id:'dubai',group:'streets',name:'Dubai',title:'Clean lines. Deep shade.',copy:'Glass, stone and generous overhangs define the modern façades along Dubai Street.',img:'residence-gallery/dubai-residence.webp',focus:'50% 49%'},
+      {id:'villas',group:'streets',name:'Villas',title:'The presidential villas.',copy:'The estate plan sets aside five presidential villa plots, one at the end of each architectural street.',img:'amada-masterplan-estate-aerial-angle.jpeg',focus:'52% 54%',link:'#/assets',action:'Explore the villa plots'},
+      {id:'academy',group:'day',name:'Academy',title:'The International Academy.',copy:'The Academy anchors the north-west side of the estate, just inside the school gate.',art:'academy'},
+      {id:'orchid-garden',group:'day',name:'Orchid Garden',title:'Make time for the Orchid Garden.',copy:'A quiet garden stop, away from the pace of the Boulevard.',art:'orchid'},
+      {id:'kitchen-garden',group:'day',name:'Kitchen Garden',title:'Closer to what grows.',copy:'The Kitchen Garden sits north of New York Street, a green counterpoint to the residential blocks.',art:'kitchen'},
+      {id:'resort',group:'day',name:'Resort',title:'Follow the curve of the lagoon.',copy:'A planted walk separates the curved resort from the sand and water.',img:'amada-resort-lagoon-pool.jpeg',focus:'50% 49%'},
+      {id:'golf',group:'day',name:'Golf',title:'A slower pace on the green.',copy:'The golf garden runs along the west side of the Boulevard, between the Academy and the resort.',art:'golf',visa:'Golfing',action:'Explore the Golf Visitor Visa'},
+      {id:'games-arena',group:'day',name:'Games Arena',title:'Make a game of it.',copy:'The southern sports grounds bring football and courts together, a short walk from the Galleria.',art:'arena'},
+      {id:'a-tower',group:'night',name:'A-Tower',title:'The A-Tower marks the skyline.',copy:'The A-Tower and Galleria connect the resort side of the estate to dining, retail and entertainment.',art:'tower'},
+      {id:'automobile-museum',group:'night',name:'Automobile Museum',title:'The automobile as design.',copy:'Explore the idea behind the Automobile Museum: a space devoted to the form, craft and history of the motor car.',art:'museum'},
+      {id:'casino',group:'night',name:'Casino',title:'An evening at the Casino.',copy:'The Casino is part of the estate’s evening itinerary, alongside dining and entertainment.',art:'casino'},
+      {id:'cave-restaurant',group:'night',name:'Cave Restaurant',title:'Dinner inside the stone.',copy:'The Cave Restaurant is conceived as an immersive dining room beneath the estate’s leisure spaces.',art:'cave'},
+      {id:'sky-lounge',group:'night',name:'Sky Lounge',title:'Finish above the city.',copy:'The Sky Lounge offers the last perspective on the journey: the estate below and Abuja beyond.',art:'sky'}
+    ];
+
+    function spatialArt(key){
+      const colors={academy:['#122e48','#7daec5'],orchid:['#193044','#b59bda'],kitchen:['#142c36','#8fb9a5'],golf:['#142c3f','#8cbeac'],arena:['#172c4b','#8aaee7'],tower:['#14253d','#a9c6f2'],museum:['#29273e','#c7af9d'],casino:['#221d35','#e0a4b5'],cave:['#2e2538','#d6a18d'],sky:['#14213d','#a9c9fa']};
+      const [back,ink]=colors[key]||colors.tower;
+      const n=(count,fn)=>Array.from({length:count},(_,i)=>fn(i)).join('');
+      let art='';
+      const h=(d,opacity=.8)=>`<path d="${d}" opacity="${opacity}"/>`;
+      const rect=(x,y,w,v,rad=0,opacity=.65)=>`<rect x="${x}" y="${y}" width="${w}" height="${v}" rx="${rad}" opacity="${opacity}"/>`;
+      const circle=(x,y,r,opacity=.6)=>`<circle cx="${x}" cy="${y}" r="${r}" opacity="${opacity}"/>`;
+      const plant=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})">${h('M0 0C-12 -32 -4 -63 9 -92M0 -18C-39 -18 -54 -40 -58 -53C-23 -47 -8 -39 0 -18M2 -38C20 -77 45 -78 64 -77C46 -49 28 -42 2 -38')}${n(5,i=>`<ellipse transform="rotate(${i*72} 10 -97)" cx="10" cy="-115" rx="8" ry="19" opacity=".75"/>`)}${circle(10,-97,5)}</g>`;
+      if(key==='academy'){
+        art=h('M255 470V282L579 171L948 280V472L578 554ZM255 282L578 390L948 280M578 390V554M315 473V326L520 391V535M648 530V390L867 326V480',.84)+
+        n(8,i=>h(`M${289+i*31} ${304+i*10}v151m${551-i*61} ${-143-i*9}v153`,.42))+
+        h('M537 365L582 350L629 367L629 519L579 538L537 523ZM255 253L579 144L948 250M206 502H1008M232 521H970M278 545H963',.62)+plant(205,470,.53)+plant(1025,475,.62);
+      }else if(key==='orchid'){
+        art=n(9,i=>plant(255+i*94,516+(i%3)*24,.76+(i%4)*.23))+n(5,i=>h(`M${220+i*20} 550Q600 ${590+i*15} ${970-i*20} 555`,.26))+circle(605,314,202,.23)+circle(605,314,231,.15);
+      }else if(key==='kitchen'){
+        art=n(6,i=>`<g transform="translate(${i*99} ${-i*12})">${h('M256 438L382 402L477 484L328 525ZM256 438v12l71 91 150-45v-12',.69)}${n(4,j=>h(`M${277+j*29} ${451+j*14}l125 -37`,.45))}</g>`)+n(7,i=>plant(293+i*108,390-i*10,.43))+h('M246 559L970 451M247 571L989 460',.39);
+      }else if(key==='golf'){
+        art=n(12,i=>h(`M${178+i*14} ${480-i*8}C${298+i*9} ${301-i*7} ${464+i*15} ${591-i*14} ${596+i*18} ${418-i*13}S${866+i*5} ${281-i*13} ${1060-i*8} ${438+i*5}`,.25+i*.025))+
+        h('M737 370v-143l85 24-85 24M715 372q22 18 45 0m-67 3q43 30 96-5',.95)+circle(503,438,6)+h('M502 433Q605 271 734 363',.54);
+      }else if(key==='arena'){
+        art=`<g transform="translate(601 383) rotate(-14) skewX(-22) translate(-601 -383)">${rect(320,237,560,292,6,.88)}${rect(336,253,528,260,0,.67)}${h('M600 253v260M336 307h103v152H336M864 307H761v152h103M336 347h45v70h-45M864 347h-45v70h45',.81)}${circle(600,383,47,.9)}${circle(600,383,4,.9)}${n(4,i=>rect(304-i*13,219-i*13,592+i*26,328+i*26,10,.18))}</g>`;
+      }else if(key==='tower'){
+        art=h('M375 564L506 176H553L450 564ZM827 564L696 176H650L752 564ZM489 348H712L733 395H468ZM506 176L526 139H573L553 176M696 176L671 139H629L650 176M468 395v27H733v-27',.92)+
+        n(14,i=>h(`M${502-i*8.45} ${190+i*25}h49m${103+i*17} 0h47`,.34))+
+        h('M279 568H931M311 587H908M332 613H865M526 139L604 96L671 139',.41)+circle(602,329,208,.19);
+      }else if(key==='museum'){
+        art=h('M261 448L296 384L405 359L471 285Q623 255 735 322L790 366L917 403L952 453L925 494H279ZM407 359L469 326L671 314L745 359ZM291 422H378L406 391M802 391L845 429H925M476 477H758',.9)+
+        n(2,i=>circle(425+365*i,477,57,.92)+circle(425+365*i,477,35,.59)+circle(425+365*i,477,11,.8))+
+        h('M310 548H912M365 575H861M301 220L602 170L904 220M296 242H905',.35);
+      }else if(key==='casino'){
+        art=`<g transform="rotate(-19 535 382)">${rect(438,245,181,271,18,.8)}${rect(451,258,155,245,11,.38)}${h('M525 333c-25 -33 -67 0 0 72c67 -72 25 -105 0 -72z',.9)}</g><g transform="rotate(20 670 390)">${rect(599,251,178,264,18,.8)}${rect(612,264,152,238,11,.39)}${h('M686 320l48 66-48 63-48-63z',.91)}</g>`+n(5,i=>`<ellipse cx="${341+i*116}" cy="${545+(i%2)*19}" rx="42" ry="14" opacity=".55"/>`)+circle(606,380,210,.14);
+      }else if(key==='cave'){
+        art=n(9,i=>h(`M${175+i*34} 554C${170+i*34} ${401+i*9} ${244+i*43} ${161+i*15} 600 ${134+i*20}S${1030-i*40} ${359+i*16} ${1029-i*34} 554`,.26+i*.064))+
+        n(3,i=>`<g transform="translate(${408+i*187} ${464+(i%2)*41})"><ellipse rx="66" ry="19" opacity=".87"/>${h('M-47 15v47M47 15v47M0 -6v-38m-4 16q4 -16 8 0',.78)}</g>`);
+      }else if(key==='sky'){
+        art=h('M205 471H991M219 487H982M281 489L221 574M423 490L367 574M606 490v86M772 490l59 85M914 489l59 87',.57)+
+        n(18,i=>{const x=230+i*43,v=48+(i*51)%118;return h(`M${x} 469v-${v}h32v${v}m-20 -${v-12}v${v-24}`,.46);})+
+        circle(797,245,65,.8)+h('M727 245H861M797 175V315M281 386h113m-90 16h132m526 -39h-78',.23)+h('M211 600H998',.39);
+      }
+      const lineGrid=n(14,i=>h(`M${90+i*76} 102V613`,.074))+n(9,i=>h(`M83 ${118+i*58}H1117`,.074));
+      return `<svg class="spatial-drawing" viewBox="0 0 1200 700" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="sp-glow-${key}"><stop stop-color="${ink}" stop-opacity=".33"/><stop offset="1" stop-color="${back}" stop-opacity=".04"/></radialGradient></defs><rect width="1200" height="700" fill="${back}"/><rect width="1200" height="700" fill="url(#sp-glow-${key})"/><g fill="none" stroke="${ink}" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">${lineGrid}${art}${h('M75 127V80h47m956 0h47v47M75 573v47h47m956 0h47v-47',.54)}</g></svg>`;
+    }
+
+    let pendingExperienceVisa=null, experienceReady=false, spatialNavigate;
+    const experienceSlug=()=>{
+      const [page,slug]=location.hash.slice(2).split('/');
+      return (page==='experience'||page==='city'||page==='gallery')&&SPATIAL_DESTINATIONS.some(stop=>stop.id===slug)?slug:null;
+    };
     function initExperience(){
       if(experienceReady)return;
       const page=document.getElementById('page-experience');
       if(!page)return;
       experienceReady=true;
-      const tabs=page.querySelector('#experienceStops'), panel=page.querySelector('#experienceChapter');
-      const image=page.querySelector('#experienceImage'), imageButton=page.querySelector('#experienceImageButton');
-      const title=page.querySelector('#experienceChapterTitle'), desc=page.querySelector('#experienceChapterDescription');
-      const label=page.querySelector('#experienceChapterLabel'), tags=page.querySelector('#experienceChapterTags');
-      const count=page.querySelector('#experienceChapterCount'), next=page.querySelector('#experienceNext');
+      const byId=id=>page.querySelector('#'+id);
+      const groups=byId('spGroups'), stops=byId('spStops'), scenes=byId('spScenes');
+      const nav=page.querySelector('.sp-index'), reduced=matchMedia('(prefers-reduced-motion: reduce)');
+      const targetById=new Map(), stopLinks=new Map(), groupLinks=new Map();
+      let current='',intent=null,intentTimer=0,scheduled=false;
       const two=i=>String(i).padStart(2,'0');
-      let active=0;
-      const controls=EXPERIENCE_STOPS.map((stop,i)=>{
-        const button=document.createElement('button');
-        button.type='button';button.id='experienceStop'+i;
-        button.setAttribute('role','tab');button.setAttribute('aria-controls',panel.id);
-        const number=document.createElement('span');
-        number.setAttribute('aria-hidden','true');number.textContent=two(i+1);
-        button.append(number,stop.label);
-        button.addEventListener('click',()=>render(i));
-        button.addEventListener('keydown',e=>{
-          const codes={ArrowLeft:(i-1+EXPERIENCE_STOPS.length)%EXPERIENCE_STOPS.length,ArrowRight:(i+1)%EXPERIENCE_STOPS.length,Home:0,End:EXPERIENCE_STOPS.length-1};
-          if(!Object.hasOwn(codes,e.key))return;
+      const titleLink=(label,id)=>{
+        const link=document.createElement('a');link.textContent=label;link.href='#/experience/'+id;
+        link.addEventListener('click',e=>{
+          if(e.button!==0||e.ctrlKey||e.metaKey||e.altKey||e.shiftKey)return;
           e.preventDefault();
-          render(codes[e.key]);controls[codes[e.key]].focus();
+          if(location.hash!==link.hash)history.pushState(null,'',link.hash);
+          spatialNavigate(id,true);
         });
-        tabs.append(button);return button;
+        return link;
+      };
+      SPATIAL_DESTINATIONS.forEach(item=>{const l=titleLink(item.name,item.id);stops.append(l);stopLinks.set(item.id,l);});
+      SPATIAL_GROUPS.forEach(group=>{
+        const items=SPATIAL_DESTINATIONS.filter(stop=>stop.group===group.id);
+        if(!items.length)return;
+        const groupLink=titleLink(group.name,items[0].id);groups.append(groupLink);groupLinks.set(group.id,groupLink);
+        const box=document.createElement('section');box.className='sp-group';box.setAttribute('aria-labelledby','sp-chapter-'+group.id);
+        const heading=document.createElement('header');heading.className='sp-group-head';
+        const left=document.createElement('div'), note=document.createElement('p'), title=document.createElement('h2'), sub=document.createElement('p');
+        note.className='experience-kicker';note.textContent=group.no+' / '+group.name;
+        title.id='sp-chapter-'+group.id;title.textContent=group.title;sub.textContent=group.sub;
+        left.append(note,title);heading.append(left,sub);box.append(heading);
+        for(const item of items){
+          const index=SPATIAL_DESTINATIONS.indexOf(item);
+          const scene=document.createElement('article');
+          scene.className='sp-scene'+(item.art?' is-linework':'')+(item.fit?' is-portrait':'');
+          scene.id='experience-'+item.id;scene.tabIndex=-1;
+          scene.dataset.stop=item.id;scene.setAttribute('aria-labelledby','sp-title-'+item.id);
+          if(item.img){
+            const img=document.createElement('img');img.className='sp-scene-media';img.src=item.img;
+            img.alt=item.name+' at Amada Residence';img.loading=index===0?'eager':'lazy';img.decoding='async';
+            if(item.focus)img.style.setProperty('--sp-focus',item.focus);
+            scene.append(img);
+            const expand=document.createElement('button');expand.className='sp-open-image';expand.type='button';expand.textContent='View image ↗︎';
+            expand.setAttribute('aria-label','View full image for '+item.name);
+            expand.addEventListener('click',()=>{
+              const frames=SPATIAL_DESTINATIONS.filter(s=>s.img).map(s=>({kind:s.name,title:s.title,subtitle:s.copy,src:s.img}));
+              const frame=frames.findIndex(s=>s.kind===item.name);
+              openGalleryModal(frame,frames);
+            });
+            scene.append(expand);
+          }else{
+            const art=document.createElement('div');art.setAttribute('role','img');
+            art.setAttribute('aria-label',item.name+' architectural illustration');art.innerHTML=spatialArt(item.art);
+            scene.append(art);
+          }
+          const number=document.createElement('span');number.className='sp-scene-no';number.textContent=two(index+1)+' / '+SPATIAL_DESTINATIONS.length;number.setAttribute('aria-hidden','true');
+          const copy=document.createElement('div');copy.className='sp-scene-copy';
+          const kicker=document.createElement('p');kicker.className='experience-kicker';kicker.textContent=item.name;
+          const h=document.createElement('h3');h.id='sp-title-'+item.id;h.textContent=item.title;
+          const p=document.createElement('p');p.textContent=item.copy;copy.append(kicker,h,p);
+          if(item.link||item.visa){
+            const link=document.createElement(item.link?'a':'button');link.className='sp-scene-link';link.textContent=item.action+' ↗︎';
+            if(item.link)link.href=item.link;else{link.type='button';link.dataset.exVisa=item.visa;}
+            copy.append(link);
+          }
+          scene.append(number,copy);box.append(scene);targetById.set(item.id,scene);
+        }
+        scenes.append(box);
       });
-      function render(i){
-        active=i;const stop=EXPERIENCE_STOPS[i];
-        controls.forEach((button,index)=>{
-          button.tabIndex=index===i?0:-1;
-          button.setAttribute('aria-selected',String(index===i));
+      const setCurrent=id=>{
+        if(id===current)return;
+        const stop=SPATIAL_DESTINATIONS.find(x=>x.id===id);
+        if(!stop)return;
+        current=id;
+        stopLinks.forEach((l,key)=>{if(key===id)l.setAttribute('aria-current','location');else l.removeAttribute('aria-current');});
+        groupLinks.forEach((l,key)=>{if(key===stop.group)l.setAttribute('aria-current','location');else l.removeAttribute('aria-current');});
+        const link=stopLinks.get(id), l=link.getBoundingClientRect(), s=stops.getBoundingClientRect();
+        if(l.left<s.left||l.right>s.right)stops.scrollTo({left:stops.scrollLeft+l.left-s.left-(s.width-l.width)/2,behavior:reduced.matches?'instant':'smooth'});
+      };
+      spatialNavigate=(id,focus=false)=>{
+        const el=targetById.get(id);if(!el)return;
+        clearTimeout(intentTimer);intent=id;setCurrent(id);
+        el.classList.add('is-seen');
+        el.scrollIntoView({block:'start',behavior:focus&&!reduced.matches?'smooth':'instant'});
+        if(focus)el.focus({preventScroll:true});
+        intentTimer=setTimeout(()=>{intent=null;onScroll();},focus&&!reduced.matches?860:80);
+      };
+      const onScroll=()=>{
+        if(scheduled || intent || !page.classList.contains('active'))return;
+        scheduled=true;
+        requestAnimationFrame(()=>{
+          scheduled=false;if(intent)return;
+          const line=Math.max(innerHeight*.42,nav.getBoundingClientRect().bottom+36);
+          let active=SPATIAL_DESTINATIONS[0].id;
+          for(const [id,element] of targetById){
+            if(element.getBoundingClientRect().top>line)break;
+            active=id;
+          }
+          setCurrent(active);
         });
-        panel.setAttribute('aria-labelledby',controls[i].id);
-        image.src=stop.src;image.alt=stop.alt || stop.label+' at Amada Residence';
-        imageButton.style.setProperty('--ex-focus',stop.focus);
-        imageButton.setAttribute('aria-label','View full image for '+stop.label);
-        label.textContent=stop.kind;title.textContent=stop.title;desc.textContent=stop.subtitle;
-        tags.replaceChildren(...stop.tags.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
-        count.textContent=two(i+1)+' / '+two(EXPERIENCE_STOPS.length);
-        next.firstChild.nodeValue=i===EXPERIENCE_STOPS.length-1?'Back to arrival ':'Next stop ';
+      };
+      if('IntersectionObserver' in window && !reduced.matches){
+        const reveal=new IntersectionObserver(entries=>{
+          for(const e of entries){if(e.isIntersecting){e.target.classList.add('is-seen');reveal.unobserve(e.target);}}
+        },{threshold:.13});
+        for(const el of targetById.values()){el.classList.add('sp-will-reveal');reveal.observe(el);}
       }
-      next.addEventListener('click',()=>render((active+1)%EXPERIENCE_STOPS.length));
-      imageButton.addEventListener('click',()=>openGalleryModal(active,EXPERIENCE_STOPS));
-      page.querySelector('#experienceStart').addEventListener('click',()=>{
-        const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const tour=page.querySelector('#experienceTour');
-        tour.querySelector('h2').focus({preventScroll:true});
-        tour.scrollIntoView({block:'start',behavior:reduced?'instant':'smooth'});
+      addEventListener('scroll',onScroll,{passive:true});
+      addEventListener('resize',onScroll,{passive:true});
+      byId('experienceStart').addEventListener('click',()=>{
+        if(location.hash!=='#/experience/boulevard')history.pushState(null,'','#/experience/boulevard');
+        spatialNavigate('boulevard',true);
       });
       page.querySelectorAll('[data-ex-visa]').forEach(button=>button.addEventListener('click',()=>{
         pendingExperienceVisa=button.dataset.exVisa;
         location.hash='#/pr-card';
       }));
-      render(0);
+      setCurrent('boulevard');
     }
-
 
     function showPage(page, { scrollTop = true } = {}) {
       if (page !== 'pr-card') prxPreview?.clearDetails();
@@ -3509,7 +3672,8 @@
       document.querySelectorAll('.page[data-page]').forEach(p => p.classList.remove('active'));
       (document.querySelector(`.page[data-page="${page}"]`) || document.querySelector('.page[data-page="home"]'))?.classList.add('active');
 
-      if (scrollTop) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      const destination=page==='experience'?experienceSlug():null;
+      if (scrollTop&&!destination) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
       lucide.createIcons();
 
@@ -3526,13 +3690,16 @@
         else focusEstateTerritory();
       }
 
-      if (page === 'experience') initExperience();
+      if (page === 'experience') {
+        initExperience();
+        if(destination)requestAnimationFrame(()=>spatialNavigate?.(destination,false));
+      }
     }
 
     function getRoutePage() {
       const h = location.hash || '#/home';
       if (!h.startsWith('#/')) return 'home';
-      const page = h.replace('#/', '').trim();
+      const page = h.slice(2).split('/')[0].trim();
       if (page === 'city' || page === 'gallery') return 'experience';
       const allowed = new Set(['home','about','experience','assets','pr-card']);
       return allowed.has(page) ? page : 'home';
