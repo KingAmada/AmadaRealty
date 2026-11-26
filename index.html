@@ -1109,6 +1109,15 @@
     #page-pr-card .prx-policy{display:flex;gap:.65rem;justify-content:center;color:#dae2f0;font-size:.8rem;border:1px solid #ffffff18;background:#ffffff08;border-radius:12px;padding:11px 8px}
     #page-pr-card .prx-policy button{text-decoration:underline;text-underline-offset:3px}
     #page-pr-card .prx-form-note{color:#c1cce0;text-align:center;font-size:.78rem;line-height:1.4}
+    #page-pr-card [hidden]{display:none!important}
+    #page-pr-card .prx-receipt{text-align:center;margin:.15rem 0 1.5rem;color:#c1cce0}
+    #page-pr-card .prx-receipt h2{font-size:clamp(1.9rem,5vw,2.65rem);color:#f8fafc;margin:.65rem 0 .35rem}
+    #page-pr-card .prx-receipt p{font:500 .92rem/1.5 system-ui,sans-serif;margin:.15rem 0}
+    #page-pr-card .prx-receipt strong{color:#f8fafc;overflow-wrap:anywhere}
+    #page-pr-card .prx-receipt-check{display:inline-grid;place-items:center;width:50px;height:50px;border-radius:50%;background:#14532d66;color:#86efac;font-size:1.35rem}
+    #page-pr-card .prx-receipt-actions{display:grid;width:100%;gap:.9rem;margin-top:1rem;text-align:center}
+    #page-pr-card .prx-receipt-back{color:#c1cce0;padding:.7rem;font:650 .72rem system-ui;letter-spacing:.12em;text-transform:uppercase}
+    #page-pr-card .prx-btn:disabled{cursor:wait;opacity:.67}
     #page-pr-card .prx-demo-summary{color:#e9dfca;background:#152139;padding:.7rem .85rem;border-radius:.6rem;font-size:.8rem;line-height:1.4}
     @media (max-width:600px){
       #page-pr-card .prx-wrap{padding-inline:10px}
@@ -1236,8 +1245,8 @@
   <div class="fixed top-0 left-0 w-full z-50 bg-slate-900 text-white text-xs py-2 glass-panel border-none !bg-slate-900/90 backdrop-blur-md">
     <div class="marquee-container flex items-center">
       <div class="marquee-content px-4 font-medium tracking-widest uppercase">
-        Amada Residence // The Chosen 75 // Private estate preview // Embassy applications not yet open //
-        Amada Residence // The Chosen 75 // Private estate preview // Embassy applications not yet open //
+        Amada Residence // The Chosen 75 // Private estate preview // Permanent Residency applications //
+        Amada Residence // The Chosen 75 // Private estate preview // Permanent Residency applications //
       </div>
     </div>
   </div>
@@ -2384,14 +2393,14 @@
           <div class="prx-text">
             <div class="text-[10px] uppercase tracking-[0.25em] font-bold text-slate-400 mb-6">The Estate Embassy</div>
             <h1>Not For Everyone.<br/>Perhaps, For You.</h1>
-            <p>Explore Permanent Residency and the Visitor Visa.</p>
+            <p>Apply for Permanent Residency or explore the Visitor Visa.</p>
             <div class="prx-preview-note"><strong>The Chosen 75</strong><br>The PR Card is the resident credential for Amada Residence. The Visitor Visa is for private estate visits.</div>
           </div>
 
           <div class="prx-card-col">
             <div class="prx-glass" id="prxGlass">
               <div id="prxFormView" class="w-full flex flex-col items-center">
-                <div class="w-full grid grid-cols-2 gap-2 px-2 mb-4">
+                <div id="prxEntryModes" class="w-full grid grid-cols-2 gap-2 px-2 mb-4">
                   <button type="button" id="prxModePR" aria-pressed="true"
                           class="rounded-2xl px-4 py-3 text-[10px] font-extrabold tracking-[0.25em] uppercase border border-white/10 bg-white/10 text-white hover:bg-white/15 transition">
                     PR Card
@@ -2402,12 +2411,18 @@
                   </button>
                 </div>
 
+                <div id="prxReceiptHeader" class="prx-receipt" tabindex="-1" hidden aria-labelledby="prxReceiptTitle">
+                  <span class="prx-receipt-check" aria-hidden="true">✓</span>
+                  <h2 id="prxReceiptTitle">Request Received</h2>
+                  <p>Your dossier ID is <strong id="prxDossierRef"></strong>.</p>
+                  <p>Keep this reference for follow-up.</p>
+                </div>
                 <div class="w-full flex justify-between items-center px-2 mb-4">
                   <div class="flex items-center gap-2">
                     <i data-lucide="gem" class="w-4 h-4 text-white"></i>
                     <span class="text-xs font-bold tracking-widest text-white" id="prxHeaderBrand">AMADA PR</span>
                   </div>
-                  <span class="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Card Status: Preview</span>
+                  <span id="prxCardStatus" class="text-[9px] font-bold tracking-widest text-slate-400 uppercase">Card Status: Preview</span>
                 </div>
 
                 <div class="prx-card-container" id="prxCard" tabindex="-1" role="group" aria-label="Amada Residence card preview">
@@ -2444,15 +2459,19 @@
                   </div>
                 </div>
 
-                <div class="w-full space-y-4">
+                 <div id="prxReceiptActions" class="prx-receipt-actions" hidden>
+                  <button class="prx-btn" id="prxDownloadReceipt" type="button">Download Acknowledgement</button>
+                  <button id="prxReceiptBack" type="button" class="prx-receipt-back">Back</button>
+                </div>
+                <form id="prxFieldsForm" class="w-full space-y-4">
                   <div class="w-full">
                     <label class="prx-label" id="prxNameLabel" for="prxNameInput">Resident Full Name</label>
-                    <input type="text" class="prx-input" placeholder="e.g. Dr. Aliko Dangote" id="prxNameInput" maxlength="40" autocomplete="off">
+                    <input type="text" class="prx-input" placeholder="e.g. Dr. Aliko Dangote" id="prxNameInput" maxlength="80" autocomplete="name">
                   </div>
 
                   <div class="w-full">
                     <label class="prx-label" for="prxPhoneInput">Phone Number</label>
-                    <input type="tel" class="prx-input" placeholder="08012345678" id="prxPhoneInput" maxlength="11" autocomplete="off" inputmode="numeric">
+                    <input type="tel" class="prx-input" placeholder="08012345678" id="prxPhoneInput" maxlength="24" autocomplete="tel" inputmode="tel">
                   </div>
 
                   <div class="w-full">
@@ -2489,9 +2508,9 @@
                     <span aria-hidden="true">·</span>
                     <button type="button" onclick="openLegal('privacy')">Privacy Policy</button>
                   </div>
-                  <button class="prx-btn" id="prxApplyBtn" type="button">Preview Waitlist Card</button>
-                  <p class="prx-form-note" id="prxPreviewStatus" role="status"></p>
-                </div>
+                  <button class="prx-btn" id="prxApplyBtn" type="submit">Submit Application</button>
+                  <p class="prx-form-note" id="prxPreviewStatus" role="status" aria-live="polite"></p>
+                </form>
               </div>
             </div>
           </div>
@@ -4466,7 +4485,7 @@
         resident.setAttribute('aria-pressed', String(!visa));
         visitor.setAttribute('aria-pressed', String(visa));
         get('prxVisaFields').classList.toggle('hidden', !visa);
-        apply.textContent = visa ? 'Preview Visitor Visa' : 'Preview Waitlist Card';
+        apply.textContent = visa ? 'Preview Visitor Visa' : 'Submit Application';
         resetStatus();
         drawName();
       };
@@ -4484,16 +4503,101 @@
       card.addEventListener('pointerleave', resetTilt);
       card.addEventListener('pointercancel', resetTilt);
       name.addEventListener('input', () => { drawName(); resetStatus(); });
-      phone.addEventListener('input', () => { phone.value = phone.value.replace(/[^0-9]/g,'').slice(0,11); resetStatus(); });
+      phone.addEventListener('input', () => { resetStatus(); });
       tier.addEventListener('change', () => switchCard(tier.value));
       visit.addEventListener('change', () => { drawVisit(); resetStatus(); });
       resident.addEventListener('click', () => switchCard(lastResident));
       visitor.addEventListener('click', () => switchCard('visa'));
-      apply.addEventListener('click', () => {
-        const visa = tier.value === 'visa';
-        status.textContent = (visa ? 'Visitor Visa' : 'PR Card') + ' preview updated.';
-        card.focus({preventScroll:true});
-        card.scrollIntoView({block:'center', behavior:reduceMotion.matches ? 'auto' : 'smooth'});
+      const fields=get('prxFieldsForm'), modes=get('prxEntryModes'), receiptTop=get('prxReceiptHeader'), receiptActions=get('prxReceiptActions');
+      let inFlight=false, generation=0, lastRequest=null, confirmation=null;
+      const lockForm=locked=>[name,phone,tier,resident,visitor,apply].forEach(el=>el.disabled=locked);
+      const hideReceipt=()=>{
+        generation++;
+        confirmation=null;
+        inFlight=false;
+        modes.hidden=false;
+        fields.hidden=false;
+        receiptTop.hidden=true;
+        receiptActions.hidden=true;
+        lockForm(false);
+        get('prxCardStatus').textContent='Card Status: Preview';
+      };
+      const showReceipt=(result,payload)=>{
+        confirmation={result,payload};
+        cardName.textContent=payload.fullName;
+        modes.hidden=true;
+        fields.hidden=true;
+        receiptTop.hidden=false;
+        receiptActions.hidden=false;
+        get('prxDossierRef').textContent=result.reference;
+        get('prxCardStatus').textContent='Application Received';
+        get('prxCardHolderLabel').textContent='Residency Applicant';
+        if(page.classList.contains('active')){
+          receiptTop.focus({preventScroll:true});
+          receiptTop.scrollIntoView({block:'center',behavior:reduceMotion.matches?'auto':'smooth'});
+        }
+      };
+      fields.addEventListener('submit',async event=>{
+        event.preventDefault();
+        if(inFlight || confirmation)return;
+        if(tier.value==='visa'){
+          status.textContent='Visitor Visa preview updated.';
+          card.focus({preventScroll:true});
+          card.scrollIntoView({block:'center',behavior:reduceMotion.matches?'auto':'smooth'});
+          return;
+        }
+        const fullName=name.value.trim().replace(/\s+/gu,' ');
+        const contactPhone=phone.value.replace(/[\s().-]/g,'');
+        if(fullName.length<2 || !/\p{L}/u.test(fullName) || /[\p{Cc}\p{Cf}<>]/u.test(fullName)){
+          status.textContent='Enter your full name.';name.focus();return;
+        }
+        if(!/^(?:0\d{10}|\+[1-9]\d{7,14})$/.test(contactPhone)){
+          status.textContent='Enter an 11-digit local number or an international number with + and country code.';
+          phone.focus();return;
+        }
+        const selectedMatches=selected&&(selected.kind==='presidential-villa'?tier.value==='presidential':selected.territory===tier.value);
+        const payload={fullName,phone:contactPhone,tier:tier.value,plot:selectedMatches?measuredPlotRef(selected):''};
+        const fingerprint=JSON.stringify(payload);
+        if(lastRequest?.fingerprint!==fingerprint)lastRequest={fingerprint,key:crypto.randomUUID()};
+        const gen=generation;
+        inFlight=true;lockForm(true);apply.textContent='Submitting…';
+        try{
+          const response=await fetch('/api/residence-application',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({...payload,requestKey:lastRequest.key}),signal:AbortSignal.timeout(18000)
+          });
+          const result=await response.json().catch(()=>({}));
+          if(gen!==generation)return;
+          if(!response.ok || !/^AMR-[A-Z]+-[A-F0-9]{12}$/.test(result.reference||'') || !Number.isFinite(Date.parse(result.receivedAt))){
+            status.textContent=typeof result.error==='string'?result.error:'We could not confirm your submission. Please try again.';
+            return;
+          }
+          status.textContent='';
+          showReceipt(result,payload);
+        }catch{
+          if(gen===generation)status.textContent='We could not confirm your submission. Please try again.';
+        }finally{
+          if(gen===generation){
+            inFlight=false;lockForm(false);
+            apply.textContent=tier.value==='visa'?'Preview Visitor Visa':'Submit Application';
+          }
+        }
+      });
+      get('prxReceiptBack').addEventListener('click',()=>{
+        hideReceipt();switchCard(lastResident);name.focus({preventScroll:true});
+        fields.scrollIntoView({block:'center',behavior:reduceMotion.matches?'auto':'smooth'});
+      });
+      get('prxDownloadReceipt').addEventListener('click',()=>{
+        if(!confirmation)return;
+        const {result,payload}=confirmation;
+        const lines=['AMADA RESIDENCE','Permanent Residency Application Acknowledgement','',
+          'Reference: '+result.reference,'Applicant: '+payload.fullName,
+          'Residence: '+(prxCardData[payload.tier]?.tier||'Permanent Residency')+(payload.plot?' · '+payload.plot:''),
+          'Received: '+result.receivedAt,'','Your application was received. This is not an approval or a residency credential.'];
+        const url=URL.createObjectURL(new Blob([lines.join('\n')+'\n'],{type:'text/plain;charset=utf-8'}));
+        const link=document.createElement('a');link.href=url;link.download=result.reference+'-Acknowledgement.txt';
+        document.body.append(link);link.click();link.remove();
+        setTimeout(()=>URL.revokeObjectURL(url),1000);
       });
       prxPreview = {
         fromPlot(unit) {
@@ -4501,6 +4605,9 @@
           switchCard(unit && unit.kind === 'presidential-villa' ? 'presidential' : (unit?.territory || 'ny'));
         },
         clearDetails() {
+          hideReceipt();
+          lastRequest = null;
+          switchCard(tier.value);
           name.value = '';
           phone.value = '';
           visit.value = '';
@@ -4525,10 +4632,10 @@
         subtitle: 'How this public estate preview handles information.',
         body: `
           <h4 style="font-weight:800; margin-top:0;">1. Scope</h4>
-          <p>This preview does not accept visitor or residency applications, issue credentials or accept payments.</p>
+          <p>This site accepts Permanent Residency applications. The Visitor Visa form is a preview. Neither flow issues credentials or accepts payments.</p>
 
           <h4 style="font-weight:800;">2. Technical Data</h4>
-          <p>Temporary selections may be stored in your browser for the duration of your visit. The site uses external resources to display fonts and icons. Hosting and resource providers may receive technical request information such as an IP address.</p>
+          <p>When you submit a Permanent Residency application, we store the name, phone number, residence selection, and submission reference you provide or receive so the application can be reviewed and followed up. Temporary selections may be stored in your browser for the duration of your visit. The site uses external resources to display fonts and icons. Hosting and resource providers may receive technical request information such as an IP address.</p>
 
           <h4 style="font-weight:800;">5. Contact</h4>
           <p><a href="mailto:concierge@amadarealty.com"><strong>Concierge inquiries</strong></a></p>
@@ -4544,7 +4651,7 @@
 
           <h4 style="font-weight:800;">2. PR Card Requests</h4>
           <ul style="margin-left:18px; list-style:disc;">
-            <li>This preview does not accept PR Card requests, issue Visitor Visas, grant access, or take deposits.</li>
+            <li>A Permanent Residency application is a request for review, not an approval, credential, reservation, or right of access. This site does not issue Visitor Visas or take deposits.</li>
             <li>We may require proof of funds and/or references before private disclosures.</li>
           </ul>
 
