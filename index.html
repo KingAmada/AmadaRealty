@@ -3709,12 +3709,13 @@
       const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#e2dfbe"/>';
       const gateApproach='M66 580C112 574 162 562 212 552C235 552 245 542 253 521L270 543C265 606 267 661 296 720L283 752C272 727 251 726 221 730L66 748Z';
       const gateCurbs='M68 580C112 574 162 562 212 552C235 552 245 542 253 521M68 748L221 730C251 726 272 727 283 752';
-      const gateSplitter='M70 650L126 644Q133 643 135 650Q135 656 126 657L70 663Z';
-      const gateCrossing=Array.from({length:9},(_,i)=>'<rect x="95" y="'+(598+i*12)+'" width="13" height="4.1" rx=".45"/>').join('');
+      // Curb-bounded gate island, with the crossing at the gate line as in the 3D view.
+      const gateSplitter='M78 686L151 678Q157 677 160 672L174 650Q176 647 173 644L153 626Q150 623 146 624L78 633Z';
+      const gateCrossing=Array.from({length:17},(_,i)=>'<rect x="77" y="'+(590+i*8.5)+'" width="24" height="3.7" rx=".5"/>').join('');
       const gateDrive='<g id="atlasResortGateDrive" aria-label="Resort gate driveway joins the outer road">'+
         '<path d="'+gateApproach+'" fill="#102e26"/><path d="'+gateCurbs+'" fill="none" stroke="#7f9c7c" stroke-opacity=".7" stroke-width="2.35"/>'+
-        '<g fill="#eee0bd" opacity=".75">'+gateCrossing+'</g>'+
-        '<path d="'+gateSplitter+'" fill="#64815b" stroke="#b9ba90" stroke-width="2.5"/></g>';
+        '<path id="atlasResortGateSplitter" d="'+gateSplitter+'" fill="#1c372e" stroke="#d0c4a1" stroke-width="3.7" stroke-linejoin="round"/>'+
+        '<g id="atlasResortGateCrossing" fill="#eee5cf" opacity=".93">'+gateCrossing+'</g></g>';
       const resortFrontage='<g id="atlasResortFrontage" transform="'+planCoordinates+'">'+
         '<path d="'+frontage+'" fill="#102e26"/>'+gateDrive+
         '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#aeb28a" stroke-width="3.4" stroke-linejoin="round"/>'+
