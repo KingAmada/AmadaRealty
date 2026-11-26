@@ -1129,46 +1129,46 @@
 
 
     /* Assets / architectural atlas */
-    #page-assets{--atlas-dark:#102b26;--atlas-copper:#e6b785;--atlas-ink:#19332c}
+    #page-assets{--atlas-dark:#0f172a;--atlas-accent:#adc3df;--atlas-ink:#0f172a}
     .atlas-shell{max-width:1370px;margin:auto;padding:3.8rem clamp(1rem,4vw,3.5rem) 4rem;color:var(--atlas-ink)}
-    .atlas-intro{display:flex;justify-content:space-between;align-items:end;gap:1.35rem;margin-bottom:1.8rem;border-bottom:1px solid #b7c0b1;padding-bottom:1.3rem}
+    .atlas-intro{display:flex;justify-content:space-between;align-items:end;gap:1.35rem;margin-bottom:1.8rem;border-bottom:1px solid #cbd5e1;padding-bottom:1.3rem}
     .atlas-eyebrow{font:700 .68rem system-ui,sans-serif;letter-spacing:.21em;text-transform:uppercase}
     .atlas-intro h2{font:500 clamp(3.1rem,6.5vw,5.8rem)/.95 "Cormorant Garamond",Georgia,serif;margin:.45rem 0 .6rem}
-    .atlas-intro p{color:#475c53}
+    .atlas-intro p{color:#475569}
     .atlas-intro-right{text-align:right;display:grid;gap:.2rem}
     .atlas-intro-right span,.atlas-intro-right button{font:700 .67rem system-ui;letter-spacing:.14em;text-transform:uppercase}
     .atlas-intro-right strong{font:600 1.6rem "Cormorant Garamond",Georgia;white-space:nowrap}
     .atlas-intro-right button{text-decoration:underline;text-underline-offset:.2em;margin-top:.35rem}
     .atlas-layout{display:grid;grid-template-columns:minmax(0,1.58fr) minmax(0,1fr);gap:1.25rem;align-items:start}
-    .atlas-board{min-width:0;background:linear-gradient(160deg,#1e4439,#0c231f 70%);color:#faf1e0;border:1px solid #345548;border-radius:1.35rem;overflow:hidden;box-shadow:0 18px 48px #0c2c252b}
+    .atlas-board{min-width:0;background:linear-gradient(160deg,#263751,#111c30 70%);color:#f8fafc;border:1px solid #334155;border-radius:1.35rem;overflow:hidden;box-shadow:0 18px 48px #0f172a26}
     .atlas-bar{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:1.2rem 1.3rem .7rem}
-    .atlas-bar .atlas-eyebrow{color:var(--atlas-copper)}
+    .atlas-bar .atlas-eyebrow{color:var(--atlas-accent)}
     .atlas-bar h3{font:500 clamp(1.75rem,3vw,2.7rem)/1.03 "Cormorant Garamond",Georgia,serif;margin-top:.28rem}
     .atlas-controls,.atlas-streets{display:flex;align-items:center;gap:.36rem}
-    .atlas-controls button,.atlas-streets button{border:1px solid #f1d0ac42;border-radius:2rem;min-height:42px;padding:.38rem .65rem;font:650 .74rem system-ui;white-space:nowrap}
+    .atlas-controls button,.atlas-streets button{border:1px solid #cbd5e142;border-radius:2rem;min-height:42px;padding:.38rem .65rem;font:650 .74rem system-ui;white-space:nowrap}
     .atlas-controls button{min-width:42px}
-    .atlas-controls button:hover,.atlas-streets button:hover{background:#f1d0ac25}
+    .atlas-controls button:hover,.atlas-streets button:hover{background:#cbd5e125}
     .atlas-streets{padding:.35rem 1.3rem 1rem;overflow:auto}
-    .atlas-streets button[aria-pressed="true"]{background:#f0c899;color:#112a24;border-color:#f0c899}
-    .atlas-stage{position:relative;isolation:isolate;height:clamp(510px,70vw,760px);background:#122e27;background-image:radial-gradient(ellipse at 37% 25%,#345448,transparent 65%)}
+    .atlas-streets button[aria-pressed="true"]{background:#e2eaf5;color:#0f172a;border-color:#e2eaf5}
+    .atlas-stage{position:relative;isolation:isolate;height:clamp(510px,70vw,760px);background:#16243a;background-image:radial-gradient(ellipse at 37% 25%,#334863,transparent 65%)}
     .atlas-svg{display:block;width:100%;height:100%;user-select:none;touch-action:pan-y}
-    .atlas-compass{position:absolute;z-index:1;top:.7rem;left:1.1rem;color:#f5d7ad;display:grid;justify-items:center;font:700 .64rem system-ui;gap:2px;pointer-events:none}
+    .atlas-compass{position:absolute;z-index:1;top:.7rem;left:1.1rem;color:#dbeafe;display:grid;justify-items:center;font:700 .64rem system-ui;gap:2px;pointer-events:none}
     .atlas-footer{display:grid;gap:.85rem;padding:1rem 1.3rem 1.2rem}
-    .atlas-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font:500 .76rem system-ui;color:#fff3df}
+    .atlas-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font:500 .76rem system-ui;color:#e2e8f0}
     .atlas-legend span::before{content:"";width:.62rem;height:.62rem;border-radius:2px;background:var(--swatch);display:inline-block;margin-right:.35rem}
-    .atlas-legend .detached{--swatch:#eed9b4}.atlas-legend .terrace{--swatch:#e3c69b}.atlas-legend .villa{--swatch:#efcc94}.atlas-legend .landscape{--swatch:#70936f}
-    .atlas-picker{display:grid;gap:.35rem}.atlas-picker label{font:650 .65rem system-ui;letter-spacing:.13em;text-transform:uppercase;color:#ebc79f}
-    .atlas-picker select{width:100%;background:#faf3e5;color:#18352d;border-radius:.55rem;padding:.7rem .8rem;font-size:.9rem}
+    .atlas-legend .detached{--swatch:#f8fafc}.atlas-legend .terrace{--swatch:#e5ecf4}.atlas-legend .villa{--swatch:#ffffff}.atlas-legend .landscape{--swatch:#719484}
+    .atlas-picker{display:grid;gap:.35rem}.atlas-picker label{font:650 .65rem system-ui;letter-spacing:.13em;text-transform:uppercase;color:#bfd0e7}
+    .atlas-picker select{width:100%;background:#f8fafc;color:#0f172a;border-radius:.55rem;padding:.7rem .8rem;font-size:.9rem}
     .atlas-details{position:sticky;top:8.5rem}
-    .atlas-detail-card{background:#fbf7ee;border:1px solid #d4cbbc;border-radius:1.35rem;padding:clamp(.9rem,2vw,1.5rem);box-shadow:0 14px 38px #19332c10}
-    .atlas-detail-card #selectedTitle{font-size:clamp(1.65rem,3.1vw,2.35rem);color:#1e3f35}
+    .atlas-detail-card{background:#f8fafc;border:1px solid #d7e0eb;border-radius:1.35rem;padding:clamp(.9rem,2vw,1.5rem);box-shadow:0 14px 38px #0f172a12}
+    .atlas-detail-card #selectedTitle{font-size:clamp(1.65rem,3.1vw,2.35rem);color:#0f172a}
     .atlas-svg [data-unit]{cursor:pointer;outline:none}
-    .atlas-svg .atlas-lot{stroke:#68756d;stroke-width:.46}
-    .atlas-svg .atlas-house{stroke:#5c6761;stroke-width:.38;pointer-events:none}
-    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#f8f7ef;stroke:#fff0ce;stroke-width:1.25}
-    .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#744523;stroke-width:.85}
+    .atlas-svg .atlas-lot{stroke:#64748b;stroke-width:.46}
+    .atlas-svg .atlas-house{stroke:#475569;stroke-width:.38;pointer-events:none}
+    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#e5f2ff;stroke:#d2e9ff;stroke-width:1.25}
+    .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#2563a5;stroke-width:.85}
     .atlas-svg text{pointer-events:none;font-family:system-ui,sans-serif}
-    .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #ffedb8;outline-offset:2px}
+    .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #bfdbfe;outline-offset:2px}
     @media(max-width:900px){.atlas-layout{grid-template-columns:1fr}.atlas-details{position:static}.atlas-stage{height:clamp(440px,133vw,690px)}}
     @media(max-width:520px){.atlas-shell{padding-top:2.25rem}.atlas-intro{align-items:start;flex-direction:column}.atlas-intro-right{text-align:left;grid-template-columns:auto auto;align-items:center;column-gap:.6rem}.atlas-intro-right button{justify-self:start}.atlas-bar,.atlas-footer{padding-inline:.8rem}.atlas-streets{padding-inline:.8rem}.atlas-stage{height:clamp(410px,137vw,600px)}}
 
@@ -1196,30 +1196,30 @@
     .map-facts strong{display:block;font:700 clamp(.9rem,2vw,1.2rem) Georgia,serif}
     .map-facts small{display:block;font-size:.63rem;line-height:1.25;margin-top:.2rem}
     #selectedTitle{scroll-margin-top:9rem}
-    .residence-gallery{margin-top:1.5rem;padding:clamp(.75rem,2vw,1.1rem);border:1px solid #d3c9b6;border-radius:1.4rem;background:linear-gradient(145deg,#fffaf1,#f1ede3);color:#19392f}
+    .residence-gallery{margin-top:1.5rem;padding:clamp(.75rem,2vw,1.1rem);border:1px solid #dae3ef;border-radius:1.4rem;background:linear-gradient(145deg,#ffffff,#eef3f9);color:#0f172a}
     .residence-gallery[hidden],.residence-gallery [hidden]{display:none!important}
     .rg-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:.1rem .2rem .75rem}
     .rg-top h3,.rg-top span{font:750 .66rem/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
-    .rg-top span{white-space:nowrap;color:#53665c;font-variant-numeric:tabular-nums}
+    .rg-top span{white-space:nowrap;color:#475569;font-variant-numeric:tabular-nums}
     .rg-stage{perspective:850px;touch-action:pan-y}
-    .rg-card{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;margin:0;color:#fff4dc;border:1px solid #af9465;border-radius:1.05rem;background:linear-gradient(145deg,#24463a,#102a23 60%,#1f4336);box-shadow:0 12px 24px #102b2540,inset 0 0 0 4px #f7db9c15;transform-style:preserve-3d;transition:transform .22s ease-out}
-    .rg-art{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:0;aspect-ratio:1/1;margin:5px 5px 0;border-radius:.76rem .76rem .22rem .22rem;background:#17382e}
+    .rg-card{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;margin:0;color:#f8fafc;border:1px solid #8395af;border-radius:1.05rem;background:linear-gradient(145deg,#31445e,#111c30 60%,#223650);box-shadow:0 12px 24px #0f172a33,inset 0 0 0 4px #e2e8f018;transform-style:preserve-3d;transition:transform .22s ease-out}
+    .rg-art{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:0;aspect-ratio:1/1;margin:5px 5px 0;border-radius:.76rem .76rem .22rem .22rem;background:#1e293b}
     .rg-art::before{content:"";position:absolute;inset:-16px;z-index:-1;background:var(--rg-image,none) center/cover;filter:blur(17px) brightness(.48) saturate(.80)}
     .rg-art img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;user-select:none}
-    .rg-art p{font:600 .77rem system-ui;color:#fff4dc}
-    .rg-identity{display:grid;gap:.25rem;padding:.65rem .9rem .75rem;transform:translateZ(14px);pointer-events:none;text-shadow:0 2px 8px #001b15}
-    .rg-identity span{font:700 .59rem/1.3 system-ui;letter-spacing:.15em;text-transform:uppercase;color:#ebd4a6}
+    .rg-art p{font:600 .77rem system-ui;color:#f8fafc}
+    .rg-identity{display:grid;gap:.25rem;padding:.65rem .9rem .75rem;transform:translateZ(14px);pointer-events:none;text-shadow:0 2px 8px #020617}
+    .rg-identity span{font:700 .59rem/1.3 system-ui;letter-spacing:.15em;text-transform:uppercase;color:#c8dbf3}
     .rg-identity strong{font-size:clamp(1.25rem,3vw,1.68rem);font-weight:650;line-height:1.1}
     .rg-shine{position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;transition:opacity .22s ease}
     .rg-controls{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.7rem}
-    .rg-controls>button{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:50%;background:#19392f;color:#fff4dc;border:1px solid #19392f;transition:background .18s}
-    .rg-controls>button:hover{background:#315a4a}
+    .rg-controls>button{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:50%;background:#0f172a;color:#f8fafc;border:1px solid #0f172a;transition:background .18s}
+    .rg-controls>button:hover{background:#334766}
     .rg-dots{display:flex;justify-content:center;flex-wrap:wrap}
     .rg-dots button{width:28px;height:44px;padding:0;display:grid;place-items:center;border-radius:8px}
-    .rg-dots button::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#a69e8d;transition:width .18s,background .18s}
-    .rg-dots button[aria-current="true"]::before{width:1rem;border-radius:1rem;background:#214439}
-    .rg-controls button:focus-visible{outline:2px solid #26634e;outline-offset:2px}
-    .rg-caption{min-height:1.2em;text-align:center;color:#415951;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
+    .rg-dots button::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#8291a5;transition:width .18s,background .18s}
+    .rg-dots button[aria-current="true"]::before{width:1rem;border-radius:1rem;background:#253b59}
+    .rg-controls button:focus-visible{outline:2px solid #2b5c9b;outline-offset:2px}
+    .rg-caption{min-height:1.2em;text-align:center;color:#475569;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
     @media(prefers-reduced-motion:reduce){.rg-card,.rg-shine,.rg-controls button,.rg-dots button::before{transition:none}}
 </style>
 </head>
@@ -3703,7 +3703,7 @@
     const atlasStreets=['ny','london','naija','dubai','canada'];
     const atlasFull=[-145,-209,290,418];
     // Quiet whites across each street, with softer plot tones for clear roof silhouettes.
-    const atlasResidencePalette={detached:['#c5cac3','#f8f8f2'],townhouse:['#bcc6c3','#e9eeed'],villa:['#d0d0c7','#fffdf6']};
+    const atlasResidencePalette={detached:['#c4cfda','#f8fafc'],townhouse:['#b8c6d4','#e5ecf4'],villa:['#ccd7e2','#ffffff']};
     let atlasView=atlasFull.slice();
     let atlasGeometryByUnit=new Map();
     const atlasCenter=p=>p.reduce((q,v)=>[q[0]+v[0]/p.length,q[1]+v[1]/p.length],[0,0]);
@@ -3712,7 +3712,7 @@
     const atlasPoly=(p,fill,attr='')=>'<polygon points="'+p.map(atlasPoint).join(' ')+'" fill="'+fill+'" '+attr+'/>';
     const atlasLine=(p,stroke,w,attr='')=>'<polyline points="'+p.map(atlasPoint).join(' ')+'" fill="none" stroke="'+stroke+'" stroke-width="'+w+'" '+attr+'/>';
     function atlasLabel(at,name,{small=false,angle=0}={}){
-      return '<text x="'+at[0]+'" y="'+at[1]+'" transform="rotate('+angle+' '+at.join(' ')+')" fill="'+(small?'#fae5bb':'#fff3d4')+'" text-anchor="middle" paint-order="stroke" stroke="#152b26" stroke-width=".72" stroke-linejoin="round" font-size="'+(small?'2.75':'3.85')+'" font-weight="800" letter-spacing="'+(small?'.17':'.34')+'">'+name+'</text>';
+      return '<text x="'+at[0]+'" y="'+at[1]+'" transform="rotate('+angle+' '+at.join(' ')+')" fill="'+(small?'#dbeafe':'#f8fafc')+'" text-anchor="middle" paint-order="stroke" stroke="#142033" stroke-width=".72" stroke-linejoin="round" font-size="'+(small?'2.75':'3.85')+'" font-weight="800" letter-spacing="'+(small?'.17':'.34')+'">'+name+'</text>';
     }
 
     // Resort detail is registered against the gate and roof corners in the owner's reference.
@@ -3731,8 +3731,8 @@
       const boulders=[[786,164],[803,176],[799,191],[660,413],[673,425],[754,637],[741,647],[740,658],[714,815],[769,843],[860,920],[877,926]];
       const seating=[[723,280,36],[707,303,33],[690,325,32],[714,497,-47],[738,526,-39],[750,555,-19],[701,727,11],[704,756,-9],[724,785,-25],[746,815,-33],[791,856,-41]];
       const foliage=palms.map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+((i*59)%120)+') scale('+(r/16)+')"><use href="#atlasResortPalm"/></g>').join('');
-      const stones=boulders.map(([x,y],i)=>'<g transform="translate('+x+' '+y+') rotate('+i*29+')"><ellipse rx="8" ry="5.5" fill="#776a4e" opacity=".35" transform="translate(2 3)"/><ellipse rx="7.2" ry="5.4" fill="#b6a47c" stroke="#73694f" stroke-width="1.5"/></g>').join('');
-      const loungers=seating.map(([x,y,a],i)=>'<g transform="translate('+x+' '+y+') rotate('+a+')"><rect x="-3.5" y="-6.5" width="8" height="17" rx="1.4" fill="#695a42" opacity=".52" transform="translate(1.8 2.2)"/><rect x="-3.5" y="-7.5" width="7" height="15" rx="1.3" fill="#fff3d9" stroke="#a48864" stroke-width="1"/>'+(i%3===0?'<circle cx="9" cy="-4" r="8.1" fill="#fff5e1" stroke="#a8936c" stroke-width="1.2"/><path d="M4 -4h10M9 -9v10" stroke="#dcc6a1" stroke-width=".9"/>':'')+'</g>').join('');
+      const stones=boulders.map(([x,y],i)=>'<g transform="translate('+x+' '+y+') rotate('+i*29+')"><ellipse rx="8" ry="5.5" fill="#465b69" opacity=".35" transform="translate(2 3)"/><ellipse rx="7.2" ry="5.4" fill="#a5b4c0" stroke="#546879" stroke-width="1.5"/></g>').join('');
+      const loungers=seating.map(([x,y,a],i)=>'<g transform="translate('+x+' '+y+') rotate('+a+')"><rect x="-3.5" y="-6.5" width="8" height="17" rx="1.4" fill="#35465a" opacity=".52" transform="translate(1.8 2.2)"/><rect x="-3.5" y="-7.5" width="7" height="15" rx="1.3" fill="#f3f7fb" stroke="#8294aa" stroke-width="1"/>'+(i%3===0?'<circle cx="9" cy="-4" r="8.1" fill="#f8fafc" stroke="#a8936c" stroke-width="1.2"/><path d="M4 -4h10M9 -9v10" stroke="#b8cadc" stroke-width=".9"/>':'')+'</g>').join('');
       // Match the arrival paving to the road, right up to the resort's west frontage.
       const frontage='M336 151C282 191 258 322 255 460C252 560 276 663 305 756C349 895 418 1002 503 1065L552 1124L616 1048L665 993C576 914 502 825 459 739C406 631 402 538 422 440C439 357 466 291 508 224L481 164Z';
       // The curved central island separates the through road from the resort drop-off loop.
@@ -3740,7 +3740,7 @@
       const median='M368 165C391 156 426 164 448 178Q460 186 453 198C421 243 391 312 373 381C352 450 349 521 360 583C373 663 403 739 444 813C465 880 489 929 540 971Q553 982 549 996L530 1019Q524 1030 511 1023C450 982 411 915 394 845C375 803 371 764 374 734C372 704 375 674 364 646C355 620 346 598 344 573C338 533 321 501 316 465C310 425 314 395 318 364C331 298 341 234 349 195Q352 176 368 165Z';
       // Center the dashes on the outer carriageway and leave the gate junction unmarked.
       const throughLane='M325 185C303 231 290 300 284 350C278 404 280 472 289 515M336 764C346 815 357 855 375 896C395 945 432 1008 467 1043';
-      const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#f1f1e6"/>';
+      const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#edf4fb"/>';
       const gateApproach='M66 580C112 574 162 562 212 552C235 552 245 542 253 521L270 543C265 606 267 661 296 720L283 752C272 727 251 726 221 730L66 748Z';
       const gateCurbs='M68 580C112 574 162 562 212 552C235 552 245 542 253 521M68 748L221 730C251 726 272 727 283 752';
       // Curb-bounded gate island, with the crossing at the gate line as in the 3D view.
@@ -3748,37 +3748,37 @@
       const gateCrossing=Array.from({length:17},(_,i)=>'<rect x="77" y="'+(590+i*8.5)+'" width="24" height="3.7" rx=".5"/>').join('');
       const gateDrive='<g id="atlasResortGateDrive" aria-label="Resort gate driveway joins the outer road">'+
         '<path d="'+gateApproach+'" fill="#102e26"/><path d="'+gateCurbs+'" fill="none" stroke="#7f9c7c" stroke-opacity=".7" stroke-width="2.35"/>'+
-        '<path id="atlasResortGateSplitter" d="'+gateSplitter+'" fill="#1c372e" stroke="#d0c4a1" stroke-width="3.7" stroke-linejoin="round"/>'+
-        '<g id="atlasResortGateCrossing" fill="#eee5cf" opacity=".93">'+gateCrossing+'</g></g>';
+        '<path id="atlasResortGateSplitter" d="'+gateSplitter+'" fill="#2b4650" stroke="#bdccdb" stroke-width="3.7" stroke-linejoin="round"/>'+
+        '<g id="atlasResortGateCrossing" fill="#edf4fb" opacity=".93">'+gateCrossing+'</g></g>';
       const resortFrontage='<g id="atlasResortFrontage" transform="'+planCoordinates+'">'+
         '<path d="'+frontage+'" fill="#102e26"/>'+gateDrive+
-        '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#aeb28a" stroke-width="3.4" stroke-linejoin="round"/>'+
-        '<path id="atlasResortLaneMarks" d="'+throughLane+'" fill="none" stroke="#f1f1e6" stroke-opacity=".86" stroke-width="3.6" stroke-linecap="butt" stroke-dasharray="18 22"/>'+
+        '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#a0b6b1" stroke-width="3.4" stroke-linejoin="round"/>'+
+        '<path id="atlasResortLaneMarks" d="'+throughLane+'" fill="none" stroke="#edf4fb" stroke-opacity=".86" stroke-width="3.6" stroke-linecap="butt" stroke-dasharray="18 22"/>'+
         '<g aria-hidden="true">'+arrow(423,302,25)+arrow(382,510,-2)+arrow(415,703,-24)+arrow(491,864,-33)+'</g></g>';
       const roadEdge=d.arrival.road;
       const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
         '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#102e26"/><stop offset=".99" stop-color="#102e26" stop-opacity="0"/></radialGradient>'+ 
         '<linearGradient id="atlasResortWater" x1="0" y1=".81" x2="1" y2=".25" gradientUnits="objectBoundingBox"><stop stop-color="#a7ddd0"/><stop offset=".27" stop-color="#45b1a6"/><stop offset=".64" stop-color="#12877f"/><stop offset="1" stop-color="#206668"/></linearGradient>'+
-        '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfca9a"/><stop offset=".56" stop-color="#f0d7a6"/><stop offset="1" stop-color="#cda573"/></linearGradient>'+
+        '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bacfdb"/><stop offset=".56" stop-color="#d8e4ef"/><stop offset="1" stop-color="#9fb6c8"/></linearGradient>'+
         '<linearGradient id="atlasResortMedianGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#729365"/><stop offset="1" stop-color="#4c7650"/></linearGradient>'+
         '<linearGradient id="atlasResortGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#618657"/><stop offset=".55" stop-color="#426e48"/><stop offset="1" stop-color="#284c37"/></linearGradient>'+
-        '<linearGradient id="atlasResortRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2dcb3"/><stop offset=".49" stop-color="#e5c89b"/><stop offset="1" stop-color="#bb925e"/></linearGradient>'+
+        '<linearGradient id="atlasResortRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f5f9"/><stop offset=".49" stop-color="#cfdce9"/><stop offset="1" stop-color="#8b9eb4"/></linearGradient>'+
         '<pattern id="atlasResortRipple" width="31" height="19" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M-5 5q8 -5 15 0t15 0t15 0M-5 14q8 -5 15 0t15 0t15 0" fill="none" stroke="#e1eee0" stroke-width="1" opacity=".12"/></pattern>'+
         '<mask id="atlasResortRoadClearance" maskUnits="userSpaceOnUse" x="-145" y="-45" width="150" height="160"><rect x="-145" y="-45" width="150" height="160" fill="white"/><path d="'+d.roads+'" fill="black" stroke="black" stroke-width=".4"/></mask>'+
         '<symbol id="atlasResortPalm" overflow="visible"><ellipse cx="3.2" cy="5" rx="13" ry="8" fill="#163d2e" opacity=".45"/><circle r="9.2" fill="#244e36"/><path d="M0 1Q-4 -10 -15 -11Q-11 -3 0 1Q-13 -4 -16 4Q-7 7 0 1Q-6 10 -1 15Q4 9 0 1Q7 12 15 6Q9 1 0 1Q12 2 15 -7Q7 -9 0 1Q7 -9 3 -15Q-3 -10 0 1" fill="#749758" stroke="#426640" stroke-width="1.15"/><circle r="2.4" fill="#bfbb70"/></symbol>'+
         '</defs>';
       const leisure='<g id="atlasResortLagoon" aria-label="Resort gardens and beach lagoon" mask="url(#atlasResortRoadClearance)"><g transform="'+planCoordinates+'">'+
         '<path d="'+ground+'" fill="url(#atlasResortGreen)" stroke="#9faf76" stroke-width="3"/>'+
-        '<path d="'+beach+'" fill="url(#atlasResortSand)" stroke="#ecd9ad" stroke-width="2.7"/>'+
+        '<path d="'+beach+'" fill="url(#atlasResortSand)" stroke="#dae7f2" stroke-width="2.7"/>'+
         '<path d="'+water+'" fill="url(#atlasResortWater)" stroke="#c2e2d3" stroke-width="3"/>'+
         '<path d="'+water+'" fill="url(#atlasResortRipple)"/>'+
-        '<path d="'+walkway+'" fill="none" stroke="#b6ab78" stroke-width="3.8" opacity=".64"/>'+stones+loungers+foliage+'</g></g>';
+        '<path d="'+walkway+'" fill="none" stroke="#b4c6ce" stroke-width="3.8" opacity=".64"/>'+stones+loungers+foliage+'</g></g>';
       // Let the green road continue beneath a separate raised span with both ends under the roofs.
       const span=[[-97.7,91.8],[-76.25,61.15],[-70.95,64.77],[-92.6,95.43]];
-      const connector='<g id="atlasResortConnector" aria-label="Elevated resort connection to the Galleria">'+atlasPoly(span.map(([x,y])=>[x+.8,y+1.2]),'#0d2721','opacity=".8"')+atlasPoly(span,'url(#atlasResortRoof)','stroke="#755c3c" stroke-width=".56"')+atlasLine([span[0],span[1]],'#f3d9ad',.24)+'</g>';
-      const resort='<g id="atlasResortBuilding">'+atlasPoly(d.resort.map(([x,y])=>[x+.9,y+1.05]),'#182f27','opacity=".78"')+atlasPoly(d.resort,'url(#atlasResortRoof)','stroke="#735735" stroke-width=".64" stroke-linejoin="round"')+
-        atlasPoly(d.resort.map(([x,y])=>[x+(atlasCenter(d.resort)[0]-x)*.019,y+(atlasCenter(d.resort)[1]-y)*.012]),'none','stroke="#f6e0b7" stroke-width=".23" opacity=".8" pointer-events="none"')+
+      const connector='<g id="atlasResortConnector" aria-label="Elevated resort connection to the Galleria">'+atlasPoly(span.map(([x,y])=>[x+.8,y+1.2]),'#0d2721','opacity=".8"')+atlasPoly(span,'url(#atlasResortRoof)','stroke="#50667d" stroke-width=".56"')+atlasLine([span[0],span[1]],'#ecf7ff',.24)+'</g>';
+      const resort='<g id="atlasResortBuilding">'+atlasPoly(d.resort.map(([x,y])=>[x+.9,y+1.05]),'#182f27','opacity=".78"')+atlasPoly(d.resort,'url(#atlasResortRoof)','stroke="#50667d" stroke-width=".64" stroke-linejoin="round"')+
+        atlasPoly(d.resort.map(([x,y])=>[x+(atlasCenter(d.resort)[0]-x)*.019,y+(atlasCenter(d.resort)[1]-y)*.012]),'none','stroke="#f1f6fd" stroke-width=".23" opacity=".8" pointer-events="none"')+
         atlasLabel([-79,26.5],'RESORT')+'</g>';
       return {defs,road,leisure,connector,resort};
     }
@@ -3786,33 +3786,33 @@
     function renderEstateAtlas(){
       const d=estateAtlasPlan;
       const resortDetail=renderAtlasResort(d);
-      const defs='<defs><pattern id="atlasGrid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="#bfccb4" opacity=".18" stroke-width=".17"/></pattern><pattern id="atlasOrchard" width="4.5" height="4.5" patternUnits="userSpaceOnUse"><circle cx="2.25" cy="2.25" r="1.25" fill="#648465"/><circle cx="2" cy="1.9" r=".52" fill="#9bb18a"/></pattern><pattern id="atlasFairway" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)"><path d="M0 0H3V6H0Z" fill="#8aac7d" opacity=".26"/></pattern><linearGradient id="atlasWater" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#72aea3"/><stop offset="1" stop-color="#255b58"/></linearGradient><linearGradient id="atlasGround" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#50735a"/><stop offset="1" stop-color="#365747"/></linearGradient></defs>';
-      const boundary=atlasPoly(d.boundary,'url(#atlasGround)','stroke="#d7af7d" stroke-width="1.2"');
+      const defs='<defs><pattern id="atlasGrid" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M12 0H0V12" fill="none" stroke="#b4c8e0" opacity=".18" stroke-width=".17"/></pattern><pattern id="atlasOrchard" width="4.5" height="4.5" patternUnits="userSpaceOnUse"><circle cx="2.25" cy="2.25" r="1.25" fill="#648465"/><circle cx="2" cy="1.9" r=".52" fill="#9bb18a"/></pattern><pattern id="atlasFairway" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-25)"><path d="M0 0H3V6H0Z" fill="#8aac7d" opacity=".26"/></pattern><linearGradient id="atlasWater" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#72aea3"/><stop offset="1" stop-color="#255b58"/></linearGradient><linearGradient id="atlasGround" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4d6969"/><stop offset="1" stop-color="#394f55"/></linearGradient></defs>';
+      const boundary=atlasPoly(d.boundary,'url(#atlasGround)','stroke="#a7b9d0" stroke-width="1.2"');
       const farms=d.farms.map((p,i)=>atlasPoly(p,i?'#4c694e':'#4d6949','stroke="#a0b38b" stroke-width=".44"')+atlasPoly(p,'url(#atlasOrchard)')).join('');
-      const golf=atlasPoly(d.schoolGolf,'#70936f','stroke="#abc093" stroke-width=".5"')+atlasPoly(d.schoolGolf,'url(#atlasFairway)');
-      const roads='<path d="'+d.roads+'" fill="#34433d" stroke="#34433d" stroke-width=".10"/>'+d.corridors.map(p=>atlasPoly(p,'#37423b','stroke="#98a08a" stroke-width=".40"')).join('')+
-        d.frontWalks.map(p=>atlasPoly(p,'#c2b89b')).join('')+resortDetail.road;
-      const islands=d.islands.map(([p,outline])=>atlasPoly(outline,'#6f9271','stroke="#bbb18b" stroke-width=".46"')+'<circle cx="'+p[0]+'" cy="'+p[1]+'" r=".66" fill="#e2c385"/>').join('');
+      const golf=atlasPoly(d.schoolGolf,'#719484','stroke="#abc093" stroke-width=".5"')+atlasPoly(d.schoolGolf,'url(#atlasFairway)');
+      const roads='<path d="'+d.roads+'" fill="#34433d" stroke="#34433d" stroke-width=".10"/>'+d.corridors.map(p=>atlasPoly(p,'#37423b','stroke="#8a99ac" stroke-width=".40"')).join('')+
+        d.frontWalks.map(p=>atlasPoly(p,'#bbc8d6')).join('')+resortDetail.road;
+      const islands=d.islands.map(([p,outline])=>atlasPoly(outline,'#6f9271','stroke="#9fb7b4" stroke-width=".46"')+'<circle cx="'+p[0]+'" cy="'+p[1]+'" r=".66" fill="#c8dcec"/>').join('');
 
-      const block=(p)=>atlasPoly(p.map(([x,y])=>[x+.65,y+.85]),'#233c32')+atlasPoly(p,'#ccb793','stroke="#5f5240" stroke-width=".6"');
+      const block=(p)=>atlasPoly(p.map(([x,y])=>[x+.65,y+.85]),'#233c32')+atlasPoly(p,'#c6d4e1','stroke="#4f637a" stroke-width=".6"');
 
       const school=block(d.school)+atlasLabel([-111,-183],'ACADEMY');
       const mall=block(d.mall)+atlasLabel([-104,93],'GALLERIA');
-      const tower=d.padCenters.map(([x,y])=>'<rect x="'+(x-3.7)+'" y="'+(y-4.8)+'" rx=".85" width="7.4" height="9.6" fill="#ebc587" stroke="#695238" stroke-width=".6"/>').join('')+atlasLabel([-104,137],'THE A TOWER');
+      const tower=d.padCenters.map(([x,y])=>'<rect x="'+(x-3.7)+'" y="'+(y-4.8)+'" rx=".85" width="7.4" height="9.6" fill="#dbe6f2" stroke="#4d6480" stroke-width=".6"/>').join('')+atlasLabel([-104,137],'THE A TOWER');
       const sports=d.sports.map(({name,center:[x,y],width:w,depth:h,yaw})=>{
-        const mark=name==='Football pitch'?'<circle r="2.3" fill="none" stroke="#d4d7b7" stroke-width=".36"/>':'';
-        return '<g transform="translate('+[x,y].join(' ')+') rotate('+(yaw*180/Math.PI)+')"><rect x="'+(-w/2)+'" y="'+(-h/2)+'" width="'+w+'" height="'+h+'" rx="1" fill="'+(mark?'#598464':'#618477')+'" stroke="#c1c6a6" stroke-width=".58"/><path d="M0 '+(-h/2)+'V'+(h/2)+'" stroke="#d4d7b7" stroke-width=".36"/>'+mark+'</g>';
+        const mark=name==='Football pitch'?'<circle r="2.3" fill="none" stroke="#d3e4e8" stroke-width=".36"/>':'';
+        return '<g transform="translate('+[x,y].join(' ')+') rotate('+(yaw*180/Math.PI)+')"><rect x="'+(-w/2)+'" y="'+(-h/2)+'" width="'+w+'" height="'+h+'" rx="1" fill="'+(mark?'#598464':'#618477')+'" stroke="#aac4c7" stroke-width=".58"/><path d="M0 '+(-h/2)+'V'+(h/2)+'" stroke="#d3e4e8" stroke-width=".36"/>'+mark+'</g>';
       }).join('');
       atlasGeometryByUnit=new Map();
       const choices=atlasStreets.map(key=>inventory.filter(u=>u.territory===key));
       function drawUnit(u,plot,house,c,f,access=[],pv=false,num=''){
         atlasGeometryByUnit.set(u.id,{plot,footprint:house,area:atlasArea(plot)});
         const cen=atlasCenter(house), ref=measuredPlotRef(u);
-        const paths=access.map(v=>atlasLine([v.from,v.to],'#e4e6df',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
-        const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#abb5af',.26);
+        const paths=access.map(v=>atlasLine([v.from,v.to],'#e2eaf3',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
+        const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#a1afbe',.26);
         return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'" role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
-          atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#253d34','opacity=".43" pointer-events="none"')+
-          atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#24352e" text-anchor="middle">'+num+'</text></g>';
+          atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#243649','opacity=".43" pointer-events="none"')+
+          atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#1e293b" text-anchor="middle">'+num+'</text></g>';
       }
       const lots=d.lots.map(([id,plot,house])=>{
         const n=Number(id.slice(1))-1,s=Math.floor(n/14),i=n%14,u=choices[s][i];
@@ -3824,13 +3824,13 @@
         const start=atlasCenter([p[0],p.at(-1)]),end=atlasCenter([p[13],p[14]]),x=start[0]+(end[0]-start[0])*.49,y=start[1]+(end[1]-start[1])*.49;
         return atlasLabel([x,y+1.3],territoryMeta[atlasStreets[i]].label.toUpperCase(),{angle:Math.atan2(end[1]-start[1],end[0]-start[0])*180/Math.PI});
       }).join('')+atlasLabel([-121,-81],'GOLF GARDEN',{small:true,angle:-90})+atlasLabel([-29,-181],'KITCHEN GARDEN',{small:true})+atlasLabel([-67,198],'SPORTS CLUB',{small:true});
-      const gate=(p,name,x,y)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.55" fill="#f6ce90" stroke="#624a31" stroke-width=".4"/>'+atlasLabel([x,y],name,{small:true});
+      const gate=(p,name,x,y)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.55" fill="#dceafe" stroke="#4b6481" stroke-width=".4"/>'+atlasLabel([x,y],name,{small:true});
       const gates=gate(d.schoolGate,'SCHOOL GATE',-78,-201)+gate(d.arrival.gate,'RESORT GATE',-119,23);
       const crossings=d.streetCrossings.map(({center,axis,width})=>{
         const [x,y]=center, angle=Math.atan2(axis[1],axis[0])*180/Math.PI;
-        return '<g transform="translate('+x+' '+y+') rotate('+angle+')" fill="#cabe9c" opacity=".79">'+Array.from({length:5},(_,i)=>'<rect x="'+(-1.8+i*.84)+'" y="'+(-width/2)+'" width=".38" height="'+width+'"/>').join('')+'</g>';
+        return '<g transform="translate('+x+' '+y+') rotate('+angle+')" fill="#b9cbdf" opacity=".79">'+Array.from({length:5},(_,i)=>'<rect x="'+(-1.8+i*.84)+'" y="'+(-width/2)+'" width=".38" height="'+width+'"/>').join('')+'</g>';
       }).join('');
-      return defs+resortDetail.defs+'<path d="M-600 -650H600V650H-600Z" fill="#15332a"/><path d="M-600 -650H600V650H-600Z" fill="url(#atlasGrid)"/>'+boundary+farms+golf+roads+islands+crossings+resortDetail.leisure+resortDetail.connector+school+resortDetail.resort+mall+tower+sports+lots+villas+labels+gates;
+      return defs+resortDetail.defs+'<path d="M-600 -650H600V650H-600Z" fill="#16243a"/><path d="M-600 -650H600V650H-600Z" fill="url(#atlasGrid)"/>'+boundary+farms+golf+roads+islands+crossings+resortDetail.leisure+resortDetail.connector+school+resortDetail.resort+mall+tower+sports+lots+villas+labels+gates;
     }
     function atlasResidenceType(u){
       return u.kind==='presidential-villa'?'Presidential Villa':((Number(measuredPlotRef(u).slice(5))-1)%14>=7)?'Townhouse':'Detached Residence';
