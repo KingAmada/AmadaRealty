@@ -1156,7 +1156,7 @@
     .atlas-footer{display:grid;gap:.85rem;padding:1rem 1.3rem 1.2rem}
     .atlas-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font:500 .76rem system-ui;color:#fff3df}
     .atlas-legend span::before{content:"";width:.62rem;height:.62rem;border-radius:2px;background:var(--swatch);display:inline-block;margin-right:.35rem}
-    .atlas-legend .detached{--swatch:#d8c7a5}.atlas-legend .terrace{--swatch:#c18c6b}.atlas-legend .villa{--swatch:#f1c986}.atlas-legend .landscape{--swatch:#70936f}
+    .atlas-legend .detached{--swatch:#eed9b4}.atlas-legend .terrace{--swatch:#e3c69b}.atlas-legend .villa{--swatch:#efcc94}.atlas-legend .landscape{--swatch:#70936f}
     .atlas-picker{display:grid;gap:.35rem}.atlas-picker label{font:650 .65rem system-ui;letter-spacing:.13em;text-transform:uppercase;color:#ebc79f}
     .atlas-picker select{width:100%;background:#faf3e5;color:#18352d;border-radius:.55rem;padding:.7rem .8rem;font-size:.9rem}
     .atlas-details{position:sticky;top:8.5rem}
@@ -1165,7 +1165,7 @@
     .atlas-svg [data-unit]{cursor:pointer;outline:none}
     .atlas-svg .atlas-lot{stroke:#5f5645;stroke-width:.46}
     .atlas-svg .atlas-house{stroke:#44362d;stroke-width:.38;pointer-events:none}
-    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#ffec9a;stroke:#fff2be;stroke-width:1.25}
+    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#f5dfb4;stroke:#fff0ce;stroke-width:1.25}
     .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#744523;stroke-width:.85}
     .atlas-svg text{pointer-events:none;font-family:system-ui,sans-serif}
     .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #ffedb8;outline-offset:2px}
@@ -3669,7 +3669,8 @@
     const estateAtlasPlan = JSON.parse(document.getElementById('estateAtlasData').textContent);
     const atlasStreets=['ny','london','naija','dubai','canada'];
     const atlasFull=[-145,-209,290,418];
-    const atlasColors=[['#c9ba9a','#eee0ba','#b18362','#d5a77f'],['#d0bba2','#eee0bb','#b78064','#cc957b'],['#cebaa3','#f4e3c6','#bb8f71','#d5ab8c'],['#c5bb9e','#f1dbb9','#af8065','#dba782'],['#c5c7af','#fff0da','#9c8876','#dfbea1']];
+    // One limestone and champagne palette across all five streets.
+    const atlasResidencePalette={detached:['#b9aa90','#eed9b4'],townhouse:['#ad9a7e','#e3c69b'],villa:['#aa8861','#efcc94']};
     let atlasView=atlasFull.slice();
     let atlasGeometryByUnit=new Map();
     const atlasCenter=p=>p.reduce((q,v)=>[q[0]+v[0]/p.length,q[1]+v[1]/p.length],[0,0]);
@@ -3685,23 +3686,25 @@
     function renderAtlasResort(d){
       const scale=1/9.46, origin=[-132.95-68*scale,29.97-653*scale];
       const planCoordinates='translate('+origin.join(' ')+') scale('+scale+')';
-      const ground='M632 67C711 64 780 102 809 170C828 234 822 281 837 337C853 396 868 449 885 501C899 543 899 574 905 616C911 660 903 712 903 766C903 814 921 864 914 905C908 935 891 958 868 978C829 1021 804 1065 786 1084C660 1043 521 944 453 813C383 692 349 579 373 441C387 354 421 262 477 196C517 147 575 103 632 67Z';
+      const ground='M632 67C711 64 780 102 809 170C828 234 822 281 837 337C853 396 868 449 885 501C899 543 899 574 905 616C911 660 903 712 903 766C903 814 921 864 914 905C908 935 891 958 868 978C829 1021 804 1065 786 1084C681 1005 580 919 517 824C446 716 429 613 446 505C460 399 496 301 545 224C577 173 609 114 632 67Z';
       const beach='M775 150C799 170 805 238 816 277C823 303 831 332 838 357C849 398 858 435 873 475C889 516 891 547 896 583C900 616 904 647 902 677C900 718 898 759 900 799C902 831 915 875 885 903C854 927 823 909 787 884C733 846 701 816 684 771C669 735 687 709 719 667C755 620 772 584 762 545C752 502 718 474 688 442C657 408 653 378 676 332C711 264 737 208 775 150Z';
       const water='M782 194C796 210 798 240 807 270C813 293 822 323 830 352C842 397 849 428 863 467C876 504 883 536 888 575C891 607 898 647 895 676C892 715 889 755 891 791C894 825 909 865 878 882C848 900 817 875 787 851C752 823 729 796 724 766C719 734 736 704 759 668C791 619 797 577 783 534C771 495 741 464 710 436C681 411 675 387 694 353C719 306 739 252 765 215C772 205 777 199 782 194Z';
-      const walkway='M413 429C392 516 397 601 421 677C455 792 518 882 602 959M759 196C717 254 683 318 655 372C631 418 682 450 717 491C757 536 757 586 728 639C704 682 660 724 675 768C698 830 767 884 838 918';
+      const walkway='M759 196C717 254 683 318 655 372C631 418 682 450 717 491C757 536 757 586 728 639C704 682 660 724 675 768C698 830 767 884 838 918';
       const palms=[
         [764,163,18],[782,218,16],[708,248,13],[694,281,15],[673,318,12],[630,390,15],
         [650,426,19],[718,466,22],[706,537,16],[710,589,18],[758,597,20],[733,642,15],
-        [692,691,14],[663,736,16],[707,804,18],[755,850,20],[798,886,18],[849,929,17],[868,959,16],
-        [439,351,12],[415,405,11],[392,476,13],[390,543,14],[401,614,12],[433,710,15],[471,796,14],[518,864,11],[559,924,12]
+        [692,691,14],[663,736,16],[707,804,18],[755,850,20],[798,886,18],[849,929,17],[868,959,16]
       ];
       const boulders=[[786,164],[803,176],[799,191],[660,413],[673,425],[754,637],[741,647],[740,658],[714,815],[769,843],[860,920],[877,926]];
       const seating=[[723,280,36],[707,303,33],[690,325,32],[714,497,-47],[738,526,-39],[750,555,-19],[701,727,11],[704,756,-9],[724,785,-25],[746,815,-33],[791,856,-41]];
       const foliage=palms.map(([x,y,r],i)=>'<g transform="translate('+x+' '+y+') rotate('+((i*59)%120)+') scale('+(r/16)+')"><use href="#atlasResortPalm"/></g>').join('');
       const stones=boulders.map(([x,y],i)=>'<g transform="translate('+x+' '+y+') rotate('+i*29+')"><ellipse rx="8" ry="5.5" fill="#776a4e" opacity=".35" transform="translate(2 3)"/><ellipse rx="7.2" ry="5.4" fill="#b6a47c" stroke="#73694f" stroke-width="1.5"/></g>').join('');
       const loungers=seating.map(([x,y,a],i)=>'<g transform="translate('+x+' '+y+') rotate('+a+')"><rect x="-3.5" y="-6.5" width="8" height="17" rx="1.4" fill="#695a42" opacity=".52" transform="translate(1.8 2.2)"/><rect x="-3.5" y="-7.5" width="7" height="15" rx="1.3" fill="#fff3d9" stroke="#a48864" stroke-width="1"/>'+(i%3===0?'<circle cx="9" cy="-4" r="8.1" fill="#fff5e1" stroke="#a8936c" stroke-width="1.2"/><path d="M4 -4h10M9 -9v10" stroke="#dcc6a1" stroke-width=".9"/>':'')+'</g>').join('');
+      // Match the arrival paving to the road, right up to the resort's west frontage.
+      const frontage='M336 151C282 191 258 322 255 460C252 560 276 663 305 756C349 895 418 1002 503 1065L552 1124L616 1048L665 993C576 914 502 825 459 739C406 631 402 538 422 440C439 357 466 291 508 224L481 164Z';
+      const resortFrontage='<path id="atlasResortFrontage" d="'+frontage+'" transform="'+planCoordinates+'" fill="#102e26"/>';
       const roadEdge=d.arrival.road;
-      const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"');
+      const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
         '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#102e26"/><stop offset=".99" stop-color="#102e26" stop-opacity="0"/></radialGradient>'+ 
         '<linearGradient id="atlasResortWater" x1="0" y1=".81" x2="1" y2=".25" gradientUnits="objectBoundingBox"><stop stop-color="#a7ddd0"/><stop offset=".27" stop-color="#45b1a6"/><stop offset=".64" stop-color="#12877f"/><stop offset="1" stop-color="#206668"/></linearGradient>'+
@@ -3759,10 +3762,11 @@
           atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#32291e" text-anchor="middle">'+num+'</text></g>';
       }
       const lots=d.lots.map(([id,plot,house])=>{
-        const n=Number(id.slice(1))-1,s=Math.floor(n/14),i=n%14,u=choices[s][i],p=atlasColors[s],town=i>=7;
-        return drawUnit(u,plot,house,p[town?2:0],p[town?3:1],[],false,id.slice(1));
+        const n=Number(id.slice(1))-1,s=Math.floor(n/14),i=n%14,u=choices[s][i];
+        const [plotFill,roofFill]=i>=7?atlasResidencePalette.townhouse:atlasResidencePalette.detached;
+        return drawUnit(u,plot,house,plotFill,roofFill,[],false,id.slice(1));
       }).join('');
-      const villas=d.villas.map(([id,plot,house,access],i)=>drawUnit(choices[i][14],plot,house,'#be965d','#f2cd8c',access,true,id)).join('');
+      const villas=d.villas.map(([id,plot,house,access],i)=>drawUnit(choices[i][14],plot,house,...atlasResidencePalette.villa,access,true,id)).join('');
       const labels=d.corridors.map((p,i)=>{
         const start=atlasCenter([p[0],p.at(-1)]),end=atlasCenter([p[13],p[14]]),x=start[0]+(end[0]-start[0])*.49,y=start[1]+(end[1]-start[1])*.49;
         return atlasLabel([x,y+1.3],territoryMeta[atlasStreets[i]].label.toUpperCase(),{angle:Math.atan2(end[1]-start[1],end[0]-start[0])*180/Math.PI});
