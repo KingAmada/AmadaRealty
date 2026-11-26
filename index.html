@@ -7,7 +7,7 @@
   <!-- Primary SEO (Bilaad-style) -->
   <title>AMADA RESIDENCE - Global Estate</title>
   <meta name="title" content="AMADA RESIDENCE - Global Estate" />
-  <meta name="description" content="Welcome to The Amada Advantage. Our homes are designed for more than just today — blending timeless architecture with private-city amenities. Explore The City, select an Asset, and preview your PR Card." />
+  <meta name="description" content="Welcome to The Amada Advantage. Our homes are designed for more than just today — blending timeless architecture with private-city amenities. Explore The Experience, select an Asset, and preview your PR Card." />
   <meta name="robots" content="index,follow" />
   <meta name="keywords" content="Amada Residence, luxury estate, gated community, private city, premium real estate, Nigeria luxury homes, sustainable communities, masterplan, estate assets" />
   <meta name="theme-color" content="#0f172a" />
@@ -1249,6 +1249,62 @@
     .rg-controls button:focus-visible{outline:2px solid #2b5c9b;outline-offset:2px}
     .rg-caption{min-height:1.2em;text-align:center;color:#475569;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
     @media(prefers-reduced-motion:reduce){.rg-card,.rg-shine,.rg-controls button,.rg-dots button::before{transition:none}}
+    /* Experience / visitor tour */
+    #page-experience{color:#101c30}
+    #page-experience .experience-shell{max-width:1440px;margin:auto;padding:2rem clamp(1rem,4vw,4.3rem) 4.4rem}
+    #page-experience button:focus-visible,#page-experience a:focus-visible{outline:3px solid #7194c9;outline-offset:3px}
+    .experience-hero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(455px,59vw,665px);display:flex;align-items:flex-end;border:1px solid #334257;border-radius:clamp(1.35rem,3.1vw,2.55rem);background:#101e32;color:#fff;box-shadow:0 24px 60px #111f362e}
+    .experience-hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 47%;z-index:-2}
+    .experience-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0c172bdf 0%,#101c319e 47%,#0a182427 100%),linear-gradient(0deg,#0b1425f8,transparent 77%)}
+    .experience-hero-content{position:relative;max-width:770px;padding:clamp(1.55rem,5vw,4.75rem)}
+    .experience-kicker{font:750 .68rem/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#536b8b;margin:0}
+    .experience-hero .experience-kicker,.experience-visit .experience-kicker{color:#bcd2f2}
+    .experience-hero h1{font:550 clamp(3.6rem,9.4vw,8.65rem)/.85 'Cormorant Garamond',Georgia,serif;letter-spacing:-.043em;margin:.97rem 0 1.3rem;text-wrap:balance}
+    .experience-hero h1+p,.experience-visit h2+p{font:450 clamp(.92rem,1.6vw,1.08rem)/1.65 system-ui,sans-serif;max-width:30rem;color:#e1e9f3;margin:0}
+    .experience-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.55rem}
+    .experience-btn{display:inline-flex;justify-content:center;align-items:center;gap:.75rem;border:1px solid transparent;border-radius:999px;padding:.78rem 1rem;min-height:46px;font:700 .75rem/1.25 system-ui,sans-serif;transition:background .2s,color .2s}
+    .experience-btn-light{background:#fff;color:#132037;border-color:#fff}.experience-btn-light:hover{background:#e5eefb;border-color:#e5eefb}
+    .experience-btn-outline{border-color:#c7daf369;background:#131f2e64;color:#f8fafc}.experience-btn-outline:hover{background:#2e476af0}
+    .experience-hero-index{position:absolute;bottom:clamp(1.55rem,5vw,4.75rem);right:clamp(1.55rem,5vw,4.75rem);text-align:right;font:650 .7rem/1.65 system-ui;letter-spacing:.2em;text-transform:uppercase;color:#dce9f7}
+    .experience-tour,.experience-film,.experience-visit{margin-top:clamp(3.35rem,8vw,6.9rem)}
+    .experience-tour{scroll-margin-top:9rem}
+    .experience-section-head{display:flex;justify-content:space-between;align-items:end;gap:1.3rem;margin-bottom:1.3rem}
+    .experience-section-head h2,.experience-film h2,.experience-visit h2{font:550 clamp(2.8rem,6.35vw,5.3rem)/.91 'Cormorant Garamond',Georgia,serif;letter-spacing:-.035em;margin:.32rem 0 0}
+    .experience-section-head>p,.experience-film-copy>p:not(.experience-kicker){font:450 .93rem/1.65 system-ui;color:#425571;max-width:26rem;margin:0}
+    .experience-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.45rem;margin-bottom:.62rem}
+    .experience-tabs button{padding:.78rem .75rem;min-height:56px;text-align:left;border:1px solid #d6e0ee;border-radius:.8rem;background:#f8fbffd9;color:#1c2e48;font:700 .77rem/1.35 system-ui,sans-serif}
+    .experience-tabs button span{margin-right:.39rem;color:#45658a;font-variant-numeric:tabular-nums;font-size:.67rem}
+    .experience-tabs button[aria-selected=true]{background:#10213b;color:#fff;border-color:#10213b}
+    .experience-tabs button[aria-selected=true] span{color:#bfd6f5}
+    .experience-tabs button:hover:not([aria-selected=true]){background:#edf4fd}
+    .experience-chapter{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);overflow:hidden;background:#f9fbff;border:1px solid #d4deec;border-radius:1.55rem;box-shadow:0 16px 47px #102b4c12;min-height:330px}
+    .experience-chapter-image{position:relative;display:block;min-width:0;min-height:330px;overflow:hidden;background:#20324b;text-align:right}
+    .experience-chapter-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--ex-focus,center);transition:transform .55s ease}
+    .experience-chapter-image:hover img{transform:scale(1.035)}
+    .experience-chapter-image>span{position:absolute;bottom:1rem;right:1rem;background:#0d172bcb;border:1px solid #e2ecf763;color:#fff;border-radius:999px;padding:.55rem .7rem;font:650 .65rem/1.3 system-ui}
+    .experience-chapter-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:clamp(1.25rem,3.65vw,3.45rem)}
+    .experience-chapter h3{font:550 clamp(2.55rem,4.25vw,4.15rem)/.96 'Cormorant Garamond',Georgia,serif;letter-spacing:-.03em;margin:.5rem 0 .87rem}
+    .experience-chapter-copy>p:not(.experience-kicker){font:450 .92rem/1.65 system-ui;color:#3d506c;margin:0}
+    .experience-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin:1.15rem 0 1.3rem;padding:0;list-style:none}
+    .experience-tags li{border:1px solid #d6e0ed;border-radius:.55rem;padding:.26rem .51rem;font:650 .65rem/1.4 system-ui;color:#36516f}
+    .experience-chapter-nav{display:flex;gap:.6rem;justify-content:space-between;align-items:center;border-top:1px solid #d5e0ef;padding-top:.65rem;color:#466384;font:700 .65rem/1.5 system-ui}
+    .experience-next,.experience-text-link{padding:.55rem 0;min-height:42px;font:720 .8rem/1.5 system-ui;color:#193454}
+    .experience-next span,.experience-text-link span{margin-left:.25rem}
+    .experience-next:hover,.experience-text-link:hover{text-decoration:underline;text-underline-offset:.3em}
+    .experience-film{display:grid;gap:clamp(1.25rem,3.2vw,2.8rem);grid-template-columns:minmax(0,.72fr) minmax(0,1.35fr);align-items:center;padding:clamp(1.25rem,4vw,3rem);border:1px solid #d7e1ef;border-radius:1.55rem;background:#eef4faf5}
+    .experience-film h2{margin:.45rem 0 .8rem}
+    .experience-text-link{display:inline-flex;align-items:center;margin-top:.5rem}
+    .experience-film-frame{border-radius:1rem;overflow:hidden;background:#101f34}
+    .experience-film-frame video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#101f34}
+    .experience-visit{display:flex;align-items:center;justify-content:space-between;gap:1.35rem;padding:clamp(1.45rem,4.7vw,3.75rem);border-radius:1.55rem;background:radial-gradient(ellipse at right,#2a4669,#101e34 69%);color:#f8fafc}
+    .experience-visit h2{margin:.45rem 0 .72rem}
+    .experience-visit-actions{display:grid;gap:.55rem;flex:0 0 auto}
+    .experience-visit-types{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem}
+    .experience-visit-types button{border:1px solid #829bbd68;border-radius:999px;padding:.4rem .58rem;min-height:36px;color:#e4efff;font:650 .65rem system-ui}
+    .experience-visit-types button:hover{background:#2e4c71}
+    @media(max-width:800px){.experience-hero-index{display:none}.experience-hero::before{background:linear-gradient(90deg,#0b172cbe,#101c3138),linear-gradient(0deg,#0b1425fa,#101c3138 90%)}.experience-chapter,.experience-film{grid-template-columns:1fr}.experience-chapter-image{min-height:clamp(215px,55vw,415px)}.experience-section-head,.experience-visit{flex-direction:column;align-items:flex-start}.experience-film-copy br{display:none}}
+    @media(max-width:560px){#page-experience .experience-shell{padding-top:1rem}.experience-hero{min-height:475px}.experience-hero-image{object-position:57% center}.experience-hero h1{font-size:clamp(3.35rem,12.1vw,4.7rem);margin:.8rem 0 1rem}.experience-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:.32rem}.experience-tabs button{min-height:43px;padding:.47rem .55rem;font-size:.71rem}.experience-tabs button:last-child{grid-column:1/-1}.experience-visit-actions{width:100%;justify-items:start}.experience-visit-types{justify-content:flex-start}}
+    @media(prefers-reduced-motion:reduce){.experience-chapter-image img,.experience-btn{transition:none}}
 </style>
 </head>
 
@@ -1283,7 +1339,7 @@
 	      <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide text-slate-600">
 	        <a href="#/home" class="hover:text-slate-900 transition-colors">Home</a>
 	        <a href="#/about" class="hover:text-slate-900 transition-colors">About</a>
-	        <a href="#/city" class="hover:text-slate-900 transition-colors">The City</a>
+	        <a href="#/experience" class="hover:text-slate-900 transition-colors">The Experience</a>
 	        <a href="#/assets" class="hover:text-slate-900 transition-colors">Assets</a>
 	        <a href="#/pr-card" class="hover:text-slate-900 transition-colors">PR Card</a>
 	      </div>
@@ -1316,7 +1372,7 @@
 	      <div class="p-6 space-y-3 text-slate-700">
 	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/home" onclick="closeMobileMenu()">Home</a>
 	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/about" onclick="closeMobileMenu()">About</a>
-	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/city" onclick="closeMobileMenu()">The City</a>
+	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/experience" onclick="closeMobileMenu()">The Experience</a>
 	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/assets" onclick="closeMobileMenu()">Assets</a>
 	        <a class="block px-4 py-3 rounded-2xl bg-white/50 hover:bg-white transition" href="#/pr-card" onclick="closeMobileMenu()">PR Card</a>
 
@@ -1373,7 +1429,7 @@
           </div>
 
           <div class="pt-6 flex flex-wrap justify-center gap-2 text-xs">
-            <a href="#/city" class="px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/15 transition">Explore The City</a>
+            <a href="#/experience" class="px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/15 transition">Explore The Experience</a>
             <a href="#/assets" class="px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/15 transition">Select an Asset</a>
             <button onclick="openLegal('bylaws')" class="px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/15 transition">Estate Bylaws</button>
           </div>
@@ -1716,9 +1772,9 @@
 	                A curated preview of the address: entrances, boulevards, leisure, and the masterplan.
 	              </p>
 	            </div>
-	            <button onclick="location.hash='#/city'"
+	            <button onclick="location.hash='#/experience'"
 	                    class="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3 rounded-full text-xs font-semibold tracking-widest uppercase hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl">
-	              Open Full Gallery
+	              Explore The Experience
 	              <i data-lucide="arrow-right" class="w-3 h-3"></i>
 	            </button>
 	          </div>
@@ -1918,169 +1974,77 @@
 
 		    </section>
 
-    <!-- CITY -->
-    <section class="page" data-page="city" id="page-city">
-      <div class="max-w-7xl mx-auto px-6 py-14">
-        <div class="text-center mb-10 reveal">
-          <span class="text-xs font-bold tracking-widest uppercase text-slate-400">The City</span>
-          <h2 class="text-4xl md:text-6xl font-serif mt-2">The Private City, In Full</h2>
-          <p class="text-lg text-slate-600 font-light max-w-3xl mx-auto mt-4">
-            Masterplan, galleries, and videos — the full Amada City experience.
-          </p>
-        </div>
-
-        <div class="glass-panel rounded-3xl p-6 md:p-8 mb-10 reveal">
-          <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-            <div class="lg:col-span-3">
-              <button class="w-full text-left" onclick="openGalleryById('layout')" aria-label="Open masterplan">
-                <div class="rounded-3xl overflow-hidden border border-slate-200 bg-white/60">
-                  <img src="amada-estate-layout-collage-2x.jpeg" alt="Amada City Masterplan" class="w-full h-[320px] md:h-[420px] object-cover"/>
-                </div>
-              </button>
-            </div>
-            <div class="lg:col-span-2 space-y-4">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 border border-slate-200">
-                <i data-lucide="map" class="w-4 h-4 text-slate-700"></i>
-                <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Masterplan</span>
-              </div>
-              <h3 class="text-2xl md:text-3xl font-serif">One City. Five Territories.</h3>
-              <p class="text-sm text-slate-600 leading-relaxed">
-                Each street shares a unified exterior language. Interiors are built to your taste across three floors — rooms, cinema, lounges, play areas, and more.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <button onclick="openGalleryById('layout')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Open Gallery</button>
-                <button onclick="location.hash='#/assets'" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase bg-slate-900 text-white hover:bg-slate-800 transition shadow-lg">Select an Asset</button>
-              </div>
+    <!-- EXPERIENCE -->
+    <section class="page" data-page="experience" id="page-experience">
+      <div class="experience-shell">
+        <header class="experience-hero">
+          <img class="experience-hero-image" src="amada-masterplan-estate-aerial.jpeg" alt="" decoding="async">
+          <div class="experience-hero-content">
+            <p class="experience-kicker">Amada Residence · Abuja, Nigeria</p>
+            <h1>The Experience</h1>
+            <p>Come through the gates. Walk the streets. Spend a little time by the lagoon. Get to know Amada Residence as a guest.</p>
+            <div class="experience-actions">
+              <button type="button" class="experience-btn experience-btn-light" id="experienceStart">Start the tour <span aria-hidden="true">↓</span></button>
+              <button type="button" class="experience-btn experience-btn-outline" data-ex-visa="">Explore the Visitor Visa <span aria-hidden="true">&#8599;&#65038;</span></button>
             </div>
           </div>
-        </div>
+          <div class="experience-hero-index" aria-hidden="true">01–05<br>Estate Tour</div>
+        </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-          <!-- Map -->
-          <div class="lg:col-span-3 glass-panel rounded-3xl p-6 reveal">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 border border-slate-200">
-                  <i data-lucide="map" class="w-4 h-4 text-slate-700"></i>
-                  <span class="text-xs font-semibold tracking-widest uppercase text-slate-600">Interactive Map</span>
-                </div>
-                <h3 class="text-2xl md:text-3xl font-serif mt-3">City Zones</h3>
-                <p class="text-sm text-slate-500 mt-2">Select a street or amenity to see its details.</p>
-              </div>
-
-              <div class="flex gap-2 flex-wrap">
-                <button onclick="setCityLayer('all')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">All</button>
-                <button onclick="setCityLayer('territories')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Territories</button>
-                <button onclick="setCityLayer('amenities')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Amenities</button>
-              </div>
-            </div>
-
-            <div class="mt-6 measured-map-wrap">
-              <div class="measured-map-titlebar"><div><span class="eyebrow">Amada Residence / Masterplan</span><strong>City zones</strong></div><button type="button" aria-controls="cityMapSvg" aria-pressed="false" class="measured-map-zoom" onclick="toggleMeasuredMapZoom(this)">Zoom in</button></div>
-              <svg id="cityMapSvg" class="measured-map" viewBox="84 16 1120 1380" aria-label="City zones on the estate masterplan" xmlns="http://www.w3.org/2000/svg"></svg>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Estate design study. Select a labeled zone to explore it.</p>
-
-            <div class="mt-5 flex flex-wrap gap-2 text-xs text-slate-600">
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Select a zone</span>
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Click</span>
-              <span class="px-3 py-1 rounded-full border border-slate-200 bg-white/60 uppercase tracking-widest">Policy-Driven</span>
-            </div>
+        <section class="experience-tour" id="experienceTour" aria-labelledby="experienceTourTitle">
+          <div class="experience-section-head">
+            <div><p class="experience-kicker">Five stops · Your pace</p><h2 id="experienceTourTitle" tabindex="-1">Inside the gates</h2></div>
+            <p>Start where a guest would arrive, then explore the places that give the estate its character.</p>
           </div>
-
-          <!-- Details -->
-          <div class="lg:col-span-2 space-y-6 reveal">
-            <div class="glass-panel rounded-3xl p-6">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <span class="text-xs font-bold tracking-widest uppercase text-slate-400">Selected Zone</span>
-                  <h3 class="text-2xl font-serif mt-2" id="cityDetailTitle">New York Territory</h3>
-                  <p class="text-sm text-slate-600 mt-2 leading-relaxed" id="cityDetailDesc">
-                    Click a zone on the map to show its rules and access tiers.
-                  </p>
-                </div>
-                <div class="w-12 h-12 rounded-2xl bg-white/60 border border-slate-200 flex items-center justify-center">
-                  <i data-lucide="sparkles" class="w-6 h-6 text-slate-700" id="cityDetailIcon"></i>
-                </div>
-              </div>
-
-              <div class="mt-6 grid grid-cols-2 gap-3">
-                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Access</p>
-                  <p class="text-sm text-slate-800 mt-1" id="cityDetailAccess">Residents + escorted guests</p>
-                </div>
-                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Hours</p>
-                  <p class="text-sm text-slate-800 mt-1" id="cityDetailHours">Always</p>
-                </div>
-                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Noise</p>
-                  <p class="text-sm text-slate-800 mt-1" id="cityDetailNoise">Low</p>
-                </div>
-                <div class="rounded-2xl bg-white/60 border border-slate-200 p-4">
-                  <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Policy</p>
-                  <button class="text-sm text-slate-800 mt-1 underline underline-offset-4 hover:text-slate-900" onclick="openLegal('bylaws')">View Estate Bylaws</button>
-                </div>
-              </div>
-
-              <div class="mt-6 flex gap-3">
-                <button id="cityCTA" onclick="location.hash='#/assets'" class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
-                  Browse Assets
-                </button>
-                <button onclick="openLegal('privacy')" class="px-5 py-3 border border-slate-200 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/70 transition-colors text-xs text-slate-700">
-                  Privacy
-                </button>
+          <div class="experience-tabs" role="tablist" aria-label="Tour stops" id="experienceStops"></div>
+          <article class="experience-chapter" id="experienceChapter" role="tabpanel" tabindex="0">
+            <button type="button" class="experience-chapter-image" id="experienceImageButton" aria-label="Open the full image">
+              <img id="experienceImage" src="amada-townhome-street-brick.jpeg" alt="The estate entrance" decoding="async">
+              <span aria-hidden="true">View image &#8599;&#65038;</span>
+            </button>
+            <div class="experience-chapter-copy">
+              <p class="experience-kicker" id="experienceChapterLabel">01 / Arrival</p>
+              <h3 id="experienceChapterTitle">The Gated Arrival</h3>
+              <p id="experienceChapterDescription">Your first view of Amada is the entrance and the boulevard beyond it.</p>
+              <ul class="experience-tags" id="experienceChapterTags" aria-label="At this stop"></ul>
+              <div class="experience-chapter-nav">
+                <button type="button" class="experience-next" id="experienceNext">Next stop <span aria-hidden="true">→</span></button>
+                <span id="experienceChapterCount" aria-hidden="true">01 / 05</span>
               </div>
             </div>
+          </article>
+        </section>
 
-            <div class="glass-card rounded-3xl p-6">
-              <h4 class="text-xl font-serif">City Statement</h4>
-              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-                The city is curated for controlled elegance—privacy-first, access-tiered, and built to preserve quiet luxury.
-                Every policy exists to protect the value of the address.
-              </p>
+        <section class="experience-film" aria-labelledby="experienceFilmTitle">
+          <div class="experience-film-copy">
+            <p class="experience-kicker">Aerial film</p>
+            <h2 id="experienceFilmTitle">See it<br>from above.</h2>
+            <p>Follow the boulevard through the estate and see how the resort, streets, gardens and landmarks sit together.</p>
+            <a class="experience-text-link" href="#/assets">Explore the Estate Atlas <span aria-hidden="true">&#8599;&#65038;</span></a>
+          </div>
+          <div class="experience-film-frame">
+            <video controls playsinline preload="none" poster="amada-masterplan-estate-aerial.jpeg" aria-label="Aerial walkthrough of Amada Residence">
+              <source src="Drone_Footage_of_Luxury_Micro_City.mp4" type="video/mp4">
+              <a href="Drone_Footage_of_Luxury_Micro_City.mp4">Open the aerial film</a>
+            </video>
+          </div>
+        </section>
+
+        <section class="experience-visit" aria-labelledby="experienceVisitTitle">
+          <div>
+            <p class="experience-kicker">The Estate Embassy</p>
+            <h2 id="experienceVisitTitle">Come as a guest.</h2>
+            <p>The Visitor Visa is how Amada Residence handles guest access. Explore the visit types, from seeing the estate to shopping or golf.</p>
+          </div>
+          <div class="experience-visit-actions">
+            <button type="button" class="experience-btn experience-btn-light" data-ex-visa="">Explore the Visitor Visa <span aria-hidden="true">&#8599;&#65038;</span></button>
+            <div class="experience-visit-types" aria-label="Explore by reason for visiting">
+              <button type="button" data-ex-visa="Tourism">Estate tour</button>
+              <button type="button" data-ex-visa="Shopping">Shopping</button>
+              <button type="button" data-ex-visa="Golfing">Golf</button>
             </div>
           </div>
-        </div>
-
-        <div class="mt-12 glass-panel rounded-3xl p-6 md:p-8 reveal">
-          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-            <div>
-              <span class="text-xs font-bold tracking-widest uppercase text-slate-400">City Gallery</span>
-              <h3 class="text-3xl md:text-4xl font-serif mt-2">Luxury, In Frames</h3>
-              <p class="text-slate-600 mt-3 max-w-2xl font-light">
-                Tap any image to view full screen. Use next/prev to tour the city.
-              </p>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              <button onclick="openGalleryById('ahoz3b')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Masterplan</button>
-              <button onclick="openGalleryById('w65loy')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Gate</button>
-              <button onclick="openGalleryById('97v93a')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/60 hover:bg-white transition">Leisure</button>
-            </div>
-          </div>
-
-          <div class="mt-8 gallery-mosaic" id="galleryGrid">
-            <!-- injected -->
-          </div>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
-          <div class="glass-card rounded-3xl overflow-hidden">
-            <div class="p-6 border-b border-slate-200/60 bg-white/60">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">City Video</div>
-              <div class="text-2xl font-serif text-slate-900 mt-1">Drone Walkthrough</div>
-            </div>
-            <video class="w-full bg-black" controls preload="metadata" src="Drone_Footage_of_Luxury_Micro_City.mp4"></video>
-          </div>
-
-          <div class="glass-card rounded-3xl overflow-hidden">
-            <div class="p-6 border-b border-slate-200/60 bg-white/60">
-              <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">City Video</div>
-              <div class="text-2xl font-serif text-slate-900 mt-1">Lifestyle Render</div>
-            </div>
-            <video class="w-full bg-black" controls preload="metadata" src="Drone_Footage_of_Luxury_Micro_City.mp4"></video>
-          </div>
-        </div>
+        </section>
       </div>
     </section>
 
@@ -2110,9 +2074,9 @@
                 Explore Assets
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
               </button>
-              <button onclick="location.hash='#/city'"
+              <button onclick="location.hash='#/experience'"
                       class="inline-flex items-center justify-center gap-2 bg-white/10 text-white px-7 py-3 rounded-full text-xs font-bold tracking-widest uppercase border border-white/15 hover:bg-white/15 transition">
-                View The City
+                View The Experience
                 <i data-lucide="map" class="w-4 h-4"></i>
               </button>
             </div>
@@ -2619,7 +2583,7 @@
 		          <h5 class="font-bold text-slate-900 uppercase tracking-widest text-xs">Explore</h5>
 		          <ul class="space-y-2">
 		            <li><a href="#/about" class="hover:text-slate-900">About</a></li>
-		            <li><a href="#/city" class="hover:text-slate-900">The City</a></li>
+		            <li><a href="#/experience" class="hover:text-slate-900">The Experience</a></li>
 		            <li><a href="#/assets" class="hover:text-slate-900">Property Page</a></li>
 		            <li><button onclick="scrollToHomeSection('home-amenities')" class="hover:text-slate-900 text-left">Privileges</button></li>
 		            <li><a href="#/pr-card" class="hover:text-slate-900">PR Card</a></li>
@@ -3456,8 +3420,86 @@
     // ---------------------------
     // SPA Router
     // ---------------------------
+    const EXPERIENCE_STOPS=[
+      {label:'Arrival',kind:'01 · Arrival',title:'The Gated Arrival',src:'amada-townhome-street-brick.jpeg',focus:'center 64%',
+        subtitle:'Look down the boulevard from the estate entrance. The gate marks the transition from Abuja outside to the quieter streets within.',
+        tags:['Estate Gate','Main boulevard','Estate Embassy']},
+      {label:'Resort & Lagoon',kind:'02 · Resort & Lagoon',title:'An afternoon by the lagoon',src:'amada-resort-lagoon-pool.jpeg',focus:'center 48%',
+        subtitle:'The curved resort wraps around the water. A planted walk leads to a sandy shore, with space to pause between the gardens and the lagoon.',
+        tags:['Lagoon beach','Resort','Garden walk']},
+      {label:'The Five Streets',kind:'03 · Architecture',title:'Five streets, five signatures',src:'amada-estate-layout-map.jpeg',focus:'center 53%',
+        subtitle:'Compare New York brownstones, London brickwork, Parisian façades, Dubai modernism and Santorini’s sculptural whites. Each street has a distinct architectural character.',
+        tags:['New York','London','Paris','Dubai','Santorini']},
+      {label:'The A Tower',alt:'Aerial plan of Amada Residence and its leisure district',kind:'04 · The A Tower',title:'From the Galleria to the sky',src:'amada-masterplan-estate-aerial.jpeg',focus:'73% 60%',
+        subtitle:'The A Tower and Galleria connect the resort side of the estate to its dining, retail and leisure destinations. Explore the vision for the Automobile Museum, Cave Restaurant and Sky Lounge.',
+        tags:['Galleria','Automobile Museum','Cave Restaurant','Sky Lounge']},
+      {label:'Golf & Gardens',alt:'Estate layout showing the gardens and open spaces',kind:'05 · Outdoors',title:'A quieter side of the estate',src:'amada-estate-layout-collage-2x.jpeg',focus:'73% 34%',
+        subtitle:'Follow the green spaces from the golf garden to the orchard and sports grounds. The landscape gives walking, playing and spending time outside their own place in the plan.',
+        tags:['Golf garden','Natural Fruits-Garden','Sports grounds']}
+    ];
+    let pendingExperienceVisa=null, experienceReady=false;
+    function initExperience(){
+      if(experienceReady)return;
+      const page=document.getElementById('page-experience');
+      if(!page)return;
+      experienceReady=true;
+      const tabs=page.querySelector('#experienceStops'), panel=page.querySelector('#experienceChapter');
+      const image=page.querySelector('#experienceImage'), imageButton=page.querySelector('#experienceImageButton');
+      const title=page.querySelector('#experienceChapterTitle'), desc=page.querySelector('#experienceChapterDescription');
+      const label=page.querySelector('#experienceChapterLabel'), tags=page.querySelector('#experienceChapterTags');
+      const count=page.querySelector('#experienceChapterCount'), next=page.querySelector('#experienceNext');
+      const two=i=>String(i).padStart(2,'0');
+      let active=0;
+      const controls=EXPERIENCE_STOPS.map((stop,i)=>{
+        const button=document.createElement('button');
+        button.type='button';button.id='experienceStop'+i;
+        button.setAttribute('role','tab');button.setAttribute('aria-controls',panel.id);
+        const number=document.createElement('span');
+        number.setAttribute('aria-hidden','true');number.textContent=two(i+1);
+        button.append(number,stop.label);
+        button.addEventListener('click',()=>render(i));
+        button.addEventListener('keydown',e=>{
+          const codes={ArrowLeft:(i-1+EXPERIENCE_STOPS.length)%EXPERIENCE_STOPS.length,ArrowRight:(i+1)%EXPERIENCE_STOPS.length,Home:0,End:EXPERIENCE_STOPS.length-1};
+          if(!Object.hasOwn(codes,e.key))return;
+          e.preventDefault();
+          render(codes[e.key]);controls[codes[e.key]].focus();
+        });
+        tabs.append(button);return button;
+      });
+      function render(i){
+        active=i;const stop=EXPERIENCE_STOPS[i];
+        controls.forEach((button,index)=>{
+          button.tabIndex=index===i?0:-1;
+          button.setAttribute('aria-selected',String(index===i));
+        });
+        panel.setAttribute('aria-labelledby',controls[i].id);
+        image.src=stop.src;image.alt=stop.alt || stop.label+' at Amada Residence';
+        imageButton.style.setProperty('--ex-focus',stop.focus);
+        imageButton.setAttribute('aria-label','View full image for '+stop.label);
+        label.textContent=stop.kind;title.textContent=stop.title;desc.textContent=stop.subtitle;
+        tags.replaceChildren(...stop.tags.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+        count.textContent=two(i+1)+' / '+two(EXPERIENCE_STOPS.length);
+        next.firstChild.nodeValue=i===EXPERIENCE_STOPS.length-1?'Back to arrival ':'Next stop ';
+      }
+      next.addEventListener('click',()=>render((active+1)%EXPERIENCE_STOPS.length));
+      imageButton.addEventListener('click',()=>openGalleryModal(active,EXPERIENCE_STOPS));
+      page.querySelector('#experienceStart').addEventListener('click',()=>{
+        const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const tour=page.querySelector('#experienceTour');
+        tour.querySelector('h2').focus({preventScroll:true});
+        tour.scrollIntoView({block:'start',behavior:reduced?'instant':'smooth'});
+      });
+      page.querySelectorAll('[data-ex-visa]').forEach(button=>button.addEventListener('click',()=>{
+        pendingExperienceVisa=button.dataset.exVisa;
+        location.hash='#/pr-card';
+      }));
+      render(0);
+    }
+
+
     function showPage(page, { scrollTop = true } = {}) {
       if (page !== 'pr-card') prxPreview?.clearDetails();
+      if (page !== 'experience') document.querySelector('#page-experience video')?.pause();
       closeMobileMenu(true);
       closeLegal(true);
       closeFloorplanModal(true);
@@ -3471,25 +3513,28 @@
 
       lucide.createIcons();
 
-      if (page === 'pr-card') initPRPreview();
+      if (page === 'pr-card') {
+        const form = initPRPreview();
+        if(pendingExperienceVisa!==null){
+          form.openVisa(pendingExperienceVisa);
+          pendingExperienceVisa=null;
+        }
+      }
 
       if (page === 'assets') {
         if (!estateRendered) renderEstateLayout();
         else focusEstateTerritory();
       }
 
-      if (page === 'city') {
-        renderCityHotspots();
-        ensureGalleryRendered();
-      }
+      if (page === 'experience') initExperience();
     }
 
     function getRoutePage() {
       const h = location.hash || '#/home';
       if (!h.startsWith('#/')) return 'home';
       const page = h.replace('#/', '').trim();
-      if (page === 'gallery') return 'city';
-      const allowed = new Set(['home','about','city','assets','pr-card']);
+      if (page === 'city' || page === 'gallery') return 'experience';
+      const allowed = new Set(['home','about','experience','assets','pr-card']);
       return allowed.has(page) ? page : 'home';
     }
 
@@ -4727,6 +4772,11 @@
         }
       });
       prxPreview = {
+        openVisa(purpose=''){
+          switchCard('visa');
+          visit.value=Object.hasOwn(visaSchemas,purpose)?purpose:'';
+          drawVisit();
+        },
         fromPlot(unit) {
           selected = unit;
           switchCard(unit && unit.kind === 'presidential-villa' ? 'presidential' : (unit?.territory || 'ny'));
@@ -4913,7 +4963,7 @@
     ];
 
     let galleryRendered = false;
-    let galleryIndex = 0;
+    let galleryIndex = 0, activeGalleryItems = GALLERY_ITEMS;
 
     function ensureGalleryRendered(){
       if(galleryRendered) return;
@@ -4952,8 +5002,9 @@
       openGalleryModal(Math.max(0, idx));
     }
 
-    function openGalleryModal(idx){
-      galleryIndex = Math.min(GALLERY_ITEMS.length - 1, Math.max(0, idx));
+    function openGalleryModal(idx,items=GALLERY_ITEMS){
+      activeGalleryItems=items;
+      galleryIndex = Math.min(activeGalleryItems.length - 1, Math.max(0, idx));
       const modal = document.getElementById('gallery-modal');
       document.body.style.overflow = 'hidden';
       modal.classList.add('open');
@@ -4962,7 +5013,7 @@
     }
 
     function hydrateGalleryModal(){
-      const it = GALLERY_ITEMS[galleryIndex];
+      const it = activeGalleryItems[galleryIndex];
       if(!it) return;
       document.getElementById('galleryKicker').innerText = it.kind;
       document.getElementById('galleryTitle').innerText = it.title;
@@ -4980,12 +5031,12 @@
     }
 
     function galleryPrev(){
-      galleryIndex = (galleryIndex - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+      galleryIndex = (galleryIndex - 1 + activeGalleryItems.length) % activeGalleryItems.length;
       hydrateGalleryModal();
     }
 
     function galleryNext(){
-      galleryIndex = (galleryIndex + 1) % GALLERY_ITEMS.length;
+      galleryIndex = (galleryIndex + 1) % activeGalleryItems.length;
       hydrateGalleryModal();
     }
 
@@ -4994,7 +5045,7 @@
     });
 
     function downloadCurrentGalleryImage(){
-      const it = GALLERY_ITEMS[galleryIndex];
+      const it = activeGalleryItems[galleryIndex];
       if(!it) return;
       const a = document.createElement('a');
       a.href = it.src;
@@ -5322,7 +5373,6 @@
     // ---------------------------
     document.addEventListener('DOMContentLoaded', () => {
 
-      renderCityHotspots();
       startHeroRotation();
       wireFlipBoxes();
       lucide.createIcons();
