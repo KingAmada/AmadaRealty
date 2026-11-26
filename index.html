@@ -3747,20 +3747,20 @@
       const gateSplitter='M78 686L151 678Q157 677 160 672L174 650Q176 647 173 644L153 626Q150 623 146 624L78 633Z';
       const gateCrossing=Array.from({length:17},(_,i)=>'<rect x="77" y="'+(590+i*8.5)+'" width="24" height="3.7" rx=".5"/>').join('');
       const gateDrive='<g id="atlasResortGateDrive" aria-label="Resort gate driveway joins the outer road">'+
-        '<path d="'+gateApproach+'" fill="#102e26"/><path d="'+gateCurbs+'" fill="none" stroke="#7f9c7c" stroke-opacity=".7" stroke-width="2.35"/>'+
+        '<path d="'+gateApproach+'" fill="#181a1d"/><path d="'+gateCurbs+'" fill="none" stroke="#7f9c7c" stroke-opacity=".7" stroke-width="2.35"/>'+
         '<path id="atlasResortGateSplitter" d="'+gateSplitter+'" fill="#2b4650" stroke="#bdccdb" stroke-width="3.7" stroke-linejoin="round"/>'+
         '<g id="atlasResortGateCrossing" fill="#edf4fb" opacity=".93">'+gateCrossing+'</g></g>';
       const resortFrontage='<g id="atlasResortFrontage" transform="'+planCoordinates+'">'+
-        '<path d="'+frontage+'" fill="#102e26"/>'+gateDrive+
+        '<path d="'+frontage+'" fill="#181a1d"/>'+gateDrive+
         '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#a0b6b1" stroke-width="3.4" stroke-linejoin="round"/>'+
         '<path id="atlasResortLaneMarks" d="'+throughLane+'" fill="none" stroke="#edf4fb" stroke-opacity=".86" stroke-width="3.6" stroke-linecap="butt" stroke-dasharray="18 22"/>'+
         '<g aria-hidden="true">'+arrow(423,302,25)+arrow(382,510,-2)+arrow(415,703,-24)+arrow(491,864,-33)+'</g></g>';
       const roadEdge=d.arrival.road;
-      const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
+      const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#181a1d','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
-        '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#102e26"/><stop offset=".99" stop-color="#102e26" stop-opacity="0"/></radialGradient>'+ 
+        '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#181a1d"/><stop offset=".99" stop-color="#181a1d" stop-opacity="0"/></radialGradient>'+ 
         '<linearGradient id="atlasResortWater" x1="0" y1=".81" x2="1" y2=".25" gradientUnits="objectBoundingBox"><stop stop-color="#a7ddd0"/><stop offset=".27" stop-color="#45b1a6"/><stop offset=".64" stop-color="#12877f"/><stop offset="1" stop-color="#206668"/></linearGradient>'+
-        '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bacfdb"/><stop offset=".56" stop-color="#d8e4ef"/><stop offset="1" stop-color="#9fb6c8"/></linearGradient>'+
+        '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfca9a"/><stop offset=".56" stop-color="#f0d7a6"/><stop offset="1" stop-color="#cda573"/></linearGradient>'+
         '<linearGradient id="atlasResortMedianGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#729365"/><stop offset="1" stop-color="#4c7650"/></linearGradient>'+
         '<linearGradient id="atlasResortGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#618657"/><stop offset=".55" stop-color="#426e48"/><stop offset="1" stop-color="#284c37"/></linearGradient>'+
         '<linearGradient id="atlasResortRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1f5f9"/><stop offset=".49" stop-color="#cfdce9"/><stop offset="1" stop-color="#8b9eb4"/></linearGradient>'+
@@ -3770,7 +3770,7 @@
         '</defs>';
       const leisure='<g id="atlasResortLagoon" aria-label="Resort gardens and beach lagoon" mask="url(#atlasResortRoadClearance)"><g transform="'+planCoordinates+'">'+
         '<path d="'+ground+'" fill="url(#atlasResortGreen)" stroke="#9faf76" stroke-width="3"/>'+
-        '<path d="'+beach+'" fill="url(#atlasResortSand)" stroke="#dae7f2" stroke-width="2.7"/>'+
+        '<path d="'+beach+'" fill="url(#atlasResortSand)" stroke="#ecd9ad" stroke-width="2.7"/>'+
         '<path d="'+water+'" fill="url(#atlasResortWater)" stroke="#c2e2d3" stroke-width="3"/>'+
         '<path d="'+water+'" fill="url(#atlasResortRipple)"/>'+
         '<path d="'+walkway+'" fill="none" stroke="#b4c6ce" stroke-width="3.8" opacity=".64"/>'+stones+loungers+foliage+'</g></g>';
@@ -3790,7 +3790,7 @@
       const boundary=atlasPoly(d.boundary,'url(#atlasGround)','stroke="#a7b9d0" stroke-width="1.2"');
       const farms=d.farms.map((p,i)=>atlasPoly(p,i?'#4c694e':'#4d6949','stroke="#a0b38b" stroke-width=".44"')+atlasPoly(p,'url(#atlasOrchard)')).join('');
       const golf=atlasPoly(d.schoolGolf,'#719484','stroke="#abc093" stroke-width=".5"')+atlasPoly(d.schoolGolf,'url(#atlasFairway)');
-      const roads='<path d="'+d.roads+'" fill="#34433d" stroke="#34433d" stroke-width=".10"/>'+d.corridors.map(p=>atlasPoly(p,'#37423b','stroke="#8a99ac" stroke-width=".40"')).join('')+
+      const roads='<path d="'+d.roads+'" fill="#1a1c1f" stroke="#1a1c1f" stroke-width=".10"/>'+d.corridors.map(p=>atlasPoly(p,'#1d1f22','stroke="#8a99ac" stroke-width=".40"')).join('')+
         d.frontWalks.map(p=>atlasPoly(p,'#bbc8d6')).join('')+resortDetail.road;
       const islands=d.islands.map(([p,outline])=>atlasPoly(outline,'#6f9271','stroke="#9fb7b4" stroke-width=".46"')+'<circle cx="'+p[0]+'" cy="'+p[1]+'" r=".66" fill="#c8dcec"/>').join('');
 
