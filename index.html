@@ -3702,13 +3702,23 @@
       const loungers=seating.map(([x,y,a],i)=>'<g transform="translate('+x+' '+y+') rotate('+a+')"><rect x="-3.5" y="-6.5" width="8" height="17" rx="1.4" fill="#695a42" opacity=".52" transform="translate(1.8 2.2)"/><rect x="-3.5" y="-7.5" width="7" height="15" rx="1.3" fill="#fff3d9" stroke="#a48864" stroke-width="1"/>'+(i%3===0?'<circle cx="9" cy="-4" r="8.1" fill="#fff5e1" stroke="#a8936c" stroke-width="1.2"/><path d="M4 -4h10M9 -9v10" stroke="#dcc6a1" stroke-width=".9"/>':'')+'</g>').join('');
       // Match the arrival paving to the road, right up to the resort's west frontage.
       const frontage='M336 151C282 191 258 322 255 460C252 560 276 663 305 756C349 895 418 1002 503 1065L552 1124L616 1048L665 993C576 914 502 825 459 739C406 631 402 538 422 440C439 357 466 291 508 224L481 164Z';
-      const resortFrontage='<path id="atlasResortFrontage" d="'+frontage+'" transform="'+planCoordinates+'" fill="#102e26"/>';
+      // The curved central island separates the through road from the resort drop-off loop.
+      // It is within the road corridor, not a planting bed against the resort wall.
+      const median='M348 165C372 156 406 164 426 178Q437 186 429 198C393 243 360 312 340 381C318 450 314 521 322 583C329 663 355 739 396 813C432 880 473 929 534 971Q549 982 546 996L530 1019Q524 1030 511 1023C446 982 390 915 350 845C307 770 281 683 272 596C262 511 268 438 286 364C301 298 313 234 325 195Q331 176 348 165Z';
+      const throughLane='M318 168C290 221 268 305 260 391C251 477 251 556 273 647C291 728 319 811 357 875C395 943 440 997 496 1042';
+      const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#e2dfbe"/>';
+      const resortFrontage='<g id="atlasResortFrontage" transform="'+planCoordinates+'">'+
+        '<path d="'+frontage+'" fill="#102e26"/>'+
+        '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#aeb28a" stroke-width="3.4" stroke-linejoin="round"/>'+
+        '<path d="'+throughLane+'" fill="none" stroke="#d7d7b7" stroke-opacity=".76" stroke-width="2.7" stroke-linecap="round" stroke-dasharray="15 23"/>'+
+        '<g aria-hidden="true">'+arrow(406,302,20)+arrow(354,510,0)+arrow(387,703,-21)+arrow(484,864,-37)+'</g></g>';
       const roadEdge=d.arrival.road;
       const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
         '<radialGradient id="atlasResortRoadTone" gradientUnits="userSpaceOnUse" cx="-95" cy="28" r="92"><stop offset=".53" stop-color="#102e26"/><stop offset=".99" stop-color="#102e26" stop-opacity="0"/></radialGradient>'+ 
         '<linearGradient id="atlasResortWater" x1="0" y1=".81" x2="1" y2=".25" gradientUnits="objectBoundingBox"><stop stop-color="#a7ddd0"/><stop offset=".27" stop-color="#45b1a6"/><stop offset=".64" stop-color="#12877f"/><stop offset="1" stop-color="#206668"/></linearGradient>'+
         '<linearGradient id="atlasResortSand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfca9a"/><stop offset=".56" stop-color="#f0d7a6"/><stop offset="1" stop-color="#cda573"/></linearGradient>'+
+        '<linearGradient id="atlasResortMedianGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#729365"/><stop offset="1" stop-color="#4c7650"/></linearGradient>'+
         '<linearGradient id="atlasResortGreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#618657"/><stop offset=".55" stop-color="#426e48"/><stop offset="1" stop-color="#284c37"/></linearGradient>'+
         '<linearGradient id="atlasResortRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2dcb3"/><stop offset=".49" stop-color="#e5c89b"/><stop offset="1" stop-color="#bb925e"/></linearGradient>'+
         '<pattern id="atlasResortRipple" width="31" height="19" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M-5 5q8 -5 15 0t15 0t15 0M-5 14q8 -5 15 0t15 0t15 0" fill="none" stroke="#e1eee0" stroke-width="1" opacity=".12"/></pattern>'+
