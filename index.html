@@ -2304,25 +2304,33 @@
                 </div>
               </div>
 
-              <div class="mt-6 rounded-3xl border border-slate-200 bg-white/55 overflow-hidden">
-                <div class="px-5 py-4 border-b border-slate-200/60 flex items-center justify-between gap-4">
-                  <div>
-                    <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Floor Plan Preview</div>
-                    <div class="text-sm text-slate-700 mt-1" id="planLabel">Select an asset to generate a preview.</div>
-                  </div>
-                  <button onclick="openFloorplanModal()"
-                          class="px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-slate-200 bg-white/70 hover:bg-white transition">
-                    View
-                  </button>
+              <section class="residence-gallery" id="residenceGallery" aria-labelledby="residenceGalleryTitle" hidden>
+                <div class="rg-top">
+                  <h3 id="residenceGalleryTitle">Residence Gallery</h3>
+                  <span id="rgCount" aria-hidden="true"></span>
                 </div>
-                <div class="p-4 bg-white/50" id="floorplanPreview">
-                  <div class="h-44 rounded-2xl border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-400 text-sm">
-                    No asset selected
-                  </div>
+                <div class="rg-stage" id="rgStage">
+                  <figure class="rg-card" id="rgCard">
+                    <div class="rg-art" id="rgArt">
+                      <img id="rgImage" alt="" decoding="async" draggable="false">
+                      <p id="rgUnavailable" hidden>Image unavailable</p>
+                    </div>
+                    <div class="rg-shine" id="rgShine" aria-hidden="true"></div>
+                    <figcaption class="rg-identity">
+                      <span id="rgStreet"></span>
+                      <strong id="rgPlot" class="serif"></strong>
+                    </figcaption>
+                  </figure>
                 </div>
-              </div>
+                <div class="rg-controls" id="rgControls" role="group" aria-label="Residence gallery controls">
+                  <button id="rgPrev" type="button" aria-label="Previous image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+                  <div id="rgDots" class="rg-dots"></div>
+                  <button id="rgNext" type="button" aria-label="Next image"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                </div>
+                <p class="rg-caption" id="rgCaption" aria-live="polite" aria-atomic="true"></p>
+              </section>
 
-              <div class="mt-6 flex gap-3">
+              <div class="mt-6 flex flex-wrap gap-3">
                 <button onclick="goPRCardWithSelection()"
                         class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
                   Explore PR Card
@@ -3859,6 +3867,125 @@
       return true;
     }
 
+    // Design imagery is grouped by street. An exact plot gallery can override its collection.
+    const residenceImages={
+      ny:[
+        ['ny-gabled','Gabled residence'],['ny-chandelier','Double-height entry'],['ny-manor','Twilight façade'],
+        ['ny-terrace','Townhouse frontage'],['/amada-resort-lagoon-aerial.jpeg','Brownstone streetscape']
+      ],
+      london:[
+        ['london-victorian','Victorian red brick'],['london-georgian','Georgian townhouse'],
+        ['/amada-townhome-street-brick-close.jpeg','Brick streetscape']
+      ],
+      naija:[
+        ['paris-mansard','Mansard façade'],['paris-golden','Golden-hour arrival'],['paris-beaux','Beaux-Arts façade'],
+        ['/amada-estate-layout-map.jpeg','Parisian streetscape']
+      ],
+      dubai:[
+        ['dubai-residence','Modern palm-lined residence'],['dubai-arches','Arched stone entrance'],['dubai-courtyard','Twilight façade'],
+        ['/amada-modern-villas-street-palm-lined.jpeg','Modern streetscape']
+      ],
+      canada:[
+        ['santorini-golden','Sculptural white façade'],['santorini-terraces','Terraced villa at dusk']
+      ]
+    };
+    const residencePlotImages={};
+    function residenceSlidesFor(unit){
+      if(residencePlotImages[unit.id]?.length) return residencePlotImages[unit.id];
+      const slides=residenceImages[unit.territory] || [];
+      const type=atlasResidenceType(unit);
+      const order={
+        ny: type==='Townhouse'?[3,4,0]:unit.kind==='presidential-villa'?[1,2,0]:[0,2,1],
+        london: type==='Townhouse'?[1,2,0]:[0,1,2],
+        naija: unit.kind==='presidential-villa'?[2,0,1]:type==='Townhouse'?[1,3,0]:[0,1,2],
+        dubai: unit.kind==='presidential-villa'?[2,1,0]:type==='Townhouse'?[0,3,1]:[0,1,2],
+        canada: unit.kind==='presidential-villa'?[1,0]:[0,1]
+      }[unit.territory] || [];
+      return order.map(i=>slides[i]).filter(Boolean);
+    }
+
+    let residenceGalleryController;
+    function showResidenceGallery(unit){
+      if(!residenceGalleryController){
+        const get=id=>document.getElementById(id);
+        const section=get('residenceGallery'), stage=get('rgStage'), card=get('rgCard'), art=get('rgArt'), shine=get('rgShine');
+        const count=get('rgCount'), street=get('rgStreet'), plot=get('rgPlot'), caption=get('rgCaption'), image=get('rgImage');
+        const fallback=get('rgUnavailable'), dots=get('rgDots'), controls=get('rgControls');
+        const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+        let activeId=null, slides=[], current=0, swipe=null;
+        const resetTilt=()=>{card.style.transform='';shine.style.opacity='0';};
+        const revealImage=()=>{
+          if(image.style.opacity!=='0')return;
+          art.style.setProperty('--rg-image','url("'+image.getAttribute('src')+'")');
+          image.style.opacity='1';
+          if(!reduced.matches)image.animate?.([{opacity:0},{opacity:1}],{duration:200,easing:'ease-out'});
+        };
+        image.addEventListener('load',revealImage);
+        const paint=()=>{
+          const [file,label]=slides[current];
+          const path=file.startsWith('/')?file:'residence-gallery/'+file+'.webp';
+          image.hidden=false;fallback.hidden=true;
+          image.alt=label+' · '+street.textContent;
+          art.style.removeProperty('--rg-image');
+          image.style.opacity='0';
+          image.src=path;
+          if(image.complete&&image.naturalWidth) revealImage();
+          count.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+          caption.textContent=label+' · '+(current+1)+' of '+slides.length;
+          [...dots.children].forEach((dot,i)=>dot.setAttribute('aria-current',String(i===current)));
+        };
+        const go=index=>{
+          if(!slides.length) return;
+          current=(index+slides.length)%slides.length;
+          paint();
+        };
+        get('rgPrev').addEventListener('click',()=>go(current-1));
+        get('rgNext').addEventListener('click',()=>go(current+1));
+        controls.addEventListener('keydown',e=>{
+          const delta=e.key==='ArrowLeft'?-1:e.key==='ArrowRight'?1:0;
+          if(delta){e.preventDefault();go(current+delta);}
+        });
+        image.addEventListener('error',()=>{image.hidden=true;fallback.hidden=false;art.style.removeProperty('--rg-image');});
+        stage.addEventListener('pointermove',e=>{
+          if(reduced.matches || e.pointerType==='touch')return;
+          const rect=stage.getBoundingClientRect();
+          const clamp=v=>Math.max(-.5,Math.min(.5,v));
+          const x=clamp((e.clientX-rect.left)/rect.width-.5),y=clamp((e.clientY-rect.top)/rect.height-.5);
+          card.style.transform='rotateX('+(-y*16)+'deg) rotateY('+(x*18)+'deg)';
+          shine.style.background='radial-gradient(circle at '+((x+.5)*100)+'% '+((y+.5)*100)+'%,#ffffff3f,transparent 65%)';
+          shine.style.opacity='1';
+        });
+        stage.addEventListener('pointerleave',resetTilt);
+        stage.addEventListener('pointercancel',()=>{swipe=null;resetTilt();});
+        stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&e.isPrimary)swipe=[e.pointerId,e.clientX,e.clientY];});
+        stage.addEventListener('pointerup',e=>{
+          if(!swipe||swipe[0]!==e.pointerId)return;
+          const dx=e.clientX-swipe[1],dy=e.clientY-swipe[2];
+          swipe=null;
+          if(Math.abs(dx)>44 && Math.abs(dx)>Math.abs(dy)*1.35)go(current+(dx<0?1:-1));
+        });
+        residenceGalleryController={show(unit){
+          if(activeId===unit.id)return;
+          activeId=unit.id;slides=residenceSlidesFor(unit);current=0;
+          section.hidden=!slides.length;
+          if(!slides.length)return;
+          resetTilt();swipe=null;
+          plot.textContent=measuredPlotRef(unit);
+          street.textContent=territoryMeta[unit.territory].label;
+          dots.replaceChildren(...slides.map((slide,index)=>{
+            const button=document.createElement('button');
+            button.type='button';button.setAttribute('aria-label','Image '+(index+1)+': '+slide[1]);
+            button.addEventListener('click',()=>go(index));
+            return button;
+          }));
+          controls.hidden=slides.length<2;
+          paint();
+        }};
+      }
+      residenceGalleryController.show(unit);
+    }
+
+
     function selectUnit(unitId, { silentScroll = false } = {}){
       const unit = inventory.find(x => x.id === unitId);
       if(!unit) return;
@@ -3886,11 +4013,7 @@
       document.getElementById('statBeds').innerText  = `${totals.bedrooms} / ${totals.bathrooms}`;
       document.getElementById('statSize').innerText = atlasPlotArea(unit);
 
-      document.getElementById('planLabel').innerText = `3-floor interior preview for ${measuredPlotRef(unit)} • ${totals.bedrooms} bedrooms, ${totals.bathrooms} bathrooms.`;
-
-      const preview = document.getElementById('floorplanPreview');
-      preview.innerHTML = buildInteriorPlan(unit, interior, { compact: true });
-
+      showResidenceGallery(unit);
 
       if(!silentScroll){
         if (window.innerWidth < 1024) {
@@ -4121,11 +4244,6 @@
 
       document.getElementById('fpBody').innerHTML = buildInteriorPlan(selectedUnit, cfg, { compact:false });
 
-      const preview = document.getElementById('floorplanPreview');
-      if (preview) preview.innerHTML = buildInteriorPlan(selectedUnit, cfg, { compact:true });
-
-      document.getElementById('planLabel').innerText =
-        `3-floor interior preview for ${selectedUnit.id} — ${totals.bedrooms} bedrooms, ${totals.bathrooms} bathrooms.`;
       document.getElementById('statBeds').innerText  = `${totals.bedrooms} / ${totals.bathrooms}`;
       const terrLabel = territoryMeta[selectedUnit.territory].label;
       document.getElementById('selectedDesc').innerText =
@@ -4846,7 +4964,32 @@
           .foot{margin-top:28px; font-size:12px; color:#64748b;}
           .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
           svg{max-width:100%; height:auto;}
-        </style>
+          .residence-gallery{margin-top:1.5rem;padding:clamp(.75rem,2vw,1.1rem);border:1px solid #d3c9b6;border-radius:1.4rem;background:linear-gradient(145deg,#fffaf1,#f1ede3);color:#19392f}
+    .residence-gallery[hidden],.residence-gallery [hidden]{display:none!important}
+    .rg-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:.1rem .2rem .75rem}
+    .rg-top h3,.rg-top span{font:750 .66rem/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .rg-top span{white-space:nowrap;color:#53665c;font-variant-numeric:tabular-nums}
+    .rg-stage{perspective:850px;touch-action:pan-y}
+    .rg-card{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;margin:0;color:#fff4dc;border:1px solid #af9465;border-radius:1.05rem;background:linear-gradient(145deg,#24463a,#102a23 60%,#1f4336);box-shadow:0 12px 24px #102b2540,inset 0 0 0 4px #f7db9c15;transform-style:preserve-3d;transition:transform .22s ease-out}
+    .rg-art{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:0;aspect-ratio:1/1;margin:5px 5px 0;border-radius:.76rem .76rem .22rem .22rem;background:#17382e}
+    .rg-art::before{content:"";position:absolute;inset:-16px;z-index:-1;background:var(--rg-image,none) center/cover;filter:blur(17px) brightness(.48) saturate(.80)}
+    .rg-art img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;user-select:none}
+    .rg-art p{font:600 .77rem system-ui;color:#fff4dc}
+    .rg-identity{display:grid;gap:.25rem;padding:.65rem .9rem .75rem;transform:translateZ(14px);pointer-events:none;text-shadow:0 2px 8px #001b15}
+    .rg-identity span{font:700 .59rem/1.3 system-ui;letter-spacing:.15em;text-transform:uppercase;color:#ebd4a6}
+    .rg-identity strong{font-size:clamp(1.25rem,3vw,1.68rem);font-weight:650;line-height:1.1}
+    .rg-shine{position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;transition:opacity .22s ease}
+    .rg-controls{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.7rem}
+    .rg-controls>button{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:50%;background:#19392f;color:#fff4dc;border:1px solid #19392f;transition:background .18s}
+    .rg-controls>button:hover{background:#315a4a}
+    .rg-dots{display:flex;justify-content:center;flex-wrap:wrap}
+    .rg-dots button{width:28px;height:44px;padding:0;display:grid;place-items:center;border-radius:8px}
+    .rg-dots button::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#a69e8d;transition:width .18s,background .18s}
+    .rg-dots button[aria-current="true"]::before{width:1rem;border-radius:1rem;background:#214439}
+    .rg-controls button:focus-visible{outline:2px solid #26634e;outline-offset:2px}
+    .rg-caption{min-height:1.2em;text-align:center;color:#415951;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
+    @media(prefers-reduced-motion:reduce){.rg-card,.rg-shine,.rg-controls button,.rg-dots button::before{transition:none}}
+  </style>
       </head><body>
         ${htmlBody}
         <div class="foot">Tip: Use Print → “Save as PDF”.</div>
