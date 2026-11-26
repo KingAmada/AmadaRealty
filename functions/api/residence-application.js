@@ -24,11 +24,11 @@ function validate(input) {
   if(!input || typeof input!=='object' || Array.isArray(input))return null;
   const {tier,requestKey}=input;
   const fullName=typeof input.fullName==='string' ? input.fullName.trim().replace(/\s+/gu,' ') : '';
-  const phone=typeof input.phone==='string' ? input.phone.replace(/[\s().-]/g,'') : '';
+  const phone=typeof input.phone==='string' ? input.phone.trim() : '';
   const plot=typeof input.plot==='string' ? input.plot : '';
   if(typeof tier!=='string' || !Object.hasOwn(tiers,tier))return null;
   if(fullName.length<2 || fullName.length>80 || !/\p{L}/u.test(fullName) || /[\p{Cc}\p{Cf}<>]/u.test(fullName))return null;
-  if(!/^(?:0\d{10}|\+[1-9]\d{7,14})$/.test(phone))return null;
+  if(!/^\d{11}$/.test(phone))return null;
   if(typeof requestKey!=='string' || !/^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i.test(requestKey))return null;
   if(plot){
     if(tier==='presidential'){if(!/^PV-0[1-5]$/.test(plot))return null;}
