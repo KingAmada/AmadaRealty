@@ -1163,9 +1163,9 @@
     .atlas-detail-card{background:#fbf7ee;border:1px solid #d4cbbc;border-radius:1.35rem;padding:clamp(.9rem,2vw,1.5rem);box-shadow:0 14px 38px #19332c10}
     .atlas-detail-card #selectedTitle{font-size:clamp(1.65rem,3.1vw,2.35rem);color:#1e3f35}
     .atlas-svg [data-unit]{cursor:pointer;outline:none}
-    .atlas-svg .atlas-lot{stroke:#5f5645;stroke-width:.46}
-    .atlas-svg .atlas-house{stroke:#44362d;stroke-width:.38;pointer-events:none}
-    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#f5dfb4;stroke:#fff0ce;stroke-width:1.25}
+    .atlas-svg .atlas-lot{stroke:#68756d;stroke-width:.46}
+    .atlas-svg .atlas-house{stroke:#5c6761;stroke-width:.38;pointer-events:none}
+    .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#f8f7ef;stroke:#fff0ce;stroke-width:1.25}
     .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#744523;stroke-width:.85}
     .atlas-svg text{pointer-events:none;font-family:system-ui,sans-serif}
     .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #ffedb8;outline-offset:2px}
@@ -3669,8 +3669,8 @@
     const estateAtlasPlan = JSON.parse(document.getElementById('estateAtlasData').textContent);
     const atlasStreets=['ny','london','naija','dubai','canada'];
     const atlasFull=[-145,-209,290,418];
-    // One limestone and champagne palette across all five streets.
-    const atlasResidencePalette={detached:['#b9aa90','#eed9b4'],townhouse:['#ad9a7e','#e3c69b'],villa:['#aa8861','#efcc94']};
+    // Quiet whites across each street, with softer plot tones for clear roof silhouettes.
+    const atlasResidencePalette={detached:['#c5cac3','#f8f8f2'],townhouse:['#bcc6c3','#e9eeed'],villa:['#d0d0c7','#fffdf6']};
     let atlasView=atlasFull.slice();
     let atlasGeometryByUnit=new Map();
     const atlasCenter=p=>p.reduce((q,v)=>[q[0]+v[0]/p.length,q[1]+v[1]/p.length],[0,0]);
@@ -3705,8 +3705,9 @@
       // The curved central island separates the through road from the resort drop-off loop.
       // Bring the island closer to the resort to narrow the drop-off lane and free the gate junction.
       const median='M368 165C391 156 426 164 448 178Q460 186 453 198C421 243 391 312 373 381C352 450 349 521 360 583C373 663 403 739 444 813C465 880 489 929 540 971Q553 982 549 996L530 1019Q524 1030 511 1023C450 982 411 915 394 845C375 803 371 764 374 734C372 704 375 674 364 646C355 620 346 598 344 573C338 533 321 501 316 465C310 425 314 395 318 364C331 298 341 234 349 195Q352 176 368 165Z';
-      const throughLane='M321 168C300 221 280 305 276 391C271 443 267 487 271 528M323 754C340 801 358 840 380 875C416 943 454 997 499 1042';
-      const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#e2dfbe"/>';
+      // Center the dashes on the outer carriageway and leave the gate junction unmarked.
+      const throughLane='M325 185C303 231 290 300 284 350C278 404 280 472 289 515M336 764C346 815 357 855 375 896C395 945 432 1008 467 1043';
+      const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#f1f1e6"/>';
       const gateApproach='M66 580C112 574 162 562 212 552C235 552 245 542 253 521L270 543C265 606 267 661 296 720L283 752C272 727 251 726 221 730L66 748Z';
       const gateCurbs='M68 580C112 574 162 562 212 552C235 552 245 542 253 521M68 748L221 730C251 726 272 727 283 752';
       // Curb-bounded gate island, with the crossing at the gate line as in the 3D view.
@@ -3719,8 +3720,8 @@
       const resortFrontage='<g id="atlasResortFrontage" transform="'+planCoordinates+'">'+
         '<path d="'+frontage+'" fill="#102e26"/>'+gateDrive+
         '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#aeb28a" stroke-width="3.4" stroke-linejoin="round"/>'+
-        '<path d="'+throughLane+'" fill="none" stroke="#d7d7b7" stroke-opacity=".76" stroke-width="2.7" stroke-linecap="round" stroke-dasharray="15 23"/>'+
-        '<g aria-hidden="true">'+arrow(421,302,20)+arrow(374,510,0)+arrow(411,703,-21)+arrow(503,864,-37)+'</g></g>';
+        '<path id="atlasResortLaneMarks" d="'+throughLane+'" fill="none" stroke="#f1f1e6" stroke-opacity=".86" stroke-width="3.6" stroke-linecap="butt" stroke-dasharray="18 22"/>'+
+        '<g aria-hidden="true">'+arrow(423,302,25)+arrow(382,510,-2)+arrow(415,703,-24)+arrow(491,864,-33)+'</g></g>';
       const roadEdge=d.arrival.road;
       const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
@@ -3774,11 +3775,11 @@
       function drawUnit(u,plot,house,c,f,access=[],pv=false,num=''){
         atlasGeometryByUnit.set(u.id,{plot,footprint:house,area:atlasArea(plot)});
         const cen=atlasCenter(house), ref=measuredPlotRef(u);
-        const paths=access.map(v=>atlasLine([v.from,v.to],'#e8d6b2',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
-        const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#725e4b',.26);
+        const paths=access.map(v=>atlasLine([v.from,v.to],'#e4e6df',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
+        const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#abb5af',.26);
         return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'" role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
-          atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#584635','opacity=".43" pointer-events="none"')+
-          atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#32291e" text-anchor="middle">'+num+'</text></g>';
+          atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#253d34','opacity=".43" pointer-events="none"')+
+          atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#24352e" text-anchor="middle">'+num+'</text></g>';
       }
       const lots=d.lots.map(([id,plot,house])=>{
         const n=Number(id.slice(1))-1,s=Math.floor(n/14),i=n%14,u=choices[s][i];
