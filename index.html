@@ -3899,8 +3899,9 @@
         ['ny-terrace','Townhouse frontage'],['/amada-resort-lagoon-aerial.jpeg','Brownstone streetscape']
       ],
       london:[
-        ['london-victorian','Victorian red brick'],['london-georgian','Georgian townhouse'],
-        ['/amada-townhome-street-brick-close.jpeg','Brick streetscape']
+        ['london-victorian','Victorian red brick'],['london-georgian','Georgian façade'],
+        ['/amada-townhome-street-brick-close.jpeg','London townhouse row'],
+        ['london-terraces','Terrace garden courtyard']
       ],
       naija:[
         ['paris-mansard','Mansard façade'],['paris-golden','Golden-hour arrival'],['paris-beaux','Beaux-Arts façade'],
@@ -3921,7 +3922,7 @@
       const type=atlasResidenceType(unit);
       const order={
         ny: type==='Townhouse'?[3,4,0]:unit.kind==='presidential-villa'?[1,2,0]:[0,2,1],
-        london: type==='Townhouse'?[1,2,0]:[0,1,2],
+        london: type==='Townhouse'?[2,3]:[0,1,2],
         naija: unit.kind==='presidential-villa'?[2,0,1]:type==='Townhouse'?[1,3,0]:[0,1,2],
         dubai: unit.kind==='presidential-villa'?[2,1,0]:type==='Townhouse'?[0,3,1]:[0,1,2],
         canada: unit.kind==='presidential-villa'?[1,0]:[0,1]
