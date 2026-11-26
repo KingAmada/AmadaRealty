@@ -1196,6 +1196,31 @@
     .map-facts strong{display:block;font:700 clamp(.9rem,2vw,1.2rem) Georgia,serif}
     .map-facts small{display:block;font-size:.63rem;line-height:1.25;margin-top:.2rem}
     #selectedTitle{scroll-margin-top:9rem}
+    .residence-gallery{margin-top:1.5rem;padding:clamp(.75rem,2vw,1.1rem);border:1px solid #d3c9b6;border-radius:1.4rem;background:linear-gradient(145deg,#fffaf1,#f1ede3);color:#19392f}
+    .residence-gallery[hidden],.residence-gallery [hidden]{display:none!important}
+    .rg-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:.1rem .2rem .75rem}
+    .rg-top h3,.rg-top span{font:750 .66rem/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .rg-top span{white-space:nowrap;color:#53665c;font-variant-numeric:tabular-nums}
+    .rg-stage{perspective:850px;touch-action:pan-y}
+    .rg-card{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;margin:0;color:#fff4dc;border:1px solid #af9465;border-radius:1.05rem;background:linear-gradient(145deg,#24463a,#102a23 60%,#1f4336);box-shadow:0 12px 24px #102b2540,inset 0 0 0 4px #f7db9c15;transform-style:preserve-3d;transition:transform .22s ease-out}
+    .rg-art{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:0;aspect-ratio:1/1;margin:5px 5px 0;border-radius:.76rem .76rem .22rem .22rem;background:#17382e}
+    .rg-art::before{content:"";position:absolute;inset:-16px;z-index:-1;background:var(--rg-image,none) center/cover;filter:blur(17px) brightness(.48) saturate(.80)}
+    .rg-art img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;user-select:none}
+    .rg-art p{font:600 .77rem system-ui;color:#fff4dc}
+    .rg-identity{display:grid;gap:.25rem;padding:.65rem .9rem .75rem;transform:translateZ(14px);pointer-events:none;text-shadow:0 2px 8px #001b15}
+    .rg-identity span{font:700 .59rem/1.3 system-ui;letter-spacing:.15em;text-transform:uppercase;color:#ebd4a6}
+    .rg-identity strong{font-size:clamp(1.25rem,3vw,1.68rem);font-weight:650;line-height:1.1}
+    .rg-shine{position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;transition:opacity .22s ease}
+    .rg-controls{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.7rem}
+    .rg-controls>button{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:50%;background:#19392f;color:#fff4dc;border:1px solid #19392f;transition:background .18s}
+    .rg-controls>button:hover{background:#315a4a}
+    .rg-dots{display:flex;justify-content:center;flex-wrap:wrap}
+    .rg-dots button{width:28px;height:44px;padding:0;display:grid;place-items:center;border-radius:8px}
+    .rg-dots button::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#a69e8d;transition:width .18s,background .18s}
+    .rg-dots button[aria-current="true"]::before{width:1rem;border-radius:1rem;background:#214439}
+    .rg-controls button:focus-visible{outline:2px solid #26634e;outline-offset:2px}
+    .rg-caption{min-height:1.2em;text-align:center;color:#415951;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
+    @media(prefers-reduced-motion:reduce){.rg-card,.rg-shine,.rg-controls button,.rg-dots button::before{transition:none}}
 </style>
 </head>
 
@@ -4964,32 +4989,7 @@
           .foot{margin-top:28px; font-size:12px; color:#64748b;}
           .brand{margin-top:26px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#94a3b8;}
           svg{max-width:100%; height:auto;}
-          .residence-gallery{margin-top:1.5rem;padding:clamp(.75rem,2vw,1.1rem);border:1px solid #d3c9b6;border-radius:1.4rem;background:linear-gradient(145deg,#fffaf1,#f1ede3);color:#19392f}
-    .residence-gallery[hidden],.residence-gallery [hidden]{display:none!important}
-    .rg-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:.1rem .2rem .75rem}
-    .rg-top h3,.rg-top span{font:750 .66rem/1.2 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
-    .rg-top span{white-space:nowrap;color:#53665c;font-variant-numeric:tabular-nums}
-    .rg-stage{perspective:850px;touch-action:pan-y}
-    .rg-card{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;min-width:0;margin:0;color:#fff4dc;border:1px solid #af9465;border-radius:1.05rem;background:linear-gradient(145deg,#24463a,#102a23 60%,#1f4336);box-shadow:0 12px 24px #102b2540,inset 0 0 0 4px #f7db9c15;transform-style:preserve-3d;transition:transform .22s ease-out}
-    .rg-art{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;min-height:0;aspect-ratio:1/1;margin:5px 5px 0;border-radius:.76rem .76rem .22rem .22rem;background:#17382e}
-    .rg-art::before{content:"";position:absolute;inset:-16px;z-index:-1;background:var(--rg-image,none) center/cover;filter:blur(17px) brightness(.48) saturate(.80)}
-    .rg-art img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:contain;user-select:none}
-    .rg-art p{font:600 .77rem system-ui;color:#fff4dc}
-    .rg-identity{display:grid;gap:.25rem;padding:.65rem .9rem .75rem;transform:translateZ(14px);pointer-events:none;text-shadow:0 2px 8px #001b15}
-    .rg-identity span{font:700 .59rem/1.3 system-ui;letter-spacing:.15em;text-transform:uppercase;color:#ebd4a6}
-    .rg-identity strong{font-size:clamp(1.25rem,3vw,1.68rem);font-weight:650;line-height:1.1}
-    .rg-shine{position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:2;opacity:0;mix-blend-mode:screen;transition:opacity .22s ease}
-    .rg-controls{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.7rem}
-    .rg-controls>button{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:50%;background:#19392f;color:#fff4dc;border:1px solid #19392f;transition:background .18s}
-    .rg-controls>button:hover{background:#315a4a}
-    .rg-dots{display:flex;justify-content:center;flex-wrap:wrap}
-    .rg-dots button{width:28px;height:44px;padding:0;display:grid;place-items:center;border-radius:8px}
-    .rg-dots button::before{content:"";width:.48rem;height:.48rem;border-radius:50%;background:#a69e8d;transition:width .18s,background .18s}
-    .rg-dots button[aria-current="true"]::before{width:1rem;border-radius:1rem;background:#214439}
-    .rg-controls button:focus-visible{outline:2px solid #26634e;outline-offset:2px}
-    .rg-caption{min-height:1.2em;text-align:center;color:#415951;margin:.05rem 0 .15rem;font:600 .73rem/1.4 system-ui}
-    @media(prefers-reduced-motion:reduce){.rg-card,.rg-shine,.rg-controls button,.rg-dots button::before{transition:none}}
-  </style>
+        </style>
       </head><body>
         ${htmlBody}
         <div class="foot">Tip: Use Print → “Save as PDF”.</div>
