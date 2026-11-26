@@ -3703,9 +3703,9 @@
       // Match the arrival paving to the road, right up to the resort's west frontage.
       const frontage='M336 151C282 191 258 322 255 460C252 560 276 663 305 756C349 895 418 1002 503 1065L552 1124L616 1048L665 993C576 914 502 825 459 739C406 631 402 538 422 440C439 357 466 291 508 224L481 164Z';
       // The curved central island separates the through road from the resort drop-off loop.
-      // It is within the road corridor, not a planting bed against the resort wall.
-      const median='M348 165C372 156 406 164 426 178Q437 186 429 198C393 243 360 312 340 381C318 450 314 521 322 583C329 663 355 739 396 813C432 880 473 929 534 971Q549 982 546 996L530 1019Q524 1030 511 1023C446 982 390 915 350 845C327 803 323 764 326 734C326 704 330 674 321 646C314 620 307 598 306 573C302 533 287 501 282 465C277 425 281 395 286 364C301 298 313 234 325 195Q331 176 348 165Z';
-      const throughLane='M318 168C290 221 268 305 260 391C255 443 251 487 253 528M302 754C317 801 335 840 357 875C395 943 440 997 496 1042';
+      // Bring the island closer to the resort to narrow the drop-off lane and free the gate junction.
+      const median='M368 165C391 156 426 164 448 178Q460 186 453 198C421 243 391 312 373 381C352 450 349 521 360 583C373 663 403 739 444 813C465 880 489 929 540 971Q553 982 549 996L530 1019Q524 1030 511 1023C450 982 411 915 394 845C375 803 371 764 374 734C372 704 375 674 364 646C355 620 346 598 344 573C338 533 321 501 316 465C310 425 314 395 318 364C331 298 341 234 349 195Q352 176 368 165Z';
+      const throughLane='M321 168C300 221 280 305 276 391C271 443 267 487 271 528M323 754C340 801 358 840 380 875C416 943 454 997 499 1042';
       const arrow=(x,y,angle)=>'<path d="M-2.1 -6H2.1V1H5L0 7L-5 1H-2.1Z" transform="translate('+x+' '+y+') rotate('+angle+')" fill="#e2dfbe"/>';
       const gateApproach='M66 580C112 574 162 562 212 552C235 552 245 542 253 521L270 543C265 606 267 661 296 720L283 752C272 727 251 726 221 730L66 748Z';
       const gateCurbs='M68 580C112 574 162 562 212 552C235 552 245 542 253 521M68 748L221 730C251 726 272 727 283 752';
@@ -3720,7 +3720,7 @@
         '<path d="'+frontage+'" fill="#102e26"/>'+gateDrive+
         '<path id="atlasResortMedian" d="'+median+'" fill="url(#atlasResortMedianGreen)" stroke="#aeb28a" stroke-width="3.4" stroke-linejoin="round"/>'+
         '<path d="'+throughLane+'" fill="none" stroke="#d7d7b7" stroke-opacity=".76" stroke-width="2.7" stroke-linecap="round" stroke-dasharray="15 23"/>'+
-        '<g aria-hidden="true">'+arrow(406,302,20)+arrow(354,510,0)+arrow(387,703,-21)+arrow(484,864,-37)+'</g></g>';
+        '<g aria-hidden="true">'+arrow(421,302,20)+arrow(374,510,0)+arrow(411,703,-21)+arrow(503,864,-37)+'</g></g>';
       const roadEdge=d.arrival.road;
       const road='<path d="'+d.roads+'" fill="url(#atlasResortRoadTone)"/>'+atlasPoly(roadEdge,'#102e26','id="atlasResortArrival" stroke="#7f9c7c" stroke-opacity=".65" stroke-width=".24" stroke-linejoin="round"')+resortFrontage;
       const defs='<defs>'+
