@@ -1118,9 +1118,24 @@
     #page-pr-card .prx-btn:disabled{cursor:wait;opacity:.67}
     #page-pr-card .prx-text h1{font-size:clamp(1.75rem,4.85vw,4.15rem)}
     #page-pr-card .prx-text h1 span{display:block;white-space:nowrap}
-    #page-pr-card .prx-app-counts{margin-top:1.45rem;padding:.8rem .95rem;border:1px solid #cbd5e124;border-radius:.85rem;background:#e2e8f008;color:#d8e2ef;font:550 .79rem/1.7 system-ui,sans-serif;font-variant-numeric:tabular-nums}
-    #page-pr-card .prx-app-counts span{display:inline-block;white-space:nowrap}
-    #page-pr-card .prx-app-counts strong{color:#f8fafc}
+    #page-pr-card .prx-final-hero{container-type:inline-size;min-width:0}
+    #page-pr-card .prx-final-hero h1{font-size:clamp(1.4rem,12.55cqi,3.8rem);font-weight:400;line-height:1.1;letter-spacing:-.022em;margin:0 0 clamp(1rem,5.9cqi,1.45rem)}
+    #page-pr-card .prx-final-hero h1 span{text-transform:capitalize}
+    #page-pr-card #prxStepLabel{margin:0 0 clamp(1.35rem,7.8cqi,2.15rem);color:#9facbf;font:650 clamp(.62rem,2.85cqi,.74rem)/1.4 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+    #page-pr-card .prx-final-hero .prx-final-sub{margin:0;color:#a0adbf;font:400 clamp(.9rem,4.1cqi,1.15rem)/1.55 'Plus Jakarta Sans',system-ui,sans-serif}
+    #page-pr-card .prx-final-hero .prx-applied{display:flex;align-items:center;gap:clamp(.65rem,3.2cqi,.9rem);max-width:none;margin:clamp(1.35rem,8cqi,2.15rem) 0 0;color:#dbe4f1;font:550 clamp(.76rem,3.45cqi,.94rem)/1.4 'Plus Jakarta Sans',system-ui,sans-serif}
+    #page-pr-card .prx-applied strong{color:#f7f9fc;font-weight:750}
+    #page-pr-card .prx-applied-mark{display:flex;flex:0 0 auto;padding-left:2px}
+    #page-pr-card .prx-applied-mark svg{width:clamp(1.7rem,8.9cqi,2.5rem);height:auto;aspect-ratio:1;border:2px solid #151e2e;border-radius:50%;overflow:hidden;color:#b6a27c;background:#302b25}
+    #page-pr-card .prx-applied-mark svg+svg{margin-left:clamp(-.46rem,-1.6cqi,-.24rem);color:#b4a0ad;background:#38303d}
+    #page-pr-card .prx-applied-mark svg:last-child{color:#a8bbc8;background:#273846}
+    #page-pr-card .prx-app-counts{list-style:none;width:fit-content;max-width:100%;display:flex;gap:.46rem .77rem;flex-wrap:wrap;margin:clamp(.9rem,4.4cqi,1.22rem) 0 0;padding:.72rem .8rem;border:1px solid #cbd5e119;border-radius:.58rem;background:#e2e8f006;font:680 clamp(.61rem,2.66cqi,.74rem)/1.42 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.055em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+    #page-pr-card .prx-app-counts li{display:flex;align-items:center;gap:.32rem;white-space:nowrap}
+    #page-pr-card .prx-app-counts li::before{content:"";width:.36rem;height:.36rem;border-radius:50%;flex:none;background:currentColor}
+    #page-pr-card .prx-approved{color:#59cd92}
+    #page-pr-card .prx-rejected{color:#fc8592}
+    #page-pr-card .prx-reviewing{color:#f5c766}
+    #page-pr-card .prx-backlog{color:#aeb9ce}
     #page-pr-card .prx-card-holder{width:calc(100% - 29px);min-width:0}
     #page-pr-card #prxCardName{display:block;width:100%;max-width:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;font-size:clamp(.8rem,3vw,1.12rem)}
     #page-pr-card .prx-deposit-section{width:100%;min-width:0;padding-top:.4rem}
@@ -1136,7 +1151,6 @@
     #page-pr-card #prxCopyDeposit{color:#f8fafc;background:#e2e8f01b;border:1px solid #cbd5e135;margin:0}
     #page-pr-card #prxCopyDeposit:hover{background:#e2e8f028}
     #page-pr-card #prxCopyStatus{min-height:1.15em;margin-top:.28rem}
-    @media(max-width:420px){#page-pr-card .prx-text h1{font-size:clamp(1.45rem,7.8vw,2.15rem)}}
     #page-pr-card .prx-demo-summary{color:#e9dfca;background:#152139;padding:.7rem .85rem;border-radius:.6rem;font-size:.8rem;line-height:1.4}
     @media (max-width:600px){
       #page-pr-card .prx-wrap{padding-inline:10px}
@@ -1415,6 +1429,13 @@
     #page-experience .experience-visit{width:min(calc(100% - 2.5rem),1250px);margin:clamp(2rem,6vw,6rem) auto 0}
     .ex-dock{position:fixed;z-index:35;bottom:max(2.65rem,calc(env(safe-area-inset-bottom) + 2.2rem));left:50%;width:min(calc(100% - 2rem),76rem);transform:translateX(-50%);display:grid;justify-items:center;align-items:end;gap:.35rem;pointer-events:none}
     .ex-dock[data-outside="true"]{display:none}
+    .ex-back-to-top{position:fixed;z-index:36;right:max(.8rem,env(safe-area-inset-right));bottom:max(.7rem,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:.38rem;min-height:44px;padding:0 .68rem;border-radius:999px;border:1px solid #a0b9dd64;background:#0b1425e6;color:#edf4ff;box-shadow:0 7px 20px #0006;font:650 .7rem/1.2 system-ui,sans-serif;transition:background .2s,color .2s}
+    .ex-back-to-top[hidden]{display:none}
+    .ex-back-to-top:hover{background:#263e5b;color:#fff}
+    .ex-back-to-top[data-film="true"]{bottom:max(3.25rem,calc(env(safe-area-inset-bottom) + 2.7rem))}
+    .ex-back-to-top svg{width:.85rem;height:.85rem;flex:none}
+    @media(max-width:650px){.ex-back-to-top{width:44px;justify-content:center;padding:0}.ex-back-to-top span{display:none}}
+    @media(prefers-reduced-motion:reduce){.ex-back-to-top{transition:none}}
     .ex-dock .sp-index{position:static;top:auto;width:100%;min-width:0;grid-row:1;border:1px solid #8ea5c350;border-radius:.9rem;background:#0b1425e8;box-shadow:0 12px 44px #02050b70;opacity:0;transform:translateY(.42rem);transition:opacity .24s ease,transform .25s ease;pointer-events:none;color:#e6eeff}
     .ex-dock .sp-index-top{border-color:#a6b9dc33}
     .ex-dock .sp-index-title,.ex-dock .sp-index a{color:#d1def1}
@@ -2125,7 +2146,7 @@
           <img class="experience-hero-image" src="amada-estate-layout-map.jpeg" alt="" decoding="async" fetchpriority="high">
           <div class="experience-hero-content">
             <p class="experience-kicker">Amada Residence · Abuja, Nigeria</p>
-            <h1>The Experience</h1>
+            <h1 tabindex="-1">The Experience</h1>
             <p>Begin on the Boulevard. Then follow the streets, gardens and gathering places that give Amada Residence its character.</p>
             <div class="experience-actions">
               <button type="button" class="experience-btn experience-btn-light" id="experienceStart">Start the tour <span aria-hidden="true">↓</span></button>
@@ -2135,6 +2156,10 @@
           </div>
           <div class="experience-hero-index" aria-hidden="true">01–18<br>Destinations</div>
         </header>
+        <button id="experienceBackToTop" class="ex-back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg>
+          <span>Back to top</span>
+        </button>
 
         <div class="ex-dock">
           <button class="ex-dock-toggle" id="experienceNavToggle" type="button" aria-expanded="false" aria-controls="experienceDestinations">Destinations <span aria-hidden="true">⌃</span></button>
@@ -2508,18 +2533,20 @@
         <div class="prx-dashboard" id="prxDashboard">
           <div class="prx-cube-bg"></div>
 
-          <div class="prx-text">
-            <div class="text-[10px] uppercase tracking-[0.25em] font-bold text-slate-400 mb-6" id="prxStepLabel">The Estate Embassy</div>
+          <div class="prx-text prx-final-hero">
+            <div id="prxStepLabel">Final Step</div>
             <h1><span>Not for everyone.</span><span>perhaps, for you.</span></h1>
-            <p id="residence-application-counts" class="prx-app-counts">
-              <span class="whitespace-nowrap"><strong class="text-white">163</strong> Applied,</span>
-              <span class="whitespace-nowrap"><strong class="text-white">2</strong> approved,</span>
-              <span class="whitespace-nowrap"><strong class="text-white">43</strong> rejected,</span>
-              <span class="whitespace-nowrap"><strong class="text-white">95</strong> being reviewed,</span>
-              <span class="whitespace-nowrap"><strong class="text-white">23</strong> backlog.</span>
+            <p class="prx-final-sub">Apply for Permanent Residency.</p>
+            <p class="prx-applied">
+              <span class="prx-applied-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="15" r="6"/><path d="M7 40v-3a13 13 0 0 1 26 0v3Z"/></svg><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="15" r="6"/><path d="M7 40v-3a13 13 0 0 1 26 0v3Z"/></svg><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="15" r="6"/><path d="M7 40v-3a13 13 0 0 1 26 0v3Z"/></svg></span>
+              <span><strong>163</strong> others applied.</span>
             </p>
-            <p>Apply for Permanent Residency or explore the Visitor Visa.</p>
-            <div class="prx-preview-note"><strong>The Chosen 75</strong><br>The PR Card is the resident credential for Amada Residence. The Visitor Visa is for private estate visits.</div>
+            <ul id="residence-application-counts" class="prx-app-counts" aria-label="Application status counts">
+              <li class="prx-approved">2 approved</li>
+              <li class="prx-rejected">43 rejected</li>
+              <li class="prx-reviewing">95 being reviewed</li>
+              <li class="prx-backlog">23 backlog</li>
+            </ul>
           </div>
 
           <div class="prx-card-col">
@@ -3684,7 +3711,7 @@
          filmRunway.scrollIntoView({block:'start',behavior:'instant'});
          film.focus({preventScroll:true});
        });
-       const dock=page.querySelector('.ex-dock'), dockToggle=byId('experienceNavToggle');
+       const dock=page.querySelector('.ex-dock'), dockToggle=byId('experienceNavToggle'), backTop=byId('experienceBackToTop');
        const hoverPointer=matchMedia('(hover:hover) and (pointer:fine)');
        let lastY=window.scrollY, openAtY=0;
        const syncDock=()=>dockToggle.setAttribute('aria-expanded',String(dock.dataset.open==='true'||dock.dataset.peek==='true'||Boolean(dock.querySelector('.sp-index :focus-visible'))));
@@ -3699,6 +3726,13 @@
        };
        const hideDock=()=>{setDock(false);setPeek(false);};
        const refreshUI=()=>{hideDock();onScroll();};
+       backTop.addEventListener('click',()=>{
+         hideDock();clearTimeout(intentTimer);intent=null;
+         if(location.hash!=='#/experience')history.pushState(null,'','#/experience');
+         hero.querySelector('h1').focus({preventScroll:true});
+         window.scrollTo({top:0,left:0,behavior:reduced.matches?'instant':'smooth'});
+         onScroll();
+       });
        dockToggle.addEventListener('click',()=>setDock(dock.dataset.open!=='true'));
        dock.addEventListener('focusin',syncDock);
        dock.addEventListener('focusout',()=>requestAnimationFrame(syncDock));
@@ -3817,8 +3851,10 @@
               item.stage.classList.toggle('is-clear',fade>=.94);
             }
           }
-          const afterFilm=frames.at(-1).rect.bottom<=viewport*.47;
+          const filmRect=frames.at(-1).rect, afterFilm=filmRect.bottom<=viewport*.47;
           dock.dataset.outside=String(afterFilm);
+          backTop.hidden=y<viewport*.56;
+          backTop.dataset.film=String(filmRect.top<viewport*.5&&filmRect.bottom>viewport*.5);
           if(!intent)setCurrent(active);
         });
       };
@@ -5026,13 +5062,11 @@
         receiptActions.hidden=true;
         lockForm(false);
         get('prxCardStatus').textContent='Card Status: Preview';
-        get('prxStepLabel').textContent='The Estate Embassy';
         get('prxCopyStatus').textContent='';
       };
       const showReceipt=(result,payload)=>{
         confirmation={result,payload};
         setCardName(payload.fullName);
-        get('prxStepLabel').textContent='Final Step';
         const bank=prxDepositDetails;
         for(const [id,value] of Object.entries({prxDepositIntroAmount:bank.amount,prxDepositName:bank.name,prxDepositBank:bank.bank,prxDepositAccount:bank.account,prxDepositAmount:bank.amount,prxDepositRef:result.reference}))get(id).textContent=value;
         modes.hidden=true;
