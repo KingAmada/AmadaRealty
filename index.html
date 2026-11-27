@@ -1129,9 +1129,10 @@
     #page-pr-card .prx-applied-mark svg{width:clamp(1.7rem,8.9cqi,2.5rem);height:auto;aspect-ratio:1;border:2px solid #151e2e;border-radius:50%;overflow:hidden;color:#b6a27c;background:#302b25}
     #page-pr-card .prx-applied-mark svg+svg{margin-left:clamp(-.46rem,-1.6cqi,-.24rem);color:#b4a0ad;background:#38303d}
     #page-pr-card .prx-applied-mark svg:last-child{color:#a8bbc8;background:#273846}
-    #page-pr-card .prx-app-counts{list-style:none;width:fit-content;max-width:100%;display:flex;gap:.46rem .77rem;flex-wrap:wrap;margin:clamp(.9rem,4.4cqi,1.22rem) 0 0;padding:.72rem .8rem;border:1px solid #cbd5e119;border-radius:.58rem;background:#e2e8f006;font:680 clamp(.61rem,2.66cqi,.74rem)/1.42 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.055em;text-transform:uppercase;font-variant-numeric:tabular-nums}
-    #page-pr-card .prx-app-counts li{display:flex;align-items:center;gap:.32rem;white-space:nowrap}
-    #page-pr-card .prx-app-counts li::before{content:"";width:.36rem;height:.36rem;border-radius:50%;flex:none;background:currentColor}
+    #page-pr-card .prx-app-counts{list-style:none;width:fit-content;max-width:100%;display:flex;align-items:center;gap:clamp(.2rem,1.55cqi,.68rem);flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;margin:clamp(.9rem,4.4cqi,1.22rem) 0 0;padding:.68rem clamp(.34rem,2cqi,.72rem);border:1px solid #cbd5e119;border-radius:.58rem;background:#e2e8f006;font:680 clamp(.53rem,2.55cqi,.74rem)/1.42 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.015em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+    #page-pr-card .prx-app-counts li{display:flex;flex:none;align-items:center;gap:clamp(.14rem,.9cqi,.3rem);white-space:nowrap}
+    #page-pr-card .prx-app-counts li::before{content:"";width:clamp(.23rem,1.05cqi,.36rem);aspect-ratio:1;border-radius:50%;flex:none;background:currentColor}
+    @media(max-width:360px){#page-pr-card .prx-app-counts{margin-inline:-1rem;max-width:calc(100% + 2rem);padding-inline:.23rem;gap:.18rem;letter-spacing:0}}
     #page-pr-card .prx-approved{color:#59cd92}
     #page-pr-card .prx-rejected{color:#fc8592}
     #page-pr-card .prx-reviewing{color:#f5c766}
