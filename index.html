@@ -1199,6 +1199,8 @@
     .atlas-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font:500 .76rem system-ui;color:#e2e8f0}
     .atlas-legend span::before{content:"";width:.62rem;height:.62rem;border-radius:2px;background:var(--swatch);display:inline-block;margin-right:.35rem}
     .atlas-legend .detached{--swatch:#f8fafc}.atlas-legend .terrace{--swatch:#e5ecf4}.atlas-legend .villa{--swatch:#ffffff}.atlas-legend .landscape{--swatch:#719484}
+    .atlas-legend .application-review{--swatch:#f5c653;color:#fff2c9}
+    .atlas-legend .application-review::before{box-shadow:0 0 0 1px #ffc33b6b}
     .atlas-picker{display:grid;gap:.35rem}.atlas-picker label{font:650 .65rem system-ui;letter-spacing:.13em;text-transform:uppercase;color:#bfd0e7}
     .atlas-picker select{width:100%;background:#f8fafc;color:#0f172a;border-radius:.55rem;padding:.7rem .8rem;font-size:.9rem}
     .atlas-details{position:sticky;top:8.5rem}
@@ -1209,6 +1211,16 @@
     .atlas-svg .atlas-house{stroke:#475569;stroke-width:.38;pointer-events:none}
     .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#e5f2ff;stroke:#d2e9ff;stroke-width:1.25}
     .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#2563a5;stroke-width:.85}
+    .atlas-svg .atlas-unit[data-review="application-review"] .atlas-lot{stroke:#edbd58;stroke-width:.86}
+    .atlas-svg .atlas-unit[data-review="application-review"] .atlas-house{stroke:#c69531;stroke-width:.58}
+    .atlas-svg .atlas-unit[data-review="application-review"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-lot{fill:#f7cb64;stroke:#fff0a2;stroke-width:1.36}
+    .atlas-svg .atlas-unit[data-review="application-review"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-house{fill:#fff1bc;stroke:#98650e;stroke-width:.79}
+    .atlas-application-box{margin-top:.85rem;display:grid;gap:.55rem;padding:.83rem .95rem;border:1px solid #ebd492;border-radius:1rem;background:#fff9ea;color:#302719}
+    .atlas-application-box[hidden]{display:none}
+    .atlas-application-box h4{display:flex;align-items:center;gap:.43rem;margin:0;color:#725011;font:750 .67rem/1.4 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .atlas-application-box h4::before{content:"";width:.55rem;height:.55rem;flex:none;border-radius:2px;background:#e4ad32}
+    .atlas-application-box ul{display:flex;flex-wrap:wrap;gap:.25rem 1.05rem;list-style:none;padding:0;margin:0;font:520 .85rem/1.5 system-ui,sans-serif}
+    .atlas-application-box strong{font-weight:760;font-variant-numeric:tabular-nums}
     .atlas-svg text{pointer-events:none;font-family:system-ui,sans-serif}
     .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #bfdbfe;outline-offset:2px}
     @media(max-width:900px){.atlas-layout{grid-template-columns:1fr}.atlas-details{position:static}.atlas-stage{height:clamp(440px,133vw,690px)}}
@@ -2442,7 +2454,7 @@
               <svg id="estatePlanSvg" class="atlas-svg" viewBox="-147 -208 294 416" aria-label="Estate masterplan with 75 selectable plots" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
             <div class="atlas-footer">
-              <div class="atlas-legend" aria-label="Map key"><span class="detached">Detached</span><span class="terrace">Townhouse</span><span class="villa">Presidential</span><span class="landscape">Landscape</span></div>
+              <div class="atlas-legend" aria-label="Map key"><span class="detached">Detached</span><span class="terrace">Townhouse</span><span class="villa">Presidential</span><span class="landscape">Landscape</span><span class="application-review">Application review</span></div>
               <div class="atlas-picker"><label for="estatePlotPicker">Find a residence</label><select id="estatePlotPicker"><option value="">Select by street and plot</option></select></div>
             </div>
           </section>
@@ -2480,6 +2492,11 @@
                   <p class="text-sm text-slate-800 mt-1" id="statSize">—</p>
                 </div>
               </div>
+
+              <section class="atlas-application-box" id="atlasApplicationReview" aria-labelledby="atlasApplicationTitle" hidden>
+                <h4 id="atlasApplicationTitle">Application review</h4>
+                <ul><li><strong id="atlasReviewed"></strong> applicants reviewed</li><li><strong id="atlasRejected"></strong> rejected</li></ul>
+              </section>
 
               <section class="residence-gallery" id="residenceGallery" aria-labelledby="residenceGalleryTitle" hidden>
                 <div class="rg-top">
@@ -4024,7 +4041,8 @@
 	            id: 'AM-' + String(idx).padStart(3,'0'),
 	            territory: terr,
 	            kind: isVilla ? 'presidential-villa' : 'home',
-	            beds, baths,
+	            beds: terr==='london'&&i===3 ? 4 : beds,
+	            baths: terr==='london'&&i===3 ? 5 : baths,
 	            size,
 	            price: Math.round(price),
 	            status: 'waitlist'
@@ -4274,6 +4292,13 @@
       return {defs,road,leisure,connector,resort};
     }
 
+    // Public per-residence summaries supplied for this map; not a live application tally.
+    // Use the same displayed reference for configured plots and presidential villas.
+    const atlasApplicationReviews=new Map([
+      ['Plot 18',{code:'application-review',reviewed:10,rejected:9}]
+    ]);
+    const atlasReviewFor=unit=>atlasApplicationReviews.get(measuredPlotRef(unit));
+
     function renderEstateAtlas(){
       const d=estateAtlasPlan;
       const resortDetail=renderAtlasResort(d);
@@ -4298,10 +4323,12 @@
       const choices=atlasStreets.map(key=>inventory.filter(u=>u.territory===key));
       function drawUnit(u,plot,house,c,f,access=[],pv=false,num=''){
         atlasGeometryByUnit.set(u.id,{plot,footprint:house,area:atlasArea(plot)});
-        const cen=atlasCenter(house), ref=measuredPlotRef(u);
+        const cen=atlasCenter(house), ref=measuredPlotRef(u), review=atlasReviewFor(u);
+        const summary=review?review.reviewed+' applicants reviewed, '+review.rejected+' rejected':'';
+        const reviewAttr=review?' data-review="'+review.code+'"':'';
         const paths=access.map(v=>atlasLine([v.from,v.to],'#e2eaf3',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
         const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#a1afbe',.26);
-        return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'" role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
+        return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'"'+reviewAttr+' role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+(summary?', '+summary:'')+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+(summary?' · '+summary:'')+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
           atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#243649','opacity=".43" pointer-events="none"')+
           atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#1e293b" text-anchor="middle">'+num+'</text></g>';
       }
@@ -4529,6 +4556,11 @@
       document.getElementById('statPrice').innerText = formatUSD(unit.price);
       document.getElementById('statBeds').innerText  = `${totals.bedrooms} / ${totals.bathrooms}`;
       document.getElementById('statSize').innerText = atlasPlotArea(unit);
+
+      const review=atlasReviewFor(unit), reviewBox=document.getElementById('atlasApplicationReview');
+      reviewBox.hidden=!review;
+      document.getElementById('atlasReviewed').textContent=review?.reviewed??'';
+      document.getElementById('atlasRejected').textContent=review?.rejected??'';
 
       showResidenceGallery(unit);
 
