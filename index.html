@@ -1364,8 +1364,21 @@
     /* Full-viewport Experience screenings */
     body.amada-screening{overflow-x:clip;background:#080e19}
     body.amada-screening #app{padding-top:0}
-    body.amada-screening .amada-site-header,body.amada-screening .amada-site-status{opacity:var(--ex-interface,1);transition:opacity .25s ease}
-    body.amada-screening .amada-site-header:hover,body.amada-screening .amada-site-header:has(:focus-visible){opacity:1}
+    body.amada-screening :is(.amada-site-header,.amada-site-status){position:absolute;opacity:0;transition:opacity .28s ease}
+    body.amada-screening:not(.ex-chrome-ready) :is(.amada-site-header,.amada-site-status){transition:none}
+    body.amada-screening .amada-site-status{pointer-events:none}
+    body.amada-screening:has(.amada-site-header :focus-visible) :is(.amada-site-header,.amada-site-status){opacity:1}
+    @media(hover:hover) and (pointer:fine){
+      body.amada-screening:has(.amada-site-header:hover) :is(.amada-site-header,.amada-site-status){opacity:1}
+    }
+    .amada-mobile-menu-label{display:none}
+    @media(hover:none),(pointer:coarse){
+      body.amada-screening .amada-site-header{left:auto;right:max(.8rem,env(safe-area-inset-right));top:max(.8rem,env(safe-area-inset-top));width:auto;padding:0;opacity:1}
+      body.amada-screening .amada-nav-surface > :not(#mobileMenuBtn){display:none}
+      body.amada-screening .amada-nav-surface{padding:0;background:#0b1425b8;border:1px solid #b3c8e655;color:#edf4ff;box-shadow:none;backdrop-filter:none}
+      body.amada-screening #mobileMenuBtn{display:flex;gap:.34rem;align-items:center;min-height:44px;padding:0 .72rem}
+      body.amada-screening .amada-mobile-menu-label{display:inline;font:650 .65rem/1.2 system-ui;text-transform:uppercase;letter-spacing:.09em}
+    }
     #page-experience{background:#080e19;color:#f5f7fb}
     #page-experience .experience-shell{width:100%;max-width:none;padding:0 0 clamp(2rem,5vw,5rem)}
     #page-experience .sp-tour,#page-experience .sp-group{margin:0}
@@ -1402,14 +1415,21 @@
     #page-experience .experience-visit{width:min(calc(100% - 2.5rem),1250px);margin:clamp(2rem,6vw,6rem) auto 0}
     .ex-dock{position:fixed;z-index:35;bottom:max(2.65rem,calc(env(safe-area-inset-bottom) + 2.2rem));left:50%;width:min(calc(100% - 2rem),76rem);transform:translateX(-50%);display:grid;justify-items:center;align-items:end;gap:.35rem;pointer-events:none}
     .ex-dock[data-outside="true"]{display:none}
-    .ex-dock .sp-index{position:static;top:auto;width:100%;min-width:0;grid-row:1;border:1px solid #8ea5c350;border-radius:.9rem;background:#0b1425e8;box-shadow:0 12px 44px #02050b70;opacity:var(--ex-interface,1);transition:opacity .28s ease;pointer-events:auto;color:#e6eeff}
+    .ex-dock .sp-index{position:static;top:auto;width:100%;min-width:0;grid-row:1;border:1px solid #8ea5c350;border-radius:.9rem;background:#0b1425e8;box-shadow:0 12px 44px #02050b70;opacity:0;transform:translateY(.42rem);transition:opacity .24s ease,transform .25s ease;pointer-events:none;color:#e6eeff}
     .ex-dock .sp-index-top{border-color:#a6b9dc33}
     .ex-dock .sp-index-title,.ex-dock .sp-index a{color:#d1def1}
     .ex-dock .sp-index a:hover,.ex-dock .sp-index a[aria-current="location"]{background:#26405e;color:white}
-    .ex-dock .ex-dock-toggle{grid-row:2;pointer-events:auto;min-height:33px;padding:.2rem .75rem;color:#f2f6fc;background:#0b1425e4;border:1px solid #a6b9dc55;border-radius:999px;font:650 .64rem/1.2 system-ui;letter-spacing:.09em;text-transform:uppercase;opacity:calc(.4 + var(--ex-interface,1) * .6);transition:opacity .2s ease}
-    .ex-dock[data-open="true"] .sp-index,.ex-dock:has(:focus-visible) .sp-index,.ex-dock:hover .ex-dock-toggle{opacity:1}
-    @media(hover:hover) and (pointer:fine){.ex-dock:hover .sp-index{opacity:1}}
-    @media(hover:none),(pointer:coarse){.ex-dock[data-clear="true"]:not([data-open="true"]):not(:has(:focus-visible)) .sp-index{pointer-events:none}}
+    .ex-dock .ex-dock-toggle{grid-row:2;pointer-events:auto;min-height:44px;padding:.2rem .78rem;color:#e8f0ff;background:#0b1425d9;border:1px solid #a6b9dc55;border-radius:999px;font:650 .64rem/1.2 system-ui;letter-spacing:.09em;text-transform:uppercase;opacity:.64;transition:opacity .23s ease}
+    .ex-dock:is([data-open="true"],[data-peek="true"]) .sp-index,.ex-dock:has(.sp-index :focus-visible) .sp-index{opacity:1;transform:none;pointer-events:auto}
+    .ex-dock:is([data-open="true"],[data-peek="true"]) .ex-dock-toggle,.ex-dock .ex-dock-toggle:focus-visible{opacity:1}
+    @media(hover:hover) and (pointer:fine){
+      .ex-dock .ex-dock-toggle{opacity:0;pointer-events:none;min-height:33px}
+      .ex-dock[data-peek="true"] .ex-dock-toggle,.ex-dock .ex-dock-toggle:focus-visible{opacity:1;pointer-events:auto}
+    }
+    @media(prefers-reduced-motion:no-preference){
+      .ex-veil,.ex-screening :is(.experience-hero-content,.experience-hero-index,.sp-scene-copy,.sp-scene-no,.sp-open-image,.experience-film-copy){transition:opacity 144ms linear}
+      .ex-screening .ex-stage .ex-photo{transition:transform 144ms linear}
+    }
     @media(max-width:650px){
       .ex-dock{width:calc(100% - 1.2rem)}
       .ex-screening .ex-stage :is(.experience-hero-content,.sp-scene-copy,.experience-film-copy){bottom:clamp(8.5rem,20vh,11rem)}
@@ -1432,6 +1452,7 @@
 </head>
 
 <body class="antialiased selection:bg-slate-200 selection:text-slate-900">
+  <script>if(/^#\/(experience|city|gallery)(?:\/|$)/.test(location.hash))document.body.classList.add("amada-screening");</script>
 
   <div class="ambient-bg">
     <div class="orb orb-1"></div>
@@ -1451,7 +1472,7 @@
 
   <!-- Navigation -->
   <nav class="amada-site-header fixed top-12 left-0 w-full z-40 px-4 md:px-12 py-4">
-    <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
+    <div class="amada-nav-surface max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
       <div class="flex items-center gap-2 cursor-pointer" onclick="location.hash = '#/home'">
         <i data-lucide="gem" class="w-6 h-6 text-slate-800"></i>
         <span class="serif text-2xl font-semibold tracking-tight text-slate-900">
@@ -1474,7 +1495,7 @@
       </button>
 
       <button class="md:hidden p-2" id="mobileMenuBtn" aria-label="Open menu">
-        <i data-lucide="menu" class="w-6 h-6"></i>
+        <i data-lucide="menu" class="w-6 h-6"></i><span class="amada-mobile-menu-label">Menu</span>
       </button>
     </div>
   </nav>
@@ -2116,7 +2137,7 @@
         </header>
 
         <div class="ex-dock">
-          <button class="ex-dock-toggle" id="experienceNavToggle" type="button" aria-expanded="true" aria-controls="experienceDestinations">Destinations <span aria-hidden="true">⌃</span></button>
+          <button class="ex-dock-toggle" id="experienceNavToggle" type="button" aria-expanded="false" aria-controls="experienceDestinations">Destinations <span aria-hidden="true">⌃</span></button>
           <nav class="sp-index" id="experienceDestinations" aria-label="Experience destinations">
             <div class="sp-index-top">
               <span class="sp-index-title">The Experience</span>
@@ -3664,18 +3685,34 @@
          film.focus({preventScroll:true});
        });
        const dock=page.querySelector('.ex-dock'), dockToggle=byId('experienceNavToggle');
+       const hoverPointer=matchMedia('(hover:hover) and (pointer:fine)');
        let lastY=window.scrollY, openAtY=0;
+       const syncDock=()=>dockToggle.setAttribute('aria-expanded',String(dock.dataset.open==='true'||dock.dataset.peek==='true'||Boolean(dock.querySelector('.sp-index :focus-visible'))));
+       const setPeek=peek=>{
+         if(dock.dataset.peek===String(peek))return;
+         dock.dataset.peek=String(peek);syncDock();
+       };
        const setDock=open=>{
          dock.dataset.open=String(open);
-         dockToggle.setAttribute('aria-expanded',String(open||dock.dataset.clear!=='true'));
          if(open)openAtY=window.scrollY;
+         syncDock();
        };
+       const hideDock=()=>{setDock(false);setPeek(false);};
+       const refreshUI=()=>{hideDock();onScroll();};
        dockToggle.addEventListener('click',()=>setDock(dock.dataset.open!=='true'));
+       dock.addEventListener('focusin',syncDock);
+       dock.addEventListener('focusout',()=>requestAnimationFrame(syncDock));
        dock.addEventListener('keydown',e=>{
-         if(e.key==='Escape'&&dock.dataset.open==='true'){
-           setDock(false);dockToggle.focus({preventScroll:true});
+         if(e.key==='Escape'){
+           hideDock();dockToggle.focus({preventScroll:true});
          }
        });
+       addEventListener('pointermove',e=>{
+         if(!hoverPointer.matches||e.pointerType==='touch'||!page.classList.contains('active')||dock.dataset.outside==='true')return;
+         const r=dock.getBoundingClientRect();
+         setPeek(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top-5&&e.clientY<=r.bottom+10);
+       },{passive:true});
+       document.addEventListener('pointerleave',()=>setPeek(false),{passive:true});
        page.classList.add('ex-screening');
 
       const titleLink=(label,id)=>{
@@ -3752,7 +3789,7 @@
       };
       spatialNavigate=(id,focus=false)=>{
         const target=targetById.get(id);if(!target)return;
-        clearTimeout(intentTimer);intent=id;setCurrent(id);setDock(false);
+        clearTimeout(intentTimer);intent=id;setCurrent(id);hideDock();
         target.runway.scrollIntoView({block:'start',behavior:'instant'});
         if(focus)target.scene.focus({preventScroll:true});
         onScroll();intentTimer=setTimeout(()=>{intent=null;onScroll();},90);
@@ -3764,33 +3801,31 @@
           scheduled=false;if(!page.classList.contains('active'))return;
           const viewport=hero.clientHeight||innerHeight;
           const frames=runways.map(item=>({item,rect:item.runway.getBoundingClientRect()}));
-          let primary=null, active=SPATIAL_DESTINATIONS[0].id;
+          let active=SPATIAL_DESTINATIONS[0].id;
           const y=window.scrollY, changed=Math.abs(y-lastY)>1;lastY=y;
-          if(changed&&dock.dataset.open==='true'&&Math.abs(y-openAtY)>45)setDock(false);
+          if(changed){
+            setPeek(false);
+            if(dock.dataset.open==='true'&&Math.abs(y-openAtY)>45)setDock(false);
+          }
           for(const {item,rect} of frames){
-            if(rect.top<=viewport*.47&&rect.bottom>viewport*.47){primary=item;if(item.id)active=item.id;}
-            if(rect.bottom<=viewport*.47&&item.id)active=item.id;
+            if(rect.top<=viewport*.47&&item.id)active=item.id;
             const distance=Math.max(1,rect.height-viewport);
-            const step=Math.max(0,Math.min(1,(-rect.top-distance*.035)/(distance*.62)));
-            const fade=reduced.matches?0:Math.round(step*1000)/1000;
+            const step=Math.max(0,Math.min(1,(-rect.top-distance*.025)/(distance*.73)));
+            const fade=reduced.matches?0:Math.round(step*step*(3-2*step)*1000)/1000;
             if(item.fade!==fade){
               item.fade=fade;item.stage.style.setProperty('--ex-fade',fade);
               item.stage.classList.toggle('is-clear',fade>=.94);
             }
           }
           const afterFilm=frames.at(-1).rect.bottom<=viewport*.47;
-          const fade=primary?.fade||0, chrome=Math.max(0,1-fade*1.16);
-          document.body.style.setProperty('--ex-interface',chrome.toFixed(3));
           dock.dataset.outside=String(afterFilm);
-          dock.dataset.clear=String(chrome===0);
-          dockToggle.setAttribute('aria-expanded',String(chrome>0||dock.dataset.open==='true'));
           if(!intent)setCurrent(active);
         });
       };
       addEventListener('scroll',onScroll,{passive:true});
       addEventListener('resize',onScroll,{passive:true});
       reduced.addEventListener?.('change',onScroll);
-      page.addEventListener('experience:refresh',onScroll);
+      page.addEventListener('experience:refresh',refreshUI);
       onScroll();
       byId('experienceStart').addEventListener('click',()=>{
         if(location.hash!=='#/experience/boulevard')history.pushState(null,'','#/experience/boulevard');
@@ -3816,6 +3851,10 @@
       (document.querySelector(`.page[data-page="${page}"]`) || document.querySelector('.page[data-page="home"]'))?.classList.add('active');
 
       document.body.classList.toggle('amada-screening',page==='experience');
+      if(page==='experience')requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        if(document.body.classList.contains('amada-screening'))document.body.classList.add('ex-chrome-ready');
+      }));
+      else document.body.classList.remove('ex-chrome-ready');
       const destination=page==='experience'?experienceSlug():null;
       if (scrollTop&&!destination) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
