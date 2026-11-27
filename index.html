@@ -1221,7 +1221,11 @@
     .atlas-svg .atlas-unit[data-review="application-review"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-lot{fill:#f7cb64;stroke:#fff0a2;stroke-width:1.36}
     .atlas-svg .atlas-unit[data-review="application-review"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-house{fill:#fff1bc;stroke:#98650e;stroke-width:.79}
     .atlas-application-box{margin-top:.85rem;display:grid;gap:.55rem;padding:.83rem .95rem;border:1px solid #ebd492;border-radius:1rem;background:#fff9ea;color:#302719}
-    .atlas-application-box[hidden]{display:none}
+    .atlas-application-box[hidden],.atlas-application-box .atlas-review-note[hidden]{display:none}
+    .atlas-application-box[data-counts="unpublished"]{border-color:#d8e2ee;background:#f0f5fa;color:#3e536a}
+    .atlas-application-box[data-counts="unpublished"] h4{color:#45617e}
+    .atlas-application-box[data-counts="unpublished"] h4::before{background:#849eb7}
+    .atlas-application-box .atlas-review-note{margin:0;color:#4c627a;font:500 .72rem/1.45 system-ui,sans-serif}
     .atlas-application-box h4{display:flex;align-items:center;gap:.43rem;margin:0;color:#725011;font:750 .67rem/1.4 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
     .atlas-application-box h4::before{content:"";width:.55rem;height:.55rem;flex:none;border-radius:2px;background:#e4ad32}
     .atlas-application-box ul{display:flex;flex-wrap:wrap;gap:.25rem 1.05rem;list-style:none;padding:0;margin:0;font:520 .85rem/1.5 system-ui,sans-serif}
@@ -2508,6 +2512,7 @@
               <section class="atlas-application-box" id="atlasApplicationReview" aria-labelledby="atlasApplicationTitle" hidden>
                 <h4 id="atlasApplicationTitle">Application review</h4>
                 <ul><li><strong id="atlasReviewed"></strong> applicants reviewed</li><li><strong id="atlasRejected"></strong> rejected</li></ul>
+                <p class="atlas-review-note" id="atlasReviewNote" hidden>Counts not published for this residence.</p>
               </section>
 
               <div class="atlas-apply-row">
@@ -4578,9 +4583,11 @@
       document.getElementById('statSize').innerText = atlasPlotArea(unit);
 
       const review=atlasReviewFor(unit), reviewBox=document.getElementById('atlasApplicationReview');
-      reviewBox.hidden=!review;
-      document.getElementById('atlasReviewed').textContent=review?.reviewed??'';
-      document.getElementById('atlasRejected').textContent=review?.rejected??'';
+      reviewBox.hidden=false;
+      reviewBox.dataset.counts=review?'published':'unpublished';
+      document.getElementById('atlasReviewed').textContent=review?.reviewed??'—';
+      document.getElementById('atlasRejected').textContent=review?.rejected??'—';
+      document.getElementById('atlasReviewNote').hidden=Boolean(review);
       const ref=measuredPlotRef(unit);
       document.getElementById('atlasCornerBadge').hidden=!atlasIsCorner(ref);
       document.getElementById('atlasApplyButton').textContent='Apply for '+ref;
