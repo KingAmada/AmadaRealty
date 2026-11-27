@@ -1361,6 +1361,73 @@
       .sp-scene{min-height:370px;scroll-margin-top:13.8rem}.sp-scene.is-linework{min-height:320px}
       .sp-scene-copy{max-width:100%}.sp-scene-no{top:.72rem;right:.73rem}
     }
+    /* Full-viewport Experience screenings */
+    body.amada-screening{overflow-x:clip;background:#080e19}
+    body.amada-screening #app{padding-top:0}
+    body.amada-screening .amada-site-header,body.amada-screening .amada-site-status{opacity:var(--ex-interface,1);transition:opacity .25s ease}
+    body.amada-screening .amada-site-header:hover,body.amada-screening .amada-site-header:has(:focus-visible){opacity:1}
+    #page-experience{background:#080e19;color:#f5f7fb}
+    #page-experience .experience-shell{width:100%;max-width:none;padding:0 0 clamp(2rem,5vw,5rem)}
+    #page-experience .sp-tour,#page-experience .sp-group{margin:0}
+    #page-experience .sp-group-head{margin:0;padding:clamp(2rem,6vw,5.25rem) max(clamp(1.25rem,6vw,6rem),calc((100vw - 1450px)/2));border-top:1px solid #8194b338;background:linear-gradient(120deg,#0b121f,#142236)}
+    #page-experience .sp-group-head>p{color:#b6c6dd}
+    #page-experience .sp-group-head .experience-kicker{color:#a4bfdf}
+    .ex-runway{position:relative;height:142vh;height:142svh;scroll-margin:0}
+    .ex-screening .ex-stage{--ex-close:calc(1 - var(--ex-fade,0));position:sticky;top:0;isolation:isolate;box-sizing:border-box;width:100%;height:100vh;height:100svh;min-height:0;margin:0;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#080e19;color:#f5f7fb;scroll-margin-top:0}
+    .ex-screening .ex-stage:focus-visible{outline-offset:-4px}
+    .ex-screening .ex-stage::before,.ex-screening .ex-stage::after{display:none}
+    .ex-backdrop,.ex-veil{position:absolute;inset:0;pointer-events:none}
+    .ex-backdrop{z-index:-3;background:radial-gradient(ellipse at center,#23374f,#080e19 79%);overflow:hidden}
+    .ex-backdrop::before{content:"";position:absolute;inset:-22px;background-image:var(--ex-image,none);background-position:center;background-size:cover;filter:blur(20px) brightness(.48) saturate(.85)}
+    .ex-veil{z-index:-1;opacity:var(--ex-close);background:linear-gradient(180deg,#080e19a8,transparent 26%),linear-gradient(0deg,#080e19 0%,#0a1325de 13%,#0a132538 55%,transparent 80%),linear-gradient(90deg,#080e19c4,transparent 79%)}
+    .ex-screening .ex-stage .ex-photo,.ex-screening .ex-stage .spatial-drawing{position:absolute;z-index:-2;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:center;animation:none;transform:scale(calc(1 + var(--ex-cover,0) * var(--ex-close)));transform-origin:var(--sp-focus,center)}
+    .ex-screening .ex-stage.is-portrait .ex-photo{transform:none}
+    .ex-screening .ex-stage .spatial-drawing{transform:none}
+    .ex-screening :is(.experience-hero-content,.experience-hero-index,.sp-scene-copy,.sp-scene-no,.sp-open-image,.experience-film-copy){opacity:var(--ex-close)}
+    .ex-screening .ex-stage:has(:focus-visible){--ex-close:1}
+    .ex-stage.is-clear :is(.experience-actions,.sp-scene-link,.sp-open-image,.experience-text-link){pointer-events:none}
+    .ex-stage.is-clear:has(:focus-visible) :is(.experience-actions,.sp-scene-link,.sp-open-image,.experience-text-link){pointer-events:auto}
+    .ex-screening .ex-stage :is(.experience-hero-content,.sp-scene-copy,.experience-film-copy){align-self:end;padding:0;position:absolute;left:clamp(1.3rem,6vw,7rem);right:clamp(1.3rem,6vw,7rem);bottom:clamp(8.4rem,21vh,14rem);z-index:1}
+    .ex-screening .ex-stage .experience-hero-index{right:clamp(1.3rem,6vw,7rem);bottom:clamp(8.4rem,21vh,14rem)}
+    .ex-screening .ex-stage .sp-scene-no,.ex-screening .ex-stage .sp-open-image{top:clamp(7.75rem,20vh,10rem)}
+    .ex-screening .ex-stage .sp-open-image{left:clamp(1.3rem,6vw,7rem)}
+    .ex-screening .ex-stage .sp-scene-no{right:clamp(1.3rem,6vw,7rem)}
+    .ex-screening .experience-film{display:block;padding:0}
+    .ex-screening .experience-film h2{font-size:clamp(2.8rem,6.35vw,5.3rem)}
+    .ex-screening .experience-film-copy p:not(.experience-kicker),.ex-screening .experience-film-copy a{color:#e7eefb}
+    .ex-screening .experience-film-frame{position:absolute;inset:0;z-index:-2;overflow:hidden;border-radius:0;background:transparent}
+    .ex-screening .experience-film-frame video{width:100%;height:100%;aspect-ratio:auto;object-fit:contain;background:transparent}
+    .ex-screening .experience-film[data-playing="true"]{--ex-close:0}
+    .ex-screening .experience-film[data-playing="true"] .experience-film-copy{pointer-events:none}
+    #page-experience .experience-visit{width:min(calc(100% - 2.5rem),1250px);margin:clamp(2rem,6vw,6rem) auto 0}
+    .ex-dock{position:fixed;z-index:35;bottom:max(2.65rem,calc(env(safe-area-inset-bottom) + 2.2rem));left:50%;width:min(calc(100% - 2rem),76rem);transform:translateX(-50%);display:grid;justify-items:center;align-items:end;gap:.35rem;pointer-events:none}
+    .ex-dock[data-outside="true"]{display:none}
+    .ex-dock .sp-index{position:static;top:auto;width:100%;min-width:0;grid-row:1;border:1px solid #8ea5c350;border-radius:.9rem;background:#0b1425e8;box-shadow:0 12px 44px #02050b70;opacity:var(--ex-interface,1);transition:opacity .28s ease;pointer-events:auto;color:#e6eeff}
+    .ex-dock .sp-index-top{border-color:#a6b9dc33}
+    .ex-dock .sp-index-title,.ex-dock .sp-index a{color:#d1def1}
+    .ex-dock .sp-index a:hover,.ex-dock .sp-index a[aria-current="location"]{background:#26405e;color:white}
+    .ex-dock .ex-dock-toggle{grid-row:2;pointer-events:auto;min-height:33px;padding:.2rem .75rem;color:#f2f6fc;background:#0b1425e4;border:1px solid #a6b9dc55;border-radius:999px;font:650 .64rem/1.2 system-ui;letter-spacing:.09em;text-transform:uppercase;opacity:calc(.4 + var(--ex-interface,1) * .6);transition:opacity .2s ease}
+    .ex-dock[data-open="true"] .sp-index,.ex-dock:has(:focus-visible) .sp-index,.ex-dock:hover .ex-dock-toggle{opacity:1}
+    @media(hover:hover) and (pointer:fine){.ex-dock:hover .sp-index{opacity:1}}
+    @media(hover:none),(pointer:coarse){.ex-dock[data-clear="true"]:not([data-open="true"]):not(:has(:focus-visible)) .sp-index{pointer-events:none}}
+    @media(max-width:650px){
+      .ex-dock{width:calc(100% - 1.2rem)}
+      .ex-screening .ex-stage :is(.experience-hero-content,.sp-scene-copy,.experience-film-copy){bottom:clamp(8.5rem,20vh,11rem)}
+      .ex-screening .ex-stage :is(.sp-scene-no,.sp-open-image){top:clamp(7.9rem,17vh,9rem)}
+      .ex-veil{background:linear-gradient(180deg,#080e19ac,transparent 24%),linear-gradient(0deg,#080e19 1%,#0a1325e0 25%,#0a13254f 53%,transparent 78%)}
+    }
+    @media(max-height:600px) and (min-width:651px){
+      .ex-screening .ex-stage :is(.experience-hero-content,.sp-scene-copy,.experience-film-copy){bottom:7.5rem}
+      .ex-screening .ex-stage :is(.sp-scene-no,.sp-open-image){top:6.9rem}
+      .ex-screening .experience-hero h1{font-size:clamp(2rem,12vh,5rem)}
+      .ex-screening .sp-scene-copy h3,.ex-screening .experience-film h2{font-size:clamp(1.8rem,9vh,4rem)}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .ex-runway{height:100vh;height:100svh}
+      .ex-screening .ex-stage{position:relative}
+      .ex-screening .ex-stage .ex-photo{transform:none}
+      .ex-dock .sp-index,.ex-dock .ex-dock-toggle,body.amada-screening :is(.amada-site-header,.amada-site-status){transition:none}
+    }
 </style>
 </head>
 
@@ -1373,7 +1440,7 @@
   </div>
 
   <!-- Estate preview status -->
-  <div class="fixed top-0 left-0 w-full z-50 bg-slate-900 text-white text-xs py-2 glass-panel border-none !bg-slate-900/90 backdrop-blur-md">
+  <div class="amada-site-status fixed top-0 left-0 w-full z-50 bg-slate-900 text-white text-xs py-2 glass-panel border-none !bg-slate-900/90 backdrop-blur-md">
     <div class="marquee-container flex items-center">
       <div class="marquee-content px-4 font-medium tracking-widest uppercase">
         Amada Residence // The Chosen 75 // Private estate preview // Permanent Residency applications //
@@ -1383,7 +1450,7 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="fixed top-12 left-0 w-full z-40 px-4 md:px-12 py-4">
+  <nav class="amada-site-header fixed top-12 left-0 w-full z-40 px-4 md:px-12 py-4">
     <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-4 flex justify-between items-center shadow-lg">
       <div class="flex items-center gap-2 cursor-pointer" onclick="location.hash = '#/home'">
         <i data-lucide="gem" class="w-6 h-6 text-slate-800"></i>
@@ -2041,24 +2108,28 @@
             <p>Begin on the Boulevard. Then follow the streets, gardens and gathering places that give Amada Residence its character.</p>
             <div class="experience-actions">
               <button type="button" class="experience-btn experience-btn-light" id="experienceStart">Start the tour <span aria-hidden="true">↓</span></button>
+              <button type="button" class="experience-btn experience-btn-outline" id="experienceFilmJump">Aerial film <span aria-hidden="true">▶&#65038;</span></button>
               <button type="button" class="experience-btn experience-btn-outline" data-ex-visa="">Explore the Visitor Visa <span aria-hidden="true">&#8599;&#65038;</span></button>
             </div>
           </div>
           <div class="experience-hero-index" aria-hidden="true">01–18<br>Destinations</div>
         </header>
 
-        <section class="sp-tour" id="experienceTour" aria-label="Explore the estate">
-          <nav class="sp-index" aria-label="Experience destinations">
+        <div class="ex-dock">
+          <button class="ex-dock-toggle" id="experienceNavToggle" type="button" aria-expanded="true" aria-controls="experienceDestinations">Destinations <span aria-hidden="true">⌃</span></button>
+          <nav class="sp-index" id="experienceDestinations" aria-label="Experience destinations">
             <div class="sp-index-top">
               <span class="sp-index-title">The Experience</span>
               <div class="sp-index-groups" id="spGroups" aria-label="Chapters"></div>
             </div>
             <div class="sp-index-stops" id="spStops" aria-label="All destinations"></div>
           </nav>
+        </div>
+        <section class="sp-tour" id="experienceTour" aria-label="Explore the estate">
           <div id="spScenes"></div>
         </section>
 
-        <section class="experience-film" aria-labelledby="experienceFilmTitle">
+        <section class="experience-film" tabindex="-1" aria-labelledby="experienceFilmTitle">
           <div class="experience-film-copy">
             <p class="experience-kicker">Aerial film</p>
             <h2 id="experienceFilmTitle">See it<br>from above.</h2>
@@ -3546,10 +3617,67 @@
       experienceReady=true;
       const byId=id=>page.querySelector('#'+id);
       const groups=byId('spGroups'), stops=byId('spStops'), scenes=byId('spScenes');
-      const nav=page.querySelector('.sp-index'), reduced=matchMedia('(prefers-reduced-motion: reduce)');
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)');
       const targetById=new Map(), stopLinks=new Map(), groupLinks=new Map();
       let current='',intent=null,intentTimer=0,scheduled=false;
       const two=i=>String(i).padStart(2,'0');
+      const runways=[];
+      const makeScreen=(stage,photo)=>{
+         const runway=document.createElement('div');runway.className='ex-runway';
+         stage.before(runway);runway.append(stage);stage.classList.add('ex-stage');
+         const backdrop=document.createElement('div'),veil=document.createElement('div');
+         backdrop.className='ex-backdrop';veil.className='ex-veil';
+         stage.prepend(backdrop,veil);
+         if(photo){
+           photo.classList.add('ex-photo');
+           const fit=()=>{
+             const width=stage.clientWidth,height=stage.clientHeight;
+             if(!width||!height||!photo.naturalWidth)return;
+             const ratio=width/height/(photo.naturalWidth/photo.naturalHeight);
+             // Keep initial crop modest on tall displays. At full reveal every edge is visible.
+             stage.style.setProperty('--ex-cover',Math.min(1.35,Math.max(ratio,1/ratio)-1).toFixed(3));
+           };
+           const initPhoto=()=>{
+             fit();
+             if(photo.naturalWidth)backdrop.style.setProperty('--ex-image','url('+JSON.stringify(photo.currentSrc||photo.src)+')');
+           };
+           photo.addEventListener('load',initPhoto);initPhoto();
+           if('ResizeObserver' in window){
+             const observer=new ResizeObserver(fit);observer.observe(stage);
+           }else addEventListener('resize',fit,{passive:true});
+         }
+         runways.push({runway,stage,id:stage.dataset.stop,fade:-1});
+         return runway;
+       };
+       const hero=page.querySelector('.experience-hero');
+       makeScreen(hero,hero.querySelector('img'));
+       const film=page.querySelector('.experience-film');
+       const video=film.querySelector('video');
+       const filmRunway=makeScreen(film);
+       film.querySelector('.ex-backdrop').style.setProperty('--ex-image','url("amada-masterplan-estate-aerial.jpeg")');
+       video.addEventListener('play',()=>{film.dataset.playing='true';});
+       video.addEventListener('pause',()=>{if(video.currentTime===0||video.ended)delete film.dataset.playing;});
+       video.addEventListener('ended',()=>delete film.dataset.playing);
+       const filmJump=byId('experienceFilmJump');
+       filmJump.addEventListener('click',()=>{
+         filmRunway.scrollIntoView({block:'start',behavior:'instant'});
+         film.focus({preventScroll:true});
+       });
+       const dock=page.querySelector('.ex-dock'), dockToggle=byId('experienceNavToggle');
+       let lastY=window.scrollY, openAtY=0;
+       const setDock=open=>{
+         dock.dataset.open=String(open);
+         dockToggle.setAttribute('aria-expanded',String(open||dock.dataset.clear!=='true'));
+         if(open)openAtY=window.scrollY;
+       };
+       dockToggle.addEventListener('click',()=>setDock(dock.dataset.open!=='true'));
+       dock.addEventListener('keydown',e=>{
+         if(e.key==='Escape'&&dock.dataset.open==='true'){
+           setDock(false);dockToggle.focus({preventScroll:true});
+         }
+       });
+       page.classList.add('ex-screening');
+
       const titleLink=(label,id)=>{
         const link=document.createElement('a');link.textContent=label;link.href='#/experience/'+id;
         link.addEventListener('click',e=>{
@@ -3593,6 +3721,7 @@
           }else{
             const art=document.createElement('div');art.setAttribute('role','img');
             art.setAttribute('aria-label',item.name+' architectural illustration');art.innerHTML=spatialArt(item.art);
+            art.querySelector('svg').setAttribute('preserveAspectRatio','xMidYMid meet');
             scene.append(art);
           }
           const number=document.createElement('span');number.className='sp-scene-no';number.textContent=two(index+1)+' / '+SPATIAL_DESTINATIONS.length;number.setAttribute('aria-hidden','true');
@@ -3605,10 +3734,12 @@
             if(item.link)link.href=item.link;else{link.type='button';link.dataset.exVisa=item.visa;}
             copy.append(link);
           }
-          scene.append(number,copy);box.append(scene);targetById.set(item.id,scene);
+          scene.append(number,copy);box.append(scene);
+           targetById.set(item.id,{scene,runway:makeScreen(scene,scene.querySelector('img'))});
         }
         scenes.append(box);
       });
+      runways.push(runways.splice(1,1)[0]); // Film is the final screen, after the destinations.
       const setCurrent=id=>{
         if(id===current)return;
         const stop=SPATIAL_DESTINATIONS.find(x=>x.id===id);
@@ -3620,35 +3751,47 @@
         if(l.left<s.left||l.right>s.right)stops.scrollTo({left:stops.scrollLeft+l.left-s.left-(s.width-l.width)/2,behavior:reduced.matches?'instant':'smooth'});
       };
       spatialNavigate=(id,focus=false)=>{
-        const el=targetById.get(id);if(!el)return;
-        clearTimeout(intentTimer);intent=id;setCurrent(id);
-        el.classList.add('is-seen');
-        el.scrollIntoView({block:'start',behavior:focus&&!reduced.matches?'smooth':'instant'});
-        if(focus)el.focus({preventScroll:true});
-        intentTimer=setTimeout(()=>{intent=null;onScroll();},focus&&!reduced.matches?860:80);
+        const target=targetById.get(id);if(!target)return;
+        clearTimeout(intentTimer);intent=id;setCurrent(id);setDock(false);
+        target.runway.scrollIntoView({block:'start',behavior:'instant'});
+        if(focus)target.scene.focus({preventScroll:true});
+        onScroll();intentTimer=setTimeout(()=>{intent=null;onScroll();},90);
       };
       const onScroll=()=>{
-        if(scheduled || intent || !page.classList.contains('active'))return;
+        if(scheduled||!page.classList.contains('active'))return;
         scheduled=true;
         requestAnimationFrame(()=>{
-          scheduled=false;if(intent)return;
-          const line=Math.max(innerHeight*.42,nav.getBoundingClientRect().bottom+36);
-          let active=SPATIAL_DESTINATIONS[0].id;
-          for(const [id,element] of targetById){
-            if(element.getBoundingClientRect().top>line)break;
-            active=id;
+          scheduled=false;if(!page.classList.contains('active'))return;
+          const viewport=hero.clientHeight||innerHeight;
+          const frames=runways.map(item=>({item,rect:item.runway.getBoundingClientRect()}));
+          let primary=null, active=SPATIAL_DESTINATIONS[0].id;
+          const y=window.scrollY, changed=Math.abs(y-lastY)>1;lastY=y;
+          if(changed&&dock.dataset.open==='true'&&Math.abs(y-openAtY)>45)setDock(false);
+          for(const {item,rect} of frames){
+            if(rect.top<=viewport*.47&&rect.bottom>viewport*.47){primary=item;if(item.id)active=item.id;}
+            if(rect.bottom<=viewport*.47&&item.id)active=item.id;
+            const distance=Math.max(1,rect.height-viewport);
+            const step=Math.max(0,Math.min(1,(-rect.top-distance*.035)/(distance*.62)));
+            const fade=reduced.matches?0:Math.round(step*1000)/1000;
+            if(item.fade!==fade){
+              item.fade=fade;item.stage.style.setProperty('--ex-fade',fade);
+              item.stage.classList.toggle('is-clear',fade>=.94);
+            }
           }
-          setCurrent(active);
+          const afterFilm=frames.at(-1).rect.bottom<=viewport*.47;
+          const fade=primary?.fade||0, chrome=Math.max(0,1-fade*1.16);
+          document.body.style.setProperty('--ex-interface',chrome.toFixed(3));
+          dock.dataset.outside=String(afterFilm);
+          dock.dataset.clear=String(chrome===0);
+          dockToggle.setAttribute('aria-expanded',String(chrome>0||dock.dataset.open==='true'));
+          if(!intent)setCurrent(active);
         });
       };
-      if('IntersectionObserver' in window && !reduced.matches){
-        const reveal=new IntersectionObserver(entries=>{
-          for(const e of entries){if(e.isIntersecting){e.target.classList.add('is-seen');reveal.unobserve(e.target);}}
-        },{threshold:.13});
-        for(const el of targetById.values()){el.classList.add('sp-will-reveal');reveal.observe(el);}
-      }
       addEventListener('scroll',onScroll,{passive:true});
       addEventListener('resize',onScroll,{passive:true});
+      reduced.addEventListener?.('change',onScroll);
+      page.addEventListener('experience:refresh',onScroll);
+      onScroll();
       byId('experienceStart').addEventListener('click',()=>{
         if(location.hash!=='#/experience/boulevard')history.pushState(null,'','#/experience/boulevard');
         spatialNavigate('boulevard',true);
@@ -3672,6 +3815,7 @@
       document.querySelectorAll('.page[data-page]').forEach(p => p.classList.remove('active'));
       (document.querySelector(`.page[data-page="${page}"]`) || document.querySelector('.page[data-page="home"]'))?.classList.add('active');
 
+      document.body.classList.toggle('amada-screening',page==='experience');
       const destination=page==='experience'?experienceSlug():null;
       if (scrollTop&&!destination) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
@@ -3693,6 +3837,7 @@
       if (page === 'experience') {
         initExperience();
         if(destination)requestAnimationFrame(()=>spatialNavigate?.(destination,false));
+        else document.getElementById('page-experience').dispatchEvent(new Event('experience:refresh'));
       }
     }
 
