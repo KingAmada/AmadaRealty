@@ -1199,6 +1199,8 @@
     .atlas-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font:500 .76rem system-ui;color:#e2e8f0}
     .atlas-legend span::before{content:"";width:.62rem;height:.62rem;border-radius:2px;background:var(--swatch);display:inline-block;margin-right:.35rem}
     .atlas-legend .detached{--swatch:#f8fafc}.atlas-legend .terrace{--swatch:#e5ecf4}.atlas-legend .villa{--swatch:#ffffff}.atlas-legend .landscape{--swatch:#719484}
+    .atlas-legend .corner-home{--swatch:#8dd6fb;color:#e2f4ff}
+    .atlas-legend .corner-home::before{box-shadow:0 0 0 1px #7dd3fc6e}
     .atlas-legend .application-review{--swatch:#f5c653;color:#fff2c9}
     .atlas-legend .application-review::before{box-shadow:0 0 0 1px #ffc33b6b}
     .atlas-picker{display:grid;gap:.35rem}.atlas-picker label{font:650 .65rem system-ui;letter-spacing:.13em;text-transform:uppercase;color:#bfd0e7}
@@ -1211,6 +1213,9 @@
     .atlas-svg .atlas-house{stroke:#475569;stroke-width:.38;pointer-events:none}
     .atlas-svg .atlas-unit:hover .atlas-lot,.atlas-svg .atlas-unit:focus-visible .atlas-lot,.atlas-svg .atlas-unit[aria-pressed="true"] .atlas-lot{fill:#e5f2ff;stroke:#d2e9ff;stroke-width:1.25}
     .atlas-svg .atlas-unit[aria-pressed="true"] .atlas-house{stroke:#2563a5;stroke-width:.85}
+    .atlas-svg .atlas-unit[data-corner="true"] .atlas-lot{fill:#b4d9ef;stroke:#6fc6f8;stroke-width:.72}
+    .atlas-svg .atlas-unit[data-corner="true"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-lot{fill:#8dd6fb;stroke:#e1f6ff;stroke-width:1.25}
+    .atlas-svg .atlas-unit[data-corner="true"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-house{stroke:#175781;stroke-width:.78}
     .atlas-svg .atlas-unit[data-review="application-review"] .atlas-lot{stroke:#edbd58;stroke-width:.86}
     .atlas-svg .atlas-unit[data-review="application-review"] .atlas-house{stroke:#c69531;stroke-width:.58}
     .atlas-svg .atlas-unit[data-review="application-review"]:is(:hover,:focus-visible,[aria-pressed="true"]) .atlas-lot{fill:#f7cb64;stroke:#fff0a2;stroke-width:1.36}
@@ -1221,6 +1226,13 @@
     .atlas-application-box h4::before{content:"";width:.55rem;height:.55rem;flex:none;border-radius:2px;background:#e4ad32}
     .atlas-application-box ul{display:flex;flex-wrap:wrap;gap:.25rem 1.05rem;list-style:none;padding:0;margin:0;font:520 .85rem/1.5 system-ui,sans-serif}
     .atlas-application-box strong{font-weight:760;font-variant-numeric:tabular-nums}
+    .atlas-apply-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.58rem;margin:.83rem 0 0;padding:.65rem .75rem;border:1px solid #d3e0ee;border-radius:1rem;background:#f0f6fc}
+    .atlas-apply-row p{margin:0;color:#36536c;font:670 .76rem/1.45 system-ui,sans-serif}
+    .atlas-apply-row p span{display:block;color:#175781;font-size:.66rem;font-weight:760;text-transform:uppercase;letter-spacing:.09em}
+    .atlas-apply-row p span[hidden]{display:none}
+    .atlas-apply-row button{flex:none;min-height:42px;border-radius:.63rem;padding:.48rem .75rem;background:#132941;color:#f8fbff;font:690 .76rem/1.3 system-ui,sans-serif}
+    .atlas-apply-row button:hover{background:#224869}
+    .atlas-apply-row button:focus-visible{outline:2px solid #245f8c;outline-offset:3px}
     .atlas-svg text{pointer-events:none;font-family:system-ui,sans-serif}
     .atlas-board button:focus-visible,.atlas-picker select:focus-visible{outline:2px solid #bfdbfe;outline-offset:2px}
     @media(max-width:900px){.atlas-layout{grid-template-columns:1fr}.atlas-details{position:static}.atlas-stage{height:clamp(440px,133vw,690px)}}
@@ -2454,7 +2466,7 @@
               <svg id="estatePlanSvg" class="atlas-svg" viewBox="-147 -208 294 416" aria-label="Estate masterplan with 75 selectable plots" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
             <div class="atlas-footer">
-              <div class="atlas-legend" aria-label="Map key"><span class="detached">Detached</span><span class="terrace">Townhouse</span><span class="villa">Presidential</span><span class="landscape">Landscape</span><span class="application-review">Application review</span></div>
+              <div class="atlas-legend" aria-label="Map key"><span class="detached">Detached</span><span class="terrace">Townhouse</span><span class="villa">Presidential</span><span class="landscape">Landscape</span><span class="corner-home">Corner home</span><span class="application-review">Application review</span></div>
               <div class="atlas-picker"><label for="estatePlotPicker">Find a residence</label><select id="estatePlotPicker"><option value="">Select by street and plot</option></select></div>
             </div>
           </section>
@@ -2498,6 +2510,11 @@
                 <ul><li><strong id="atlasReviewed"></strong> applicants reviewed</li><li><strong id="atlasRejected"></strong> rejected</li></ul>
               </section>
 
+              <div class="atlas-apply-row">
+                <p><span id="atlasCornerBadge" hidden>Corner home</span>PR applications open</p>
+                <button id="atlasApplyButton" type="button" onclick="goPRCardWithSelection()">Apply for this residence</button>
+              </div>
+
               <section class="residence-gallery" id="residenceGallery" aria-labelledby="residenceGalleryTitle" hidden>
                 <div class="rg-top">
                   <h3 id="residenceGalleryTitle">Residence Gallery</h3>
@@ -2525,10 +2542,6 @@
               </section>
 
               <div class="mt-6 flex flex-wrap gap-3">
-                <button onclick="goPRCardWithSelection()"
-                        class="flex-1 bg-slate-900 text-white py-3 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg text-xs">
-                  Explore PR Card
-                </button>
                 <button onclick="downloadSelectedDossierPDF()"
                         class="px-5 py-3 border border-slate-200 rounded-2xl font-bold uppercase tracking-widest hover:bg-white/70 transition-colors text-xs text-slate-700">
                   Download PDF
@@ -4298,6 +4311,12 @@
       ['Plot 18',{code:'application-review',reviewed:10,rejected:9}]
     ]);
     const atlasReviewFor=unit=>atlasApplicationReviews.get(measuredPlotRef(unit));
+    // The first and last lots in each of the two seven-home rows are street-end homes.
+    function atlasIsCorner(ref){
+      if(!/^Plot \d{2}$/.test(ref))return false;
+      const position=(Number(ref.slice(5))-1)%14;
+      return position===0||position===6||position===7||position===13;
+    }
 
     function renderEstateAtlas(){
       const d=estateAtlasPlan;
@@ -4325,10 +4344,11 @@
         atlasGeometryByUnit.set(u.id,{plot,footprint:house,area:atlasArea(plot)});
         const cen=atlasCenter(house), ref=measuredPlotRef(u), review=atlasReviewFor(u);
         const summary=review?review.reviewed+' applicants reviewed, '+review.rejected+' rejected':'';
-        const reviewAttr=review?' data-review="'+review.code+'"':'';
+        const corner=atlasIsCorner(ref);
+        const reviewAttr=(review?' data-review="'+review.code+'"':'')+(corner?' data-corner="true"':'');
         const paths=access.map(v=>atlasLine([v.from,v.to],'#e2eaf3',Math.min(v.width,3.7),'stroke-linecap="round"')).join('');
         const ridgeline=pv?'':atlasLine([[.5*(house[0][0]+house[1][0]),.5*(house[0][1]+house[1][1])],[.5*(house[2][0]+house[3][0]),.5*(house[2][1]+house[3][1])]],'#a1afbe',.26);
-        return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'"'+reviewAttr+' role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+(summary?', '+summary:'')+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+(summary?' · '+summary:'')+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
+        return '<g class="atlas-unit" id="unit-'+u.id+'" data-unit="'+u.id+'"'+reviewAttr+' role="button" tabindex="0" aria-pressed="false" aria-label="'+ref+', '+territoryMeta[u.territory].label+', '+atlasResidenceType(u)+(corner?', corner home':'')+(summary?', '+summary:'')+'"><title>'+ref+' · '+territoryMeta[u.territory].label+' · '+atlasResidenceType(u)+(corner?' · Corner home':'')+(summary?' · '+summary:'')+'</title>'+atlasPoly(plot,c,'class="atlas-lot"')+paths+
           atlasPoly(house.map(([x,y])=>[x+.45,y+.53]),'#243649','opacity=".43" pointer-events="none"')+
           atlasPoly(house,f,'class="atlas-house"')+ridgeline+'<text x="'+cen[0]+'" y="'+(cen[1]+.85)+'" font-size="'+(pv?'3.2':'2.45')+'" font-weight="800" fill="#1e293b" text-anchor="middle">'+num+'</text></g>';
       }
@@ -4561,6 +4581,9 @@
       reviewBox.hidden=!review;
       document.getElementById('atlasReviewed').textContent=review?.reviewed??'';
       document.getElementById('atlasRejected').textContent=review?.rejected??'';
+      const ref=measuredPlotRef(unit);
+      document.getElementById('atlasCornerBadge').hidden=!atlasIsCorner(ref);
+      document.getElementById('atlasApplyButton').textContent='Apply for '+ref;
 
       showResidenceGallery(unit);
 
